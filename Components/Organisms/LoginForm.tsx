@@ -1,18 +1,16 @@
 import { View } from 'react-native';
 import React, { useState } from 'react';
+import { LoginFormProps } from 'frontendSelfTypes/moduleProps/LoginFormProps';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
-import {
-  DataObject,
-  LoginFormProps,
-} from '../../frontendSelfTypes/moduleProps/LoginFormProps';
+import { LoginDataObject } from '../../../farm-service-be/types/Useer/LoginDataObject';
 
 export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
   const [data, setData] = useState({
     login: '',
     password: '',
-  } as DataObject);
+  } as LoginDataObject);
   return (
     <View className="w-full mt-14">
       <AppInput

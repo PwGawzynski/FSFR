@@ -3,21 +3,7 @@ import React, { useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
-
-export interface RegisterDataAsk {
-  email: string;
-  password: string;
-  name: string;
-  surname: string;
-  companyName: string;
-  nip: string;
-  contactPhone: string;
-  companyCompactPhone: string;
-  city: string;
-  postalCode: string;
-  houseNumber: string;
-  circumference: string;
-}
+import { RegisterDataObject } from '../../../farm-service-be/types/Useer/RegisterDataObject';
 
 export function RegisterForm() {
   const [data, setData] = useState({
@@ -33,7 +19,7 @@ export function RegisterForm() {
     postalCode: '',
     houseNumber: '',
     circumference: '',
-  } as RegisterDataAsk);
+  } as RegisterDataObject);
 
   return (
     <KeyboardAwareScrollView

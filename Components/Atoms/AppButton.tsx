@@ -1,5 +1,5 @@
+import { AppButtonProps } from 'frontendSelfTypes/moduleProps/AppButtonProps';
 import { Text, TouchableOpacity } from 'react-native';
-import { AppButtonProps } from '../../frontendSelfTypes/moduleProps/AppButtonProps';
 
 export function AppButton({
   action,
