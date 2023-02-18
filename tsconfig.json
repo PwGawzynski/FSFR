@@ -1,6 +1,12 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@selfTypes": ["./frontendSelfTypes/moduleProps"],
+      "@sharedTypes": ["./../farm-service-be/types"]
+    }
   }
 }
