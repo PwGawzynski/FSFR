@@ -12,13 +12,17 @@ export function CustomInput({
   keyboardType,
   onFocus,
   onDeFocus,
+  refGetter,
+  onSubmit,
 }: CustomInputProps) {
   const context = useContext(AppSettings);
   const { settings } = context;
   const { theme } = settings;
   return (
     <TextInput
+      ref={refGetter}
       onFocus={onFocus}
+      onEndEditing={onSubmit}
       onBlur={onDeFocus}
       className={`${
         theme === ThemeOptions.dark ? 'text-white' : 'text-black'
