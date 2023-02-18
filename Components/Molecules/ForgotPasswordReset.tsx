@@ -1,13 +1,10 @@
 import { View } from 'react-native';
 import React from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
 import { InfoText } from '../Atoms/InfoText';
 import { AppButton } from '../Atoms/AppButton';
-import { LoginStackParamList } from '../../App';
+import { ForgotPasswordProps } from '../../frontendSelfTypes/moduleProps/ForgotPasswordProps';
 
-type Props = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
-
-export function ForgotPasswordReset({ navigation }: Props) {
+export function ForgotPasswordReset({ navigation }: ForgotPasswordProps) {
   return (
     <View className="w-full">
       <InfoText additionalStyles="mt-10">

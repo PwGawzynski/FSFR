@@ -1,13 +1,10 @@
 import { View } from 'react-native';
 import React from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
 import { InfoText } from '../Atoms/InfoText';
 import { AppButton } from '../Atoms/AppButton';
-import { LoginStackParamList } from '../../App';
+import { RegisterAskProps } from '../../frontendSelfTypes/moduleProps/RegisterAskProps';
 
-type Props = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
-
-export function RegisterAsk({ navigation }: Props) {
+export function RegisterAsk({ navigation }: RegisterAskProps) {
   return (
     <View className="w-full">
       <InfoText additionalStyles="mt-10">

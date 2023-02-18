@@ -37,7 +37,7 @@ export function RegisterForm() {
 
   return (
     <KeyboardAwareScrollView
-      className="w-8/12 mt-8"
+      className="w-8/12 pt-10"
       resetScrollToCoords={{ x: 0, y: 0 }}
       scrollEnabled
       extraHeight={450}
@@ -149,7 +149,7 @@ export function RegisterForm() {
       <AppButton
         action={() => console.log('REGISTER')}
         context="Register"
-        additionalStyles="mt-5"
+        additionalStyles="mt-5 mb-24"
       />
     </KeyboardAwareScrollView>
   );

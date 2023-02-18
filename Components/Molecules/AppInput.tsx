@@ -1,16 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { CustomInput, CustomInputProps } from '../Atoms/CustomInput';
+import { CustomInput } from '../Atoms/CustomInput';
 import { InputLabel } from '../Atoms/InputLabel';
+import { AppInputProps } from '../../frontendSelfTypes/moduleProps/AppInputProps';
 
-export interface Props<T extends object>
-  extends Omit<CustomInputProps, 'onChange'> {
-  setter: React.Dispatch<React.SetStateAction<T>>;
-  underlyingLabel: string;
-  ObjectKey: keyof T;
-
-  additionalStyles?: string;
-}
 export function AppInput<T extends object>({
   inputMode,
   setter,
@@ -21,10 +14,14 @@ export function AppInput<T extends object>({
   isPwd,
   additionalStyles,
   keyboardType,
-}: Props<T>) {
+  onFocus,
+  onDeFocus,
+}: AppInputProps<T>) {
   return (
     <View className={`w-full ${additionalStyles}`}>
       <CustomInput
+        onFocus={onFocus}
+        onDeFocus={onDeFocus}
         value={value}
         onChange={text =>
           setter(prev => ({

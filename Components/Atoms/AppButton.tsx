@@ -1,12 +1,11 @@
 import { Text, TouchableOpacity } from 'react-native';
+import { AppButtonProps } from '../../frontendSelfTypes/moduleProps/AppButtonProps';
 
-export interface Props {
-  action: () => void;
-  context: string;
-
-  additionalStyles?: string;
-}
-export function AppButton({ action, context, additionalStyles }: Props) {
+export function AppButton({
+  action,
+  context,
+  additionalStyles,
+}: AppButtonProps) {
   return (
     <TouchableOpacity
       className={`w-full h-9 bg-black rounded-2xl justify-center ${additionalStyles}`}

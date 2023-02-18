@@ -3,21 +3,21 @@ import React, { useState } from 'react';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
+import {
+  DataObject,
+  LoginFormProps,
+} from '../../frontendSelfTypes/moduleProps/LoginFormProps';
 
-export interface DataObject {
-  login: string;
-  password: string;
-}
-
-export function LoginForm() {
+export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
   const [data, setData] = useState({
     login: '',
     password: '',
   } as DataObject);
-
   return (
     <View className="w-full mt-14">
       <AppInput
+        onDeFocus={onDeFocus}
+        onFocus={onFocus}
         setter={setData}
         underlyingLabel="UserName or NIP or E-mail"
         ObjectKey="login"
@@ -26,6 +26,8 @@ export function LoginForm() {
         autoComplete="username"
       />
       <AppInput
+        onDeFocus={onDeFocus}
+        onFocus={onFocus}
         setter={setData}
         underlyingLabel="Password"
         ObjectKey="password"

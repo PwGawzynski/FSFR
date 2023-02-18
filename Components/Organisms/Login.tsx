@@ -1,19 +1,32 @@
-import { View } from 'react-native';
-import React from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
+import { Animated, Dimensions } from 'react-native';
+import React, { useEffect, useRef } from 'react';
 import { LoginForm } from './LoginForm';
-import { LoginStackParamList } from '../../App';
 import { RegisterAsk } from '../Molecules/RegisterAsk';
 import { ForgotPasswordReset } from '../Molecules/ForgotPasswordReset';
+import { LoginProps } from '../../frontendSelfTypes/moduleProps/LoginProps';
+import { handleLoginPgAnimation } from '../../helpers/handlers/LoginHandlers';
 
-type Props = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
-
-export function Login({ navigation }: Props) {
+export function Login({ navigation, onOff, setOnOff }: LoginProps) {
+  const elPosition = useRef(new Animated.Value(0)).current;
+  const screenHeight = Dimensions.get('window').height;
+  useEffect(() => {
+    handleLoginPgAnimation(onOff, elPosition, screenHeight);
+  });
   return (
-    <View className="w-8/12 bg-white items-center">
-      <LoginForm />
+    <Animated.View
+      className="w-8/12 bg-white items-center"
+      style={{
+        transform: [{ translateY: elPosition }],
+      }}
+    >
+      <LoginForm
+        onDeFocus={() => {
+          setOnOff(false);
+        }}
+        onFocus={() => setOnOff(true)}
+      />
       <RegisterAsk navigation={navigation} />
       <ForgotPasswordReset navigation={navigation} />
-    </View>
+    </Animated.View>
   );
 }

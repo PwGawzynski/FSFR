@@ -1,14 +1,9 @@
 import { Text } from 'react-native';
-import { ReactNode, useContext } from 'react';
+import { useContext } from 'react';
 import { AppSettings, ThemeOptions } from '../../helpers/appSettings/contexts';
+import { InfoTextProps } from '../../frontendSelfTypes/moduleProps/InfoTextProps';
 
-interface Props {
-  children: ReactNode;
-
-  additionalStyles?: string;
-}
-
-export function InfoText({ children, additionalStyles }: Props) {
+export function InfoText({ children, additionalStyles }: InfoTextProps) {
   const context = useContext(AppSettings);
   const theme = context?.settings.theme;
   return (

@@ -1,51 +1,8 @@
 import React, { useContext } from 'react';
 import { TextInput } from 'react-native';
 import { AppSettings, ThemeOptions } from '../../helpers/appSettings/contexts';
+import { CustomInputProps } from '../../frontendSelfTypes/moduleProps/CustomInputProps';
 
-export interface CustomInputProps {
-  value: string;
-  onChange: (value: string) => void;
-  inputMode?:
-    | 'addressCity'
-    | 'countryName'
-    | 'creditCardNumber'
-    | 'emailAddress'
-    | 'fullStreetAddress'
-    | 'givenName'
-    | 'name'
-    | 'postalCode'
-    | 'streetAddressLine1'
-    | 'username'
-    | 'password'
-    | 'newPassword'
-    | 'oneTimeCode';
-  autoComplete?:
-    | 'username'
-    | 'name-given'
-    | 'name-middle'
-    | 'street-address'
-    | 'tel'
-    | 'email'
-    | 'password'
-    | 'postal-code'
-    | null;
-  isPwd?: boolean;
-
-  keyboardType?:
-    | 'default'
-    | 'email-address'
-    | 'numeric'
-    | 'phone-pad'
-    | 'ascii-capable'
-    | 'numbers-and-punctuation'
-    | 'url'
-    | 'number-pad'
-    | 'name-phone-pad'
-    | 'decimal-pad'
-    | 'twitter'
-    | 'web-search'
-    | 'visible-password';
-}
 export function CustomInput({
   value,
   inputMode,
@@ -53,13 +10,16 @@ export function CustomInput({
   autoComplete,
   isPwd,
   keyboardType,
+  onFocus,
+  onDeFocus,
 }: CustomInputProps) {
   const context = useContext(AppSettings);
   const { settings } = context;
   const { theme } = settings;
-
   return (
     <TextInput
+      onFocus={onFocus}
+      onBlur={onDeFocus}
       className={`${
         theme === ThemeOptions.dark ? 'text-white' : 'text-black'
       } w-max border-solid border-b-4 ${
