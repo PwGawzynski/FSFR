@@ -1,11 +1,9 @@
-import { StackScreenProps } from '@react-navigation/stack';
 import { Image, View } from 'react-native';
 import React from 'react';
-import { LoginStackParamList } from '../../App';
 import { RegisterForm } from '../Organisms/RegisterForm';
+import { RegisterProps } from '../../frontendSelfTypes/moduleProps/RegisterProps';
 
-type Props = StackScreenProps<LoginStackParamList>;
-export function Register({ navigation }: Props) {
+export function Register({ navigation }: RegisterProps) {
   return (
     <View className="w-screen h-screen items-center bg-white">
       <View className="w-screen h-1/5 bg-black">
@@ -15,7 +13,7 @@ export function Register({ navigation }: Props) {
           source={require('../../assets/loginBg.png')}
         />
       </View>
-      <RegisterForm />
+      <RegisterForm navigation={navigation} />
     </View>
   );
 }

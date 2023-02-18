@@ -6,6 +6,7 @@ import { AppSettings, ThemeOptions } from './helpers/appSettings/contexts';
 import { LoginPage } from './Components/Pages/LoginPage';
 import { Register } from './Components/Pages/Register';
 import { ResetPassword } from './Components/Pages/ResetPassword';
+import { AuthCode } from './Components/Pages/AuthCode';
 
 export type LoginStackParamList = {
   Login: undefined;
@@ -41,6 +42,7 @@ export default function App() {
           <Stack.Screen name="Login" component={LoginPage} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
+          <Stack.Screen name="AuthCode" component={AuthCode} />
         </Stack.Navigator>
       </AppSettings.Provider>
     </NavigationContainer>
