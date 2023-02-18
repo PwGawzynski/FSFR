@@ -16,10 +16,14 @@ export function AppInput<T extends object>({
   keyboardType,
   onFocus,
   onDeFocus,
+  refGetter,
+  onSubmit,
 }: AppInputProps<T>) {
   return (
     <View className={`w-full ${additionalStyles}`}>
       <CustomInput
+        refGetter={refGetter}
+        onSubmit={onSubmit}
         onFocus={onFocus}
         onDeFocus={onDeFocus}
         value={value}

@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { TextInput } from 'react-native';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterDataObject } from '../../../farm-service-be/types/Useer/RegisterDataObject';
+import { RegisterFormProps } from '../../frontendSelfTypes/moduleProps/RegisterFormProps';
 
-export function RegisterForm() {
+export function RegisterForm({ navigation }: RegisterFormProps) {
+  const input1 = React.createRef<TextInput>();
+  const input2 = React.createRef<TextInput>();
+  const input3 = React.createRef<TextInput>();
+  const input4 = React.createRef<TextInput>();
+  const input5 = React.createRef<TextInput>();
+  const input6 = React.createRef<TextInput>();
+  const input7 = React.createRef<TextInput>();
+  const input9 = React.createRef<TextInput>();
+  const input10 = React.createRef<TextInput>();
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -20,16 +30,18 @@ export function RegisterForm() {
     houseNumber: '',
     circumference: '',
   } as RegisterDataObject);
-
   return (
     <KeyboardAwareScrollView
       className="w-8/12 pt-10"
       resetScrollToCoords={{ x: 0, y: 0 }}
       scrollEnabled
+      enableResetScrollToCoords={false}
       extraHeight={450}
       showsVerticalScrollIndicator={false}
     >
       <AppInput
+        refGetter={input1}
+        onSubmit={() => input2.current?.focus()}
         setter={setData}
         underlyingLabel="Email"
         ObjectKey="email"
@@ -40,6 +52,10 @@ export function RegisterForm() {
       />
       <AppInput
         setter={setData}
+        refGetter={input2}
+        onSubmit={() => {
+          input3.current?.focus();
+        }}
         underlyingLabel="Password"
         ObjectKey="password"
         value={data.password}
@@ -50,6 +66,8 @@ export function RegisterForm() {
       />
       <AppInput
         setter={setData}
+        refGetter={input3}
+        onSubmit={() => input4.current?.focus()}
         underlyingLabel="Name"
         ObjectKey="name"
         value={data.name}
@@ -59,6 +77,8 @@ export function RegisterForm() {
       />
       <AppInput
         setter={setData}
+        refGetter={input4}
+        onSubmit={() => input5.current?.focus()}
         underlyingLabel="Surname"
         ObjectKey="surname"
         value={data.surname}
@@ -67,12 +87,16 @@ export function RegisterForm() {
       />
       <AppInput
         setter={setData}
+        refGetter={input5}
+        onSubmit={() => input6.current?.focus()}
         underlyingLabel="CompanyName"
         ObjectKey="companyName"
         value={data.companyName}
         additionalStyles="mt-5"
       />
       <AppInput
+        refGetter={input6}
+        onSubmit={() => input7.current?.focus()}
         setter={setData}
         underlyingLabel="NIP"
         ObjectKey="nip"
@@ -82,6 +106,7 @@ export function RegisterForm() {
       />
       <AppInput
         setter={setData}
+        refGetter={input7}
         underlyingLabel="Your Contact Phone"
         ObjectKey="contactPhone"
         autoComplete="tel"
@@ -100,6 +125,7 @@ export function RegisterForm() {
       />
       <AppInput
         setter={setData}
+        onSubmit={() => input9.current?.focus()}
         underlyingLabel="City"
         ObjectKey="city"
         value={data.city}
@@ -109,6 +135,8 @@ export function RegisterForm() {
       />
       <AppInput
         setter={setData}
+        refGetter={input9}
+        onSubmit={() => input10.current?.focus()}
         underlyingLabel="Postal Code"
         ObjectKey="postalCode"
         value={data.postalCode}
@@ -119,6 +147,7 @@ export function RegisterForm() {
       />
       <AppInput
         setter={setData}
+        refGetter={input10}
         underlyingLabel="House Number"
         ObjectKey="houseNumber"
         value={data.houseNumber}
@@ -133,7 +162,7 @@ export function RegisterForm() {
         additionalStyles="mt-5"
       />
       <AppButton
-        action={() => console.log('REGISTER')}
+        action={() => navigation.navigate('AuthCode')}
         context="Register"
         additionalStyles="mt-5 mb-24"
       />

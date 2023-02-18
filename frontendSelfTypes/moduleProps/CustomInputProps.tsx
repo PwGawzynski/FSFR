@@ -1,3 +1,5 @@
+import { TextInput } from 'react-native';
+
 export interface CustomInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -43,4 +45,8 @@ export interface CustomInputProps {
     | 'visible-password';
   onFocus?: () => void;
   onDeFocus?: () => void;
+
+  refGetter?: React.MutableRefObject<TextInput | null>;
+
+  onSubmit?: () => void;
 }
