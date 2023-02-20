@@ -1,4 +1,5 @@
 import React from 'react';
+import { DeviceType } from 'expo-device';
 // _______________________APP_SETTINGS_______________________ //
 export enum ThemeOptions {
   dark,
@@ -6,9 +7,11 @@ export enum ThemeOptions {
 }
 interface SettingsObject {
   theme: ThemeOptions;
+  deviceType: DeviceType;
 }
 interface AppOptionsSetters {
   setTheme: React.Dispatch<React.SetStateAction<ThemeOptions>>;
+  setDeviceType: React.Dispatch<React.SetStateAction<DeviceType>>;
 }
 interface SettingsContext {
   settings: SettingsObject;
