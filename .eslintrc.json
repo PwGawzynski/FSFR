@@ -18,6 +18,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "react/jsx-props-no-spreading": "off",
     "react/destructuring-assignment": "off",
     "react/require-default-props": "off",
     "import/no-unresolved": 0,
