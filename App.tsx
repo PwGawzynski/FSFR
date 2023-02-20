@@ -5,10 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as Device from 'expo-device';
 import { DeviceType } from 'expo-device';
 import { AppSettings, ThemeOptions } from './helpers/appSettings/contexts';
-import { LoginPage } from './Components/Pages/LoginPage';
 import { Register } from './Components/Pages/Register';
 import { ResetPassword } from './Components/Pages/ResetPassword';
 import { AuthCode } from './Components/Pages/AuthCode';
+import { LoginPage } from './Components/Pages/LoginPage';
+import { LoginPageTab } from './Components/Pages/LoginPageTab';
 
 export type LoginStackParamList = {
   Login: undefined;
@@ -51,7 +52,12 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="Login" component={LoginPage} />
+          <Stack.Screen
+            name="Login"
+            component={
+              deviceType === DeviceType.PHONE ? LoginPage : LoginPageTab
+            }
+          />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="AuthCode" component={AuthCode} />

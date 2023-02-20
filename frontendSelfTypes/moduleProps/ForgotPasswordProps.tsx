@@ -1,7 +1,9 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import { LoginStackParamList } from '../../App';
 
-export type ForgotPasswordProps = Omit<
-  StackScreenProps<LoginStackParamList>,
-  'route'
->;
+type ForgotPasswordBase = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
+
+export interface ForgotPasswordProps extends ForgotPasswordBase {
+  additionalStyles?: string;
+  additionalBtnStyles?: string;
+}
