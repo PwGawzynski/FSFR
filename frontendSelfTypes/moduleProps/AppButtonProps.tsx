@@ -3,4 +3,5 @@ export interface AppButtonProps {
   context: string;
 
   additionalStyles?: string;
+  additionalTextStyles?: string;
 }

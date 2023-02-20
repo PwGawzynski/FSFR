@@ -18,6 +18,8 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "import/no-extraneous-dependencies": ["off", {"devDependencies": true}],
+    "react/jsx-props-no-spreading": "off",
     "react/destructuring-assignment": "off",
     "react/require-default-props": "off",
     "import/no-unresolved": 0,

@@ -5,13 +5,16 @@ export function AppButton({
   action,
   context,
   additionalStyles,
+  additionalTextStyles,
 }: AppButtonProps) {
   return (
     <TouchableOpacity
       className={`w-full h-9 bg-black rounded-2xl justify-center ${additionalStyles}`}
       onPress={action}
     >
-      <Text className="text-white text-center text-base font-bold uppercase tracking-wide">
+      <Text
+        className={`text-white text-center text-base font-bold uppercase tracking-wide ${additionalTextStyles}`}
+      >
         {context}
       </Text>
     </TouchableOpacity>

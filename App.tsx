@@ -1,7 +1,9 @@
 import 'react-native-gesture-handler';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import * as Device from 'expo-device';
+import { DeviceType } from 'expo-device';
 import { AppSettings, ThemeOptions } from './helpers/appSettings/contexts';
 import { LoginPage } from './Components/Pages/LoginPage';
 import { Register } from './Components/Pages/Register';
@@ -17,17 +19,27 @@ export type LoginStackParamList = {
 
 export default function App() {
   const [settings, setSettings] = useState(ThemeOptions.light);
+  const [deviceType, setDeviceType] = useState(DeviceType.UNKNOWN);
+
   const memoSettings = useMemo(
     () => ({
       settings: {
         theme: settings,
+        deviceType,
       },
       setters: {
         setTheme: setSettings,
+        setDeviceType,
       },
     }),
-    [settings],
+    [settings, deviceType],
   );
+  useEffect(() => {
+    (async () => {
+      const recognizedDeviceType = await Device.getDeviceTypeAsync();
+      setDeviceType(recognizedDeviceType);
+    })();
+  });
 
   const Stack = createStackNavigator<LoginStackParamList>();
   return (

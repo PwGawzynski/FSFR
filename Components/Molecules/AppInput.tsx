@@ -1,8 +1,8 @@
-import React from 'react';
-import { View } from 'react-native';
-import { CustomInput } from '../Atoms/CustomInput';
+import React, { useContext } from 'react';
+import { TextInput, View } from 'react-native';
 import { InputLabel } from '../Atoms/InputLabel';
 import { AppInputProps } from '../../frontendSelfTypes/moduleProps/AppInputProps';
+import { AppSettings, ThemeOptions } from '../../helpers/appSettings/contexts';
 
 export function AppInput<T extends object>({
   inputMode,
@@ -18,25 +18,37 @@ export function AppInput<T extends object>({
   onDeFocus,
   refGetter,
   onSubmit,
+  maxLength,
+  additionalTextStyles,
 }: AppInputProps<T>) {
+  const context = useContext(AppSettings);
+  const { settings } = context;
+  const { theme } = settings;
   return (
     <View className={`w-full ${additionalStyles}`}>
-      <CustomInput
-        refGetter={refGetter}
-        onSubmit={onSubmit}
+      <TextInput
+        maxLength={maxLength}
+        ref={refGetter}
         onFocus={onFocus}
-        onDeFocus={onDeFocus}
+        onEndEditing={onSubmit}
+        onBlur={onDeFocus}
+        className={`${
+          theme === ThemeOptions.dark ? 'text-white' : 'text-black'
+        } w-max border-solid border-b-4 ${
+          theme === ThemeOptions.dark ? 'border-white' : 'border-black'
+        } text-base ${additionalTextStyles}`}
+        autoCorrect={false}
         value={value}
-        onChange={text =>
+        autoComplete={autoComplete ?? 'off'}
+        textContentType={inputMode}
+        onChangeText={txt =>
           setter(prev => ({
             ...prev,
-            [ObjectKey]: text,
+            [ObjectKey]: txt,
           }))
         }
+        secureTextEntry={isPwd}
         keyboardType={keyboardType}
-        inputMode={inputMode}
-        autoComplete={autoComplete}
-        isPwd={isPwd}
       />
       <InputLabel>{underlyingLabel}</InputLabel>
     </View>
