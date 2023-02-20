@@ -15,6 +15,7 @@ const codeSplitter = (code: string): string => {
 export function AuthCode() {
   const [data, setData] = useState({ code: '' } as AuthCodeData);
   const [isInputFocused, setInputFocused] = useState(false as boolean);
+
   return (
     <View className="w-screen h-screen bg-white items-center flex-1">
       <LogoImage />
