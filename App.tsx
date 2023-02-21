@@ -1,12 +1,15 @@
 import 'react-native-gesture-handler';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import * as Device from 'expo-device';
+import { DeviceType } from 'expo-device';
 import { AppSettings, ThemeOptions } from './helpers/appSettings/contexts';
-import { LoginPage } from './Components/Pages/LoginPage';
 import { Register } from './Components/Pages/Register';
 import { ResetPassword } from './Components/Pages/ResetPassword';
 import { AuthCode } from './Components/Pages/AuthCode';
+import { LoginPage } from './Components/Pages/LoginPage';
+import { LoginPageTab } from './Components/Pages/LoginPageTab';
 
 export type LoginStackParamList = {
   Login: undefined;
@@ -17,17 +20,27 @@ export type LoginStackParamList = {
 
 export default function App() {
   const [settings, setSettings] = useState(ThemeOptions.light);
+  const [deviceType, setDeviceType] = useState(DeviceType.UNKNOWN);
+
   const memoSettings = useMemo(
     () => ({
       settings: {
         theme: settings,
+        deviceType,
       },
       setters: {
         setTheme: setSettings,
+        setDeviceType,
       },
     }),
-    [settings],
+    [settings, deviceType],
   );
+  useEffect(() => {
+    (async () => {
+      const recognizedDeviceType = await Device.getDeviceTypeAsync();
+      setDeviceType(recognizedDeviceType);
+    })();
+  });
 
   const Stack = createStackNavigator<LoginStackParamList>();
   return (
@@ -39,7 +52,12 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="Login" component={LoginPage} />
+          <Stack.Screen
+            name="Login"
+            component={
+              deviceType === DeviceType.PHONE ? LoginPage : LoginPageTab
+            }
+          />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="AuthCode" component={AuthCode} />
