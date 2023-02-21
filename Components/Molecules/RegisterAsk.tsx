@@ -4,10 +4,15 @@ import { InfoText } from '../Atoms/InfoText';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterAskProps } from '../../frontendSelfTypes/moduleProps/RegisterAskProps';
 
-export function RegisterAsk({ navigation }: RegisterAskProps) {
+export function RegisterAsk({
+  navigation,
+  additionalTxtStyles,
+  additionalStyles,
+  additionalBtnStyles,
+}: RegisterAskProps) {
   return (
-    <View className="w-full">
-      <InfoText additionalStyles="mt-10">
+    <View className={`w-full items-center ${additionalStyles}`}>
+      <InfoText additionalStyles={`mt-10 ${additionalTxtStyles}`}>
         {`DON'T YOU HAVE AN ACCOUNT ? RELAX CLICK BELLOW AND CREATE ONE`}
       </InfoText>
       <AppButton
@@ -15,7 +20,7 @@ export function RegisterAsk({ navigation }: RegisterAskProps) {
           navigation.navigate('Register');
         }}
         context="Register"
-        additionalStyles="mt-10"
+        additionalStyles={`mt-10 ${additionalBtnStyles}`}
       />
     </View>
   );

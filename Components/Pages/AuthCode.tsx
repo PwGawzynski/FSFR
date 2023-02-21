@@ -1,6 +1,6 @@
 import { LayoutAnimation, Platform, UIManager, View } from 'react-native';
 import React, { useState } from 'react';
-import { LogoImage } from '../Atoms/LogoImage';
+import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
 import { InfoText } from '../Atoms/InfoText';
 import { AppInput } from '../Molecules/AppInput';
 import { AuthCodeData } from '../../frontendSelfTypes/moduleProps/AuthCodeData';
@@ -18,7 +18,7 @@ export function AuthCode() {
 
   return (
     <View className="w-screen h-screen bg-white items-center flex-1">
-      <LogoImage />
+      <LogoImageCurtain />
       <InfoText additionalStyles="w-10/12 text-base mb-12 mt-24">
         We’ve sent you e-mail message on given address, please click on link
         inside it, to activate your account. This action is crucial to achieve

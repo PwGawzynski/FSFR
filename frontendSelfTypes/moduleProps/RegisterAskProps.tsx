@@ -1,7 +1,10 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import { LoginStackParamList } from '../../App';
 
-export type RegisterAskProps = Omit<
-  StackScreenProps<LoginStackParamList>,
-  'route'
->;
+type RegisterAskBase = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
+
+export interface RegisterAskProps extends RegisterAskBase {
+  additionalTxtStyles?: string;
+  additionalStyles?: string;
+  additionalBtnStyles?: string;
+}
