@@ -108,3 +108,7 @@ export type RegisterFormProps = Omit<
 >;
 
 export type RegisterProps = StackScreenProps<LoginStackParamList, 'Register'>;
+export type RegisterTabProps = StackScreenProps<
+  LoginStackParamList,
+  'Register'
+>;
