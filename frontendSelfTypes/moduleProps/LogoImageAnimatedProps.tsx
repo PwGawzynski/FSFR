@@ -3,8 +3,11 @@ import { ImageProps } from 'react-native';
 export interface LogoImageAnimatedProps {
   onOff: boolean;
 }
-export interface AnimatedPositionAppButtonProps {
-  isFocused: boolean;
+export interface LogoProps {
+  additionalBoxStyles?: string;
+  additionalImageStyles?: string;
+
+  resizeMode?: ImageProps['resizeMode'];
 }
 
 export interface LogoImageProps {

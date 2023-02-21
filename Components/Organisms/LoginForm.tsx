@@ -19,7 +19,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
       className={`w-full mt-14 ${
         deviceType === DeviceType.PHONE
           ? ''
-          : 'flex flex-row items-center justify-center'
+          : 'flex-1 flex-row items-center justify-center m-0'
       }`}
     >
       <View

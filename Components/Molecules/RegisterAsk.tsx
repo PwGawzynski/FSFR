@@ -6,12 +6,13 @@ import { RegisterAskProps } from '../../frontendSelfTypes/moduleProps/RegisterAs
 
 export function RegisterAsk({
   navigation,
+  additionalTxtStyles,
   additionalStyles,
   additionalBtnStyles,
 }: RegisterAskProps) {
   return (
-    <View className="w-full items-center">
-      <InfoText additionalStyles={`mt-10 ${additionalStyles}`}>
+    <View className={`w-full items-center ${additionalStyles}`}>
+      <InfoText additionalStyles={`mt-10 ${additionalTxtStyles}`}>
         {`DON'T YOU HAVE AN ACCOUNT ? RELAX CLICK BELLOW AND CREATE ONE`}
       </InfoText>
       <AppButton

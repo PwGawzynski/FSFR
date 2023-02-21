@@ -4,6 +4,7 @@ import { LoginStackParamList } from '../../App';
 type ForgotPasswordBase = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
 
 export interface ForgotPasswordProps extends ForgotPasswordBase {
-  additionalStyles?: string;
+  additionalTxtStyles?: string;
   additionalBtnStyles?: string;
+  additionalStyles?: string;
 }

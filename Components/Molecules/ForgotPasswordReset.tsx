@@ -6,12 +6,13 @@ import { ForgotPasswordProps } from '../../frontendSelfTypes/moduleProps/ForgotP
 
 export function ForgotPasswordReset({
   navigation,
-  additionalStyles,
+  additionalTxtStyles,
   additionalBtnStyles,
+  additionalStyles,
 }: ForgotPasswordProps) {
   return (
-    <View className="w-full items-center">
-      <InfoText additionalStyles={`mt-10 ${additionalStyles}`}>
+    <View className={`w-full items-center ${additionalStyles}`}>
+      <InfoText additionalStyles={`mt-10 ${additionalTxtStyles}`}>
         FORGOT YOUR PASSWORD ? DON’T WORRY, CLICK RESET PASSWORD BUTTON BELLOW{' '}
       </InfoText>
       <AppButton
