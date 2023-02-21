@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import React from 'react';
 import { InfoText } from '../Atoms/InfoText';
 import { AppButton } from '../Atoms/AppButton';
-import { ForgotPasswordProps } from '../../frontendSelfTypes/moduleProps/ForgotPasswordProps';
+import { ForgotPasswordProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 
 export function ForgotPasswordReset({
   navigation,

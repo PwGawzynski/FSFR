@@ -1,6 +1,6 @@
 import { Image, View } from 'react-native';
 import React from 'react';
-import { LogoImageProps } from '../../frontendSelfTypes/moduleProps/LogoImageAnimatedProps';
+import { LogoImageProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 
 export function LogoImage({ resizeMode, additionalBoxStyles }: LogoImageProps) {
   return (

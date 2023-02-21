@@ -1,8 +1,8 @@
 import { View } from 'react-native';
 import React from 'react';
 import { RegisterForm } from '../Organisms/RegisterForm';
-import { RegisterProps } from '../../frontendSelfTypes/moduleProps/RegisterProps';
 import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
+import { RegisterProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 
 export function Register({ navigation }: RegisterProps) {
   return (

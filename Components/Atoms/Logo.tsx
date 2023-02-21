@@ -1,5 +1,5 @@
 import { Image, View } from 'react-native';
-import { LogoProps } from '../../frontendSelfTypes/moduleProps/LogoImageAnimatedProps';
+import { LogoProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 
 export function Logo({
   additionalBoxStyles,

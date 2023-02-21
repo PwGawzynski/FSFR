@@ -1,7 +1,7 @@
 import { Animated, Dimensions, Image, View } from 'react-native';
 import React, { useEffect, useRef } from 'react';
-import { LogoImageAnimatedProps } from '../../frontendSelfTypes/moduleProps/LogoImageAnimatedProps';
 import { handleLogoImagePgAnimations } from '../../helpers/handlers/LogoImageAnimatedHandlers';
+import { LogoImageAnimatedProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 
 export function LogoImageAnimated({ onOff }: LogoImageAnimatedProps) {
   const elPosition = useRef(new Animated.Value(0)).current;

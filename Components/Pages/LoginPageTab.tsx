@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { LoginStackParamList } from '../../App';
 import { LogoImage } from '../Atoms/LogoImage';
