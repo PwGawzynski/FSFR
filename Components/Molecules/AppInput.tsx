@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { TextInput, View } from 'react-native';
 import { InputLabel } from '../Atoms/InputLabel';
-import { AppInputProps } from '../../frontendSelfTypes/moduleProps/AppInputProps';
 import { AppSettings, ThemeOptions } from '../../helpers/appSettings/contexts';
+import { AppInputProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 
 export function AppInput<T extends object>({
   inputMode,

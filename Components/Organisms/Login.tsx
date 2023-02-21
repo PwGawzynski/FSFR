@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from 'react';
 import { LoginForm } from './LoginForm';
 import { RegisterAsk } from '../Molecules/RegisterAsk';
 import { ForgotPasswordReset } from '../Molecules/ForgotPasswordReset';
-import { LoginProps } from '../../frontendSelfTypes/moduleProps/LoginProps';
 import { handleLoginPgAnimation } from '../../helpers/handlers/LoginHandlers';
+import { LoginProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 
 export function Login({ navigation, onOff, setOnOff }: LoginProps) {
   const elPosition = useRef(new Animated.Value(0)).current;

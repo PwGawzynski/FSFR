@@ -1,8 +1,8 @@
-import { AppButtonProps } from 'frontendSelfTypes/moduleProps/AppButtonProps';
 import { Text, TouchableOpacity } from 'react-native';
 import { useContext } from 'react';
 import { DeviceType } from 'expo-device';
 import { AppSettings } from '../../helpers/appSettings/contexts';
+import { AppButtonProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 
 export function AppButton({
   action,

@@ -4,7 +4,7 @@ import { TextInput } from 'react-native';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterDataObject } from '../../../farm-service-be/types/Useer/RegisterDataObject';
-import { RegisterFormProps } from '../../frontendSelfTypes/moduleProps/RegisterFormProps';
+import { RegisterFormProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 
 export function RegisterForm({ navigation }: RegisterFormProps) {
   const input1 = React.createRef<TextInput>();

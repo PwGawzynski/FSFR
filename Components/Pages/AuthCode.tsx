@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
 import { InfoText } from '../Atoms/InfoText';
 import { AppInput } from '../Molecules/AppInput';
-import { AuthCodeData } from '../../frontendSelfTypes/moduleProps/AuthCodeData';
+import { AuthCodeData } from '../../frontendSelfTypes/ApiDataTypes/AuthCodeData';
 import { AppButton } from '../Atoms/AppButton';
 
 const codeSplitter = (code: string): string => {
