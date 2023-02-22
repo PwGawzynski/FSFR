@@ -1,5 +1,11 @@
 import React, { ReactNode } from 'react';
-import { TextInput, TextInputProps, ImageProps } from 'react-native';
+import {
+  TextInput,
+  TextInputProps,
+  ImageProps,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { LoginStackParamList } from '../../App';
 
@@ -36,7 +42,7 @@ export interface AppInputProps<T extends object> {
     | 'oneTimeCode';
 
   isPwd?: boolean;
-  onFocus?: () => void;
+  onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onDeFocus?: () => void;
 
   refGetter?: React.MutableRefObject<TextInput | null>;

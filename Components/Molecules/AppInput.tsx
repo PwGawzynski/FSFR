@@ -27,10 +27,11 @@ export function AppInput<T extends object>({
   return (
     <View className={`w-full ${additionalStyles}`}>
       <TextInput
+        blurOnSubmit={false}
         maxLength={maxLength}
         ref={refGetter}
-        onFocus={onFocus}
-        onEndEditing={onSubmit}
+        onFocus={onFocus ? e => onFocus(e) : undefined}
+        onSubmitEditing={onSubmit}
         onBlur={onDeFocus}
         className={`${
           theme === ThemeOptions.dark ? 'text-white' : 'text-black'
