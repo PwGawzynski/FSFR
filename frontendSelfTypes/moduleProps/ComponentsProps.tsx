@@ -53,6 +53,8 @@ export interface AppInputProps<T extends object> {
 
   additionalStyles?: string;
   additionalTextStyles?: string;
+
+  keyboardHideOnSubmit?: boolean;
 }
 
 type ForgotPasswordBase = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
@@ -108,10 +110,15 @@ export interface RegisterAskProps extends RegisterAskBase {
   additionalBtnStyles?: string;
 }
 
-export type RegisterFormProps = Omit<
+export type RegisterFormBase = Omit<
   StackScreenProps<LoginStackParamList, 'Register'>,
   'route'
 >;
+
+export interface RegisterFormProps extends RegisterFormBase {
+  setFocused: React.Dispatch<React.SetStateAction<boolean>>;
+  isFocused?: boolean;
+}
 
 export type RegisterProps = StackScreenProps<LoginStackParamList, 'Register'>;
 export type RegisterTabProps = StackScreenProps<
