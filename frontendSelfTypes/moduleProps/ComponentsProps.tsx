@@ -1,5 +1,11 @@
 import React, { ReactNode } from 'react';
-import { TextInput, TextInputProps, ImageProps } from 'react-native';
+import {
+  TextInput,
+  TextInputProps,
+  ImageProps,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { LoginStackParamList } from '../../App';
 
@@ -36,7 +42,7 @@ export interface AppInputProps<T extends object> {
     | 'oneTimeCode';
 
   isPwd?: boolean;
-  onFocus?: () => void;
+  onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onDeFocus?: () => void;
 
   refGetter?: React.MutableRefObject<TextInput | null>;
@@ -47,6 +53,8 @@ export interface AppInputProps<T extends object> {
 
   additionalStyles?: string;
   additionalTextStyles?: string;
+
+  keyboardHideOnSubmit?: boolean;
 }
 
 type ForgotPasswordBase = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
@@ -102,9 +110,18 @@ export interface RegisterAskProps extends RegisterAskBase {
   additionalBtnStyles?: string;
 }
 
-export type RegisterFormProps = Omit<
+export type RegisterFormBase = Omit<
   StackScreenProps<LoginStackParamList, 'Register'>,
   'route'
 >;
 
+export interface RegisterFormProps extends RegisterFormBase {
+  setFocused: React.Dispatch<React.SetStateAction<boolean>>;
+  isFocused?: boolean;
+}
+
 export type RegisterProps = StackScreenProps<LoginStackParamList, 'Register'>;
+export type RegisterTabProps = StackScreenProps<
+  LoginStackParamList,
+  'Register'
+>;

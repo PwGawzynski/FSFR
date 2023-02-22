@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { TextInput } from 'react-native';
+import { LayoutAnimation, Platform, TextInput, UIManager } from 'react-native';
+import { DeviceType } from 'expo-device';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterDataObject } from '../../../farm-service-be/types/Useer/RegisterDataObject';
 import { RegisterFormProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
+import { AppSettings } from '../../helpers/appSettings/contexts';
 
-export function RegisterForm({ navigation }: RegisterFormProps) {
+export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
+  const { deviceType } = useContext(AppSettings).settings;
   const input1 = React.createRef<TextInput>();
   const input2 = React.createRef<TextInput>();
   const input3 = React.createRef<TextInput>();
@@ -14,8 +17,21 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
   const input5 = React.createRef<TextInput>();
   const input6 = React.createRef<TextInput>();
   const input7 = React.createRef<TextInput>();
+  const input8 = React.createRef<TextInput>();
   const input9 = React.createRef<TextInput>();
   const input10 = React.createRef<TextInput>();
+  const input11 = React.createRef<TextInput>();
+  const input12 = React.createRef<TextInput>();
+
+  useEffect(() => {
+    if (
+      Platform.OS === 'android' &&
+      UIManager.setLayoutAnimationEnabledExperimental
+    ) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+    LayoutAnimation.easeInEaseOut();
+  });
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -33,15 +49,17 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
   return (
     <KeyboardAwareScrollView
       className="w-8/12 pt-10"
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      scrollEnabled
       enableResetScrollToCoords={false}
-      extraHeight={450}
+      extraHeight={deviceType === DeviceType.PHONE ? 450 : 300}
       showsVerticalScrollIndicator={false}
     >
       <AppInput
         refGetter={input1}
-        onSubmit={() => input2.current?.focus()}
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
+        onSubmit={() => {
+          input2.current?.focus();
+        }}
         setter={setData}
         underlyingLabel="Email"
         ObjectKey="email"
@@ -51,6 +69,8 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         keyboardType="email-address"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
         setter={setData}
         refGetter={input2}
         onSubmit={() => {
@@ -65,9 +85,13 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         isPwd
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
         setter={setData}
         refGetter={input3}
-        onSubmit={() => input4.current?.focus()}
+        onSubmit={() => {
+          input4.current?.focus();
+        }}
         underlyingLabel="Name"
         ObjectKey="name"
         value={data.name}
@@ -76,9 +100,13 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         additionalStyles="mt-5"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
         setter={setData}
         refGetter={input4}
-        onSubmit={() => input5.current?.focus()}
+        onSubmit={() => {
+          input5.current?.focus();
+        }}
         underlyingLabel="Surname"
         ObjectKey="surname"
         value={data.surname}
@@ -86,17 +114,25 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         additionalStyles="mt-5"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
         setter={setData}
         refGetter={input5}
-        onSubmit={() => input6.current?.focus()}
+        onSubmit={() => {
+          input6.current?.focus();
+        }}
         underlyingLabel="CompanyName"
         ObjectKey="companyName"
         value={data.companyName}
         additionalStyles="mt-5"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
         refGetter={input6}
-        onSubmit={() => input7.current?.focus()}
+        onSubmit={() => {
+          input7.current?.focus();
+        }}
         setter={setData}
         underlyingLabel="NIP"
         ObjectKey="nip"
@@ -105,8 +141,13 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         keyboardType="number-pad"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
         setter={setData}
         refGetter={input7}
+        onSubmit={() => {
+          input8.current?.focus();
+        }}
         underlyingLabel="Your Contact Phone"
         ObjectKey="contactPhone"
         autoComplete="tel"
@@ -115,7 +156,13 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         keyboardType="phone-pad"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
         setter={setData}
+        refGetter={input8}
+        onSubmit={() => {
+          input9.current?.focus();
+        }}
         underlyingLabel="Company Contact Phone"
         ObjectKey="companyCompactPhone"
         value={data.companyCompactPhone}
@@ -124,8 +171,13 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         keyboardType="phone-pad"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
         setter={setData}
-        onSubmit={() => input9.current?.focus()}
+        refGetter={input9}
+        onSubmit={() => {
+          input10.current?.focus();
+        }}
         underlyingLabel="City"
         ObjectKey="city"
         value={data.city}
@@ -134,9 +186,13 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         additionalStyles="mt-5"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
         setter={setData}
-        refGetter={input9}
-        onSubmit={() => input10.current?.focus()}
+        refGetter={input10}
+        onSubmit={() => {
+          input11.current?.focus();
+        }}
         underlyingLabel="Postal Code"
         ObjectKey="postalCode"
         value={data.postalCode}
@@ -146,8 +202,13 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         keyboardType="numbers-and-punctuation"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
+        onSubmit={() => {
+          input12.current?.focus();
+        }}
         setter={setData}
-        refGetter={input10}
+        refGetter={input11}
         underlyingLabel="House Number"
         ObjectKey="houseNumber"
         value={data.houseNumber}
@@ -155,6 +216,9 @@ export function RegisterForm({ navigation }: RegisterFormProps) {
         keyboardType="number-pad"
       />
       <AppInput
+        onFocus={() => setFocused(true)}
+        onDeFocus={() => setFocused(false)}
+        refGetter={input12}
         setter={setData}
         underlyingLabel="Circumference"
         ObjectKey="circumference"

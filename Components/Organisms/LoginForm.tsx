@@ -30,6 +30,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
         }`}
       >
         <AppInput
+          keyboardHideOnSubmit
           onDeFocus={onDeFocus}
           onFocus={onFocus}
           setter={setData}
@@ -40,6 +41,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
           autoComplete="username"
         />
         <AppInput
+          keyboardHideOnSubmit
           onDeFocus={onDeFocus}
           onFocus={onFocus}
           setter={setData}
