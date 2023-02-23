@@ -1,15 +1,13 @@
 import { View } from 'react-native';
 import React from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
-import { LoginStackParamList } from '../../App';
 import { LogoImage } from '../Atoms/LogoImage';
 import { LoginForm } from '../Organisms/LoginForm';
 import { RegisterAsk } from '../Molecules/RegisterAsk';
 import { ForgotPasswordReset } from '../Molecules/ForgotPasswordReset';
 import { Logo } from '../Atoms/Logo';
+import { LoginPageTabBase } from '../../frontendSelfTypes/navigation/types';
 
-type Props = StackScreenProps<LoginStackParamList>;
-export function LoginPageTab({ navigation }: Props) {
+export function LoginPageTab({ navigation }: LoginPageTabBase) {
   return (
     <View className="w-max h-screen bg-white flex flex-row">
       <LogoImage additionalBoxStyles="w-1/3 h-full" resizeMode="cover" />

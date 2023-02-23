@@ -1,12 +1,10 @@
 import { View } from 'react-native';
 import React, { useState } from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
 import { Login } from '../Organisms/Login';
-import { LoginStackParamList } from '../../App';
 import { LogoImageAnimated } from '../Organisms/LogoImageAnimated';
+import { LoginPageBase } from '../../frontendSelfTypes/navigation/types';
 
-type Props = StackScreenProps<LoginStackParamList>;
-export function LoginPage({ navigation }: Props) {
+export function LoginPage({ navigation }: LoginPageBase) {
   const [el, sEl] = useState(false);
   return (
     <View className="w-max h-screen bg-white items-center">
