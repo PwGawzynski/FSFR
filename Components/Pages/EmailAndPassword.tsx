@@ -1,14 +1,11 @@
 import { View } from 'react-native';
-import { StackScreenProps } from '@react-navigation/stack';
 import { useState } from 'react';
 import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
 import { EmailAndPasswordForm } from '../Organisms/EmailAndPasswordForm';
-import { RegisterStackParamList } from '../../frontendSelfTypes/NavigatorsInterfaces/RegisterStack';
 import { EmailAndPasswordData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
+import { EmailAndPasswordBase } from '../../frontendSelfTypes/navigation/types';
 
-type Props = StackScreenProps<RegisterStackParamList, 'EmailAndPassword'>;
-
-export function EmailAndPassword({ navigation, route }: Props) {
+export function EmailAndPassword({ navigation, route }: EmailAndPasswordBase) {
   const [data, setData] = useState<EmailAndPasswordData>({
     email: '',
     password: '',
