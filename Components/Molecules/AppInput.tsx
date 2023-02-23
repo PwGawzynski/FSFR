@@ -26,7 +26,7 @@ export function AppInput<T extends object>({
   const { settings } = context;
   const { theme } = settings;
   return (
-    <View className={`w-full ${additionalStyles}`}>
+    <View className={`w-full  ${additionalStyles}`}>
       <TextInput
         blurOnSubmit={keyboardHideOnSubmit}
         maxLength={maxLength}
@@ -38,7 +38,7 @@ export function AppInput<T extends object>({
           theme === ThemeOptions.dark ? 'text-white' : 'text-black'
         } w-max border-solid border-b-4 ${
           theme === ThemeOptions.dark ? 'border-white' : 'border-black'
-        } text-base ${additionalTextStyles}`}
+        } text-lg pb-2 ${additionalTextStyles}`}
         autoCorrect={false}
         value={value}
         autoComplete={autoComplete ?? 'off'}

@@ -1,6 +1,9 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useMemo, useState } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  StackScreenProps,
+} from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Device from 'expo-device';
 import { DeviceType } from 'expo-device';
@@ -10,11 +13,12 @@ import { AuthCode } from './Components/Pages/AuthCode';
 import { LoginPage } from './Components/Pages/LoginPage';
 import { LoginPageTab } from './Components/Pages/LoginPageTab';
 import { RegisterTab } from './Components/Pages/RegisterTab';
-import { Register } from './Components/Pages/Register';
+import { RegisterMobi } from './Components/Pages/RegisterMobi';
+import { RegisterStackParamList } from './frontendSelfTypes/NavigatorsInterfaces/RegisterStack';
 
 export type LoginStackParamList = {
   Login: undefined;
-  Register: undefined;
+  Register: StackScreenProps<RegisterStackParamList> | undefined;
   AuthCode: undefined;
   ResetPassword: undefined;
 };
@@ -61,7 +65,9 @@ export default function App() {
           />
           <Stack.Screen
             name="Register"
-            component={deviceType === DeviceType.PHONE ? Register : RegisterTab}
+            component={
+              deviceType === DeviceType.PHONE ? RegisterMobi : RegisterTab
+            }
           />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="AuthCode" component={AuthCode} />

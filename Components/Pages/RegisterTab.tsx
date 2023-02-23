@@ -1,4 +1,4 @@
-import { View, Animated, Dimensions, Easing } from 'react-native';
+import { View, Animated, Dimensions } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { RegisterFormTab } from '../Organisms/RegisterFormTab';
 import { RegisterTabProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';

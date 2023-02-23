@@ -8,6 +8,11 @@ import {
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { LoginStackParamList } from '../../App';
+import { RegisterStackParamList } from '../NavigatorsInterfaces/RegisterStack';
+import {
+  EmailAndPasswordData,
+  RegisterDataMobi,
+} from '../../../farm-service-be/types/Useer/RegisterDataObject';
 
 export interface AppButtonProps {
   action: () => void;
@@ -120,8 +125,17 @@ export interface RegisterFormProps extends RegisterFormBase {
   isFocused?: boolean;
 }
 
-export type RegisterProps = StackScreenProps<LoginStackParamList, 'Register'>;
 export type RegisterTabProps = StackScreenProps<
   LoginStackParamList,
   'Register'
 >;
+type EmailAndPasswordBase = StackScreenProps<
+  RegisterStackParamList,
+  'EmailAndPassword'
+>;
+
+export interface EmailAndPasswordProps extends EmailAndPasswordBase {
+  data: EmailAndPasswordData;
+
+  setData: React.Dispatch<React.SetStateAction<EmailAndPasswordData>>;
+}
