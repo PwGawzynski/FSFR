@@ -1,9 +1,13 @@
 import { TextInput, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { NameAndSurnameData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
 import { AppInput } from '../Molecules/AppInput';
+import {
+  handleRestoreData,
+  handleSaveDataMerge,
+} from '../../helpers/handlers/AsyncStoreHelpers';
 
 export function PersonalDataForm({
   navigation,
@@ -13,6 +17,13 @@ export function PersonalDataForm({
     surname: '',
   });
   const input2 = React.createRef<TextInput>();
+  useEffect(() => {
+    (async () => {
+      console.log(
+        await handleRestoreData('RegisterMobiDataNameSurname', setData),
+      );
+    })();
+  }, []);
   return (
     <View className="w-10/12 pt-10">
       <AppInput
@@ -31,10 +42,24 @@ export function PersonalDataForm({
         ObjectKey="surname"
         value={data.surname}
         underlyingLabel="Surname"
-        onSubmit={() => navigation.navigate('CompanyNameAndNip')}
+        onSubmit={() =>
+          handleSaveDataMerge(
+            'RegisterMobiDataNameSurname',
+            data,
+            navigation,
+            'ContactPhones',
+          )
+        }
       />
       <AppButton
-        action={() => navigation.navigate('CompanyNameAndNip')}
+        action={() =>
+          handleSaveDataMerge(
+            'RegisterMobiDataNameSurname',
+            data,
+            navigation,
+            'ContactPhones',
+          )
+        }
         context="Next"
         additionalStyles="mt-36"
       />
