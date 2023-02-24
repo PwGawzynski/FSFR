@@ -2,15 +2,15 @@ import { TextInput, View } from 'react-native';
 import React, { useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
-import { CompanyNameAndNIPData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
+import { ContactPhonesData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
 import { AppInput } from '../Molecules/AppInput';
 
-export function CompanyNameAndNipForm({
+export function ContactPhonesForm({
   navigation,
-}: RegisterMobiPropsBase<'CompanyNameAndNip'>) {
-  const [data, setData] = useState<CompanyNameAndNIPData>({
-    companyName: '',
-    nip: '',
+}: RegisterMobiPropsBase<'ContactPhones'>) {
+  const [data, setData] = useState<ContactPhonesData>({
+    contactPhone: '',
+    companyCompactPhone: '',
   });
   const input2 = React.createRef<TextInput>();
   return (
@@ -19,23 +19,22 @@ export function CompanyNameAndNipForm({
         keyboardHideOnSubmit={false}
         autoFocus
         setter={setData}
-        ObjectKey="companyName"
-        value={data.companyName}
-        underlyingLabel="Company Name"
+        ObjectKey="contactPhone"
+        value={data.contactPhone}
+        underlyingLabel="Your Contact Phone"
         onSubmit={() => input2.current?.focus()}
       />
       <AppInput
         keyboardHideOnSubmit={false}
         refGetter={input2}
         setter={setData}
-        ObjectKey="nip"
-        value={data.nip}
-        underlyingLabel="NIP"
-        keyboardType="number-pad"
-        onSubmit={() => navigation.navigate('ContactPhones')}
+        ObjectKey="companyCompactPhone"
+        value={data.companyCompactPhone}
+        underlyingLabel="Company Contact Phone"
+        onSubmit={() => navigation.navigate('CompanyNameAndNip')}
       />
       <AppButton
-        action={() => navigation.navigate('ContactPhones')}
+        action={() => navigation.navigate('CompanyNameAndNip')}
         context="Next"
         additionalStyles="mt-36"
       />
