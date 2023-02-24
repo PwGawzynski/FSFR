@@ -2,15 +2,15 @@ import { TextInput, View } from 'react-native';
 import React, { useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
-import { NameAndSurnameData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
+import { CompanyNameAndNIPData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
 import { AppInput } from '../Molecules/AppInput';
 
-export function PersonalDataForm({
+export function CompanyNameAndNipForm({
   navigation,
-}: RegisterMobiPropsBase<'PersonalData'>) {
-  const [data, setData] = useState<NameAndSurnameData>({
-    name: '',
-    surname: '',
+}: RegisterMobiPropsBase<'CompanyNameAndNip'>) {
+  const [data, setData] = useState<CompanyNameAndNIPData>({
+    companyName: '',
+    nip: '',
   });
   const input2 = React.createRef<TextInput>();
   return (
@@ -19,19 +19,19 @@ export function PersonalDataForm({
         keyboardHideOnSubmit={false}
         autoFocus
         setter={setData}
-        ObjectKey="name"
-        value={data.name}
-        underlyingLabel="Name"
+        ObjectKey="companyName"
+        value={data.companyName}
+        underlyingLabel="Company Name"
         onSubmit={() => input2.current?.focus()}
       />
       <AppInput
         keyboardHideOnSubmit={false}
         refGetter={input2}
         setter={setData}
-        ObjectKey="surname"
-        value={data.surname}
-        underlyingLabel="Surname"
-        onSubmit={() => navigation.navigate('CompanyNameAndNip')}
+        ObjectKey="nip"
+        value={data.nip}
+        underlyingLabel="NIP"
+        keyboardType="number-pad"
       />
       <AppButton
         action={() => navigation.navigate('CompanyNameAndNip')}

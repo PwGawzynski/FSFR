@@ -4,9 +4,11 @@ import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
 import { EmailAndPasswordData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
-import { EmailAndPasswordBase } from '../../frontendSelfTypes/navigation/types';
+import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 
-export function EmailAndPasswordForm({ navigation }: EmailAndPasswordBase) {
+export function EmailAndPasswordForm({
+  navigation,
+}: RegisterMobiPropsBase<'EmailAndPassword'>) {
   const input2 = React.createRef<TextInput>();
 
   const [data, setData] = useState<EmailAndPasswordData>({
