@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { RegisterStackParamList } from '../../frontendSelfTypes/NavigatorsInterfaces/RegisterStack';
 import { EmailAndPassword } from './EmailAndPassword';
 import { RegisterMobiBase } from '../../frontendSelfTypes/navigation/types';
+import { PersonalData } from './PersonalData';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function RegisterMobi({ navigation }: RegisterMobiBase) {
@@ -18,6 +19,7 @@ export function RegisterMobi({ navigation }: RegisterMobiBase) {
         name="EmailAndPassword"
         component={EmailAndPassword}
       />
+      <RegisterStack.Screen name="PersonalData" component={PersonalData} />
     </RegisterStack.Navigator>
   );
 }

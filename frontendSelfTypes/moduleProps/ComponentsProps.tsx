@@ -7,10 +7,8 @@ import {
   TextInputFocusEventData,
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { EmailAndPasswordData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
 import { LoginStackParamList } from '../NavigatorsInterfaces/LoginStackParamList';
 import {
-  EmailAndPasswordBase,
   ForgotPasswordBase,
   LoginBase,
   RegisterAskBase,
@@ -61,6 +59,8 @@ export interface AppInputProps<T extends object> {
   additionalTextStyles?: string;
 
   keyboardHideOnSubmit?: boolean;
+
+  autoFocus?: boolean;
 }
 
 export interface ForgotPasswordProps extends ForgotPasswordBase {
@@ -118,10 +118,4 @@ export type RegisterFormBase = Omit<
 export interface RegisterFormProps extends RegisterFormBase {
   setFocused: React.Dispatch<React.SetStateAction<boolean>>;
   isFocused?: boolean;
-}
-
-export interface EmailAndPasswordProps extends EmailAndPasswordBase {
-  data: EmailAndPasswordData;
-
-  setData: React.Dispatch<React.SetStateAction<EmailAndPasswordData>>;
 }

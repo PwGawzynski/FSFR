@@ -23,3 +23,8 @@ export type RegisterAskBase = Omit<
   StackScreenProps<LoginStackParamList>,
   'route'
 >;
+
+export type PersonalDataBase = CompositeScreenProps<
+  StackScreenProps<RegisterStackParamList, 'PersonalData'>,
+  StackScreenProps<LoginStackParamList>
+>;

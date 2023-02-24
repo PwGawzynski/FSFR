@@ -21,6 +21,7 @@ export function AppInput<T extends object>({
   maxLength,
   additionalTextStyles,
   keyboardHideOnSubmit,
+  autoFocus,
 }: AppInputProps<T>) {
   const context = useContext(AppSettings);
   const { settings } = context;
@@ -28,6 +29,7 @@ export function AppInput<T extends object>({
   return (
     <View className={`w-full  ${additionalStyles}`}>
       <TextInput
+        autoFocus={autoFocus}
         blurOnSubmit={keyboardHideOnSubmit}
         maxLength={maxLength}
         ref={refGetter}
