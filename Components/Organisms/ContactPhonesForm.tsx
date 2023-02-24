@@ -23,6 +23,7 @@ export function ContactPhonesForm({
         value={data.contactPhone}
         underlyingLabel="Your Contact Phone"
         onSubmit={() => input2.current?.focus()}
+        keyboardType="phone-pad"
       />
       <AppInput
         keyboardHideOnSubmit={false}
@@ -31,10 +32,11 @@ export function ContactPhonesForm({
         ObjectKey="companyCompactPhone"
         value={data.companyCompactPhone}
         underlyingLabel="Company Contact Phone"
-        onSubmit={() => navigation.navigate('CompanyNameAndNip')}
+        keyboardType="phone-pad"
+        onSubmit={() => navigation.navigate('Addresses')}
       />
       <AppButton
-        action={() => navigation.navigate('CompanyNameAndNip')}
+        action={() => navigation.navigate('Addresses')}
         context="Next"
         additionalStyles="mt-36"
       />
