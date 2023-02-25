@@ -2,25 +2,25 @@ import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
-import { NameAndSurnameData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
+import { ContactPhonesData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
 import { AppInput } from '../Molecules/AppInput';
 import {
   handleRestoreData,
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
 
-export function PersonalDataForm({
+export function ContactPhonesForm({
   navigation,
-}: RegisterMobiPropsBase<'PersonalData'>) {
-  const [data, setData] = useState<NameAndSurnameData>({
-    name: '',
-    surname: '',
+}: RegisterMobiPropsBase<'ContactPhones'>) {
+  const [data, setData] = useState<ContactPhonesData>({
+    contactPhone: '',
+    companyCompactPhone: '',
   });
   const input2 = React.createRef<TextInput>();
   useEffect(() => {
     (async () => {
       console.log(
-        await handleRestoreData('RegisterMobiDataNameSurname', setData),
+        await handleRestoreData('RegisterMobiDataContactPhones', setData),
       );
     })();
   }, []);
@@ -30,34 +30,36 @@ export function PersonalDataForm({
         keyboardHideOnSubmit={false}
         autoFocus
         setter={setData}
-        ObjectKey="name"
-        value={data.name}
-        underlyingLabel="Name"
+        ObjectKey="contactPhone"
+        value={data.contactPhone}
+        underlyingLabel="Your Contact Phone"
         onSubmit={() => input2.current?.focus()}
+        keyboardType="phone-pad"
       />
       <AppInput
         keyboardHideOnSubmit={false}
         refGetter={input2}
         setter={setData}
-        ObjectKey="surname"
-        value={data.surname}
-        underlyingLabel="Surname"
+        ObjectKey="companyCompactPhone"
+        value={data.companyCompactPhone}
+        underlyingLabel="Company Contact Phone"
+        keyboardType="phone-pad"
         onSubmit={() =>
           handleSaveDataMerge(
-            'RegisterMobiDataNameSurname',
+            'RegisterMobiDataContactPhones',
             data,
             navigation,
-            'ContactPhones',
+            'CompanyNameAndNip',
           )
         }
       />
       <AppButton
         action={() =>
           handleSaveDataMerge(
-            'RegisterMobiDataNameSurname',
+            'RegisterMobiDataContactPhones',
             data,
             navigation,
-            'ContactPhones',
+            'CompanyNameAndNip',
           )
         }
         context="Next"
