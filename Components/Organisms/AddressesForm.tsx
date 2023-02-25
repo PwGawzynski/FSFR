@@ -1,9 +1,13 @@
 import { TextInput, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
 import { CompanyAddressData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
+import {
+  handleRestoreData,
+  handleSaveDataMerge,
+} from '../../helpers/handlers/AsyncStoreHelpers';
 
 export function AddressesForm({
   navigation,
@@ -17,6 +21,13 @@ export function AddressesForm({
   const input2 = React.createRef<TextInput>();
   const input3 = React.createRef<TextInput>();
   const input4 = React.createRef<TextInput>();
+  useEffect(() => {
+    (async () => {
+      console.log(
+        await handleRestoreData('RegisterMobiDataAddresses', setData),
+      );
+    })();
+  }, []);
   return (
     <View className="w-10/12 pt-10">
       <AppInput
@@ -57,7 +68,14 @@ export function AddressesForm({
         underlyingLabel="Circumference"
       />
       <AppButton
-        action={() => console.log('Send Data To Server')}
+        action={() =>
+          handleSaveDataMerge(
+            'RegisterMobiDataAddresses',
+            data,
+            navigation,
+            'Addresses',
+          )
+        }
         context="Next"
         additionalStyles="mt-10"
       />
