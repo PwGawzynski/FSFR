@@ -15,11 +15,13 @@ export type ForgotPasswordBase = Omit<
 >;
 export type LoginBase = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
 export type RegisterTabBase = StackScreenProps<LoginStackParamList, 'Register'>;
-export type EmailAndPasswordBase = CompositeScreenProps<
-  StackScreenProps<RegisterStackParamList, 'EmailAndPassword'>,
-  StackScreenProps<LoginStackParamList>
->;
 export type RegisterAskBase = Omit<
   StackScreenProps<LoginStackParamList>,
   'route'
 >;
+
+export type RegisterMobiPropsBase<T extends keyof RegisterStackParamList> =
+  CompositeScreenProps<
+    StackScreenProps<RegisterStackParamList, T>,
+    StackScreenProps<LoginStackParamList>
+  >;
