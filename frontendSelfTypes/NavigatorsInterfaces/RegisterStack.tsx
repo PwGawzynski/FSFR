@@ -6,4 +6,6 @@ export type RegisterStackParamList = {
   CompanyNameAndNip: undefined;
 
   ContactPhones: undefined;
+
+  Addresses: undefined;
 };

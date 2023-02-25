@@ -1,10 +1,14 @@
 import { TextInput, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
 import { EmailAndPasswordData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
+import {
+  handleRestoreData,
+  handleSaveDataMerge,
+} from '../../helpers/handlers/AsyncStoreHelpers';
 
 export function EmailAndPasswordForm({
   navigation,
@@ -15,7 +19,11 @@ export function EmailAndPasswordForm({
     email: '',
     password: '',
   });
-
+  useEffect(() => {
+    (async () => {
+      console.log(await handleRestoreData('RegisterMobiData', setData));
+    })();
+  }, []);
   return (
     <View className="w-10/12 pt-10">
       <AppInput
@@ -38,10 +46,24 @@ export function EmailAndPasswordForm({
         autoComplete="password"
         additionalStyles="mt-5"
         isPwd
-        onSubmit={() => navigation.navigate('PersonalData')}
+        onSubmit={() =>
+          handleSaveDataMerge(
+            'RegisterMobiData',
+            data,
+            navigation,
+            'PersonalData',
+          )
+        }
       />
       <AppButton
-        action={() => navigation.navigate('PersonalData')}
+        action={() =>
+          handleSaveDataMerge(
+            'RegisterMobiData',
+            data,
+            navigation,
+            'PersonalData',
+          )
+        }
         context="Next"
         additionalStyles="mt-10 mb-2"
       />
