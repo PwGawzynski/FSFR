@@ -1,16 +1,16 @@
 import { View } from 'react-native';
 import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
-import { EmailAndPasswordForm } from '../Organisms/EmailAndPasswordForm';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
+import { AddressesForm } from '../Organisms/AddressesForm';
 
-export function EmailAndPassword({
+export function AddressesData({
   navigation,
   route,
-}: RegisterMobiPropsBase<'EmailAndPassword'>) {
+}: RegisterMobiPropsBase<'Addresses'>) {
   return (
     <View className="bg-white w-full h-full items-center">
       <LogoImageCurtain />
-      <EmailAndPasswordForm navigation={navigation} route={route} />
+      <AddressesForm navigation={navigation} route={route} />
     </View>
   );
 }
