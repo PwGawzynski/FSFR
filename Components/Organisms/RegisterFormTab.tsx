@@ -32,6 +32,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
     }
     LayoutAnimation.easeInEaseOut();
   });
+
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -227,7 +228,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
       />
       <AppButton
         action={() => navigation.navigate('AuthCode')}
-        context="Register"
+        context="RegisterMobi"
         additionalStyles="mt-5 mb-24"
       />
     </KeyboardAwareScrollView>

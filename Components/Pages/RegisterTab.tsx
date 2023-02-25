@@ -1,10 +1,10 @@
-import { View, Animated, Dimensions, Easing } from 'react-native';
+import { View, Animated, Dimensions } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { RegisterFormTab } from '../Organisms/RegisterFormTab';
-import { RegisterTabProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 import { LogoImage } from '../Atoms/LogoImage';
+import { RegisterTabBase } from '../../frontendSelfTypes/navigation/types';
 
-export function RegisterTab({ navigation }: RegisterTabProps) {
+export function RegisterTab({ navigation }: RegisterTabBase) {
   const [isFocused, setFocused] = useState<boolean>(false);
   const deviceHeight = Dimensions.get('window').height;
   const imgHeight = useRef(new Animated.Value(0)).current;

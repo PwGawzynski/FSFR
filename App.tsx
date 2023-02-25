@@ -10,14 +10,8 @@ import { AuthCode } from './Components/Pages/AuthCode';
 import { LoginPage } from './Components/Pages/LoginPage';
 import { LoginPageTab } from './Components/Pages/LoginPageTab';
 import { RegisterTab } from './Components/Pages/RegisterTab';
-import { Register } from './Components/Pages/Register';
-
-export type LoginStackParamList = {
-  Login: undefined;
-  Register: undefined;
-  AuthCode: undefined;
-  ResetPassword: undefined;
-};
+import { RegisterMobi } from './Components/Pages/RegisterMobi';
+import { LoginStackParamList } from './frontendSelfTypes/NavigatorsInterfaces/LoginStackParamList';
 
 export default function App() {
   const [settings, setSettings] = useState(ThemeOptions.light);
@@ -61,7 +55,9 @@ export default function App() {
           />
           <Stack.Screen
             name="Register"
-            component={deviceType === DeviceType.PHONE ? Register : RegisterTab}
+            component={
+              deviceType === DeviceType.PHONE ? RegisterMobi : RegisterTab
+            }
           />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="AuthCode" component={AuthCode} />

@@ -7,12 +7,16 @@ import {
   TextInputFocusEventData,
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { LoginStackParamList } from '../../App';
+import { LoginStackParamList } from '../NavigatorsInterfaces/LoginStackParamList';
+import {
+  ForgotPasswordBase,
+  LoginBase,
+  RegisterAskBase,
+} from '../navigation/types';
 
 export interface AppButtonProps {
   action: () => void;
   context: string;
-
   additionalStyles?: string;
   additionalTextStyles?: string;
 }
@@ -55,9 +59,9 @@ export interface AppInputProps<T extends object> {
   additionalTextStyles?: string;
 
   keyboardHideOnSubmit?: boolean;
-}
 
-type ForgotPasswordBase = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
+  autoFocus?: boolean;
+}
 
 export interface ForgotPasswordProps extends ForgotPasswordBase {
   additionalTxtStyles?: string;
@@ -67,7 +71,6 @@ export interface ForgotPasswordProps extends ForgotPasswordBase {
 
 export interface InfoTextProps {
   children: ReactNode;
-
   additionalStyles?: string;
 }
 
@@ -80,8 +83,7 @@ export interface LoginFormProps {
   onDeFocus?: () => void;
 }
 
-type DefProps = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
-export interface LoginProps extends DefProps {
+export interface LoginProps extends LoginBase {
   onOff: boolean;
   setOnOff: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -102,8 +104,6 @@ export interface LogoImageProps {
   resizeMode?: ImageProps['resizeMode'];
 }
 
-type RegisterAskBase = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
-
 export interface RegisterAskProps extends RegisterAskBase {
   additionalTxtStyles?: string;
   additionalStyles?: string;
@@ -111,7 +111,7 @@ export interface RegisterAskProps extends RegisterAskBase {
 }
 
 export type RegisterFormBase = Omit<
-  StackScreenProps<LoginStackParamList, 'Register'>,
+  StackScreenProps<LoginStackParamList>,
   'route'
 >;
 
@@ -119,9 +119,3 @@ export interface RegisterFormProps extends RegisterFormBase {
   setFocused: React.Dispatch<React.SetStateAction<boolean>>;
   isFocused?: boolean;
 }
-
-export type RegisterProps = StackScreenProps<LoginStackParamList, 'Register'>;
-export type RegisterTabProps = StackScreenProps<
-  LoginStackParamList,
-  'Register'
->;
