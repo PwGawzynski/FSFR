@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
-import { CompanyAddressData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
+import { CompanyAddressData } from '../../../FarmServiceBE/farm-service-be/types/Useer/RegisterDataObject';
 import {
   handleRestoreData,
   handleSaveDataMerge,
