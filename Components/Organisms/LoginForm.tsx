@@ -4,7 +4,7 @@ import { DeviceType } from 'expo-device';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
-import { LoginDataObject } from '../../../farm-service-be/types/Useer/LoginDataObject';
+import { LoginDataObject } from '../../../FarmServiceBE/farm-service-be/types/Useer/LoginDataObject';
 import { AppSettings } from '../../helpers/appSettings/contexts';
 import { LoginFormProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 

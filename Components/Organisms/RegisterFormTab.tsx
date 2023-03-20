@@ -4,7 +4,7 @@ import { LayoutAnimation, Platform, TextInput, UIManager } from 'react-native';
 import { DeviceType } from 'expo-device';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
-import { RegisterDataObject } from '../../../farm-service-be/types/Useer/RegisterDataObject';
+import { RegisterDataObject } from '../../../FarmServiceBE/farm-service-be/types/Useer/RegisterDataObject';
 import { RegisterFormProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 import { AppSettings } from '../../helpers/appSettings/contexts';
 

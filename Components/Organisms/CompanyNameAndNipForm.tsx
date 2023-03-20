@@ -2,7 +2,7 @@ import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
-import { CompanyNameAndNIPData } from '../../../farm-service-be/types/Useer/RegisterDataObject';
+import { CompanyNameAndNIPData } from '../../../FarmServiceBE/farm-service-be/types/Useer/RegisterDataObject';
 import { AppInput } from '../Molecules/AppInput';
 import {
   handleRestoreData,

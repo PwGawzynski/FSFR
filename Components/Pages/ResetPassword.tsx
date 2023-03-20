@@ -11,7 +11,7 @@ import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
 import { InfoText } from '../Atoms/InfoText';
 import { AppButton } from '../Atoms/AppButton';
 import { AppInput } from '../Molecules/AppInput';
-import { ResetPasswordData } from '../../../farm-service-be/types/Useer/LoginDataObject';
+import { ResetPasswordData } from '../../../FarmServiceBE/farm-service-be/types/Useer/LoginDataObject';
 
 export function ResetPassword() {
   const [data, setData] = useState({ email: '' } as ResetPasswordData);
