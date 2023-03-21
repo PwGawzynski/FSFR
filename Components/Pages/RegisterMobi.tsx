@@ -7,6 +7,7 @@ import { PersonalData } from './PersonalData';
 import { CompanyNameAndNip } from './CompanyNameAndNip';
 import { ContactPhones } from './ContactPhones';
 import { AddressesData } from './AddressesData';
+import { AddressDataCdnMobi } from './AddressDataCdnMobi';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function RegisterMobi({ navigation }: RegisterMobiBase) {
@@ -29,6 +30,10 @@ export function RegisterMobi({ navigation }: RegisterMobiBase) {
       />
       <RegisterStack.Screen name="ContactPhones" component={ContactPhones} />
       <RegisterStack.Screen name="Addresses" component={AddressesData} />
+      <RegisterStack.Screen
+        name="AddressesCdn"
+        component={AddressDataCdnMobi}
+      />
     </RegisterStack.Navigator>
   );
 }

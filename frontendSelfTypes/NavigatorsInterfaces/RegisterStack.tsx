@@ -8,4 +8,6 @@ export type RegisterStackParamList = {
   ContactPhones: undefined;
 
   Addresses: undefined;
+
+  AddressesCdn: undefined;
 };
