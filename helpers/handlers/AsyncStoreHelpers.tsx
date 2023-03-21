@@ -11,18 +11,18 @@ export async function handleSaveDataMerge<
   key: string,
   data: DATA_TYPE,
   navi: RegisterMobiPropsBase<CURR_RUTE_NAME>['navigation'],
-  nextRoute: NEXT_ROUTE_NAME,
+  nextRoute?: NEXT_ROUTE_NAME,
 ): Promise<boolean> {
   try {
     const exist = await AsyncStorage.getItem(key);
     const stringifyData = JSON.stringify(data);
     if (exist) {
       AsyncStorage.mergeItem(key, stringifyData);
-      navi.navigate<keyof RegisterStackParamList>(nextRoute);
+      if (nextRoute) navi.navigate<keyof RegisterStackParamList>(nextRoute);
       return true;
     }
     AsyncStorage.setItem(key, stringifyData);
-    navi.navigate<keyof RegisterStackParamList>(nextRoute);
+    if (nextRoute) navi.navigate<keyof RegisterStackParamList>(nextRoute);
     return true;
   } catch (e) {
     console.log(e);
@@ -39,6 +39,20 @@ export async function handleRestoreData<T>(
     if (restored) {
       setData(JSON.parse(restored) as T);
       return true;
+    }
+    return false;
+  } catch (e) {
+    return false;
+  }
+}
+
+export async function restoreDataFromStorage<T>(
+  key: string,
+): Promise<T | false> {
+  try {
+    const restored = await AsyncStorage.getItem(key);
+    if (restored) {
+      return JSON.parse(restored) as T;
     }
     return false;
   } catch (e) {
