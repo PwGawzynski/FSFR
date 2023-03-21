@@ -21,7 +21,7 @@ export function EmailAndPasswordForm({
   });
   useEffect(() => {
     (async () => {
-      console.log(await handleRestoreData('RegisterMobiData', setData));
+      await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
     })();
   }, []);
   return (
@@ -58,7 +58,7 @@ export function EmailAndPasswordForm({
       <AppButton
         action={() =>
           handleSaveDataMerge(
-            'RegisterMobiData',
+            'RegisterMobiDataEmailAndPassword',
             data,
             navigation,
             'PersonalData',
