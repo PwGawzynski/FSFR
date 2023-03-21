@@ -14,18 +14,17 @@ export function AddressesForm({
 }: RegisterMobiPropsBase<'Addresses'>) {
   const [data, setData] = useState<CompanyAddressData>({
     city: '',
-    houseNumber: '',
-    postalCode: '',
-    circumference: '',
+    county: '',
+    street: '',
+    voivodeship: '',
   });
   const input2 = React.createRef<TextInput>();
   const input3 = React.createRef<TextInput>();
   const input4 = React.createRef<TextInput>();
+
   useEffect(() => {
     (async () => {
-      console.log(
-        await handleRestoreData('RegisterMobiDataAddresses', setData),
-      );
+      await handleRestoreData('RegisterMobiDataAddresses', setData);
     })();
   }, []);
   return (
@@ -43,39 +42,37 @@ export function AddressesForm({
         keyboardHideOnSubmit={false}
         refGetter={input2}
         setter={setData}
-        ObjectKey="houseNumber"
-        value={data.houseNumber}
-        underlyingLabel="House Number"
-        keyboardType="number-pad"
+        ObjectKey="county"
+        value={data.county}
+        underlyingLabel="County"
         onSubmit={() => input3.current?.focus()}
       />
       <AppInput
         refGetter={input3}
         keyboardHideOnSubmit={false}
         setter={setData}
-        ObjectKey="postalCode"
-        value={data.postalCode}
-        underlyingLabel="Postal Code"
-        keyboardType="numbers-and-punctuation"
+        ObjectKey="street"
+        value={data.street}
+        underlyingLabel="Street name"
         onSubmit={() => input4.current?.focus()}
       />
       <AppInput
         keyboardHideOnSubmit={false}
         refGetter={input4}
         setter={setData}
-        ObjectKey="circumference"
-        value={data.circumference}
-        underlyingLabel="Circumference"
+        ObjectKey="voivodeship"
+        value={data.voivodeship}
+        underlyingLabel="Voivodeship"
       />
       <AppButton
-        action={() =>
+        action={() => {
           handleSaveDataMerge(
             'RegisterMobiDataAddresses',
             data,
             navigation,
-            'Addresses',
-          )
-        }
+            'AddressesCdn',
+          );
+        }}
         context="Next"
         additionalStyles="mt-10"
       />
