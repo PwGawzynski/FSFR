@@ -4,13 +4,13 @@ import { useMutation } from 'react-query';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
-import { CompanyAddressDataCdn } from '../../../FarmServiceBE/farm-service-be/types/Useer/RegisterDataObject';
 import {
   handleRestoreData,
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
 import { handleGetDataFromStore } from '../../helpers/handlers/handleGetDataFromStore';
 import { Api } from '../../helpers/api/Api';
+import { CompanyAddressDataCdn } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 
 export function AddressFormCdn({
   navigation,

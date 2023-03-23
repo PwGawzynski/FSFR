@@ -4,10 +4,10 @@ import { RegisterStackParamList } from '../../frontendSelfTypes/NavigatorsInterf
 import { EmailAndPassword } from './EmailAndPassword';
 import { RegisterMobiBase } from '../../frontendSelfTypes/navigation/types';
 import { PersonalData } from './PersonalData';
-import { CompanyNameAndNip } from './CompanyNameAndNip';
 import { ContactPhones } from './ContactPhones';
 import { AddressesData } from './AddressesData';
 import { AddressDataCdnMobi } from './AddressDataCdnMobi';
+import { ChooseUserRoleMobi } from './chooseUserRoleMobi';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function RegisterMobi({ navigation }: RegisterMobiBase) {
@@ -24,15 +24,16 @@ export function RegisterMobi({ navigation }: RegisterMobiBase) {
         component={EmailAndPassword}
       />
       <RegisterStack.Screen name="PersonalData" component={PersonalData} />
-      <RegisterStack.Screen
-        name="CompanyNameAndNip"
-        component={CompanyNameAndNip}
-      />
+
       <RegisterStack.Screen name="ContactPhones" component={ContactPhones} />
       <RegisterStack.Screen name="Addresses" component={AddressesData} />
       <RegisterStack.Screen
         name="AddressesCdn"
         component={AddressDataCdnMobi}
+      />
+      <RegisterStack.Screen
+        name="ChooseUserRole"
+        component={ChooseUserRoleMobi}
       />
     </RegisterStack.Navigator>
   );

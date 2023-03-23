@@ -61,7 +61,7 @@ export function EmailAndPasswordForm({
             'RegisterMobiDataEmailAndPassword',
             data,
             navigation,
-            'PersonalData',
+            'ChooseUserRole',
           )
         }
         context="Next"
