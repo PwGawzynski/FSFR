@@ -18,7 +18,7 @@ export interface CompanyAddressData {
   city: string;
   postalCode: string;
   houseNumber: string;
-  circumference: string;
+  county: string;
 }
 
 export type RegisterDataObject = EmailAndPasswordData &

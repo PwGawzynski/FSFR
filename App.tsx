@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Device from 'expo-device';
 import { DeviceType } from 'expo-device';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppSettings, ThemeOptions } from './helpers/appSettings/contexts';
 import { ResetPassword } from './Components/Pages/ResetPassword';
 import { AuthCode } from './Components/Pages/AuthCode';
@@ -38,31 +39,35 @@ export default function App() {
   });
 
   const Stack = createStackNavigator<LoginStackParamList>();
+
+  const queryClient = new QueryClient();
   return (
     <NavigationContainer>
-      <AppSettings.Provider value={memoSettings}>
-        <Stack.Navigator
-          initialRouteName="Login"
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen
-            name="Login"
-            component={
-              deviceType === DeviceType.PHONE ? LoginPage : LoginPageTab
-            }
-          />
-          <Stack.Screen
-            name="Register"
-            component={
-              deviceType === DeviceType.PHONE ? RegisterMobi : RegisterTab
-            }
-          />
-          <Stack.Screen name="ResetPassword" component={ResetPassword} />
-          <Stack.Screen name="AuthCode" component={AuthCode} />
-        </Stack.Navigator>
-      </AppSettings.Provider>
+      <QueryClientProvider client={queryClient}>
+        <AppSettings.Provider value={memoSettings}>
+          <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen
+              name="Login"
+              component={
+                deviceType === DeviceType.PHONE ? LoginPage : LoginPageTab
+              }
+            />
+            <Stack.Screen
+              name="Register"
+              component={
+                deviceType === DeviceType.PHONE ? RegisterMobi : RegisterTab
+              }
+            />
+            <Stack.Screen name="ResetPassword" component={ResetPassword} />
+            <Stack.Screen name="AuthCode" component={AuthCode} />
+          </Stack.Navigator>
+        </AppSettings.Provider>
+      </QueryClientProvider>
     </NavigationContainer>
   );
 }

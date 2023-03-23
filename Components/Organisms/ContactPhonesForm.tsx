@@ -13,15 +13,12 @@ export function ContactPhonesForm({
   navigation,
 }: RegisterMobiPropsBase<'ContactPhones'>) {
   const [data, setData] = useState<ContactPhonesData>({
-    contactPhone: '',
-    companyCompactPhone: '',
+    contactPhone: '+48 ',
   });
   const input2 = React.createRef<TextInput>();
   useEffect(() => {
     (async () => {
-      console.log(
-        await handleRestoreData('RegisterMobiDataContactPhones', setData),
-      );
+      await handleRestoreData('RegisterMobiDataContactPhones', setData);
     })();
   }, []);
   return (
@@ -36,30 +33,13 @@ export function ContactPhonesForm({
         onSubmit={() => input2.current?.focus()}
         keyboardType="phone-pad"
       />
-      <AppInput
-        keyboardHideOnSubmit={false}
-        refGetter={input2}
-        setter={setData}
-        ObjectKey="companyCompactPhone"
-        value={data.companyCompactPhone}
-        underlyingLabel="Company Contact Phone"
-        keyboardType="phone-pad"
-        onSubmit={() =>
-          handleSaveDataMerge(
-            'RegisterMobiDataContactPhones',
-            data,
-            navigation,
-            'CompanyNameAndNip',
-          )
-        }
-      />
       <AppButton
         action={() =>
           handleSaveDataMerge(
             'RegisterMobiDataContactPhones',
             data,
             navigation,
-            'CompanyNameAndNip',
+            'Addresses',
           )
         }
         context="Next"
