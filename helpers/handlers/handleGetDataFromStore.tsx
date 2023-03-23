@@ -1,11 +1,15 @@
 import { restoreDataFromStorage } from './AsyncStoreHelpers';
+
 import {
   CompanyAddressData,
+  CompanyAddressDataCdn,
   ContactPhonesData,
   EmailAndPasswordData,
   NameAndSurnameData,
-  RegisterDataMobi,
-} from '../../types/Useer/RegisterDataObject';
+  RegisterScreensDataCollection,
+  UserRoleMobiScreen,
+} from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
+import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
 
 export async function handleGetDataFromStore() {
   const emailAndPassword = await restoreDataFromStorage<EmailAndPasswordData>(
@@ -20,15 +24,19 @@ export async function handleGetDataFromStore() {
   const addresses = await restoreDataFromStorage<CompanyAddressData>(
     'RegisterMobiDataAddresses',
   );
-  const addressesCdn = await restoreDataFromStorage<CompanyAddressData>(
+  const addressesCdn = await restoreDataFromStorage<CompanyAddressDataCdn>(
     'RegisterMobiDataAddressesCdn',
+  );
+  const userRole = await restoreDataFromStorage<UserRoleMobiScreen>(
+    'RegisterMobiUserRole',
   );
   if (
     emailAndPassword &&
     nameAndSurname &&
     contactPhones &&
     addresses &&
-    addressesCdn
+    addressesCdn &&
+    userRole
   ) {
     const data = {
       ...addressesCdn,
@@ -36,7 +44,8 @@ export async function handleGetDataFromStore() {
       ...nameAndSurname,
       ...contactPhones,
       ...addresses,
-    } as RegisterDataMobi;
+      userRole: userRole.owner ? UserRole.owner : UserRole.worker,
+    } as RegisterScreensDataCollection;
     return data;
   }
   return undefined;
