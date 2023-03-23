@@ -2,11 +2,11 @@ import { View } from 'react-native';
 import React from 'react';
 import { ChoseOwnerRoleBtn } from '../Atoms/ChoseOwnerRoleBtn';
 import { ChooseWorkerRoleBtn } from '../Atoms/chooseWorkerRoleBtn';
-import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+import { UserRoleMobiScreen } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 
 export interface Props {
-  onFlag: UserRole;
-  setOnFlag: React.Dispatch<React.SetStateAction<UserRole>>;
+  onFlag: UserRoleMobiScreen;
+  setOnFlag: React.Dispatch<React.SetStateAction<UserRoleMobiScreen>>;
 }
 export function AccountType({ onFlag, setOnFlag }: Props) {
   return (
