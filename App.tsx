@@ -14,6 +14,7 @@ import { RegisterTab } from './Components/Pages/RegisterTab';
 import { RegisterMobi } from './Components/Pages/RegisterMobi';
 import { LoginStackParamList } from './frontendSelfTypes/NavigatorsInterfaces/LoginStackParamList';
 import { Test } from './Components/Pages/test';
+import { Api } from './helpers/api/Api';
 
 export default function App() {
   const [settings, setSettings] = useState(ThemeOptions.light);
@@ -39,6 +40,8 @@ export default function App() {
     (async () => {
       const recognizedDeviceType = await Device.getDeviceTypeAsync();
       setDeviceType(recognizedDeviceType);
+      console.log(await Api.checkCurrentSession(), 'TOKEN W APP');
+      setLogged(await Api.checkCurrentSession());
     })();
   });
 

@@ -8,15 +8,18 @@ import {
   LoginUser,
 } from '../../FarmServiceTypes/User/LoginUser';
 import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
-import { RestoreTokenStoredObject } from '../../FrontendSelfTypes/IToken/RestoreTokenStoredObject';
 
 export class Api {
+  private static access_token: string;
+
+  private static refresh_token: string;
+
   private static axiosAuthInstance = axios.create({
     baseURL: 'http://localhost:3000',
     timeout: 5000,
     withCredentials: true,
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9naW4iOiJ1c2VyMjIiLCJ1c2VySWQiOiJiMWU4MmM0Yy1iMzA0LTRlNzMtYTU0ZS05MmY5MTU4MTA1ZWYiLCJpYXQiOjE2Nzk2MDE5ODEsImV4cCI6MTY3OTYwMjg4MX0.8z-XS5wOQO0ExsYpfqP4YaOlmMUaoLIWio-Fw7FMebo`,
+      Authorization: `Bearer ${Api.refresh_token}`,
     },
   });
 
@@ -25,16 +28,24 @@ export class Api {
     timeout: 5000,
     withCredentials: true,
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9naW4iOiJ1c2VyMjIiLCJ1c2VySWQiOiJiMWU4MmM0Yy1iMzA0LTRlNzMtYTU0ZS05MmY5MTU4MTA1ZWYiLCJpYXQiOjE2Nzk2MDE5ODEsImV4cCI6MTY3OTYwMjg4MX0.8z-XS5wOQO0ExsYpfqP4YaOlmMUaoLIWio-Fw7FMebo`,
+      Authorization: `Bearer ${Api.access_token}`,
     },
   });
 
+  /**
+   * FN check if session is present IF SESSION IS PRESENT RETURNS TRUE
+   */
   static async checkCurrentSession() {
-    const session = await SecureStore.getItemAsync('RefreshToken');
-    if (!session) return false;
-    const token: RestoreTokenStoredObject = JSON.parse(session);
-    const now = new Date();
-    return now.getTime() - token.lastUpdatedAt.getTime() > 604800000;
+    try {
+      const session = await SecureStore.getItemAsync('Tokens');
+      if (!session) return false;
+      const token: IdentityAuthTokenLoginStored = await JSON.parse(session);
+      const now = new Date();
+      const tokenDate = new Date(token.last_updated_refresh_token_at);
+      return !(now.getTime() - tokenDate.getTime() > 604800000);
+    } catch (e) {
+      return false;
+    }
   }
 
   static async registerNewUser(userData: RegisterScreensDataCollection) {
@@ -73,7 +84,7 @@ export class Api {
         last_updated_access_token_at: new Date(),
         last_updated_refresh_token_at: new Date(),
       };
-      SecureStore.setItemAsync('Tokens', JSON.stringify(storedData));
+      SecureStore.setItemAsync('Tokens', await JSON.stringify(storedData));
       return true;
     }
     throw new Error('Something went wrong, try again later');
