@@ -13,23 +13,27 @@ import { LoginPageTab } from './Components/Pages/LoginPageTab';
 import { RegisterTab } from './Components/Pages/RegisterTab';
 import { RegisterMobi } from './Components/Pages/RegisterMobi';
 import { LoginStackParamList } from './frontendSelfTypes/NavigatorsInterfaces/LoginStackParamList';
+import { Test } from './Components/Pages/test';
 
 export default function App() {
   const [settings, setSettings] = useState(ThemeOptions.light);
   const [deviceType, setDeviceType] = useState(DeviceType.UNKNOWN);
+  const [isLogged, setLogged] = useState(false);
 
   const memoSettings = useMemo(
     () => ({
       settings: {
         theme: settings,
         deviceType,
+        isLogged,
       },
       setters: {
         setTheme: setSettings,
         setDeviceType,
+        setLogged,
       },
     }),
-    [settings, deviceType],
+    [isLogged, settings, deviceType],
   );
   useEffect(() => {
     (async () => {
@@ -45,27 +49,30 @@ export default function App() {
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
         <AppSettings.Provider value={memoSettings}>
-          <Stack.Navigator
-            initialRouteName="Login"
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen
-              name="Login"
-              component={
-                deviceType === DeviceType.PHONE ? LoginPage : LoginPageTab
-              }
-            />
-            <Stack.Screen
-              name="Register"
-              component={
-                deviceType === DeviceType.PHONE ? RegisterMobi : RegisterTab
-              }
-            />
-            <Stack.Screen name="ResetPassword" component={ResetPassword} />
-            <Stack.Screen name="AuthCode" component={AuthCode} />
-          </Stack.Navigator>
+          {!isLogged && (
+            <Stack.Navigator
+              initialRouteName="Login"
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen
+                name="Login"
+                component={
+                  deviceType === DeviceType.PHONE ? LoginPage : LoginPageTab
+                }
+              />
+              <Stack.Screen
+                name="Register"
+                component={
+                  deviceType === DeviceType.PHONE ? RegisterMobi : RegisterTab
+                }
+              />
+              <Stack.Screen name="ResetPassword" component={ResetPassword} />
+              <Stack.Screen name="AuthCode" component={AuthCode} />
+            </Stack.Navigator>
+          )}
+          {isLogged && <Test />}
         </AppSettings.Provider>
       </QueryClientProvider>
     </NavigationContainer>
