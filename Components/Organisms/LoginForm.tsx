@@ -16,9 +16,12 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
     password: '',
   } as LoginUser);
   const { deviceType } = useContext(AppSettings).settings;
+  const { setLogged } = useContext(AppSettings).setters;
 
   const loginMutation = useMutation(async (loginData: LoginUser) => {
-    return Api.loginUser(loginData);
+    const response = await Api.loginUser(loginData);
+    if (response) setLogged(true);
+    return response;
   });
 
   return (
@@ -69,7 +72,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
       >
         <AppButton
           action={() => {
-            loginMutation.mutate(data);
+            console.log(loginMutation.mutate(data));
           }}
           context="Login"
           additionalStyles={`${deviceType === DeviceType.PHONE ? 'mt-10' : ''}`}
