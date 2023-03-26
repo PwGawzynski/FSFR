@@ -8,10 +8,13 @@ export enum ThemeOptions {
 interface SettingsObject {
   theme: ThemeOptions;
   deviceType: DeviceType;
+
+  isLogged: boolean;
 }
 interface AppOptionsSetters {
   setTheme: React.Dispatch<React.SetStateAction<ThemeOptions>>;
   setDeviceType: React.Dispatch<React.SetStateAction<DeviceType>>;
+  setLogged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface SettingsContext {
   settings: SettingsObject;
