@@ -3,7 +3,8 @@ import * as SecureStore from 'expo-secure-store';
 import { RegisterScreensDataCollection } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { RegisterNewUserDataDtoInterfaceMobi } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
 import {
-  IdentityAuthTokenLogin,
+  IdentityAuthTokenLoginRaw,
+  IdentityAuthTokenLoginStored,
   LoginUser,
 } from '../../FarmServiceTypes/User/LoginUser';
 import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
@@ -53,16 +54,19 @@ export class Api {
   }
 
   static async loginUser(loginData: LoginUser) {
-    const response: ResponseObject<IdentityAuthTokenLogin> = (
+    const response: ResponseObject<IdentityAuthTokenLoginRaw> = (
       await Api.axiosAuthInstance.post('/auth/login', loginData)
     ).data;
-    if (response) {
-      const storedData = {
-        ...response,
+    const { payload } = response;
+    if (payload) {
+      const storedData: IdentityAuthTokenLoginStored = {
+        ...payload,
+        last_updated_access_token_at: new Date(),
+        last_updated_refresh_token_at: new Date(),
       };
-      SecureStore.setItemAsync('RefreshToken', JSON.stringify(response));
+      SecureStore.setItemAsync('Tokens', JSON.stringify(storedData));
+      return true;
     }
-    console.log(await response, 'ELO');
-    return response;
+    throw new Error('Something went wrong, try again later');
   }
 }
