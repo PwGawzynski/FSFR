@@ -10,7 +10,8 @@ export async function checkCurrentSession() {
     const token: IdentityAuthTokenLoginStored = await JSON.parse(session);
     const now = new Date();
     const tokenDate = new Date(token.last_updated_refresh_token_at);
-    return !(now.getTime() - tokenDate.getTime() > 604800000);
+    // time is minute reduced to prevent logout after loading desktop and to give time to restore tokens
+    return !(now.getTime() - tokenDate.getTime() > 601200000);
   } catch (e) {
     return false;
   }
