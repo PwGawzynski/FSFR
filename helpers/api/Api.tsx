@@ -32,22 +32,6 @@ export class Api {
     },
   });
 
-  /**
-   * FN check if session is present IF SESSION IS PRESENT RETURNS TRUE
-   */
-  static async checkCurrentSession() {
-    try {
-      const session = await SecureStore.getItemAsync('Tokens');
-      if (!session) return false;
-      const token: IdentityAuthTokenLoginStored = await JSON.parse(session);
-      const now = new Date();
-      const tokenDate = new Date(token.last_updated_refresh_token_at);
-      return !(now.getTime() - tokenDate.getTime() > 604800000);
-    } catch (e) {
-      return false;
-    }
-  }
-
   static async registerNewUser(userData: RegisterScreensDataCollection) {
     const serializedData = {
       email: userData.email,
