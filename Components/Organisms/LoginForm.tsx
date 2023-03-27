@@ -1,19 +1,29 @@
 import { View } from 'react-native';
 import React, { useContext, useState } from 'react';
 import { DeviceType } from 'expo-device';
+import { useMutation } from 'react-query';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
-import { LoginDataObject } from '../../../FarmServiceBE/farm-service-be/types/Useer/LoginDataObject';
 import { AppSettings } from '../../helpers/appSettings/contexts';
 import { LoginFormProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
+import { LoginUser } from '../../FarmServiceTypes/User/LoginUser';
+import { Api } from '../../helpers/api/Api';
 
 export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
   const [data, setData] = useState({
     login: '',
     password: '',
-  } as LoginDataObject);
+  } as LoginUser);
   const { deviceType } = useContext(AppSettings).settings;
+  const { setLogged } = useContext(AppSettings).setters;
+
+  const loginMutation = useMutation(async (loginData: LoginUser) => {
+    const response = await Api.loginUser(loginData);
+    if (response) setLogged(true);
+    return response;
+  });
+
   return (
     <View
       className={`w-full mt-14 ${
@@ -62,7 +72,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
       >
         <AppButton
           action={() => {
-            console.log('LOGIN ACTION');
+            console.log(loginMutation.mutate(data));
           }}
           context="Login"
           additionalStyles={`${deviceType === DeviceType.PHONE ? 'mt-10' : ''}`}

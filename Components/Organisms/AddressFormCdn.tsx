@@ -1,6 +1,7 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
+import { AxiosError } from 'axios';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
@@ -11,6 +12,15 @@ import {
 import { handleGetDataFromStore } from '../../helpers/handlers/handleGetDataFromStore';
 import { Api } from '../../helpers/api/Api';
 import { CompanyAddressDataCdn } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
+import { ErrorInfoText } from '../Atoms/ErrorInfoText';
+
+function handleErrorOccurred(e: unknown) {
+  if (!(e instanceof AxiosError))
+    return 'Some error occurred, please try again later';
+  const message = e.response?.data?.payload?.message;
+  if (!message) return 'Some error occurred, please try again later';
+  return message;
+}
 
 export function AddressFormCdn({
   navigation,
@@ -39,7 +49,7 @@ export function AddressFormCdn({
     })();
   }, []);
   return (
-    <View className="w-10/12 pt-10">
+    <View className="w-10/12 pt-10 items-center">
       <AppInput
         keyboardHideOnSubmit={false}
         autoFocus
@@ -78,6 +88,11 @@ export function AddressFormCdn({
         context="Next"
         additionalStyles="mt-10"
       />
+      {createUserMutation.isError && (
+        <ErrorInfoText additionalStyles="mt-10">
+          {handleErrorOccurred(createUserMutation.error)}
+        </ErrorInfoText>
+      )}
     </View>
   );
 }
