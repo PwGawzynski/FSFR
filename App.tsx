@@ -40,10 +40,9 @@ export default function App() {
     (async () => {
       const recognizedDeviceType = await Device.getDeviceTypeAsync();
       setDeviceType(recognizedDeviceType);
-      console.log(await Api.checkCurrentSession(), 'TOKEN W APP');
-      setLogged(await Api.checkCurrentSession());
+      setLogged(await Api.init());
     })();
-  });
+  }, []);
 
   const Stack = createStackNavigator<LoginStackParamList>();
 
