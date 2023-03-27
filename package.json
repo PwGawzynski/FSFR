@@ -44,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
     "babel-plugin-module-resolver": "^5.0.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "customize-cra": "^1.0.0",
     "eslint": "^8.31.0",
     "eslint-config-airbnb": "^19.0.4",
