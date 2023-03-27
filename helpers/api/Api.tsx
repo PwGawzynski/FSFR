@@ -1,6 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 import * as SecureStore from 'expo-secure-store';
-import { RegisterScreensDataCollection } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
+import Constants from 'expo-constants';
+import {
+  EmailAndPasswordData,
+  RegisterScreensDataCollection,
+} from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { RegisterNewUserDataDtoInterfaceMobi } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
 import {
   IdentityAuthTokenLoginRaw,
@@ -134,6 +138,20 @@ export class Api {
   }
 
   /* ----------------------------------------API-CALS---------------------------------------------*/
+
+  static async registerInAuthUser(data: EmailAndPasswordData) {
+    /* await Api.initAxios(); */
+    console.log(Constants.expoConfig?.extra?.apiUrl);
+    const axiosInstance = axios.create({
+      baseURL: Constants.expoConfig?.extra?.apiUrl,
+      timeout: 5000,
+      withCredentials: true,
+    });
+    return axiosInstance.post('/user', {
+      login: data.email,
+      password: data.password,
+    });
+  }
 
   static async registerNewUser(userData: RegisterScreensDataCollection) {
     const serializedData = {
