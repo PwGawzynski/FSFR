@@ -1,14 +1,34 @@
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 import { RegisterScreensDataCollection } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { RegisterNewUserDataDtoInterfaceMobi } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+import {
+  IdentityAuthTokenLoginRaw,
+  IdentityAuthTokenLoginStored,
+  LoginUser,
+} from '../../FarmServiceTypes/User/LoginUser';
+import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
 
 export class Api {
+  private static access_token: string;
+
+  private static refresh_token: string;
+
+  private static axiosAuthInstance = axios.create({
+    baseURL: 'http://localhost:3000',
+    timeout: 5000,
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${Api.refresh_token}`,
+    },
+  });
+
   private static axiosInstance = axios.create({
     baseURL: 'http://localhost:3002',
     timeout: 5000,
     withCredentials: true,
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9naW4iOiJ1c2VyMjIiLCJ1c2VySWQiOiJiMWU4MmM0Yy1iMzA0LTRlNzMtYTU0ZS05MmY5MTU4MTA1ZWYiLCJpYXQiOjE2Nzk2MDE5ODEsImV4cCI6MTY3OTYwMjg4MX0.8z-XS5wOQO0ExsYpfqP4YaOlmMUaoLIWio-Fw7FMebo`,
+      Authorization: `Bearer ${Api.access_token}`,
     },
   });
 
@@ -35,5 +55,22 @@ export class Api {
       userRole: userData.userRole,
     } as RegisterNewUserDataDtoInterfaceMobi;
     return Api.axiosInstance.post('/user', serializedData);
+  }
+
+  static async loginUser(loginData: LoginUser) {
+    const response: ResponseObject<IdentityAuthTokenLoginRaw> = (
+      await Api.axiosAuthInstance.post('/auth/login', loginData)
+    ).data;
+    const { payload } = response;
+    if (payload) {
+      const storedData: IdentityAuthTokenLoginStored = {
+        ...payload,
+        last_updated_access_token_at: new Date(),
+        last_updated_refresh_token_at: new Date(),
+      };
+      SecureStore.setItemAsync('Tokens', await JSON.stringify(storedData));
+      return true;
+    }
+    throw new Error('Something went wrong, try again later');
   }
 }
