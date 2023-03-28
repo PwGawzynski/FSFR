@@ -139,18 +139,27 @@ export class Api {
 
   /* ----------------------------------------API-CALS---------------------------------------------*/
 
-  static async registerInAuthUser(data: EmailAndPasswordData) {
-    /* await Api.initAxios(); */
-    console.log(Constants.expoConfig?.extra?.apiUrl);
+  static async registerInAuthUser(
+    data: EmailAndPasswordData,
+  ): Promise<ResponseObject<IdentityAuthTokenLoginRaw>> {
     const axiosInstance = axios.create({
       baseURL: Constants.expoConfig?.extra?.apiUrl,
       timeout: 5000,
       withCredentials: true,
     });
-    return axiosInstance.post('/user', {
-      login: data.email,
-      password: data.password,
-    });
+    const response = (
+      await axiosInstance.post('/user', {
+        login: data.email,
+        password: data.password,
+      })
+    ).data as ResponseObject<IdentityAuthTokenLoginRaw>;
+    if (response.payload) {
+      Api.access_token = response.payload.access_token;
+      Api.refresh_token = response.payload.refresh_token;
+      await Api.initAxios();
+    }
+    console.log(Api.access_token, 'AFTER REGISTER TOKEN');
+    return response;
   }
 
   static async registerNewUser(userData: RegisterScreensDataCollection) {
@@ -175,7 +184,11 @@ export class Api {
       },
       userRole: userData.userRole,
     } as RegisterNewUserDataDtoInterfaceMobi;
-    return Api.axiosInstance.post('/user', serializedData);
+    return Api.axiosInstance.post('/user', serializedData, {
+      headers: {
+        Authorization: `Bearer ${Api.access_token}`,
+      },
+    });
   }
 
   /**

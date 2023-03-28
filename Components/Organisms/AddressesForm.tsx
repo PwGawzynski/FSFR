@@ -1,13 +1,13 @@
-import { TextInput, View } from 'react-native';
+import { TextInput, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
-import { CompanyAddressData } from '../../../FarmServiceBE/farm-service-be/types/Useer/RegisterDataObject';
 import {
   handleRestoreData,
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
+import { CompanyAddressData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 
 export function AddressesForm({
   navigation,
@@ -28,7 +28,7 @@ export function AddressesForm({
     })();
   }, []);
   return (
-    <View className="w-10/12 pt-10">
+    <ScrollView className="w-10/12 pt-4">
       <AppInput
         keyboardHideOnSubmit={false}
         autoFocus
@@ -74,8 +74,8 @@ export function AddressesForm({
           );
         }}
         context="Next"
-        additionalStyles="mt-10"
+        additionalStyles="mt-3"
       />
-    </View>
+    </ScrollView>
   );
 }
