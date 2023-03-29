@@ -56,7 +56,8 @@ export function EmailAndPasswordForm({
           'ChooseUserRole',
         );
     })();
-  }, [canMoveOn, data, navigation]);
+    // eslint-disable-next-line
+  }, [canMoveOn]);
   return (
     <View className="w-10/12 pt-10 items-center">
       {registerToIdentity.isError && (
