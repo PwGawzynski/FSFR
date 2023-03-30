@@ -67,57 +67,53 @@ export class Api {
   }
 
   /**
-   * Driver method must be called before any Api usage, checks if tokens are saved and valid,
-   * if not return false, then initialize tokens in API, init axios, and restore tokens
+   * Driver to init Api instance, init tokens, init axios, restore sessions Tokens
+   * @return TRUE if session has been correctly restored, FALSE if session expired and can't be restored
    */
   static async init() {
-    console.log('Init Api');
     try {
-      if (await checkCurrentSession()) {
-        await Api.initTokens();
-        await Api.initAxios();
-        await Api.restoreTokens();
-        return true;
-      }
-      return false;
+      await Api.initTokens();
+      await Api.initAxios();
+      return (await checkCurrentSession()) || (await Api.restoreTokens());
     } catch (e) {
-      console.log(e);
+      await Api.initAxios();
       return false;
     }
   }
 
   /**
    * Method used to restore tokens from secure store
-   * @private
+   * @throws Error when can't get tokens from store
    */
-  private static async initTokens() {
+  private static async initTokens(): Promise<void> {
     const stored = await SecureStore.getItemAsync('Tokens');
-    if (stored) {
-      const tokens: IdentityAuthTokenLoginStored = await JSON.parse(stored);
-      Api.access_token = tokens.access_token;
-      Api.refresh_token = tokens.refresh_token;
-    }
-    return false;
+    if (!stored) throw Error('Cannot get tokens');
+    const tokens: IdentityAuthTokenLoginStored = await JSON.parse(stored);
+    Api.access_token = tokens.access_token;
+    Api.refresh_token = tokens.refresh_token;
   }
 
   /**
-   * Method used to refresh tokens
+   * Refresh tokens stored in SecureStore
    * @private
+   * @return True if refresh went correct
+   * @throws AxiosError when req went wrong, Error when saving operation went wrong
    */
   private static async restoreTokens() {
     const response = (await Api.axiosAuthInstance.post('/auth/refresh'))
       .data as ResponseObject<IdentityAuthTokenLoginRaw>;
-    await Api.saveTokensToSecureStoreFromResPayload(response);
+    return Api.saveTokensToSecureStoreFromResPayload(response);
   }
 
   /**
    * Method used to save tokens in SecureStore, received in response from Identity
    * @param response ResponseObject<IdentityAuthTokenLoginRaw> data from Identity
-   * @private
+   * @return true if tokens have been correctly saved
+   * @throws Error when save or axios init went wrong
    */
   private static async saveTokensToSecureStoreFromResPayload(
     response: ResponseObject<IdentityAuthTokenLoginRaw>,
-  ) {
+  ): Promise<boolean> {
     const { payload } = response;
     if (payload?.access_token && payload.access_token) {
       const storedData: IdentityAuthTokenLoginStored = {
@@ -141,27 +137,35 @@ export class Api {
 
   /* ----------------------------------------API-CALS---------------------------------------------*/
 
+  /**
+   * Register new user in Auth system,
+   * @param data : EmailAndPasswordData
+   * @returns TRUE if register and save Tokens From register in SecureStore went correct
+   * @throws AxiosError when error on request occur, or Error when Save went wrong
+   */
   static async registerInAuthUser(
     data: EmailAndPasswordData,
-  ): Promise<ResponseObject<IdentityAuthTokenLoginRaw>> {
+  ): Promise<boolean> {
     await Api.initAxios();
-    const axiosInstance = axios.create({
-      baseURL: `${Constants.expoConfig?.extra?.apiUrl}:3000`,
-      timeout: 5000,
-      withCredentials: true,
-    });
     const response = (
-      await axiosInstance.post('/user', {
+      await Api.axiosAuthInstance.post('/user', {
         login: data.email,
         password: data.password,
       })
     ).data as ResponseObject<IdentityAuthTokenLoginRaw>;
-    console.log(response);
-    Api.saveTokensToSecureStoreFromResPayload(response);
-    return response;
+    await Api.saveTokensToSecureStoreFromResPayload(response);
+    return true;
   }
 
-  static async registerNewUser(userData: RegisterScreensDataCollection) {
+  /**
+   * Register new user in Api
+   * @param userData : RegisterScreensDataCollection
+   * @returns ResponseObject when operation went correct
+   * @throws AxiosError return by axios
+   */
+  static async registerNewUser(
+    userData: RegisterScreensDataCollection,
+  ): Promise<ResponseObject> {
     const serializedData = {
       email: userData.email,
       userPersonalData: {
@@ -192,8 +196,9 @@ export class Api {
 
   /**
    * Method used when user login ion app
-   * @param loginData
+   * @param loginData : LoginUser
    * @returns boolean to indicate that access is given or not
+   * @throws Error when save went wrong
    */
   static async loginUser(loginData: LoginUser) {
     const response: ResponseObject<IdentityAuthTokenLoginRaw> = (
@@ -203,6 +208,11 @@ export class Api {
     return Api.saveTokensToSecureStoreFromResPayload(response);
   }
 
+  /**
+   * Method used to check if userLogin is free to take
+   * @param userLoginIdentifier
+   * @throws AxiosError return by axios
+   */
   static async checkIfExist(userLoginIdentifier: string) {
     return (
       await Api.axiosAuthInstance.get(`/user/exist/${userLoginIdentifier}`)
