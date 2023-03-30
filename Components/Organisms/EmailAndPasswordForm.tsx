@@ -34,27 +34,25 @@ export function EmailAndPasswordForm({
     password: '',
   });
 
-  const [canMoveOn, setCanMoveOn] = useState(false);
-
   const registerToIdentity = useMutation(
     async (mutationData: EmailAndPasswordData) => {
       const response = await Api.checkIfExist(mutationData.email);
-      if (response.code === ResponseCode.ProcessedCorrect) setCanMoveOn(true);
-    },
-  );
-  useEffect(() => {
-    (async () => {
-      await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
-      if (canMoveOn)
+      if (response.code === ResponseCode.ProcessedCorrect)
         handleSaveDataMerge(
           'RegisterMobiDataEmailAndPassword',
           data,
           navigation,
           'ChooseUserRole',
         );
+    },
+  );
+
+  useEffect(() => {
+    (async () => {
+      await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
     })();
-    // eslint-disable-next-line
-  }, [canMoveOn]);
+  }, []);
+
   return (
     <View className="w-10/12 pt-10 items-center">
       {registerToIdentity.isError && (
