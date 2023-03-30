@@ -13,10 +13,7 @@ import {
 } from '../../helpers/handlers/AsyncStoreHelpers';
 import { EmailAndPasswordData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { Api } from '../../helpers/api/Api';
-import {
-  ResponseCode,
-  ResponseObject,
-} from '../../FarmServiceTypes/Respnse/responseGeneric';
+import { ResponseCode } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 
 function handleErrorOccurred(e: unknown) {
@@ -41,7 +38,7 @@ export function EmailAndPasswordForm({
 
   const registerToIdentity = useMutation(
     async (mutationData: EmailAndPasswordData) => {
-      const response = await Api.registerInAuthUser(mutationData);
+      const response = await Api.checkIfExist(mutationData.email);
       if (response.code === ResponseCode.ProcessedCorrect) setCanMoveOn(true);
     },
   );

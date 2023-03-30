@@ -42,21 +42,25 @@ export function AddressFormCdn({
     async (userData: CompanyAddressDataCdn) => {
       const storedData = await handleGetDataFromStore();
       if (storedData) {
-        const response = await Api.registerNewUser({
-          ...storedData,
-          ...userData,
+        const authResponse = await Api.registerInAuthUser({
+          email: storedData.email,
+          password: storedData.password,
         });
-        console.log(response.data);
-        if (
-          response.data.code ===
-          ResponseCode.ProcessedWithoutConfirmationWaiting
-        ) {
-          console.log('done');
-          appSetters.setLogged(true);
+        if (authResponse) {
+          const response = await Api.registerNewUser({
+            ...storedData,
+            ...userData,
+          });
+          if (
+            response.data.code ===
+            ResponseCode.ProcessedWithoutConfirmationWaiting
+          ) {
+            appSetters.setLogged(true);
+          }
+        } else {
+          console.warn('Cannot restore data in AddressesCdn');
+          throw new Error('Something bad happen, try again later');
         }
-      } else {
-        console.warn('Cannot restore data in AddressesCdn');
-        throw new Error('Something bad happen, try again later');
       }
     },
   );

@@ -48,7 +48,7 @@ export class Api {
    */
   private static async initAxios() {
     Api.axiosInstance = axios.create({
-      baseURL: 'http://localhost:3002',
+      baseURL: `${Constants.expoConfig?.extra?.apiUrl}:3002`,
       timeout: 5000,
       withCredentials: true,
       headers: {
@@ -57,7 +57,7 @@ export class Api {
     });
 
     Api.axiosAuthInstance = axios.create({
-      baseURL: 'http://localhost:3000',
+      baseURL: `${Constants.expoConfig?.extra?.apiUrl}:3000`,
       timeout: 5000,
       withCredentials: true,
       headers: {
@@ -71,6 +71,7 @@ export class Api {
    * if not return false, then initialize tokens in API, init axios, and restore tokens
    */
   static async init() {
+    console.log('Init Api');
     try {
       if (await checkCurrentSession()) {
         await Api.initTokens();
@@ -80,6 +81,7 @@ export class Api {
       }
       return false;
     } catch (e) {
+      console.log(e);
       return false;
     }
   }
@@ -117,7 +119,7 @@ export class Api {
     response: ResponseObject<IdentityAuthTokenLoginRaw>,
   ) {
     const { payload } = response;
-    if (payload) {
+    if (payload?.access_token && payload.access_token) {
       const storedData: IdentityAuthTokenLoginStored = {
         ...payload,
         last_updated_access_token_at: new Date(),
@@ -142,8 +144,9 @@ export class Api {
   static async registerInAuthUser(
     data: EmailAndPasswordData,
   ): Promise<ResponseObject<IdentityAuthTokenLoginRaw>> {
+    await Api.initAxios();
     const axiosInstance = axios.create({
-      baseURL: Constants.expoConfig?.extra?.apiUrl,
+      baseURL: `${Constants.expoConfig?.extra?.apiUrl}:3000`,
       timeout: 5000,
       withCredentials: true,
     });
@@ -153,12 +156,8 @@ export class Api {
         password: data.password,
       })
     ).data as ResponseObject<IdentityAuthTokenLoginRaw>;
-    if (response.payload) {
-      Api.access_token = response.payload.access_token;
-      Api.refresh_token = response.payload.refresh_token;
-      await Api.initAxios();
-    }
-    console.log(Api.access_token, 'AFTER REGISTER TOKEN');
+    console.log(response);
+    Api.saveTokensToSecureStoreFromResPayload(response);
     return response;
   }
 
@@ -202,5 +201,11 @@ export class Api {
     ).data;
     // must return true or false to manage isLogged state
     return Api.saveTokensToSecureStoreFromResPayload(response);
+  }
+
+  static async checkIfExist(userLoginIdentifier: string) {
+    return (
+      await Api.axiosAuthInstance.get(`/user/exist/${userLoginIdentifier}`)
+    ).data;
   }
 }
