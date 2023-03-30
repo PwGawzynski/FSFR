@@ -52,8 +52,7 @@ export function AddressFormCdn({
             ...userData,
           });
           if (
-            response.data.code ===
-            ResponseCode.ProcessedWithoutConfirmationWaiting
+            response.code === ResponseCode.ProcessedWithoutConfirmationWaiting
           ) {
             appSetters.setLogged(true);
           }
@@ -105,7 +104,6 @@ export function AddressFormCdn({
       <AppButton
         action={() => {
           handleSaveDataMerge('RegisterMobiDataAddressesCdn', data, navigation);
-          console.log(createUserMutation.mutate(data));
         }}
         context="Next"
         additionalStyles="mt-10"
