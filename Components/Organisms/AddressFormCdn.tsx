@@ -46,15 +46,17 @@ export function AddressFormCdn({
           email: storedData.email,
           password: storedData.password,
         });
+        console.log(authResponse, 'RES');
         if (authResponse) {
           const response = await Api.registerNewUser({
             ...storedData,
             ...userData,
           });
           if (
-            response.code === ResponseCode.ProcessedWithoutConfirmationWaiting
+            response.code !== ResponseCode.ProcessedWithoutConfirmationWaiting
           ) {
-            appSetters.setLogged(true);
+            console.log(authResponse, 'AUTH RES');
+            throw Error('');
           }
         } else {
           console.warn('Cannot restore data in AddressesCdn');
@@ -103,7 +105,15 @@ export function AddressFormCdn({
       />
       <AppButton
         action={() => {
-          handleSaveDataMerge('RegisterMobiDataAddressesCdn', data, navigation);
+          createUserMutation.mutate(data);
+          if (createUserMutation.isSuccess) {
+            appSetters.setLogged(true);
+            handleSaveDataMerge(
+              'RegisterMobiDataAddressesCdn',
+              data,
+              navigation,
+            );
+          }
         }}
         context="Next"
         additionalStyles="mt-10"

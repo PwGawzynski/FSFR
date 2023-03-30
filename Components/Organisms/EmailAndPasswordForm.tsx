@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 import { StatusCodes } from 'http-status-codes';
+import * as Yup from 'yup';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
@@ -46,18 +47,31 @@ export function EmailAndPasswordForm({
         );
     },
   );
-
+  const dataValidationSchema = Yup.object().shape({
+    email: Yup.string().max(200).email().required(),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .max(200, "Password can't be longer than 200 characters")
+      .matches(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{[\]:;\\"'<,>.?/\\-]).+$/),
+  });
   useEffect(() => {
     (async () => {
       await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
     })();
   }, []);
 
+  const [validationError, setValidationError] = useState({
+    isError: false,
+    errorMessages: [] as Array<string>,
+  });
+
   return (
     <View className="w-10/12 pt-10 items-center">
-      {registerToIdentity.isError && (
+      {(registerToIdentity.isError || validationError.isError) && (
         <ErrorInfoText additionalStyles="top-[-20]">
-          {handleErrorOccurred(registerToIdentity.error)}
+          {registerToIdentity.isError
+            ? handleErrorOccurred(registerToIdentity.error)
+            : validationError.errorMessages}
         </ErrorInfoText>
       )}
       <AppInput
@@ -90,8 +104,19 @@ export function EmailAndPasswordForm({
         }
       />
       <AppButton
-        action={() => {
-          registerToIdentity.mutate(data);
+        action={async () => {
+          try {
+            console.log(await dataValidationSchema.validate(data));
+          } catch (e) {
+            if (e instanceof Yup.ValidationError) {
+              console.log(e.errors);
+              setValidationError({
+                isError: true,
+                errorMessages: e.errors,
+              });
+            }
+          }
+          //           registerToIdentity.mutate(data);
         }}
         context="Next"
         additionalStyles="mt-10 mb-2"
