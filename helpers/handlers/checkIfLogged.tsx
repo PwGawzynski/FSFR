@@ -1,9 +1,11 @@
 import * as SecureStore from 'expo-secure-store';
 import { IdentityAuthTokenLoginStored } from '../../FarmServiceTypes/User/LoginUser';
 /**
- * FN check if session is present IF SESSION IS PRESENT RETURNS TRUE
+ * FN check if session is present
+ * @return True if session is present or
+ * False If session expired
  */
-export async function checkCurrentSession() {
+export async function checkCurrentSession(): Promise<boolean> {
   try {
     const session = await SecureStore.getItemAsync('Tokens');
     if (!session) return false;

@@ -40,7 +40,7 @@ export function AppInput<T extends object>({
           theme === ThemeOptions.dark ? 'text-white' : 'text-black'
         } w-max border-solid border-b-4 ${
           theme === ThemeOptions.dark ? 'border-white' : 'border-black'
-        } text-lg pb-2 ${additionalTextStyles}`}
+        } text-lg pb-2 h-14 ${additionalTextStyles}`}
         autoCorrect={false}
         value={value}
         autoComplete={autoComplete ?? 'off'}

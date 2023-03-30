@@ -1,5 +1,5 @@
 import { TextInput, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 import { AppButton } from '../Atoms/AppButton';
@@ -13,6 +13,8 @@ import { handleGetDataFromStore } from '../../helpers/handlers/handleGetDataFrom
 import { Api } from '../../helpers/api/Api';
 import { CompanyAddressDataCdn } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
+import { ResponseCode } from '../../FarmServiceTypes/Respnse/responseGeneric';
+import { AppSettings } from '../../helpers/appSettings/contexts';
 
 function handleErrorOccurred(e: unknown) {
   if (!(e instanceof AxiosError))
@@ -34,12 +36,31 @@ export function AddressFormCdn({
   const input3 = React.createRef<TextInput>();
   const input4 = React.createRef<TextInput>();
 
+  const appSetters = useContext(AppSettings).setters;
+
   const createUserMutation = useMutation(
     async (userData: CompanyAddressDataCdn) => {
       const storedData = await handleGetDataFromStore();
-      if (storedData)
-        return Api.registerNewUser({ ...storedData, ...userData });
-      throw new Error('');
+      if (storedData) {
+        const authResponse = await Api.registerInAuthUser({
+          email: storedData.email,
+          password: storedData.password,
+        });
+        if (authResponse) {
+          const response = await Api.registerNewUser({
+            ...storedData,
+            ...userData,
+          });
+          if (
+            response.code === ResponseCode.ProcessedWithoutConfirmationWaiting
+          ) {
+            appSetters.setLogged(true);
+          }
+        } else {
+          console.warn('Cannot restore data in AddressesCdn');
+          throw new Error('Something bad happen, try again later');
+        }
+      }
     },
   );
 
@@ -83,7 +104,6 @@ export function AddressFormCdn({
       <AppButton
         action={() => {
           handleSaveDataMerge('RegisterMobiDataAddressesCdn', data, navigation);
-          console.log(createUserMutation.mutate(data));
         }}
         context="Next"
         additionalStyles="mt-10"

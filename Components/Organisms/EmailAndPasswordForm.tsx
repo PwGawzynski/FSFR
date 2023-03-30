@@ -1,14 +1,28 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
+import { AxiosError } from 'axios';
+import { StatusCodes } from 'http-status-codes';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
-import { EmailAndPasswordData } from '../../../FarmServiceBE/farm-service-be/types/Useer/RegisterDataObject';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import {
   handleRestoreData,
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
+import { EmailAndPasswordData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
+import { Api } from '../../helpers/api/Api';
+import { ResponseCode } from '../../FarmServiceTypes/Respnse/responseGeneric';
+import { ErrorInfoText } from '../Atoms/ErrorInfoText';
+
+function handleErrorOccurred(e: unknown) {
+  if (!(e instanceof AxiosError))
+    return 'Some error occurred, please try again later';
+  const message = e.response?.data?.payload?.message;
+  if (e.response?.status === StatusCodes.CONFLICT && message) return message;
+  return 'Some error occurred, please try again later';
+}
 
 export function EmailAndPasswordForm({
   navigation,
@@ -19,13 +33,33 @@ export function EmailAndPasswordForm({
     email: '',
     password: '',
   });
+
+  const registerToIdentity = useMutation(
+    async (mutationData: EmailAndPasswordData) => {
+      const response = await Api.checkIfExist(mutationData.email);
+      if (response.code === ResponseCode.ProcessedCorrect)
+        handleSaveDataMerge(
+          'RegisterMobiDataEmailAndPassword',
+          data,
+          navigation,
+          'ChooseUserRole',
+        );
+    },
+  );
+
   useEffect(() => {
     (async () => {
       await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
     })();
   }, []);
+
   return (
-    <View className="w-10/12 pt-10">
+    <View className="w-10/12 pt-10 items-center">
+      {registerToIdentity.isError && (
+        <ErrorInfoText additionalStyles="top-[-20]">
+          {handleErrorOccurred(registerToIdentity.error)}
+        </ErrorInfoText>
+      )}
       <AppInput
         autoFocus
         onSubmit={() => input2.current?.focus()}
@@ -56,14 +90,9 @@ export function EmailAndPasswordForm({
         }
       />
       <AppButton
-        action={() =>
-          handleSaveDataMerge(
-            'RegisterMobiDataEmailAndPassword',
-            data,
-            navigation,
-            'ChooseUserRole',
-          )
-        }
+        action={() => {
+          registerToIdentity.mutate(data);
+        }}
         context="Next"
         additionalStyles="mt-10 mb-2"
       />
