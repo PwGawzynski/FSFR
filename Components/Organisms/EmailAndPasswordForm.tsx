@@ -16,6 +16,7 @@ import { EmailAndPasswordData } from '../../FrontendSelfTypes/RegisterMobi/Regis
 import { Api } from '../../helpers/api/Api';
 import { ResponseCode } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
+import { useValidation } from '../../helpers/hooks/validationHook';
 
 function handleErrorOccurred(e: unknown) {
   if (!(e instanceof AxiosError))
@@ -48,30 +49,35 @@ export function EmailAndPasswordForm({
     },
   );
   const dataValidationSchema = Yup.object().shape({
-    email: Yup.string().max(200).email().required(),
+    email: Yup.string().max(200).email('Invalid Email').required(),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
       .max(200, "Password can't be longer than 200 characters")
-      .matches(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{[\]:;\\"'<,>.?/\\-]).+$/),
+      .matches(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{[\]:;\\"'<,>.?/\\-]).+$/)
+      .required(),
   });
+
+  console.log('Vailda');
+
+  const [validator, canValidate] = useValidation<EmailAndPasswordData>(
+    data,
+    dataValidationSchema,
+  );
+
   useEffect(() => {
+    console.log('REREN FORM');
     (async () => {
       await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
     })();
-  }, []);
-
-  const [validationError, setValidationError] = useState({
-    isError: false,
-    errorMessages: [] as Array<string>,
-  });
+  }, [canValidate]);
 
   return (
     <View className="w-10/12 pt-10 items-center">
-      {(registerToIdentity.isError || validationError.isError) && (
+      {(registerToIdentity.isError || validator.isError) && (
         <ErrorInfoText additionalStyles="top-[-20]">
           {registerToIdentity.isError
             ? handleErrorOccurred(registerToIdentity.error)
-            : validationError.errorMessages}
+            : validator.errorMessages}
         </ErrorInfoText>
       )}
       <AppInput
@@ -105,17 +111,7 @@ export function EmailAndPasswordForm({
       />
       <AppButton
         action={async () => {
-          try {
-            console.log(await dataValidationSchema.validate(data));
-          } catch (e) {
-            if (e instanceof Yup.ValidationError) {
-              console.log(e.errors);
-              setValidationError({
-                isError: true,
-                errorMessages: e.errors,
-              });
-            }
-          }
+          canValidate(true);
           //           registerToIdentity.mutate(data);
         }}
         context="Next"
