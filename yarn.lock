@@ -3179,9 +3179,9 @@
     "@xtuc/long" "4.2.2"
 
 "@xmldom/xmldom@~0.7.7":
-  "integrity" "sha512-yceMpm/xd4W2a85iqZyO09gTnHvXF6pyiWjD2jcOJs7hRoZtNNOO1eJlhHj1ixA+xip2hOyGn+LgcvLCMo5zXA=="
-  "resolved" "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.7.9.tgz"
-  "version" "0.7.9"
+  "integrity" "sha512-hb9QhOg5MGmpVkFcoZ9XJMe1em5gd0e2eqqjK87O1dwULedXsnY/Zg/Ju6lcohA+t6jVkmKpe7I1etqhvdRdrQ=="
+  "resolved" "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.7.10.tgz"
+  "version" "0.7.10"
 
 "@xtuc/ieee754@^1.2.0":
   "integrity" "sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA=="
@@ -12368,9 +12368,9 @@
     "is-fullwidth-code-point" "^4.0.0"
 
 "slugify@^1.3.4":
-  "integrity" "sha512-8mo9bslnBO3tr5PEVFzMPIWwWnipGS0xVbYf65zxDqfNwmzYn1LpiKNrR6DlClusuvo+hDHd1zKpmfAe83NQSQ=="
-  "resolved" "https://registry.npmjs.org/slugify/-/slugify-1.6.5.tgz"
-  "version" "1.6.5"
+  "integrity" "sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw=="
+  "resolved" "https://registry.npmjs.org/slugify/-/slugify-1.6.6.tgz"
+  "version" "1.6.6"
 
 "snapdragon-node@^2.0.1":
   "integrity" "sha512-O27l4xaMYt/RSQ5TR3vpWCAB5Kb/czIcqUFOM/C4fYcLnbZUc1PkjTAMjof2pBWaSTwOUd6qUHcFGVGj7aIwnw=="
@@ -12812,9 +12812,9 @@
   "version" "0.1.3"
 
 "sucrase@^3.20.0":
-  "integrity" "sha512-7d37d3vLF0IeH2dzvHpzDNDxUqpbDHJXTJOAnQ8jvMW04o2Czps6mxtaSnKWpE+hUS/eczqfWPUgQTrazKZPnQ=="
-  "resolved" "https://registry.npmjs.org/sucrase/-/sucrase-3.30.0.tgz"
-  "version" "3.30.0"
+  "integrity" "sha512-6QsHnkqyVEzYcaiHsOKkzOtOgdJcb8i54x6AV2hDwyZcY9ZyykGZVw6L/YN98xC0evwTP6utsWWrKRaa8QlfEQ=="
+  "resolved" "https://registry.npmjs.org/sucrase/-/sucrase-3.31.0.tgz"
+  "version" "3.31.0"
   dependencies:
     "commander" "^4.0.0"
     "glob" "7.1.6"
