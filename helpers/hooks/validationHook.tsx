@@ -9,12 +9,15 @@ export const useValidation = <T extends object>(
     isError: false,
     errorMessages: [] as Array<string>,
   });
-  const [canValidate, performValidation] = useState(false);
   useEffect(() => {
     console.log('EFFF');
     (async () => {
       try {
         await schema.validate(data);
+        setValidationError({
+          isError: false,
+          errorMessages: [],
+        });
       } catch (e) {
         if (e instanceof Yup.ValidationError) {
           setValidationError({
@@ -25,6 +28,6 @@ export const useValidation = <T extends object>(
       }
     })();
     // eslint-disable-next-line
-  }, [canValidate]);
-  return [validationError, performValidation] as const;
+  }, [data]);
+  return validationError;
 };
