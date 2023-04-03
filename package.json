@@ -7,6 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+
     "prepare": "husky install"
   },
   "dependencies": {
@@ -35,7 +36,8 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-web": "~0.18.11",
     "react-query": "^3.39.3",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
