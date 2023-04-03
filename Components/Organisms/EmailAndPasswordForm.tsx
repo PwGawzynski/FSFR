@@ -57,19 +57,16 @@ export function EmailAndPasswordForm({
       .required(),
   });
 
-  console.log('Vailda');
-
-  const [validator, canValidate] = useValidation<EmailAndPasswordData>(
+  const validator = useValidation<EmailAndPasswordData>(
     data,
     dataValidationSchema,
   );
 
   useEffect(() => {
-    console.log('REREN FORM');
     (async () => {
       await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
     })();
-  }, [canValidate]);
+  }, []);
 
   return (
     <View className="w-10/12 pt-10 items-center">
@@ -111,8 +108,7 @@ export function EmailAndPasswordForm({
       />
       <AppButton
         action={async () => {
-          canValidate(true);
-          //           registerToIdentity.mutate(data);
+          if (!validator.isError) registerToIdentity.mutate(data);
         }}
         context="Next"
         additionalStyles="mt-10 mb-2"
