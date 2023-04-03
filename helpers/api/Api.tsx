@@ -163,9 +163,7 @@ export class Api {
    * @returns ResponseObject when operation went correct
    * @throws AxiosError return by axios
    */
-  static async registerNewUser(
-    userData: RegisterScreensDataCollection,
-  ): Promise<ResponseObject> {
+  static async registerNewUser(userData: RegisterScreensDataCollection) {
     const serializedData = {
       email: userData.email,
       userPersonalData: {
