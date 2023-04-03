@@ -49,8 +49,6 @@ export function EmailAndPasswordForm({
     },
   );
 
-  console.log('RENDER EMAIL');
-
   const dataValidationSchema = Yup.object().shape({
     email: Yup.string().max(200).email('Invalid Email').required(),
     password: Yup.string()
@@ -105,7 +103,6 @@ export function EmailAndPasswordForm({
       <AppButton
         action={async () => {
           setCanValidate(true);
-          console.log(!validator.isError);
           if (!validator.isError) registerToIdentity.mutate(data);
         }}
         context="Next"
