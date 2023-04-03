@@ -42,7 +42,7 @@ export function EmailAndPasswordForm({
       if (response.code === ResponseCode.ProcessedCorrect)
         handleSaveDataMerge(
           'RegisterMobiDataEmailAndPassword',
-          data,
+          { email: data.email, password: '' } as EmailAndPasswordData,
           navigation,
           'ChooseUserRole',
         );
@@ -68,6 +68,7 @@ export function EmailAndPasswordForm({
   useEffect(() => {
     (async () => {
       await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
+      setCanValidate(true);
     })();
   }, []);
 
@@ -100,14 +101,6 @@ export function EmailAndPasswordForm({
         autoComplete="password"
         additionalStyles="mt-5"
         isPwd
-        onSubmit={() =>
-          handleSaveDataMerge(
-            'RegisterMobiData',
-            data,
-            navigation,
-            'PersonalData',
-          )
-        }
       />
       <AppButton
         action={async () => {
