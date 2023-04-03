@@ -13,7 +13,10 @@ import { handleGetDataFromStore } from '../../helpers/handlers/handleGetDataFrom
 import { Api } from '../../helpers/api/Api';
 import { CompanyAddressDataCdn } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
-import { ResponseCode } from '../../FarmServiceTypes/Respnse/responseGeneric';
+import {
+  ResponseCode,
+  ResponseObject,
+} from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { AppSettings } from '../../helpers/appSettings/contexts';
 
 function handleErrorOccurred(e: unknown) {
@@ -46,17 +49,17 @@ export function AddressFormCdn({
           email: storedData.email,
           password: storedData.password,
         });
-        console.log(authResponse, 'RES');
         if (authResponse) {
-          const response = await Api.registerNewUser({
-            ...storedData,
-            ...userData,
-          });
+          const response = (
+            await Api.registerNewUser({
+              ...storedData,
+              ...userData,
+            })
+          ).data as ResponseObject;
           if (
-            response.code !== ResponseCode.ProcessedWithoutConfirmationWaiting
+            response.code === ResponseCode.ProcessedWithoutConfirmationWaiting
           ) {
-            console.log(authResponse, 'AUTH RES');
-            throw Error('');
+            appSetters.setLogged(true);
           }
         } else {
           console.warn('Cannot restore data in AddressesCdn');
@@ -71,8 +74,14 @@ export function AddressFormCdn({
       await handleRestoreData('RegisterMobiDataAddressesCdn', setData);
     })();
   }, []);
+
   return (
     <View className="w-10/12 pt-10 items-center">
+      {createUserMutation.isError && (
+        <ErrorInfoText additionalStyles="top-[-20]">
+          {handleErrorOccurred(createUserMutation.error)}
+        </ErrorInfoText>
+      )}
       <AppInput
         keyboardHideOnSubmit={false}
         autoFocus
@@ -106,14 +115,7 @@ export function AddressFormCdn({
       <AppButton
         action={() => {
           createUserMutation.mutate(data);
-          if (createUserMutation.isSuccess) {
-            appSetters.setLogged(true);
-            handleSaveDataMerge(
-              'RegisterMobiDataAddressesCdn',
-              data,
-              navigation,
-            );
-          }
+          handleSaveDataMerge('RegisterMobiDataAddressesCdn', data, navigation);
         }}
         context="Next"
         additionalStyles="mt-10"
