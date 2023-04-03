@@ -9,25 +9,29 @@ export const useValidation = <T extends object>(
     isError: false,
     errorMessages: [] as Array<string>,
   });
+  const [canValidate, setCanValidate] = useState(true);
   useEffect(() => {
     console.log('EFFF');
     (async () => {
-      try {
-        await schema.validate(data);
-        setValidationError({
-          isError: false,
-          errorMessages: [],
-        });
-      } catch (e) {
-        if (e instanceof Yup.ValidationError) {
+      if (canValidate) {
+        try {
+          await schema.validate(data);
           setValidationError({
-            isError: true,
-            errorMessages: e.errors,
+            isError: false,
+            errorMessages: [],
           });
+        } catch (e) {
+          if (e instanceof Yup.ValidationError) {
+            setValidationError({
+              isError: true,
+              errorMessages: e.errors,
+            });
+          }
         }
       }
+      setCanValidate(false);
     })();
     // eslint-disable-next-line
-  }, [data]);
-  return validationError;
+  }, [canValidate]);
+  return [validationError, setCanValidate] as const;
 };
