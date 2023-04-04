@@ -1,8 +1,6 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { AxiosError } from 'axios';
-import { StatusCodes } from 'http-status-codes';
 import * as Yup from 'yup';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
@@ -17,14 +15,7 @@ import { Api } from '../../helpers/api/Api';
 import { ResponseCode } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 import { useValidation } from '../../helpers/hooks/validationHook';
-
-function handleErrorOccurred(e: unknown) {
-  if (!(e instanceof AxiosError))
-    return 'Some error occurred, please try again later';
-  const message = e.response?.data?.payload?.message;
-  if (e.response?.status === StatusCodes.CONFLICT && message) return message;
-  return 'Some error occurred, please try again later';
-}
+import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
 
 export function EmailAndPasswordForm({
   navigation,
@@ -35,21 +26,6 @@ export function EmailAndPasswordForm({
     email: '',
     password: '',
   });
-
-  const registerToIdentity = useMutation(
-    async (mutationData: EmailAndPasswordData) => {
-      const response = await Api.checkIfExist(mutationData.email);
-      if (response.code === ResponseCode.ProcessedCorrect)
-        handleSaveDataMerge(
-          'RegisterMobiDataEmailAndPassword',
-          data,
-          navigation,
-          'ChooseUserRole',
-        );
-    },
-  );
-
-  console.log('RENDER EMAIL');
 
   const dataValidationSchema = Yup.object().shape({
     email: Yup.string().max(200).email('Invalid Email').required(),
@@ -65,9 +41,30 @@ export function EmailAndPasswordForm({
     dataValidationSchema,
   );
 
+  const registerToIdentity = useMutation(
+    async (mutationData: EmailAndPasswordData) => {
+      const response = await Api.checkIfExist(mutationData.email);
+      if (response.code === ResponseCode.ProcessedCorrect && !validator.isError)
+        handleSaveDataMerge(
+          'RegisterMobiDataEmailAndPassword',
+          { email: data.email, password: '' } as EmailAndPasswordData,
+          navigation,
+          'ChooseUserRole',
+        );
+    },
+  );
+  const [dataRestored, setDataRestored] = useState(false);
+
+  useEffect(() => {
+    if (dataRestored) setCanValidate(true);
+    if (!validator.isError && dataRestored) registerToIdentity.mutate(data);
+  }, [validator, dataRestored]);
+
   useEffect(() => {
     (async () => {
-      await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
+      setDataRestored(
+        await handleRestoreData('RegisterMobiDataEmailAndPassword', setData),
+      );
     })();
   }, []);
 
@@ -76,7 +73,7 @@ export function EmailAndPasswordForm({
       {(registerToIdentity.isError || validator.isError) && (
         <ErrorInfoText additionalStyles="top-[-20]">
           {registerToIdentity.isError
-            ? handleErrorOccurred(registerToIdentity.error)
+            ? handlePrintErrorToUser(registerToIdentity.error)
             : validator.errorMessages}
         </ErrorInfoText>
       )}
@@ -100,20 +97,10 @@ export function EmailAndPasswordForm({
         autoComplete="password"
         additionalStyles="mt-5"
         isPwd
-        onSubmit={() =>
-          handleSaveDataMerge(
-            'RegisterMobiData',
-            data,
-            navigation,
-            'PersonalData',
-          )
-        }
       />
       <AppButton
-        action={async () => {
+        action={() => {
           setCanValidate(true);
-          console.log(!validator.isError);
-          if (!validator.isError) registerToIdentity.mutate(data);
         }}
         context="Next"
         additionalStyles="mt-10 mb-2"

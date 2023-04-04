@@ -11,9 +11,9 @@ export const useValidation = <T extends object>(
   });
   const [canValidate, setCanValidate] = useState(true);
   useEffect(() => {
-    console.log('EFFF');
     (async () => {
       if (canValidate) {
+        console.log('PERFORMING VALIDATION');
         try {
           await schema.validate(data);
           setValidationError({
@@ -27,6 +27,7 @@ export const useValidation = <T extends object>(
               errorMessages: e.errors,
             });
           }
+          setCanValidate(false);
         }
       }
       setCanValidate(false);
