@@ -27,6 +27,7 @@ export const useValidation = <T extends object>(
               errorMessages: e.errors,
             });
           }
+          setCanValidate(false);
         }
       }
       setCanValidate(false);
