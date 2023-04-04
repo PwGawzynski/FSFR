@@ -1,7 +1,6 @@
 import { TextInput, View } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { AxiosError } from 'axios';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
@@ -18,14 +17,7 @@ import {
   ResponseObject,
 } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { AppSettings } from '../../helpers/appSettings/contexts';
-
-function handleErrorOccurred(e: unknown) {
-  if (!(e instanceof AxiosError))
-    return 'Some error occurred, please try again later';
-  const message = e.response?.data?.payload?.message;
-  if (!message) return 'Some error occurred, please try again later';
-  return message;
-}
+import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
 
 export function AddressFormCdn({
   navigation,
@@ -79,7 +71,7 @@ export function AddressFormCdn({
     <View className="w-10/12 pt-10 items-center">
       {createUserMutation.isError && (
         <ErrorInfoText additionalStyles="top-[-20]">
-          {handleErrorOccurred(createUserMutation.error)}
+          {handlePrintErrorToUser(createUserMutation.error)}
         </ErrorInfoText>
       )}
       <AppInput
@@ -122,7 +114,7 @@ export function AddressFormCdn({
       />
       {createUserMutation.isError && (
         <ErrorInfoText additionalStyles="mt-10">
-          {handleErrorOccurred(createUserMutation.error)}
+          {handlePrintErrorToUser(createUserMutation.error)}
         </ErrorInfoText>
       )}
     </View>
