@@ -1,5 +1,5 @@
 import { TextInput, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
@@ -16,6 +16,7 @@ import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
 import { EmailAndPasswordSchema } from '../../helpers/validation/mobileSchemas/emailAndPasswordSchema';
+import { AppSettings, ModalState } from '../../helpers/appSettings/contexts';
 
 export function EmailAndPasswordForm({
   navigation,
@@ -48,6 +49,9 @@ export function EmailAndPasswordForm({
     },
   );
 
+  const appState = useContext(AppSettings).setters;
+  const { setModalContext } = appState;
+
   useEffect(() => {
     (async () => {
       setDataRestored(
@@ -55,6 +59,16 @@ export function EmailAndPasswordForm({
       );
     })();
   }, []);
+
+  useEffect(() => {
+    return navigation.addListener('beforeRemove', () => {
+      setModalContext({
+        isOn: ModalState.on,
+        context:
+          'Are you sure? Once you leave the process, your data will be deleted !!',
+      });
+    });
+  }, [navigation]);
 
   useEffect(() => {
     if (!validator.isError && btnClicked) registerToIdentity.mutate(data);
