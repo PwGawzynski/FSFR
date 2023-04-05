@@ -40,7 +40,8 @@ export default function App() {
     (async () => {
       const recognizedDeviceType = await Device.getDeviceTypeAsync();
       setDeviceType(recognizedDeviceType);
-      setLogged(await Api.init());
+      await Api.init();
+      // setLogged(await Api.init());
     })();
   }, []);
 
