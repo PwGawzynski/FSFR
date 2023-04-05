@@ -2,7 +2,6 @@ import { restoreDataFromStorage } from './AsyncStoreHelpers';
 
 import {
   CompanyAddressData,
-  CompanyAddressDataCdn,
   ContactPhonesData,
   EmailAndPasswordData,
   NameAndSurnameData,
@@ -24,9 +23,9 @@ export async function handleGetDataFromStore() {
   const addresses = await restoreDataFromStorage<CompanyAddressData>(
     'RegisterMobiDataAddresses',
   );
-  const addressesCdn = await restoreDataFromStorage<CompanyAddressDataCdn>(
+  /* const addressesCdn = await restoreDataFromStorage<CompanyAddressDataCdn>(
     'RegisterMobiDataAddressesCdn',
-  );
+  ); */
   const userRole = await restoreDataFromStorage<UserRoleMobiScreen>(
     'RegisterMobiUserRole',
   );
@@ -35,17 +34,16 @@ export async function handleGetDataFromStore() {
     nameAndSurname &&
     contactPhones &&
     addresses &&
-    addressesCdn &&
     userRole
   ) {
     const data = {
-      ...addressesCdn,
       ...emailAndPassword,
       ...nameAndSurname,
       ...contactPhones,
       ...addresses,
       userRole: userRole.owner ? UserRole.owner : UserRole.worker,
     } as RegisterScreensDataCollection;
+    console.log('STORE DEFINED', data);
     return data;
   }
   return undefined;

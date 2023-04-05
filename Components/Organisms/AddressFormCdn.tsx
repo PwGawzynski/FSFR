@@ -1,7 +1,6 @@
 import { TextInput, View } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { AxiosError } from 'axios';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
@@ -13,30 +12,35 @@ import { handleGetDataFromStore } from '../../helpers/handlers/handleGetDataFrom
 import { Api } from '../../helpers/api/Api';
 import { CompanyAddressDataCdn } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
-import { ResponseCode } from '../../FarmServiceTypes/Respnse/responseGeneric';
+import {
+  ResponseCode,
+  ResponseObject,
+} from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { AppSettings } from '../../helpers/appSettings/contexts';
-
-function handleErrorOccurred(e: unknown) {
-  if (!(e instanceof AxiosError))
-    return 'Some error occurred, please try again later';
-  const message = e.response?.data?.payload?.message;
-  if (!message) return 'Some error occurred, please try again later';
-  return message;
-}
+import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
+import { useValidation } from '../../helpers/hooks/validationHook';
+import { AddressesCdnSchema } from '../../helpers/validation/mobileSchemas/AddressesCdnSchema';
 
 export function AddressFormCdn({
   navigation,
 }: RegisterMobiPropsBase<'AddressesCdn'>) {
-  const [data, setData] = useState<CompanyAddressDataCdn>({
-    apartmentNumber: '',
-    houseNumber: '',
-    postalCode: '',
-  });
   const input2 = React.createRef<TextInput>();
   const input3 = React.createRef<TextInput>();
   const input4 = React.createRef<TextInput>();
 
   const appSetters = useContext(AppSettings).setters;
+
+  const [data, setData] = useState<CompanyAddressDataCdn>({
+    apartmentNumber: '',
+    houseNumber: '',
+    postalCode: '',
+  });
+  const [dataRestored, setDataRestored] = useState(false);
+  const [btnClicked, setBtnClicked] = useState(false);
+  const [validator, setCanValidate] = useValidation(data, AddressesCdnSchema, [
+    dataRestored,
+    btnClicked,
+  ]);
 
   const createUserMutation = useMutation(
     async (userData: CompanyAddressDataCdn) => {
@@ -44,13 +48,15 @@ export function AddressFormCdn({
       if (storedData) {
         const authResponse = await Api.registerInAuthUser({
           email: storedData.email,
-          password: storedData.password,
+          password: 'Password1!r',
         });
         if (authResponse) {
-          const response = await Api.registerNewUser({
-            ...storedData,
-            ...userData,
-          });
+          const response = (
+            await Api.registerNewUser({
+              ...storedData,
+              ...userData,
+            })
+          ).data as ResponseObject;
           if (
             response.code === ResponseCode.ProcessedWithoutConfirmationWaiting
           ) {
@@ -58,6 +64,7 @@ export function AddressFormCdn({
           }
         } else {
           console.warn('Cannot restore data in AddressesCdn');
+          handleSaveDataMerge('RegisterMobiDataAddressesCdn', data, navigation);
           throw new Error('Something bad happen, try again later');
         }
       }
@@ -65,12 +72,26 @@ export function AddressFormCdn({
   );
 
   useEffect(() => {
+    if (!validator.isError && btnClicked) createUserMutation.mutate(data);
+  }, [validator]);
+
+  useEffect(() => {
     (async () => {
-      await handleRestoreData('RegisterMobiDataAddressesCdn', setData);
+      setDataRestored(
+        await handleRestoreData('RegisterMobiDataAddressesCdn', setData),
+      );
     })();
   }, []);
+
   return (
     <View className="w-10/12 pt-10 items-center">
+      {(createUserMutation.isError || validator.isError) && (
+        <ErrorInfoText additionalStyles="top-[-20]">
+          {validator.isError
+            ? validator.errorMessages
+            : handlePrintErrorToUser(createUserMutation.error)}
+        </ErrorInfoText>
+      )}
       <AppInput
         keyboardHideOnSubmit={false}
         autoFocus
@@ -103,16 +124,12 @@ export function AddressFormCdn({
       />
       <AppButton
         action={() => {
-          handleSaveDataMerge('RegisterMobiDataAddressesCdn', data, navigation);
+          setCanValidate(true);
+          setBtnClicked(true);
         }}
         context="Next"
         additionalStyles="mt-10"
       />
-      {createUserMutation.isError && (
-        <ErrorInfoText additionalStyles="mt-10">
-          {handleErrorOccurred(createUserMutation.error)}
-        </ErrorInfoText>
-      )}
     </View>
   );
 }

@@ -2,30 +2,54 @@ import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
-import { NameAndSurnameData } from '../../../FarmServiceBE/farm-service-be/types/Useer/RegisterDataObject';
 import { AppInput } from '../Molecules/AppInput';
 import {
   handleRestoreData,
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
+import { NameAndSurnameData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
+import { useValidation } from '../../helpers/hooks/validationHook';
+import { ErrorInfoText } from '../Atoms/ErrorInfoText';
+import { PersonalDataSchema } from '../../helpers/validation/mobileSchemas/PersonalDataSchema';
 
 export function PersonalDataForm({
   navigation,
 }: RegisterMobiPropsBase<'PersonalData'>) {
+  const input2 = React.createRef<TextInput>();
+
   const [data, setData] = useState<NameAndSurnameData>({
     name: '',
     surname: '',
   });
-  const input2 = React.createRef<TextInput>();
+  const [btnClicked, setBtnClicked] = useState(false);
+  const [validator, canValidate] = useValidation(data, PersonalDataSchema, [
+    btnClicked,
+  ]);
+
   useEffect(() => {
     (async () => {
-      console.log(
-        await handleRestoreData('RegisterMobiDataNameSurname', setData),
-      );
+      await handleRestoreData('RegisterMobiDataNameSurname', setData);
     })();
   }, []);
+
+  useEffect(() => {
+    if (!validator.isError && btnClicked) {
+      handleSaveDataMerge(
+        'RegisterMobiDataNameSurname',
+        data,
+        navigation,
+        'ContactPhones',
+      );
+    }
+  }, [validator]);
+
   return (
     <View className="w-10/12 pt-10">
+      {validator.isError && btnClicked && (
+        <ErrorInfoText additionalStyles="top-[-20]">
+          {validator.errorMessages}
+        </ErrorInfoText>
+      )}
       <AppInput
         keyboardHideOnSubmit={false}
         autoFocus
@@ -52,14 +76,10 @@ export function PersonalDataForm({
         }
       />
       <AppButton
-        action={() =>
-          handleSaveDataMerge(
-            'RegisterMobiDataNameSurname',
-            data,
-            navigation,
-            'ContactPhones',
-          )
-        }
+        action={() => {
+          canValidate(true);
+          setBtnClicked(true);
+        }}
         context="Next"
         additionalStyles="mt-36"
       />

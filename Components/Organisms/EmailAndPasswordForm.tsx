@@ -1,8 +1,6 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { AxiosError } from 'axios';
-import { StatusCodes } from 'http-status-codes';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
@@ -15,14 +13,9 @@ import { EmailAndPasswordData } from '../../FrontendSelfTypes/RegisterMobi/Regis
 import { Api } from '../../helpers/api/Api';
 import { ResponseCode } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
-
-function handleErrorOccurred(e: unknown) {
-  if (!(e instanceof AxiosError))
-    return 'Some error occurred, please try again later';
-  const message = e.response?.data?.payload?.message;
-  if (e.response?.status === StatusCodes.CONFLICT && message) return message;
-  return 'Some error occurred, please try again later';
-}
+import { useValidation } from '../../helpers/hooks/validationHook';
+import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
+import { EmailAndPasswordSchema } from '../../helpers/validation/mobileSchemas/emailAndPasswordSchema';
 
 export function EmailAndPasswordForm({
   navigation,
@@ -33,6 +26,14 @@ export function EmailAndPasswordForm({
     email: '',
     password: '',
   });
+  const [btnClicked, setBtnClicked] = useState(false);
+  const [dataRestored, setDataRestored] = useState(false);
+
+  const [validator, setCanValidate] = useValidation<EmailAndPasswordData>(
+    data,
+    EmailAndPasswordSchema,
+    [dataRestored, btnClicked],
+  );
 
   const registerToIdentity = useMutation(
     async (mutationData: EmailAndPasswordData) => {
@@ -40,7 +41,7 @@ export function EmailAndPasswordForm({
       if (response.code === ResponseCode.ProcessedCorrect)
         handleSaveDataMerge(
           'RegisterMobiDataEmailAndPassword',
-          data,
+          { email: data.email, password: '' } as EmailAndPasswordData,
           navigation,
           'ChooseUserRole',
         );
@@ -49,15 +50,23 @@ export function EmailAndPasswordForm({
 
   useEffect(() => {
     (async () => {
-      await handleRestoreData('RegisterMobiDataEmailAndPassword', setData);
+      setDataRestored(
+        await handleRestoreData('RegisterMobiDataEmailAndPassword', setData),
+      );
     })();
   }, []);
 
+  useEffect(() => {
+    if (!validator.isError && btnClicked) registerToIdentity.mutate(data);
+  }, [validator]);
+
   return (
     <View className="w-10/12 pt-10 items-center">
-      {registerToIdentity.isError && (
+      {(registerToIdentity.isError || validator.isError) && (
         <ErrorInfoText additionalStyles="top-[-20]">
-          {handleErrorOccurred(registerToIdentity.error)}
+          {registerToIdentity.isError
+            ? handlePrintErrorToUser(registerToIdentity.error)
+            : validator.errorMessages}
         </ErrorInfoText>
       )}
       <AppInput
@@ -80,18 +89,11 @@ export function EmailAndPasswordForm({
         autoComplete="password"
         additionalStyles="mt-5"
         isPwd
-        onSubmit={() =>
-          handleSaveDataMerge(
-            'RegisterMobiData',
-            data,
-            navigation,
-            'PersonalData',
-          )
-        }
       />
       <AppButton
         action={() => {
-          registerToIdentity.mutate(data);
+          setCanValidate(true);
+          setBtnClicked(true);
         }}
         context="Next"
         additionalStyles="mt-10 mb-2"

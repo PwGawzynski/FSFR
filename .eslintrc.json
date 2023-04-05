@@ -38,6 +38,7 @@
         "endOfLine": "auto"
       }
     ],
+    "react-hooks/exhaustive-deps": 0,
     "global-require": "off",
     "import/prefer-default-export": "off",
     "react/style-prop-object" : 0,

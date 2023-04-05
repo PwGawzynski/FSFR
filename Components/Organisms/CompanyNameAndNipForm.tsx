@@ -1,17 +1,14 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
-import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
-import { CompanyNameAndNIPData } from '../../../FarmServiceBE/farm-service-be/types/Useer/RegisterDataObject';
 import { AppInput } from '../Molecules/AppInput';
 import {
   handleRestoreData,
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
+import { CompanyNameAndNIPData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 
-export function CompanyNameAndNipForm({
-  navigation,
-}: RegisterMobiPropsBase<'CompanyNameAndNip'>) {
+export function CompanyNameAndNipForm({ navigation }: any) {
   const [data, setData] = useState<CompanyNameAndNIPData>({
     companyName: '',
     nip: '',

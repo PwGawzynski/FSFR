@@ -8,19 +8,38 @@ import {
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
 import { CompanyAddressData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
+import { useValidation } from '../../helpers/hooks/validationHook';
+import { ErrorInfoText } from '../Atoms/ErrorInfoText';
+import { AddressesSchema } from '../../helpers/validation/mobileSchemas/AddressesSchema';
 
 export function AddressesForm({
   navigation,
 }: RegisterMobiPropsBase<'Addresses'>) {
+  const input2 = React.createRef<TextInput>();
+  const input3 = React.createRef<TextInput>();
+  const input4 = React.createRef<TextInput>();
+
   const [data, setData] = useState<CompanyAddressData>({
     city: '',
     county: '',
     street: '',
     voivodeship: '',
   });
-  const input2 = React.createRef<TextInput>();
-  const input3 = React.createRef<TextInput>();
-  const input4 = React.createRef<TextInput>();
+  const [btnClicked, setBtnClicked] = useState(false);
+  const [validator, canValidate] = useValidation(data, AddressesSchema, [
+    btnClicked,
+  ]);
+
+  useEffect(() => {
+    if (!validator.isError && btnClicked) {
+      handleSaveDataMerge(
+        'RegisterMobiDataAddresses',
+        data,
+        navigation,
+        'AddressesCdn',
+      );
+    }
+  }, [validator]);
 
   useEffect(() => {
     (async () => {
@@ -28,7 +47,12 @@ export function AddressesForm({
     })();
   }, []);
   return (
-    <ScrollView className="w-10/12 pt-4">
+    <ScrollView className="w-10/12 pt-10">
+      {validator.isError && btnClicked && (
+        <ErrorInfoText additionalStyles="top-[-20] w-max text-center">
+          {validator.errorMessages}
+        </ErrorInfoText>
+      )}
       <AppInput
         keyboardHideOnSubmit={false}
         autoFocus
@@ -66,12 +90,8 @@ export function AddressesForm({
       />
       <AppButton
         action={() => {
-          handleSaveDataMerge(
-            'RegisterMobiDataAddresses',
-            data,
-            navigation,
-            'AddressesCdn',
-          );
+          canValidate(true);
+          setBtnClicked(true);
         }}
         context="Next"
         additionalStyles="mt-3"
