@@ -1,6 +1,5 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import * as Yup from 'yup';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
@@ -11,28 +10,21 @@ import {
 import { NameAndSurnameData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
+import { PersonalDataSchema } from '../../helpers/validation/mobileSchemas/PersonalDataSchema';
 
 export function PersonalDataForm({
   navigation,
 }: RegisterMobiPropsBase<'PersonalData'>) {
+  const input2 = React.createRef<TextInput>();
+
   const [data, setData] = useState<NameAndSurnameData>({
     name: '',
     surname: '',
   });
-  const input2 = React.createRef<TextInput>();
-
-  const NameAndSurnameValidationSchema = Yup.object().shape({
-    name: Yup.string().min(1).max(70),
-    surname: Yup.string().min(1).max(250),
-  });
-
   const [btnClicked, setBtnClicked] = useState(false);
-
-  const [validator, canValidate] = useValidation(
-    data,
-    NameAndSurnameValidationSchema,
-    [btnClicked],
-  );
+  const [validator, canValidate] = useValidation(data, PersonalDataSchema, [
+    btnClicked,
+  ]);
 
   useEffect(() => {
     (async () => {
