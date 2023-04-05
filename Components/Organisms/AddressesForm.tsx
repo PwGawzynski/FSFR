@@ -1,6 +1,5 @@
 import { TextInput, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import * as Yup from 'yup';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
@@ -11,29 +10,22 @@ import {
 import { CompanyAddressData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
+import { AddressesSchema } from '../../helpers/validation/mobileSchemas/AddressesSchema';
 
 export function AddressesForm({
   navigation,
 }: RegisterMobiPropsBase<'Addresses'>) {
+  const input2 = React.createRef<TextInput>();
+  const input3 = React.createRef<TextInput>();
+  const input4 = React.createRef<TextInput>();
+
   const [data, setData] = useState<CompanyAddressData>({
     city: '',
     county: '',
     street: '',
     voivodeship: '',
   });
-  const input2 = React.createRef<TextInput>();
-  const input3 = React.createRef<TextInput>();
-  const input4 = React.createRef<TextInput>();
-
-  const AddressesSchema = Yup.object().shape({
-    city: Yup.string().min(1).max(70),
-    county: Yup.string().min(1).max(50),
-    street: Yup.string().min(1).max(100),
-    voivodeship: Yup.string().min(1).max(50),
-  });
-
   const [btnClicked, setBtnClicked] = useState(false);
-
   const [validator, canValidate] = useValidation(data, AddressesSchema, [
     btnClicked,
   ]);

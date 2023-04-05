@@ -1,7 +1,6 @@
 import { TextInput, View } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import * as Yup from 'yup';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
@@ -20,33 +19,28 @@ import {
 import { AppSettings } from '../../helpers/appSettings/contexts';
 import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
 import { useValidation } from '../../helpers/hooks/validationHook';
+import { AddressesCdnSchema } from '../../helpers/validation/mobileSchemas/AddressesCdnSchema';
 
 export function AddressFormCdn({
   navigation,
 }: RegisterMobiPropsBase<'AddressesCdn'>) {
-  const [data, setData] = useState<CompanyAddressDataCdn>({
-    apartmentNumber: '',
-    houseNumber: '',
-    postalCode: '',
-  });
   const input2 = React.createRef<TextInput>();
   const input3 = React.createRef<TextInput>();
   const input4 = React.createRef<TextInput>();
 
   const appSetters = useContext(AppSettings).setters;
 
-  const dataValidationSchema = Yup.object().shape({
-    apartmentNumber: Yup.string().min(1).max(20),
-    houseNumber: Yup.string().min(1).max(20),
-    postalCode: Yup.string().matches(/^[0-9]{2}-[0-9]{3}$/),
+  const [data, setData] = useState<CompanyAddressDataCdn>({
+    apartmentNumber: '',
+    houseNumber: '',
+    postalCode: '',
   });
   const [dataRestored, setDataRestored] = useState(false);
   const [btnClicked, setBtnClicked] = useState(false);
-  const [validator, setCanValidate] = useValidation(
-    data,
-    dataValidationSchema,
-    [dataRestored, btnClicked],
-  );
+  const [validator, setCanValidate] = useValidation(data, AddressesCdnSchema, [
+    dataRestored,
+    btnClicked,
+  ]);
 
   const createUserMutation = useMutation(
     async (userData: CompanyAddressDataCdn) => {

@@ -1,6 +1,5 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import * as Yup from 'yup';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
@@ -11,26 +10,20 @@ import {
 import { ContactPhonesData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
+import { ContactPhonesSchema } from '../../helpers/validation/mobileSchemas/ContactPhonesSchema';
 
 export function ContactPhonesForm({
   navigation,
 }: RegisterMobiPropsBase<'ContactPhones'>) {
+  const input2 = React.createRef<TextInput>();
+
   const [data, setData] = useState<ContactPhonesData>({
     contactPhone: '+48 ',
   });
-  const input2 = React.createRef<TextInput>();
-
-  const NameAndSurnameValidationSchema = Yup.object().shape({
-    contactPhone: Yup.string().min(13).max(13),
-  });
-
   const [btnClicked, setBtnClicked] = useState(false);
-
-  const [validator, canValidate] = useValidation(
-    data,
-    NameAndSurnameValidationSchema,
-    [btnClicked],
-  );
+  const [validator, canValidate] = useValidation(data, ContactPhonesSchema, [
+    btnClicked,
+  ]);
 
   useEffect(() => {
     if (!validator.isError && btnClicked) {
