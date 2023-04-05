@@ -26,9 +26,12 @@ export function PersonalDataForm({
     surname: Yup.string().min(1).max(250),
   });
 
+  const [btnClicked, setBtnClicked] = useState(false);
+
   const [validator, canValidate] = useValidation(
     data,
     NameAndSurnameValidationSchema,
+    [btnClicked],
   );
 
   useEffect(() => {
@@ -36,8 +39,6 @@ export function PersonalDataForm({
       await handleRestoreData('RegisterMobiDataNameSurname', setData);
     })();
   }, []);
-
-  const [btnClicked, setBtnClicked] = useState(false);
 
   useEffect(() => {
     if (!validator.isError && btnClicked) {

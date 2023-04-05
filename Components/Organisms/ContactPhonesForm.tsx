@@ -29,6 +29,7 @@ export function ContactPhonesForm({
   const [validator, canValidate] = useValidation(
     data,
     NameAndSurnameValidationSchema,
+    [btnClicked],
   );
 
   useEffect(() => {

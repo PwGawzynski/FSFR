@@ -1,5 +1,6 @@
 import { TextInput, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import * as Yup from 'yup';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
@@ -8,6 +9,8 @@ import {
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
 import { CompanyAddressData } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
+import { useValidation } from '../../helpers/hooks/validationHook';
+import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 
 export function AddressesForm({
   navigation,
@@ -22,13 +25,42 @@ export function AddressesForm({
   const input3 = React.createRef<TextInput>();
   const input4 = React.createRef<TextInput>();
 
+  const AddressesSchema = Yup.object().shape({
+    city: Yup.string().min(1).max(70),
+    county: Yup.string().min(1).max(50),
+    street: Yup.string().min(1).max(100),
+    voivodeship: Yup.string().min(1).max(50),
+  });
+
+  const [btnClicked, setBtnClicked] = useState(false);
+
+  const [validator, canValidate] = useValidation(data, AddressesSchema, [
+    btnClicked,
+  ]);
+
+  useEffect(() => {
+    if (!validator.isError && btnClicked) {
+      handleSaveDataMerge(
+        'RegisterMobiDataAddresses',
+        data,
+        navigation,
+        'AddressesCdn',
+      );
+    }
+  }, [validator]);
+
   useEffect(() => {
     (async () => {
       await handleRestoreData('RegisterMobiDataAddresses', setData);
     })();
   }, []);
   return (
-    <ScrollView className="w-10/12 pt-4">
+    <ScrollView className="w-10/12 pt-10">
+      {validator.isError && btnClicked && (
+        <ErrorInfoText additionalStyles="top-[-20] w-max text-center">
+          {validator.errorMessages}
+        </ErrorInfoText>
+      )}
       <AppInput
         keyboardHideOnSubmit={false}
         autoFocus
@@ -66,12 +98,8 @@ export function AddressesForm({
       />
       <AppButton
         action={() => {
-          handleSaveDataMerge(
-            'RegisterMobiDataAddresses',
-            data,
-            navigation,
-            'AddressesCdn',
-          );
+          canValidate(true);
+          setBtnClicked(true);
         }}
         context="Next"
         additionalStyles="mt-3"
