@@ -36,9 +36,13 @@ export function EmailAndPasswordForm({
       .required(),
   });
 
+  const [btnClicked, setBtnClicked] = useState(false);
+  const [dataRestored, setDataRestored] = useState(false);
+
   const [validator, setCanValidate] = useValidation<EmailAndPasswordData>(
     data,
     dataValidationSchema,
+    [dataRestored, btnClicked],
   );
 
   const registerToIdentity = useMutation(
@@ -53,12 +57,6 @@ export function EmailAndPasswordForm({
         );
     },
   );
-  const [dataRestored, setDataRestored] = useState(false);
-
-  useEffect(() => {
-    if (dataRestored) setCanValidate(true);
-    if (!validator.isError && dataRestored) registerToIdentity.mutate(data);
-  }, [validator, dataRestored]);
 
   useEffect(() => {
     (async () => {
@@ -67,6 +65,10 @@ export function EmailAndPasswordForm({
       );
     })();
   }, []);
+
+  useEffect(() => {
+    if (!validator.isError && btnClicked) registerToIdentity.mutate(data);
+  }, [validator]);
 
   return (
     <View className="w-10/12 pt-10 items-center">
@@ -101,6 +103,7 @@ export function EmailAndPasswordForm({
       <AppButton
         action={() => {
           setCanValidate(true);
+          setBtnClicked(true);
         }}
         context="Next"
         additionalStyles="mt-10 mb-2"
