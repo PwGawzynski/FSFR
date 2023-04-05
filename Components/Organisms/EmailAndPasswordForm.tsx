@@ -1,7 +1,6 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import * as Yup from 'yup';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
@@ -16,6 +15,7 @@ import { ResponseCode } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
+import { EmailAndPasswordSchema } from '../../helpers/validation/mobileSchemas/emailAndPasswordSchema';
 
 export function EmailAndPasswordForm({
   navigation,
@@ -26,29 +26,19 @@ export function EmailAndPasswordForm({
     email: '',
     password: '',
   });
-
-  const dataValidationSchema = Yup.object().shape({
-    email: Yup.string().max(200).email('Invalid Email').required(),
-    password: Yup.string()
-      .min(8, 'Password must be at least 8 characters')
-      .max(200, "Password can't be longer than 200 characters")
-      .matches(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{[\]:;\\"'<,>.?/\\-]).+$/)
-      .required(),
-  });
-
   const [btnClicked, setBtnClicked] = useState(false);
   const [dataRestored, setDataRestored] = useState(false);
 
   const [validator, setCanValidate] = useValidation<EmailAndPasswordData>(
     data,
-    dataValidationSchema,
+    EmailAndPasswordSchema,
     [dataRestored, btnClicked],
   );
 
   const registerToIdentity = useMutation(
     async (mutationData: EmailAndPasswordData) => {
       const response = await Api.checkIfExist(mutationData.email);
-      if (response.code === ResponseCode.ProcessedCorrect && !validator.isError)
+      if (response.code === ResponseCode.ProcessedCorrect)
         handleSaveDataMerge(
           'RegisterMobiDataEmailAndPassword',
           { email: data.email, password: '' } as EmailAndPasswordData,
