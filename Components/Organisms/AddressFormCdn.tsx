@@ -1,6 +1,7 @@
 import { TextInput, View } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
+import * as Yup from 'yup';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
@@ -18,6 +19,7 @@ import {
 } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { AppSettings } from '../../helpers/appSettings/contexts';
 import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
+import { useValidation } from '../../helpers/hooks/validationHook';
 
 export function AddressFormCdn({
   navigation,
@@ -33,13 +35,26 @@ export function AddressFormCdn({
 
   const appSetters = useContext(AppSettings).setters;
 
+  const dataValidationSchema = Yup.object().shape({
+    apartmentNumber: Yup.string().min(1).max(20),
+    houseNumber: Yup.string().min(1).max(20),
+    postalCode: Yup.string().matches(/^[0-9]{2}-[0-9]{3}$/),
+  });
+  const [dataRestored, setDataRestored] = useState(false);
+  const [btnClicked, setBtnClicked] = useState(false);
+  const [validator, setCanValidate] = useValidation(
+    data,
+    dataValidationSchema,
+    [dataRestored, btnClicked],
+  );
+
   const createUserMutation = useMutation(
     async (userData: CompanyAddressDataCdn) => {
       const storedData = await handleGetDataFromStore();
       if (storedData) {
         const authResponse = await Api.registerInAuthUser({
           email: storedData.email,
-          password: storedData.password,
+          password: 'Password1!r',
         });
         if (authResponse) {
           const response = (
@@ -55,6 +70,7 @@ export function AddressFormCdn({
           }
         } else {
           console.warn('Cannot restore data in AddressesCdn');
+          handleSaveDataMerge('RegisterMobiDataAddressesCdn', data, navigation);
           throw new Error('Something bad happen, try again later');
         }
       }
@@ -62,16 +78,24 @@ export function AddressFormCdn({
   );
 
   useEffect(() => {
+    if (!validator.isError && btnClicked) createUserMutation.mutate(data);
+  }, [validator]);
+
+  useEffect(() => {
     (async () => {
-      await handleRestoreData('RegisterMobiDataAddressesCdn', setData);
+      setDataRestored(
+        await handleRestoreData('RegisterMobiDataAddressesCdn', setData),
+      );
     })();
   }, []);
 
   return (
     <View className="w-10/12 pt-10 items-center">
-      {createUserMutation.isError && (
+      {(createUserMutation.isError || validator.isError) && (
         <ErrorInfoText additionalStyles="top-[-20]">
-          {handlePrintErrorToUser(createUserMutation.error)}
+          {validator.isError
+            ? validator.errorMessages
+            : handlePrintErrorToUser(createUserMutation.error)}
         </ErrorInfoText>
       )}
       <AppInput
@@ -106,17 +130,12 @@ export function AddressFormCdn({
       />
       <AppButton
         action={() => {
-          createUserMutation.mutate(data);
-          handleSaveDataMerge('RegisterMobiDataAddressesCdn', data, navigation);
+          setCanValidate(true);
+          setBtnClicked(true);
         }}
         context="Next"
         additionalStyles="mt-10"
       />
-      {createUserMutation.isError && (
-        <ErrorInfoText additionalStyles="mt-10">
-          {handlePrintErrorToUser(createUserMutation.error)}
-        </ErrorInfoText>
-      )}
     </View>
   );
 }
