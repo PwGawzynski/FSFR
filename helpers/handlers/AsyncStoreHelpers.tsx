@@ -46,6 +46,17 @@ export async function handleRestoreData<T>(
   }
 }
 
+export async function handleRemoveDataFromStore(
+  keys: Array<string>,
+): Promise<boolean> {
+  try {
+    keys.forEach(key => AsyncStorage.removeItem(key));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 export async function restoreDataFromStorage<T>(
   key: string,
 ): Promise<T | false> {
