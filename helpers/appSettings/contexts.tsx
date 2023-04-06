@@ -14,6 +14,9 @@ export enum ModalState {
 export interface ModalContext {
   isOn: ModalState;
   context?: string;
+
+  onApproveCallback?: () => void;
+  onDisapproveCallback?: () => void;
 }
 
 interface SettingsObject {
