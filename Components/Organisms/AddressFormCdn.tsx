@@ -21,6 +21,7 @@ import { AppSettings } from '../../helpers/appSettings/contexts';
 import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { AddressesCdnSchema } from '../../helpers/validation/mobileSchemas/AddressesCdnSchema';
+import { handleRestoreDataFromSecureStore } from '../../helpers/handlers/SecureStoreHelpers';
 
 export function AddressFormCdn({
   navigation,
@@ -45,11 +46,12 @@ export function AddressFormCdn({
 
   const createUserMutation = useMutation(
     async (userData: CompanyAddressDataCdn) => {
+      console.log(await handleRestoreDataFromSecureStore('RegisterPwd'));
       const storedData = await handleGetDataFromStore();
       if (storedData) {
         const authResponse = await Api.registerInAuthUser({
           email: storedData.email,
-          password: 'Password1!r',
+          password: await handleRestoreDataFromSecureStore('RegisterPwd'),
         });
         if (authResponse) {
           const response = (
