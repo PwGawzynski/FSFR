@@ -6,6 +6,7 @@ import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import {
+  handleRemoveDataFromStore,
   handleRestoreData,
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
@@ -66,6 +67,17 @@ export function EmailAndPasswordForm({
         isOn: ModalState.on,
         context:
           'Are you sure? Once you leave the process, your data will be deleted !!',
+        onApproveCallback: () =>
+          setTimeout(() => navigation.navigate('Register'), 310),
+        onDisapproveCallback: () =>
+          handleRemoveDataFromStore([
+            'RegisterMobiDataEmailAndPassword',
+            'RegisterMobiDataNameSurname',
+            'RegisterMobiDataContactPhones',
+            'RegisterMobiDataAddresses',
+            'RegisterMobiDataAddressesCdn',
+            'RegisterMobiUserRole',
+          ]),
       });
     });
   }, [navigation]);
