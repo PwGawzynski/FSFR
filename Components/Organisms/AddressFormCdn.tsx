@@ -5,6 +5,7 @@ import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
 import {
+  handleRemoveDataFromStore,
   handleRestoreData,
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
@@ -61,6 +62,14 @@ export function AddressFormCdn({
             response.code === ResponseCode.ProcessedWithoutConfirmationWaiting
           ) {
             appSetters.setLogged(true);
+            handleRemoveDataFromStore([
+              'RegisterMobiDataEmailAndPassword',
+              'RegisterMobiDataNameSurname',
+              'RegisterMobiDataContactPhones',
+              'RegisterMobiDataAddresses',
+              'RegisterMobiDataAddressesCdn',
+              'RegisterMobiUserRole',
+            ]);
           }
         } else {
           console.warn('Cannot restore data in AddressesCdn');
