@@ -18,6 +18,7 @@ import { useValidation } from '../../helpers/hooks/validationHook';
 import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
 import { EmailAndPasswordSchema } from '../../helpers/validation/mobileSchemas/emailAndPasswordSchema';
 import { AppSettings, ModalState } from '../../helpers/appSettings/contexts';
+import { handleSaveToSecureStore } from '../../helpers/handlers/SecureStoreHelpers';
 
 export function EmailAndPasswordForm({
   navigation,
@@ -40,13 +41,15 @@ export function EmailAndPasswordForm({
   const registerToIdentity = useMutation(
     async (mutationData: EmailAndPasswordData) => {
       const response = await Api.checkIfExist(mutationData.email);
-      if (response.code === ResponseCode.ProcessedCorrect)
+      if (response.code === ResponseCode.ProcessedCorrect) {
+        handleSaveToSecureStore('RegisterPwd', data.password);
         handleSaveDataMerge(
           'RegisterMobiDataEmailAndPassword',
           { email: data.email, password: '' } as EmailAndPasswordData,
           navigation,
           'ChooseUserRole',
         );
+      }
     },
   );
 
