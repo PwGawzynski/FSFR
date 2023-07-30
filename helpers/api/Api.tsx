@@ -48,20 +48,24 @@ export class Api {
    */
   private static async initAxios() {
     Api.axiosInstance = axios.create({
-      baseURL: `${Constants.expoConfig?.extra?.apiUrl}:3002`,
+      baseURL: `http://${Constants.expoConfig?.extra?.apiUrl}:3002`,
       timeout: 5000,
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${Api.access_token}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
       },
     });
 
     Api.axiosAuthInstance = axios.create({
-      baseURL: `${Constants.expoConfig?.extra?.apiUrl}:3000`,
+      baseURL: `http://${Constants.expoConfig?.extra?.apiUrl}:3000`,
       timeout: 5000,
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${Api.refresh_token}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
       },
     });
   }
