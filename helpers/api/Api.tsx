@@ -5,7 +5,10 @@ import {
   EmailAndPasswordData,
   RegisterScreensDataCollection,
 } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
-import { RegisterNewUserDataDtoInterfaceMobi } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+import {
+  RegisterNewUserDataDtoInterfaceMobi,
+  Theme,
+} from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
 import {
   IdentityAuthTokenLoginRaw,
   IdentityAuthTokenLoginStored,
@@ -53,7 +56,7 @@ export class Api {
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${Api.access_token}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     });
@@ -64,7 +67,7 @@ export class Api {
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${Api.refresh_token}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     });
@@ -185,7 +188,7 @@ export class Api {
         postalCode: userData.postalCode,
       },
       accountData: {
-        theme: 0,
+        theme: Theme.light,
       },
       userRole: userData.userRole,
     } as RegisterNewUserDataDtoInterfaceMobi;
