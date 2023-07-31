@@ -5,7 +5,10 @@ import {
   EmailAndPasswordData,
   RegisterScreensDataCollection,
 } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
-import { RegisterNewUserDataDtoInterfaceMobi } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+import {
+  RegisterNewUserDataDtoInterfaceMobi,
+  Theme,
+} from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
 import {
   IdentityAuthTokenLoginRaw,
   IdentityAuthTokenLoginStored,
@@ -48,20 +51,24 @@ export class Api {
    */
   private static async initAxios() {
     Api.axiosInstance = axios.create({
-      baseURL: `${Constants.expoConfig?.extra?.apiUrl}:3002`,
+      baseURL: `http://${Constants.expoConfig?.extra?.apiUrl}:3002`,
       timeout: 5000,
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${Api.access_token}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     });
 
     Api.axiosAuthInstance = axios.create({
-      baseURL: `${Constants.expoConfig?.extra?.apiUrl}:3000`,
+      baseURL: `http://${Constants.expoConfig?.extra?.apiUrl}:3000`,
       timeout: 5000,
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${Api.refresh_token}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     });
   }
@@ -181,7 +188,7 @@ export class Api {
         postalCode: userData.postalCode,
       },
       accountData: {
-        theme: 0,
+        theme: Theme.light,
       },
       userRole: userData.userRole,
     } as RegisterNewUserDataDtoInterfaceMobi;
