@@ -4,7 +4,6 @@ import { LayoutAnimation, Platform, TextInput, UIManager } from 'react-native';
 import { DeviceType } from 'expo-device';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
-import { RegisterDataObject } from '../../../FarmServiceBE/farm-service-be/types/Useer/RegisterDataObject';
 import { RegisterFormProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 import { AppSettings } from '../../helpers/appSettings/contexts';
 
@@ -46,7 +45,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
     postalCode: '',
     houseNumber: '',
     circumference: '',
-  } as RegisterDataObject);
+  });
   return (
     <KeyboardAwareScrollView
       className="w-8/12 pt-10"
