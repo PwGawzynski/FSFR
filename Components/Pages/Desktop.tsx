@@ -1,6 +1,6 @@
 import { SafeAreaView, Text } from 'react-native';
 
-export function Test() {
+export function Desktop() {
   return (
     <SafeAreaView>
       <Text>It is works</Text>
