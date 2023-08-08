@@ -10,7 +10,7 @@ export async function handleSaveDataMerge<
 >(
   key: string,
   data: DATA_TYPE,
-  navi: RegisterMobiPropsBase<CURR_RUTE_NAME>['navigation'],
+  navi?: RegisterMobiPropsBase<CURR_RUTE_NAME>['navigation'],
   nextRoute?: NEXT_ROUTE_NAME,
 ): Promise<boolean> {
   try {
@@ -18,14 +18,15 @@ export async function handleSaveDataMerge<
     const stringifyData = JSON.stringify(data);
     if (exist) {
       AsyncStorage.mergeItem(key, stringifyData);
-      if (nextRoute) navi.navigate<keyof RegisterStackParamList>(nextRoute);
+      if (nextRoute && navi)
+        navi.navigate<keyof RegisterStackParamList>(nextRoute);
       return true;
     }
     AsyncStorage.setItem(key, stringifyData);
-    if (nextRoute) navi.navigate<keyof RegisterStackParamList>(nextRoute);
+    if (nextRoute && navi)
+      navi.navigate<keyof RegisterStackParamList>(nextRoute);
     return true;
   } catch (e) {
-    console.log(e);
     return false;
   }
 }
