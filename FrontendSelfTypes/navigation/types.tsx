@@ -1,32 +1,40 @@
-import { StackScreenProps } from '@react-navigation/stack';
-import { CompositeScreenProps } from '@react-navigation/native';
-import type { CompositeNavigationProp } from '@react-navigation/native';
-import { NativeStackNavigationProp } from 'react-native-screens/native-stack';
-import { LoginStackParamList } from '../NavigatorsInterfaces/LoginStackParamList';
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import {
+  CompositeNavigationProp,
+  CompositeScreenProps,
+} from '@react-navigation/native';
+import { RootStackParamList } from '../NavigatorsInterfaces/RootStackParamList';
 import { RegisterStackParamList } from '../NavigatorsInterfaces/RegisterStack';
 
-export type LoginPageBase = StackScreenProps<LoginStackParamList, 'Login'>;
+export type LoginPageBase = StackScreenProps<RootStackParamList, 'Login'>;
 export type LoginPageTabBase = LoginPageBase;
 export type RegisterMobiBase = CompositeScreenProps<
-  StackScreenProps<LoginStackParamList, 'Register'>,
+  StackScreenProps<RootStackParamList, 'Register'>,
   StackScreenProps<RegisterStackParamList>
 >;
 export type ForgotPasswordBase = Omit<
-  StackScreenProps<LoginStackParamList>,
+  StackScreenProps<RootStackParamList>,
   'route'
 >;
-export type LoginBase = Omit<StackScreenProps<LoginStackParamList>, 'route'>;
-export type RegisterTabBase = StackScreenProps<LoginStackParamList, 'Register'>;
+export type LoginBase = Omit<StackScreenProps<RootStackParamList>, 'route'>;
+export type RegisterTabBase = StackScreenProps<RootStackParamList, 'Register'>;
 export type RegisterAskBase = Omit<
-  StackScreenProps<LoginStackParamList>,
+  StackScreenProps<RootStackParamList>,
+  'route'
+>;
+export type RegisterTabFormBase = Omit<
+  StackScreenProps<RootStackParamList>,
   'route'
 >;
 
 export type RegisterMobiPropsBase<T extends keyof RegisterStackParamList> =
   CompositeScreenProps<
     StackScreenProps<RegisterStackParamList, T>,
-    StackScreenProps<LoginStackParamList>
+    StackScreenProps<RootStackParamList>
   >;
 
-export type RegisterMobiNavigation<T extends keyof LoginStackParamList> =
-  NativeStackNavigationProp<LoginStackParamList, T>;
+export type RegisterScreenNavBaseProps<T extends keyof RegisterStackParamList> =
+  CompositeNavigationProp<
+    StackNavigationProp<RegisterStackParamList, T>,
+    StackNavigationProp<RootStackParamList>
+  >;
