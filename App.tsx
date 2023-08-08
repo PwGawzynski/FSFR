@@ -11,10 +11,10 @@ import {
   ThemeOptions,
 } from './helpers/appSettings/contexts';
 
-import { Test } from './Components/Pages/test';
 import { Api } from './helpers/api/Api';
 import { GlobalModal } from './Components/Atoms/GlobalModal';
 import { LoginRegisterStack } from './Components/Navigators/LoginRegisterStack';
+import { Desktop } from './Components/Pages/Desktop';
 
 export default function App() {
   const [settings, setSettings] = useState(ThemeOptions.light);
@@ -46,7 +46,7 @@ export default function App() {
       const recognizedDeviceType = await Device.getDeviceTypeAsync();
       setDeviceType(recognizedDeviceType);
       await Api.init();
-      setLogged(await Api.init());
+      // setLogged(await Api.init());
     })();
   }, []);
 
@@ -57,7 +57,7 @@ export default function App() {
         <AppSettings.Provider value={memoSettings}>
           <GlobalModal />
           {!isLogged && <LoginRegisterStack />}
-          {isLogged && <Test />}
+          {isLogged && <Desktop />}
         </AppSettings.Provider>
       </QueryClientProvider>
     </NavigationContainer>

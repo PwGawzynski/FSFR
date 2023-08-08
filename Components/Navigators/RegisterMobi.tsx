@@ -1,13 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { RegisterStackParamList } from '../../frontendSelfTypes/NavigatorsInterfaces/RegisterStack';
-import { EmailAndPassword } from './EmailAndPassword';
-import { RegisterMobiBase } from '../../frontendSelfTypes/navigation/types';
-import { PersonalData } from './PersonalData';
-import { ContactPhones } from './ContactPhones';
-import { AddressesData } from './AddressesData';
-import { AddressDataCdnMobi } from './AddressDataCdnMobi';
-import { ChooseUserRoleMobi } from './chooseUserRoleMobi';
+import { RegisterStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/RegisterStack';
+import { EmailAndPassword } from '../Pages/EmailAndPassword';
+import { RegisterMobiBase } from '../../FrontendSelfTypes/navigation/types';
+import { PersonalData } from '../Pages/PersonalData';
+import { ContactPhones } from '../Pages/ContactPhones';
+import { AddressesData } from '../Pages/AddressesData';
+import { AddressDataCdnMobi } from '../Pages/AddressDataCdnMobi';
+import { ChooseUserRoleMobi } from '../Pages/chooseUserRoleMobi';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function RegisterMobi({ navigation }: RegisterMobiBase) {

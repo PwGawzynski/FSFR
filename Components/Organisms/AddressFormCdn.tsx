@@ -4,24 +4,13 @@ import { useMutation } from 'react-query';
 import { AppButton } from '../Atoms/AppButton';
 import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
-import {
-  handleRemoveDataFromStore,
-  handleRestoreData,
-  handleSaveDataMerge,
-} from '../../helpers/handlers/AsyncStoreHelpers';
-import { handleGetDataFromStore } from '../../helpers/handlers/handleGetDataFromStore';
-import { Api } from '../../helpers/api/Api';
+import { handleRestoreData } from '../../helpers/handlers/AsyncStoreHelpers';
 import { CompanyAddressDataCdn } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
-import {
-  ResponseCode,
-  ResponseObject,
-} from '../../FarmServiceTypes/Respnse/responseGeneric';
-import { AppSettings } from '../../helpers/appSettings/contexts';
 import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { AddressesCdnSchema } from '../../helpers/validation/mobileSchemas/AddressesCdnSchema';
-import { handleRestoreDataFromSecureStore } from '../../helpers/handlers/SecureStoreHelpers';
+import { registerService } from '../../helpers/api/Services/Auth';
 
 export function AddressFormCdn({
   navigation,
@@ -29,8 +18,6 @@ export function AddressFormCdn({
   const input2 = React.createRef<TextInput>();
   const input3 = React.createRef<TextInput>();
   const input4 = React.createRef<TextInput>();
-
-  const appSetters = useContext(AppSettings).setters;
 
   const [data, setData] = useState<CompanyAddressDataCdn>({
     apartmentNumber: '',
@@ -43,43 +30,8 @@ export function AddressFormCdn({
     dataRestored,
     btnClicked,
   ]);
-
-  const createUserMutation = useMutation(
-    async (userData: CompanyAddressDataCdn) => {
-      console.log(await handleRestoreDataFromSecureStore('RegisterPwd'));
-      const storedData = await handleGetDataFromStore();
-      if (storedData) {
-        const authResponse = await Api.registerInAuthUser({
-          email: storedData.email,
-          password: await handleRestoreDataFromSecureStore('RegisterPwd'),
-        });
-        if (authResponse) {
-          const response = (
-            await Api.registerNewUser({
-              ...storedData,
-              ...userData,
-            })
-          ).data as ResponseObject;
-          if (
-            response.code === ResponseCode.ProcessedWithoutConfirmationWaiting
-          ) {
-            appSetters.setLogged(true);
-            handleRemoveDataFromStore([
-              'RegisterMobiDataEmailAndPassword',
-              'RegisterMobiDataNameSurname',
-              'RegisterMobiDataContactPhones',
-              'RegisterMobiDataAddresses',
-              'RegisterMobiDataAddressesCdn',
-              'RegisterMobiUserRole',
-            ]);
-          }
-        } else {
-          console.warn('Cannot restore data in AddressesCdn');
-          handleSaveDataMerge('RegisterMobiDataAddressesCdn', data, navigation);
-          throw new Error('Something bad happen, try again later');
-        }
-      }
-    },
+  const createUserMutation = useMutation((userData: CompanyAddressDataCdn) =>
+    registerService(userData, navigation),
   );
 
   useEffect(() => {

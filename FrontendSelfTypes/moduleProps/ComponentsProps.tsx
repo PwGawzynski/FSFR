@@ -6,12 +6,11 @@ import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
 } from 'react-native';
-import { StackScreenProps } from '@react-navigation/stack';
-import { LoginStackParamList } from '../NavigatorsInterfaces/LoginStackParamList';
 import {
   ForgotPasswordBase,
   LoginBase,
   RegisterAskBase,
+  RegisterTabFormBase,
 } from '../navigation/types';
 
 export interface AppButtonProps {
@@ -110,12 +109,7 @@ export interface RegisterAskProps extends RegisterAskBase {
   additionalBtnStyles?: string;
 }
 
-export type RegisterFormBase = Omit<
-  StackScreenProps<LoginStackParamList>,
-  'route'
->;
-
-export interface RegisterFormProps extends RegisterFormBase {
+export interface RegisterFormProps extends RegisterTabFormBase {
   setFocused: React.Dispatch<React.SetStateAction<boolean>>;
   isFocused?: boolean;
 }
