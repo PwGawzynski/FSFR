@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import Constants from 'expo-constants';
 import {
@@ -16,6 +16,7 @@ import {
 } from '../../FarmServiceTypes/User/LoginUser';
 import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { checkCurrentSession } from '../handlers/checkIfLogged';
+import { GetUserDataResponse } from '../../FarmServiceTypes/Respnse/UserService/GetUserDataResponse';
 
 export class Api {
   /**
@@ -98,6 +99,12 @@ export class Api {
     const tokens: IdentityAuthTokenLoginStored = await JSON.parse(stored);
     Api.access_token = tokens.access_token;
     Api.refresh_token = tokens.refresh_token;
+  }
+
+  static async getUserData(): Promise<
+    AxiosResponse<ResponseObject<GetUserDataResponse>>
+  > {
+    return Api.axiosInstance.get('/user/me');
   }
 
   /**
