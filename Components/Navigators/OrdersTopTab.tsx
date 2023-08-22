@@ -4,7 +4,6 @@ import { OrdersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfa
 import { topLabelOff } from '../../helpers/style/TopLabelOff';
 import { OrdersRoot } from '../Pages/Mobi/OwnerPages/Orders/OrdersRoot';
 import { AddOrder } from '../Pages/Mobi/OwnerPages/Orders/AddOrder';
-import { OrdersDetails } from '../Pages/Mobi/OwnerPages/Orders/OrdfersDetails';
 import { AllOrders } from '../Pages/Mobi/OwnerPages/Orders/AllOrders';
 import { OrdersSearch } from '../Pages/Mobi/OwnerPages/Orders/OrdersSearch';
 import { OrdersAddField } from '../Pages/Mobi/OwnerPages/Orders/OrdersAddField';
@@ -12,6 +11,7 @@ import { OrdersAddWorker } from '../Pages/Mobi/OwnerPages/Orders/OrdersAddWorker
 import { OrdersLocations } from '../Pages/Mobi/OwnerPages/Orders/OrdersLocations';
 import { OrdersManageWorkers } from '../Pages/Mobi/OwnerPages/Orders/OrdersManageWorkers';
 import { OrderFinishAndAccount } from '../Pages/Mobi/OwnerPages/Orders/OrderFinishAndAccount';
+import { OrdersDetails } from '../Pages/Mobi/OwnerPages/Orders/OrdersDetails';
 
 const TabNavigator = createMaterialTopTabNavigator<OrdersTopTabParamList>();
 
