@@ -21,30 +21,34 @@ export function GlobalModal() {
         <Text className="font-xl uppercase text-center text-black">
           {modalContext.context}
         </Text>
-        <AppButton
-          action={() => {
-            if (modalContext.onDisapproveCallback)
-              modalContext.onDisapproveCallback();
-            setModalContext({
-              isOn: ModalState.off,
-              context: undefined,
-            });
-          }}
-          context="Confirm"
-          additionalStyles="mt-10"
-        />
-        <AppButton
-          action={() => {
-            if (modalContext.onApproveCallback)
-              modalContext.onApproveCallback();
-            setModalContext({
-              isOn: ModalState.off,
-              context: undefined,
-            });
-          }}
-          context="Go Back"
-          additionalStyles="mt-6"
-        />
+        {modalContext.onDisapproveCallback && (
+          <AppButton
+            action={() => {
+              if (modalContext.onDisapproveCallback)
+                modalContext.onDisapproveCallback();
+              setModalContext({
+                isOn: ModalState.off,
+                context: undefined,
+              });
+            }}
+            context={modalContext.customDisapproveButtonText || 'Confirm'}
+            additionalStyles="mt-10"
+          />
+        )}
+        {modalContext.onApproveCallback && (
+          <AppButton
+            action={() => {
+              if (modalContext.onApproveCallback)
+                modalContext.onApproveCallback();
+              setModalContext({
+                isOn: ModalState.off,
+                context: undefined,
+              });
+            }}
+            context={modalContext.customApproveButtonText || 'Go Back'}
+            additionalStyles="mt-6"
+          />
+        )}
       </View>
     </Modal>
   );

@@ -11,10 +11,9 @@ import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
 import { InfoText } from '../Atoms/InfoText';
 import { AppButton } from '../Atoms/AppButton';
 import { AppInput } from '../Molecules/AppInput';
-import { ResetPasswordData } from '../../../FarmServiceBE/farm-service-be/types/Useer/LoginDataObject';
 
 export function ResetPassword() {
-  const [data, setData] = useState({ email: '' } as ResetPasswordData);
+  const [data, setData] = useState({ email: '' } as any);
   const [isInputFocused, setInputFocused] = useState(false as boolean);
   const inputRef = React.createRef<TextInput>();
   return (
