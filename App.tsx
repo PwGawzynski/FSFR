@@ -15,11 +15,15 @@ import { Api } from './helpers/api/Api';
 import { GlobalModal } from './Components/Atoms/GlobalModal';
 import { LoginRegisterStack } from './Components/Navigators/LoginRegisterStack';
 import { Desktop } from './Components/Pages/Desktop';
+import { GetUserDataResponse } from './FarmServiceTypes/Respnse/UserService/GetUserDataResponse';
 
 export default function App() {
   const [settings, setSettings] = useState(ThemeOptions.light);
   const [deviceType, setDeviceType] = useState(DeviceType.UNKNOWN);
   const [isLogged, setLogged] = useState(false);
+  const [userData, setUserData] = useState<GetUserDataResponse | undefined>(
+    undefined,
+  );
   const [modalContext, setModalContext] = useState<ModalContext>({
     isOn: ModalState.off,
   });
@@ -31,22 +35,26 @@ export default function App() {
         deviceType,
         isLogged,
         modalContext,
+        currentUser: userData,
       },
       setters: {
         setTheme: setSettings,
         setDeviceType,
         setLogged,
         setModalContext,
+        setCurrentUser: setUserData,
       },
     }),
-    [isLogged, settings, deviceType, modalContext],
+    [isLogged, settings, deviceType, modalContext, userData],
   );
+
   useEffect(() => {
     (async () => {
       const recognizedDeviceType = await Device.getDeviceTypeAsync();
       setDeviceType(recognizedDeviceType);
-      await Api.init();
-      // setLogged(await Api.init());
+      // to rem after setLogged
+      // await Api.init();
+      setLogged(await Api.init());
     })();
   }, []);
 
