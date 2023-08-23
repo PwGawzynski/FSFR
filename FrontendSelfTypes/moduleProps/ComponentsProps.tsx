@@ -113,3 +113,9 @@ export interface RegisterFormProps extends RegisterTabFormBase {
   setFocused: React.Dispatch<React.SetStateAction<boolean>>;
   isFocused?: boolean;
 }
+
+export interface ScreenTitleHeaderProps {
+  children: ReactNode;
+
+  variant: 'sm' | 'lg';
+}
