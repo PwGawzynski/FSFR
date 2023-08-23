@@ -1,22 +1,18 @@
-import { SafeAreaView, Text, View } from 'react-native';
-import { AppButton } from '../Atoms/AppButton';
+import { SafeAreaView, View } from 'react-native';
+import React from 'react';
+import { DesktopRootHeader } from '../Molecules/DesktopRootHeader';
+import { DesktopBottomButtons } from '../Molecules/DesktopBottomButtons';
+import { OwnerMobiDesktopTopTabProps } from '../../FrontendSelfTypes/navigation/types';
 
-export function DesktopRootMobi({ navigation }: any) {
+export function DesktopRootMobi({
+  navigation,
+  route,
+}: OwnerMobiDesktopTopTabProps<'desktopRoot', 'desktop'>) {
   return (
     <SafeAreaView>
-      <Text>RootDesktop</Text>
-      <View className="flex flex-row">
-        <AppButton
-          additionalStyles="flex-1 m-2"
-          action={() => navigation.navigate('orders')}
-          context="Orders"
-        />
-        <AppButton
-          additionalStyles="flex-1 m-2"
-          action={() => navigation.navigate('workers')}
-          context="Workers"
-        />
-      </View>
+      <DesktopRootHeader />
+      <DesktopBottomButtons navigation={navigation} route={route} />
+      <View className="flex flex-col" />
     </SafeAreaView>
   );
 }
