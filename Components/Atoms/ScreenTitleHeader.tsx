@@ -8,7 +8,7 @@ export function ScreenTitleHeader({
   children,
 }: ScreenTitleHeaderProps) {
   return (
-    <View className="ml-4 flex-1 justify-center">
+    <View className="justify-center">
       <BigBoldText
         additionalStyles={`uppercase ${variant === 'lg' ? 'text-2xl' : ''}`}
       >

@@ -5,9 +5,9 @@ import { BellIco } from '../Atoms/BellIco';
 
 export function DesktopRootHeader() {
   return (
-    <View className="flex flex-row w-full h-[50}">
+    <View className="flex flex-row  w-full  mb-6">
       <ScreenTitleHeader variant="lg">Last Activities</ScreenTitleHeader>
-      <View className="flex-1 pr-4">
+      <View className="flex-1">
         <BellIco />
       </View>
     </View>
