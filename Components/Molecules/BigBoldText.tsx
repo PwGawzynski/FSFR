@@ -8,7 +8,11 @@ export interface Props {
 }
 export function BigBoldText({ additionalStyles, children }: Props) {
   return (
-    <Text className={`w-full text-xl font-medium ${additionalStyles}`}>
+    <Text
+      adjustsFontSizeToFit
+      numberOfLines={1}
+      className={`w-full text-xl font-medium ${additionalStyles}`}
+    >
       {children}
     </Text>
   );
