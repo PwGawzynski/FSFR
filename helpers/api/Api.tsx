@@ -230,4 +230,10 @@ export class Api {
       await Api.axiosAuthInstance.get(`/user/exist/${userLoginIdentifier}`)
     ).data;
   }
+
+  static async getAllActivities() {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const data = require('../../tmpData');
+    return data;
+  }
 }
