@@ -119,3 +119,24 @@ export interface ScreenTitleHeaderProps {
 
   variant: 'sm' | 'lg';
 }
+
+export interface ProfilePhotoProps {
+  resizeMode?: ImageProps['resizeMode'];
+  additionalBoxStyles?: string;
+
+  additionalImageStyles?: string;
+
+  imgLink?: string;
+}
+
+export interface ActivityProps {
+  activityLogCauser: string;
+  activityCauserRole: number;
+  activityType: number;
+  taskType: string;
+  client: string;
+  fieldName: string;
+  fieldLocationPlaceName: string;
+  // TODO change to date
+  date: string;
+}
