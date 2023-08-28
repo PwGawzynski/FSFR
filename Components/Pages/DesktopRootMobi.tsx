@@ -10,10 +10,9 @@ export function DesktopRootMobi({
   navigation,
   route,
 }: OwnerMobiDesktopTopTabProps<'desktopRoot', 'desktop'>) {
-  Api.getAllActivities();
   return (
     <SafeAreaView className="mr-4 ml-4  h-full">
-      <DesktopRootHeader />
+      <DesktopRootHeader navigation={navigation} route={route} />
       <LastActivities />
       <DesktopBottomButtons navigation={navigation} route={route} />
     </SafeAreaView>
