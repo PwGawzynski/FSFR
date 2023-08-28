@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { ScrollView, View } from 'react-native';
-import { ActivityProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { ActivityI } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getLastActivitiesService } from '../../helpers/api/Services/Activities';
 import { Activity } from '../Molecules/Activity';
 
 export function LastActivities() {
-  const [data, setData] = useState<Array<ActivityProps> | undefined>(undefined);
+  const [data, setData] = useState<Array<ActivityI> | undefined>(undefined);
   const {
     mutate: getActivitiesMutate,
     data: activities,

@@ -60,5 +60,49 @@
       "fieldLocationPlaceName": "Orłów",
       "date": "23/08/2023"
     }
+  ],
+  "events": [
+    {
+      "causer": "Jan Kowalski",
+      "causerRole": 0,
+      "message": "Your client has confirmed order",
+      "rightBottomSign": "27/08/2023 12:23",
+      "eventType": 0
+    },
+    {
+      "causer": "Jan Kowalski",
+      "causerRole": 0,
+      "message": "Your client has confirmed order",
+      "rightBottomSign": "27/08/2023 12:23",
+      "eventType": 1
+    },
+    {
+      "causer": "Jan Kowalski",
+      "causerRole": 0,
+      "message": "Your client has confirmed order",
+      "rightBottomSign": "27/08/2023 12:23",
+      "eventType": 2
+    },
+    {
+      "causer": "Jan Kowalski",
+      "causerRole": 0,
+      "message": "Your client has confirmed order",
+      "rightBottomSign": "27/08/2023 12:23",
+      "eventType": 0
+    },
+    {
+      "causer": "Jan Kowalski",
+      "causerRole": 0,
+      "message": "Your client has confirmed order",
+      "rightBottomSign": "27/08/2023 12:23",
+      "eventType": 1
+    },
+    {
+      "causer": "Jan Kowalski",
+      "causerRole": 0,
+      "message": "Your client has confirmed order",
+      "rightBottomSign": "27/08/2023 12:23",
+      "eventType": 2
+    }
   ]
 }
