@@ -12,6 +12,7 @@ import {
   RegisterAskBase,
   RegisterTabFormBase,
 } from '../navigation/types';
+import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
 
 export interface AppButtonProps {
   action: () => void;
@@ -128,7 +129,7 @@ export interface ProfilePhotoProps {
 
   imgLink?: string;
 }
-
+// TODO move to united types
 export interface ActivityProps {
   activityLogCauser: string;
   activityCauserRole: number;
@@ -139,4 +140,41 @@ export interface ActivityProps {
   fieldLocationPlaceName: string;
   // TODO change to date
   date: string;
+}
+
+export type ActivityI = ActivityProps;
+
+// TODO move to united types
+export enum EventType {
+  Action,
+  Warning,
+  Check,
+}
+// TODO move to united types
+export interface NotificationI {
+  causer: string;
+  causerRole: UserRole;
+  message: string;
+  rightBottomSign: string;
+
+  eventType: EventType;
+}
+
+export type NotificationProps = NotificationI;
+
+export interface NotificationsProps {
+  filterOptions: ThreeOptionSwitchStates;
+}
+export interface ThreeOptionSwitchStates {
+  firstOptionName: string;
+  firstOptionState: boolean;
+  secondOptionName: string;
+  secondOptionState: boolean;
+  thirdOptionName: string;
+  thirdOptionState: boolean;
+}
+export interface ThreeOptionSwitchProps {
+  options: ThreeOptionSwitchStates;
+
+  setter: React.Dispatch<React.SetStateAction<ThreeOptionSwitchStates>>;
 }
