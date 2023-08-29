@@ -242,4 +242,10 @@ export class Api {
     const data = require('../../tmpData');
     return data;
   }
+
+  static getAllOrders() {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const data = require('../../tmpData');
+    return data;
+  }
 }
