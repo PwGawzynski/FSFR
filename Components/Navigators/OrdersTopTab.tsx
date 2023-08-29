@@ -68,11 +68,6 @@ export function OrdersTopTab() {
         name="ordersManageWorkers"
         component={OrdersManageWorkers}
       />
-      <TabNavigator.Screen
-        options={topLabelOff}
-        name="ordersFinishAndAccount"
-        component={OrderFinishAndAccount}
-      />
     </TabNavigator.Navigator>
   );
 }
