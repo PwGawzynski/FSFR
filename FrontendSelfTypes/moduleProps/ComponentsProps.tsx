@@ -178,3 +178,19 @@ export interface ThreeOptionSwitchProps {
 
   setter: React.Dispatch<React.SetStateAction<ThreeOptionSwitchStates>>;
 }
+
+export enum TaskType {
+  Harvesting,
+}
+
+export interface OrderBaseI {
+  taskId: string;
+  name: string;
+  type: TaskType;
+  additionalInfo: string;
+  performanceDate: string;
+  clientId: string;
+  client: string;
+}
+
+export type OrderProps = OrderBaseI;
