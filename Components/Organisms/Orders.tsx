@@ -12,7 +12,7 @@ export function Orders() {
   );
 
   return (
-    <ScrollView className="flex-1 h-max">
+    <ScrollView className="flex-1 h-max" showsVerticalScrollIndicator={false}>
       {orders?.map(order => (
         <OrderShortInfoBox
           key={order.taskId}
