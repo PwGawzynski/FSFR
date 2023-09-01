@@ -42,7 +42,10 @@ export function AddOrder({
 
   useEffect(() => {
     if (hasOrderBeenAdded) {
-      navigation.navigate('ordersRoot');
+      navigation.navigate('OperationConfirmed', {
+        redirectScreenName: 'ordersRoot',
+        shownMessage: 'Order Has Been Added',
+      });
     }
   }, [hasOrderBeenAdded]);
 
