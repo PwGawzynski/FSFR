@@ -6,6 +6,7 @@ import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/Navigato
 import { WorkersTabNavigator } from './WorkersTopTab';
 import { OrdersTopTab } from './OrdersTopTab';
 import { DesktopTopTab } from './DesktopTopTab';
+import { OperationConfirmedAnimation } from '../Pages/Mobi/Common/OperationConfirmedAnimation';
 
 const Stack = createStackNavigator<OwnerDesktopRootStackParamList>();
 
@@ -40,6 +41,16 @@ export function OwnerDesktopMobiRootStack() {
           gestureDirection: 'vertical',
           gestureResponseDistance: 800,
           cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        }}
+      />
+      <Stack.Screen
+        name="OperationConfirmed"
+        component={OperationConfirmedAnimation}
+        options={{
+          headerShown: false,
+          gestureDirection: 'vertical',
+          gestureResponseDistance: 800,
+          cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
         }}
       />
     </Stack.Navigator>

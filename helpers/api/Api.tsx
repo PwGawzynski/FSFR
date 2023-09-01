@@ -17,6 +17,10 @@ import {
 import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { checkCurrentSession } from '../handlers/checkIfLogged';
 import { GetUserDataResponse } from '../../FarmServiceTypes/Respnse/UserService/GetUserDataResponse';
+import {
+  NewClientShortCreateI,
+  NewOrderI,
+} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export class Api {
   /**
@@ -243,9 +247,19 @@ export class Api {
     return data;
   }
 
-  static getAllOrders() {
+  static async getAllOrders() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const data = require('../../tmpData');
     return data;
+  }
+
+  static async addNewOrder(data: NewOrderI) {
+    console.log('NEW ORDER DATA: ', data);
+    return true;
+  }
+
+  static async createNewClientShort(data: NewClientShortCreateI) {
+    console.log('NEW CLIENT', data);
+    return true;
   }
 }

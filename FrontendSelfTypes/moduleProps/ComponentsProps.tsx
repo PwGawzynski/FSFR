@@ -116,6 +116,7 @@ export interface RegisterFormProps extends RegisterTabFormBase {
 }
 
 export interface ScreenTitleHeaderProps {
+  additionalStyles?: string;
   children: ReactNode;
 
   variant: 'sm' | 'lg';
@@ -193,4 +194,12 @@ export interface OrderBaseI {
   client: string;
 }
 
+export type NewOrderI = Omit<OrderBaseI, 'taskId' | 'clientId'>;
+
 export type OrderProps = OrderBaseI;
+
+export interface NewClientShortCreateI {
+  name: string;
+  phoneNumber: string;
+  email: string;
+}
