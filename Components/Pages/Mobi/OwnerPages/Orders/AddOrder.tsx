@@ -1,5 +1,5 @@
 import { SafeAreaView, View } from 'react-native';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useMutation } from 'react-query';
@@ -16,6 +16,10 @@ import { addNewOrder } from '../../../../../helpers/api/Services/OrdersService';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { AppButton } from '../../../../Atoms/AppButton';
 import { AddNewClientShortService } from '../../../../../helpers/api/Services/Client';
+import { useValidation } from '../../../../../helpers/hooks/validationHook';
+import { AddOrderSchema } from '../../../../../helpers/validation/mobileSchemas/AddOrderSchema';
+import { ErrorInfoText } from '../../../../Atoms/ErrorInfoText';
+import { handlePrintErrorToUser } from '../../../../../helpers/handlers/HandlePrintErrorToUser';
 
 export function AddOrder({
   navigation,
@@ -27,18 +31,43 @@ export function AddOrder({
     type: TaskType.Harvesting,
     performanceDate: '',
   });
-
   const [newClient, setNewClient] = useState<NewClientShortCreateI>({
     name: '',
     phoneNumber: '',
     email: '',
   });
 
-  const { isSuccess: hasOrderBeenAdded, mutate: createNewOrder } =
-    useMutation(addNewOrder);
-
-  const { isSuccess: isClientMutatioSuccess, mutate: createClient } =
+  const [btnClicked, setBtnClicked] = useState<boolean>(false);
+  const [validator, setCanValidate] = useValidation<Omit<NewOrderI, 'type'>>(
+    {
+      name: newOrder.name,
+      client: newOrder.client,
+      additionalInfo: newOrder.additionalInfo,
+      performanceDate: newOrder.performanceDate,
+    },
+    AddOrderSchema,
+    [btnClicked],
+  );
+  const {
+    isSuccess: hasOrderBeenAdded,
+    mutate: createNewOrder,
+    isError: isNewOrderError,
+    error: newOrderErrorValue,
+  } = useMutation(addNewOrder);
+  const { isSuccess: isClientMutationSuccess, mutate: createClient } =
     useMutation(AddNewClientShortService);
+
+  useEffect(() => {
+    if (isClientMutationSuccess) {
+      createNewOrder(newOrder);
+    }
+  }, [isClientMutationSuccess]);
+
+  useEffect(() => {
+    if (!validator.isError && btnClicked) {
+      createNewOrder(newOrder);
+    }
+  }, [validator, btnClicked]);
 
   useEffect(() => {
     if (hasOrderBeenAdded) {
@@ -49,17 +78,20 @@ export function AddOrder({
     }
   }, [hasOrderBeenAdded]);
 
-  useEffect(() => {
-    if (isClientMutatioSuccess) {
-      createNewOrder(newOrder);
-    }
-  }, [isClientMutatioSuccess]);
-
   return (
     <SafeAreaView className="w-full h-full">
       <View className="flex flex-col mr-4 ml-4 mt-4 w-max h-full">
         <View className="flex-1 grow w-full">
           <ScreenTitleHeader variant="lg">Add Order</ScreenTitleHeader>
+        </View>
+        <View className="items-center w-full">
+          {(isNewOrderError || validator.isError) && btnClicked && (
+            <ErrorInfoText additionalStyles="">
+              {isNewOrderError
+                ? handlePrintErrorToUser(newOrderErrorValue)
+                : validator.errorMessages}
+            </ErrorInfoText>
+          )}
         </View>
         <KeyboardAwareScrollView
           className="flex flex-1 grow-[11] flex-col  w-full"
@@ -147,7 +179,8 @@ export function AddOrder({
                   newClient.email.length
                 )
               ) {
-                createNewOrder(newOrder);
+                setCanValidate(true);
+                setBtnClicked(true);
                 return;
               }
               createClient(newClient);
