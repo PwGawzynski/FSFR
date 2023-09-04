@@ -17,7 +17,11 @@ import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/nav
 import { AppButton } from '../../../../Atoms/AppButton';
 import { AddNewClientShortService } from '../../../../../helpers/api/Services/Client';
 import { useValidation } from '../../../../../helpers/hooks/validationHook';
-import { AddOrderSchema } from '../../../../../helpers/validation/mobileSchemas/AddOrderSchema';
+import {
+  AddNewClientShortSchema,
+  AddOrderSchema,
+  AddOrderSchemaI,
+} from '../../../../../helpers/validation/mobileSchemas/AddOrderSchema';
 import { ErrorInfoText } from '../../../../Atoms/ErrorInfoText';
 import { handlePrintErrorToUser } from '../../../../../helpers/handlers/HandlePrintErrorToUser';
 
@@ -38,16 +42,16 @@ export function AddOrder({
   });
 
   const [btnClicked, setBtnClicked] = useState<boolean>(false);
-  const [validator, setCanValidate] = useValidation<Omit<NewOrderI, 'type'>>(
-    {
-      name: newOrder.name,
-      client: newOrder.client,
-      additionalInfo: newOrder.additionalInfo,
-      performanceDate: newOrder.performanceDate,
-    },
+  const [validator, setCanValidate] = useValidation<AddOrderSchemaI>(
+    newOrder,
     AddOrderSchema,
     [btnClicked],
   );
+
+  const [clientValidator, setCanValidateClient] =
+    useValidation<NewClientShortCreateI>(newClient, AddNewClientShortSchema, [
+      btnClicked,
+    ]);
   const {
     isSuccess: hasOrderBeenAdded,
     mutate: createNewOrder,
@@ -70,6 +74,12 @@ export function AddOrder({
   }, [validator, btnClicked]);
 
   useEffect(() => {
+    if (!clientValidator.isError && !validator.isError && btnClicked) {
+      createClient(newClient);
+    }
+  }, [clientValidator, validator, btnClicked]);
+
+  useEffect(() => {
     if (hasOrderBeenAdded) {
       navigation.navigate('OperationConfirmed', {
         redirectScreenName: 'ordersRoot',
@@ -85,13 +95,18 @@ export function AddOrder({
           <ScreenTitleHeader variant="lg">Add Order</ScreenTitleHeader>
         </View>
         <View className="items-center w-full">
-          {(isNewOrderError || validator.isError) && btnClicked && (
+          {((isNewOrderError || validator.isError) && btnClicked && (
             <ErrorInfoText additionalStyles="">
               {isNewOrderError
                 ? handlePrintErrorToUser(newOrderErrorValue)
                 : validator.errorMessages}
             </ErrorInfoText>
-          )}
+          )) ||
+            (clientValidator.isError && btnClicked && (
+              <ErrorInfoText additionalStyles="">
+                {clientValidator.errorMessages}
+              </ErrorInfoText>
+            ))}
         </View>
         <KeyboardAwareScrollView
           className="flex flex-1 grow-[11] flex-col  w-full"
@@ -183,7 +198,8 @@ export function AddOrder({
                 setBtnClicked(true);
                 return;
               }
-              createClient(newClient);
+              setCanValidateClient(true);
+              setBtnClicked(true);
             }}
             context="Create"
             additionalStyles="mt-4 mb-8 flex-1"
