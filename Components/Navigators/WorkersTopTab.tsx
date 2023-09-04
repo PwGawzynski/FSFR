@@ -2,12 +2,12 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { WorkersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/WorkersTopTabParamList';
 import { WorkersRoot } from '../Pages/Mobi/OwnerPages/Workers/WorkersRoot';
 import { topLabelOff } from '../../helpers/style/TopLabelOff';
-import { AddOrder } from '../Pages/Mobi/OwnerPages/Orders/AddOrder';
 import { WorkerDetails } from '../Pages/Mobi/OwnerPages/Workers/WorkerDetails';
 import { WorkerSearch } from '../Pages/Mobi/OwnerPages/Workers/WorkerSearch';
 import { WorkersLocations } from '../Pages/Mobi/OwnerPages/Workers/WorkersLocations';
 import { WorkerWorkDayDetails } from '../Pages/Mobi/OwnerPages/Workers/WorkerWorkDayDetails';
 import { WorkerWorkDaysInfo } from '../Pages/Mobi/OwnerPages/Workers/WorkerWorkDaysInfo';
+import { AddWorker } from '../Pages/Mobi/OwnerPages/Workers/AddWorker';
 
 const TabNavigator = createMaterialTopTabNavigator<WorkersTopTabParamList>();
 
@@ -22,7 +22,7 @@ export function WorkersTabNavigator() {
       <TabNavigator.Screen
         options={topLabelOff}
         name="addWorker"
-        component={AddOrder}
+        component={AddWorker}
       />
       <TabNavigator.Screen
         options={topLabelOff}
