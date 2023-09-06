@@ -203,3 +203,27 @@ export interface NewClientShortCreateI {
   phoneNumber: string;
   email: string;
 }
+
+export interface AddOrderFormProps {
+  newOrder: NewOrderI;
+  setNewOrder: React.Dispatch<React.SetStateAction<NewOrderI>>;
+}
+
+export interface AddClientShortFormProps {
+  newClient: NewClientShortCreateI;
+  setNewClient: React.Dispatch<React.SetStateAction<NewClientShortCreateI>>;
+}
+type AddOrderAndClientPropsUnion = AddOrderFormProps & AddClientShortFormProps;
+export interface AddOrderAndClientFormProps
+  extends AddOrderAndClientPropsUnion {
+  setCanValidateClient: React.Dispatch<React.SetStateAction<boolean>>;
+  setCanValidate: React.Dispatch<React.SetStateAction<boolean>>;
+  setBtnClicked: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export interface AddOrderErrorInfoProps {
+  isNewOrderError: boolean;
+  newOrderErrorValue: unknown;
+  btnClicked: boolean;
+  clientValidator: { isError: boolean; errorMessages: string[] };
+  validator: { isError: boolean; errorMessages: string[] };
+}
