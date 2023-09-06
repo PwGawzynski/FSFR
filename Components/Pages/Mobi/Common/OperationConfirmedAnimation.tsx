@@ -14,7 +14,6 @@ export function OperationConfirmedAnimation({
   const opacity = useSharedValue(0);
   const [animationStart, setAnimationStart] = useState(false);
   const [acceptBell, setAcceptBell] = useState<Sound | undefined>();
-
   useEffect(() => {
     if (!acceptBell) {
       (async () => {
