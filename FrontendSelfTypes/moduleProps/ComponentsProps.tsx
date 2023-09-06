@@ -220,3 +220,10 @@ export interface AddOrderAndClientFormProps
   setCanValidate: React.Dispatch<React.SetStateAction<boolean>>;
   setBtnClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
+export interface AddOrderErrorInfoProps {
+  isNewOrderError: boolean;
+  newOrderErrorValue: unknown;
+  btnClicked: boolean;
+  clientValidator: { isError: boolean; errorMessages: string[] };
+  validator: { isError: boolean; errorMessages: string[] };
+}
