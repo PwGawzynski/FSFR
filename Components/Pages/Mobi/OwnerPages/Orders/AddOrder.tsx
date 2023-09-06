@@ -6,7 +6,6 @@ import {
   NewOrderI,
   TaskType,
 } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
-import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 import { addNewOrder } from '../../../../../helpers/api/Services/OrdersService';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { AddNewClientShortService } from '../../../../../helpers/api/Services/Client';
@@ -16,9 +15,8 @@ import {
   AddOrderSchema,
   AddOrderSchemaI,
 } from '../../../../../helpers/validation/mobileSchemas/AddOrderSchema';
-import { ErrorInfoText } from '../../../../Atoms/ErrorInfoText';
-import { handlePrintErrorToUser } from '../../../../../helpers/handlers/HandlePrintErrorToUser';
 import { AddOrderAndClientForm } from '../../../../Organisms/AddOrderAndClientForm';
+import { AddOrderErrorInfo } from '../../../../Atoms/AddOrderErrorInfo';
 
 const initOrder = (): NewOrderI => ({
   name: '',
@@ -107,23 +105,13 @@ export function AddOrder({
   return (
     <SafeAreaView className="w-full h-full">
       <View className="flex flex-col mr-4 ml-4 mt-4 w-max h-full">
-        <View className="flex-1 grow w-full">
-          <ScreenTitleHeader variant="lg">Add Order</ScreenTitleHeader>
-        </View>
-        <View className="items-center w-full">
-          {((isNewOrderError || validator.isError) && btnClicked && (
-            <ErrorInfoText additionalStyles="">
-              {isNewOrderError
-                ? handlePrintErrorToUser(newOrderErrorValue)
-                : validator.errorMessages}
-            </ErrorInfoText>
-          )) ||
-            (clientValidator.isError && btnClicked && (
-              <ErrorInfoText additionalStyles="">
-                {clientValidator.errorMessages}
-              </ErrorInfoText>
-            ))}
-        </View>
+        <AddOrderErrorInfo
+          isNewOrderError={isNewOrderError}
+          newOrderErrorValue={newOrderErrorValue}
+          btnClicked={btnClicked}
+          clientValidator={clientValidator}
+          validator={validator}
+        />
         <AddOrderAndClientForm
           setNewClient={setNewClient}
           newClient={newClient}
