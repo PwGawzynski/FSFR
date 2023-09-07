@@ -11,7 +11,7 @@ export function OrdersRoot({
   return (
     <SafeAreaView className="flex flex-col h-full w-ful  ml-4 mr-4 mt-4">
       <OrdersRootScreenTopBar navigation={navigation} route={route} />
-      <OrdersShortInfoBoxList />
+      <OrdersShortInfoBoxList navigation={navigation} route={route} />
     </SafeAreaView>
   );
 }
