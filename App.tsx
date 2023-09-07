@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as Device from 'expo-device';
 import { DeviceType } from 'expo-device';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { PaperProvider } from 'react-native-paper';
 import {
   AppSettings,
   ModalContext,
@@ -60,14 +61,16 @@ export default function App() {
 
   const queryClient = new QueryClient();
   return (
-    <NavigationContainer>
-      <QueryClientProvider client={queryClient}>
-        <AppSettings.Provider value={memoSettings}>
-          <GlobalModal />
-          {!isLogged && <LoginRegisterStack />}
-          {isLogged && <Desktop />}
-        </AppSettings.Provider>
-      </QueryClientProvider>
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <QueryClientProvider client={queryClient}>
+          <AppSettings.Provider value={memoSettings}>
+            <GlobalModal />
+            {!isLogged && <LoginRegisterStack />}
+            {isLogged && <Desktop />}
+          </AppSettings.Provider>
+        </QueryClientProvider>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }

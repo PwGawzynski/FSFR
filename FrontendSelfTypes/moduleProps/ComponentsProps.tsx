@@ -6,6 +6,9 @@ import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
 } from 'react-native';
+import { CompositeNavigationProp } from '@react-navigation/native';
+import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
   ForgotPasswordBase,
   LoginBase,
@@ -13,6 +16,8 @@ import {
   RegisterTabFormBase,
 } from '../navigation/types';
 import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+import { OrdersTopTabParamList } from '../NavigatorsInterfaces/OrdersTopTabParamList';
+import { OwnerDesktopRootStackParamList } from '../NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 
 export interface AppButtonProps {
   action: () => void;
@@ -184,6 +189,12 @@ export enum TaskType {
   Harvesting,
 }
 
+export enum OrderStats {
+  Added,
+  Confirmed,
+  Done,
+}
+
 export interface OrderBaseI {
   taskId: string;
   name: string;
@@ -192,11 +203,24 @@ export interface OrderBaseI {
   performanceDate: string;
   clientId: string;
   client: string;
+
+  area: number;
+  status: OrderStats;
+
+  doneArea: number;
 }
 
-export type NewOrderI = Omit<OrderBaseI, 'taskId' | 'clientId'>;
+export type NewOrderI = Omit<
+  OrderBaseI,
+  'taskId' | 'clientId' | 'area' | 'status' | 'doneArea'
+>;
 
-export type OrderProps = OrderBaseI;
+export interface OrderProps extends OrderBaseI {
+  navigation: CompositeNavigationProp<
+    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    StackNavigationProp<OwnerDesktopRootStackParamList, any>
+  >;
+}
 
 export interface NewClientShortCreateI {
   name: string;
@@ -226,4 +250,44 @@ export interface AddOrderErrorInfoProps {
   btnClicked: boolean;
   clientValidator: { isError: boolean; errorMessages: string[] };
   validator: { isError: boolean; errorMessages: string[] };
+}
+
+export enum FieldStatus {
+  WAITING,
+  OPEN,
+  DONE,
+}
+export interface FieldI {
+  taskId: string;
+  fieldId: string;
+  area: number;
+  status: FieldStatus;
+}
+
+export interface OrderDetailsHeaderProps {
+  onButtonClick: () => void;
+  headerText: string;
+  buttonText: string;
+
+  variant: 'sm' | 'lg';
+
+  buttonAdditionalStyles?: string;
+
+  headerAdditionalStyles?: string;
+
+  boxAdditionalStyles?: string;
+
+  buttonTextAdditionalStyles?: string;
+}
+
+export interface OrderDetailsInfoProps {
+  order: OrderBaseI;
+}
+
+export interface FieldListProps {
+  orderId: string;
+}
+
+export interface LineDividerProps {
+  additionalStyles?: string;
 }

@@ -7,11 +7,16 @@ import {
 
 export function OrderShortInfoBox({
   type,
+  taskId,
   client,
   performanceDate,
+  navigation,
 }: OrderProps) {
   return (
-    <View className="w-max h-32 flex flex-row rounded-2xl border-dotted border-black border-2 mb-8">
+    <TouchableOpacity
+      onPress={() => navigation.navigate('orderDetails', { orderId: taskId })}
+      className="w-max h-32 flex flex-row rounded-2xl border-dotted border-black border-2 mb-8"
+    >
       <TouchableOpacity className="w-1/2 h-8 items-center justify-center bg-black absolute top-28 left-1/4 rounded-full">
         <Text className="text-lg font-bold text-white uppercase">More</Text>
       </TouchableOpacity>
@@ -47,6 +52,6 @@ export function OrderShortInfoBox({
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

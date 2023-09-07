@@ -7,6 +7,7 @@ module.exports = function (api) {
       'nativewind/babel',
       'react-native-reanimated/plugin',
       'transform-inline-environment-variables',
+      'react-native-paper/babel',
       [
         'module-resolver',
         {
