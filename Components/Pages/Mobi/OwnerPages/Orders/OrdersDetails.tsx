@@ -53,7 +53,16 @@ export function OrdersDetails({
                 additionalStyles="w-3/5 bg-[#434343]"
               />
               <AppButton
-                action={() => console.log('Close')}
+                action={() =>
+                  navigation.navigate('OperationDanger', {
+                    shownMessage: [
+                      'Are you sure ?',
+                      'This operation cannot be canceled',
+                    ],
+                    afterDangerScreenName: 'ordersRoot',
+                    dangerButtonSign: 'delete',
+                  })
+                }
                 context="Close"
                 additionalStyles="w-1/4 bg-[#FF0000]"
               />
