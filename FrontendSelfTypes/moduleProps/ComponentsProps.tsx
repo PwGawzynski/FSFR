@@ -291,3 +291,7 @@ export interface FieldListProps {
 export interface LineDividerProps {
   additionalStyles?: string;
 }
+
+export interface ContainerWCenteredLinedTextProps {
+  messages?: Array<string> | string;
+}
