@@ -2,6 +2,7 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 import { DesktopTopTabParamList } from './DesktopTopTabParamList';
 import { OrdersTopTabParamList } from './OrdersTopTabParamList';
 import { WorkersTopTabParamList } from './WorkersTopTabParamList';
+import { FieldTopTabParamList } from './FieldTopTabParamList';
 
 export type OwnerDesktopRootStackParamList = {
   desktop: NavigatorScreenParams<DesktopTopTabParamList>;
@@ -24,4 +25,5 @@ export type OwnerDesktopRootStackParamList = {
       | keyof WorkersTopTabParamList;
     dangerButtonSign?: string;
   };
+  fields: NavigatorScreenParams<FieldTopTabParamList>;
 };
