@@ -15,4 +15,13 @@ export type OwnerDesktopRootStackParamList = {
       | keyof WorkersTopTabParamList;
     shownMessage?: string;
   };
+  OperationDanger: {
+    shownMessage?: string | Array<string>;
+    afterDangerScreenName:
+      | keyof OwnerDesktopRootStackParamList
+      | keyof DesktopTopTabParamList
+      | keyof OrdersTopTabParamList
+      | keyof WorkersTopTabParamList;
+    dangerButtonSign?: string;
+  };
 };
