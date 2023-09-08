@@ -5,9 +5,9 @@ module.exports = function (api) {
     presets: ['babel-preset-expo', 'module:metro-react-native-babel-preset'],
     plugins: [
       'nativewind/babel',
-      'react-native-reanimated/plugin',
       'transform-inline-environment-variables',
       'react-native-paper/babel',
+      '@babel/plugin-proposal-export-namespace-from',
       [
         'module-resolver',
         {
@@ -17,6 +17,7 @@ module.exports = function (api) {
           },
         },
       ],
+      'react-native-reanimated/plugin',
     ],
   };
 };
