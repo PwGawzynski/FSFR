@@ -10,6 +10,7 @@ import { OwnerDesktopRootStackParamList } from '../NavigatorsInterfaces/OwnerDes
 import { DesktopTopTabParamList } from '../NavigatorsInterfaces/DesktopTopTabParamList';
 import { OrdersTopTabParamList } from '../NavigatorsInterfaces/OrdersTopTabParamList';
 import { WorkersTopTabParamList } from '../NavigatorsInterfaces/WorkersTopTabParamList';
+import { FieldTopTabParamList } from '../NavigatorsInterfaces/FieldTopTabParamList';
 
 export type LoginPageBase = StackScreenProps<RootStackParamList, 'Login'>;
 export type LoginPageTabBase = LoginPageBase;
@@ -69,5 +70,13 @@ export type OwnerMobiWorkersTopTabProps<
   N extends keyof OwnerDesktopRootStackParamList,
 > = CompositeScreenProps<
   MaterialTopTabScreenProps<WorkersTopTabParamList, T>,
+  OwnerMobiDesktopRootStackProps<N>
+>;
+
+export type OwnerMobiFieldsTopTabProps<
+  T extends keyof FieldTopTabParamList,
+  N extends keyof OwnerDesktopRootStackParamList,
+> = CompositeScreenProps<
+  MaterialTopTabScreenProps<FieldTopTabParamList, T>,
   OwnerMobiDesktopRootStackProps<N>
 >;

@@ -10,7 +10,6 @@ import { OrdersAddField } from '../Pages/Mobi/OwnerPages/Orders/OrdersAddField';
 import { OrdersAddWorker } from '../Pages/Mobi/OwnerPages/Orders/OrdersAddWorker';
 import { OrdersLocations } from '../Pages/Mobi/OwnerPages/Orders/OrdersLocations';
 import { OrdersManageWorkers } from '../Pages/Mobi/OwnerPages/Orders/OrdersManageWorkers';
-import { OrderFinishAndAccount } from '../Pages/Mobi/OwnerPages/Orders/OrderFinishAndAccount';
 import { OrdersDetails } from '../Pages/Mobi/OwnerPages/Orders/OrdersDetails';
 
 const TabNavigator = createMaterialTopTabNavigator<OrdersTopTabParamList>();

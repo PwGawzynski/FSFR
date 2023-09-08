@@ -8,6 +8,7 @@ import { OrdersTopTab } from './OrdersTopTab';
 import { DesktopTopTab } from './DesktopTopTab';
 import { OperationConfirmedAnimation } from '../Pages/Mobi/Common/OperationConfirmedAnimation';
 import { OperationDanger } from '../Pages/Mobi/Common/OperationDanger';
+import { FieldsTopTab } from './FieldsTopTab';
 
 const Stack = createStackNavigator<OwnerDesktopRootStackParamList>();
 
@@ -57,6 +58,16 @@ export function OwnerDesktopMobiRootStack() {
       <Stack.Screen
         name="OperationDanger"
         component={OperationDanger}
+        options={{
+          headerShown: false,
+          gestureDirection: 'vertical',
+          gestureResponseDistance: 800,
+          cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+        }}
+      />
+      <Stack.Screen
+        name="fields"
+        component={FieldsTopTab}
         options={{
           headerShown: false,
           gestureDirection: 'vertical',
