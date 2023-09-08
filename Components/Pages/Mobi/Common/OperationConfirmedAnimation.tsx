@@ -1,6 +1,10 @@
 import { SafeAreaView, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { Audio } from 'expo-av';
 import { Sound } from 'expo-av/build/Audio/Sound';
 import CheckIco from '../../../../assets/check.svg';
@@ -14,6 +18,9 @@ export function OperationConfirmedAnimation({
   const opacity = useSharedValue(0);
   const [animationStart, setAnimationStart] = useState(false);
   const [acceptBell, setAcceptBell] = useState<Sound | undefined>();
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
   useEffect(() => {
     if (!acceptBell) {
       (async () => {
@@ -50,19 +57,21 @@ export function OperationConfirmedAnimation({
 
   useEffect(() => {
     acceptBell?.playAsync();
-    opacity.value = withSpring(1);
+    opacity.value = withTiming(1, { duration: 1000 });
   }, [animationStart]);
 
   return (
     <View className="w-full h-full">
       <SafeAreaView className="w-full h-full items-center justify-center flex flex-col">
         <Animated.View
-          style={{
-            opacity: opacity.value,
-            overflow: 'hidden',
-            flexGrow: 1,
-            justifyContent: 'flex-end',
-          }}
+          style={[
+            {
+              overflow: 'hidden',
+              flexGrow: 1,
+              justifyContent: 'flex-end',
+            },
+            animatedStyle,
+          ]}
         >
           <CheckIco
             color="#000"
