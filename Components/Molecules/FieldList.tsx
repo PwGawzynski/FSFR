@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { useQuery } from 'react-query';
 import {
@@ -8,9 +8,9 @@ import {
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getAllFieldsByOrderId } from '../../helpers/api/Services/FieldsService';
 
-export function FieldList({ orderId }: FieldListProps) {
+export function FieldList({ orderId, navigation }: FieldListProps) {
   const { data: orderConnectedFields } = useQuery<Array<FieldI> | undefined>(
-    ['field', orderId],
+    ['fields', orderId],
     ({ queryKey }) => getAllFieldsByOrderId(`${queryKey[1]}`),
   );
   return (
@@ -46,48 +46,60 @@ export function FieldList({ orderId }: FieldListProps) {
         >
           {orderConnectedFields &&
             orderConnectedFields.map((f: FieldI, i) => (
-              <DataTable.Row key={f.fieldId}>
-                <DataTable.Cell
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'flex-start',
-                  }}
-                  numeric
-                >
-                  <Text className="text-black text-sm">{`${i}`}</Text>
-                </DataTable.Cell>
-                <DataTable.Cell
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'flex-start',
-                  }}
-                  numeric
-                >
-                  <Text className="text-black text-sm">{f.area}</Text>
-                </DataTable.Cell>
-                <DataTable.Cell
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'flex-start',
-                  }}
-                >
-                  <Text className="text-black text-sm">{f.fieldId}</Text>
-                </DataTable.Cell>
-                <DataTable.Cell
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                  }}
-                >
-                  <Text className="text-black text-sm">
-                    {FieldStatus[f.status]}
-                  </Text>
-                </DataTable.Cell>
-              </DataTable.Row>
+              <TouchableOpacity
+                key={f.fieldId}
+                onPress={() =>
+                  navigation.navigate('fields', {
+                    screen: 'fieldDetails',
+                    params: {
+                      fieldId: f.fieldId,
+                    },
+                  })
+                }
+              >
+                <DataTable.Row>
+                  <DataTable.Cell
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'flex-start',
+                    }}
+                    numeric
+                  >
+                    <Text className="text-black text-sm">{`${i}`}</Text>
+                  </DataTable.Cell>
+                  <DataTable.Cell
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'flex-start',
+                    }}
+                    numeric
+                  >
+                    <Text className="text-black text-sm">{f.area}</Text>
+                  </DataTable.Cell>
+                  <DataTable.Cell
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'flex-start',
+                    }}
+                  >
+                    <Text className="text-black text-sm">{f.fieldId}</Text>
+                  </DataTable.Cell>
+                  <DataTable.Cell
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'flex-end',
+                    }}
+                  >
+                    <Text className="text-black text-sm">
+                      {FieldStatus[f.status]}
+                    </Text>
+                  </DataTable.Cell>
+                </DataTable.Row>
+              </TouchableOpacity>
             ))}
         </ScrollView>
       </DataTable>
