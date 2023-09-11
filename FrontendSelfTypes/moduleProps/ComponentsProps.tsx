@@ -122,6 +122,7 @@ export interface RegisterFormProps extends RegisterTabFormBase {
 
 export interface ScreenTitleHeaderProps {
   additionalStyles?: string;
+  additionalTextStyles?: string;
   children: ReactNode;
 
   variant: 'sm' | 'lg';
@@ -262,6 +263,11 @@ export interface FieldI {
   fieldId: string;
   area: number;
   status: FieldStatus;
+  voice: string;
+  county: string;
+  city: string;
+  dataCollectionDate: string;
+  name: string;
 }
 
 export interface OrderDetailsHeaderProps {
@@ -281,11 +287,16 @@ export interface OrderDetailsHeaderProps {
 }
 
 export interface OrderDetailsInfoProps {
-  order: OrderBaseI;
+  titles: Array<string>;
+  keys: Array<string>;
 }
 
 export interface FieldListProps {
   orderId: string;
+  navigation: CompositeNavigationProp<
+    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    StackNavigationProp<OwnerDesktopRootStackParamList, any>
+  >;
 }
 
 export interface LineDividerProps {
