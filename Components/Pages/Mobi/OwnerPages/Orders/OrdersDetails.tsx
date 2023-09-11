@@ -3,13 +3,14 @@ import { useQuery } from 'react-query';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import {
   OrderBaseI,
+  OrderStats,
   TaskType,
 } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { AppButton } from '../../../../Atoms/AppButton';
 import { HeaderWithButton } from '../../../../Atoms/HeaderWithButton';
-import { OrderDetailsInfo } from '../../../../Atoms/OrderDetailsInfo';
 import { LineDivider } from '../../../../Atoms/LineDivider';
 import { FieldList } from '../../../../Molecules/FieldList';
+import { TitleValueInfoComponent } from '../../../../Atoms/TitleValueInfoComponent';
 
 export function OrdersDetails({
   route,
@@ -25,14 +26,29 @@ export function OrdersDetails({
         <SafeAreaView className="ml-4 mr-4 flex flex-col grow">
           <HeaderWithButton
             variant="lg"
-            buttonAdditionalStyles="ml-4 flex-1"
+            buttonAdditionalStyles=" flex-1"
             headerText={TaskType[order.type]}
-            headerAdditionalStyles="mr-4 flex-1"
+            headerAdditionalStyles="flex-1"
             boxAdditionalStyles="mt-8"
             buttonText="Manage assigned workers"
             onButtonClick={() => navigation.navigate('ordersAddWorker')}
           />
-          <OrderDetailsInfo order={order} />
+          <TitleValueInfoComponent
+            titles={[
+              'purchaser',
+              'performance date',
+              'area',
+              'status',
+              'rest area',
+            ]}
+            keys={[
+              order.client,
+              order.performanceDate,
+              order.area.toString(),
+              OrderStats[order.status],
+              (order.area - order.doneArea).toFixed(2),
+            ]}
+          />
           <LineDivider />
           <HeaderWithButton
             onButtonClick={() => navigation.navigate('ordersAddField')}
@@ -41,7 +57,7 @@ export function OrdersDetails({
             variant="sm"
             buttonAdditionalStyles="w-1/3"
           />
-          <FieldList orderId={orderId} />
+          <FieldList orderId={orderId} navigation={navigation} />
 
           <View className="flex-col flex max-w-max">
             <LineDivider additionalStyles="mt-0 mb-0" />
