@@ -261,6 +261,13 @@ export class Api {
     return data.fields.filter((f: any) => f.taskId === id) as Array<FieldI>;
   }
 
+  static async getAllFieldsById(id: string): Promise<FieldI> {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const data = require('../../tmpData');
+    // TEMPORARY
+    return data.fields.find((f: any) => f.fieldId === id) as FieldI;
+  }
+
   static async addNewOrder(data: NewOrderI) {
     console.log('NEW ORDER DATA: ', data);
     return true;

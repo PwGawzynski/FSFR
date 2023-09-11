@@ -11,3 +11,14 @@ export async function getAllFieldsByOrderId(
     return undefined;
   }
 }
+
+export async function getAllFieldsById(
+  id: string,
+): Promise<FieldI | undefined> {
+  try {
+    const data = await Api.getAllFieldsById(id);
+    return data as FieldI;
+  } catch (e) {
+    return undefined;
+  }
+}

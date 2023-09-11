@@ -6,11 +6,15 @@ import { ScreenTitleHeaderProps } from '../../FrontendSelfTypes/moduleProps/Comp
 export function ScreenTitleHeader({
   variant,
   children,
+  additionalStyles,
+  additionalTextStyles,
 }: ScreenTitleHeaderProps) {
   return (
-    <View className="justify-center">
+    <View className={`justify-center ${additionalStyles}`}>
       <BigBoldText
-        additionalStyles={`uppercase ${variant === 'lg' ? 'text-2xl' : ''}`}
+        additionalStyles={`uppercase ${
+          variant === 'lg' ? 'text-2xl' : ''
+        } ${additionalTextStyles}`}
       >
         {children}
       </BigBoldText>

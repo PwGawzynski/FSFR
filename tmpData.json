@@ -208,109 +208,199 @@
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
       "area": 9.32,
-      "status": 1
+      "status": 1,
+      "voice": "Mazowieckie",
+      "county": "Warszawa",
+      "city": "Warszawa",
+      "dataCollectionDate": "2023-09-08",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "c9f7a9d1-5ef8-4e29-89a5-230af1906f5a",
       "area": 6.71,
-      "status": 0
+      "status": 0,
+      "voice": "Małopolskie",
+      "county": "Kraków",
+      "city": "Kraków",
+      "dataCollectionDate": "2023-09-09",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "b2649789-1c03-4e31-8e9d-781f77d46432",
       "area": 3.45,
-      "status": 2
+      "status": 2,
+      "voice": "Śląskie",
+      "county": "Katowice",
+      "city": "Katowice",
+      "dataCollectionDate": "2023-09-10",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "7ea0b8a2-96b9-4925-ae6a-d1b783047d9b",
       "area": 8.12,
-      "status": 1
+      "status": 1,
+      "voice": "Wielkopolskie",
+      "county": "Poznań",
+      "city": "Poznań",
+      "dataCollectionDate": "2023-09-11",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "dfb1b86c-8af7-4841-a325-3f1e398d12c1",
       "area": 5.89,
-      "status": 0
+      "status": 0,
+      "voice": "Dolnośląskie",
+      "county": "Wrocław",
+      "city": "Wrocław",
+      "dataCollectionDate": "2023-09-12",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "5f5c90a3-7ce1-4e71-91b7-4bf8cc6a1585",
       "area": 7.24,
-      "status": 2
+      "status": 2,
+      "voice": "Łódzkie",
+      "county": "Łódź",
+      "city": "Łódź",
+      "dataCollectionDate": "2023-09-13",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "1e33dcaf-4aa4-4bfa-a844-b43ed6b3bfab",
       "area": 4.76,
-      "status": 1
+      "status": 1,
+      "voice": "Pomorskie",
+      "county": "Gdańsk",
+      "city": "Gdańsk",
+      "dataCollectionDate": "2023-09-14",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "ce0f74d3-94ca-4f4a-af2f-080ad7c1f682",
       "area": 6.03,
-      "status": 0
+      "status": 0,
+      "voice": "Kujawsko-Pomorskie",
+      "county": "Bydgoszcz",
+      "city": "Bydgoszcz",
+      "dataCollectionDate": "2023-09-15",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "b91abfc4-862a-4877-85c5-1d94e225ab66",
       "area": 2.18,
-      "status": 1
+      "status": 1,
+      "voice": "Podlaskie",
+      "county": "Białystok",
+      "city": "Białystok",
+      "dataCollectionDate": "2023-09-16",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "f67c8a0f-ebcc-4c0a-bb15-24e2b1ac607d",
       "area": 6.88,
-      "status": 2
+      "status": 2,
+      "voice": "Warmińsko-Mazurskie",
+      "county": "Olsztyn",
+      "city": "Olsztyn",
+      "dataCollectionDate": "2023-09-17",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "89e7693b-61de-4e1e-9cd1-71f1ab4878f2",
       "area": 7.97,
-      "status": 0
+      "status": 0,
+      "voice": "Lubuskie",
+      "county": "Zielona Góra",
+      "city": "Zielona Góra",
+      "dataCollectionDate": "2023-09-18",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "88a0c9b6-1be6-4bf3-8e67-2c4a49d7d682",
       "area": 5.12,
-      "status": 1
+      "status": 1,
+      "voice": "Opolskie",
+      "county": "Opole",
+      "city": "Opole",
+      "dataCollectionDate": "2023-09-19",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "3b73f2f9-27c0-45c1-8c29-7d55866b0e63",
       "area": 9.72,
-      "status": 0
+      "status": 0,
+      "voice": "Świętokrzyskie",
+      "county": "Kielce",
+      "city": "Kielce",
+      "dataCollectionDate": "2023-09-20",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "8efb8c43-3e52-4e91-8f1d-2b6a1a5c366e",
       "area": 4.23,
-      "status": 2
+      "status": 2,
+      "voice": "Podkarpackie",
+      "county": "Rzeszów",
+      "city": "Rzeszów",
+      "dataCollectionDate": "2023-09-21",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "8fc9b849-6c90-4c4c-8b13-3702dd3d91c3",
       "area": 7.55,
-      "status": 1
+      "status": 1,
+      "voice": "Lubelskie",
+      "county": "Lublin",
+      "city": "Lublin",
+      "dataCollectionDate": "2023-09-22",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "ccf5a0d6-d2d3-4c03-8bc6-4c51a63635f2",
       "area": 6.47,
-      "status": 0
+      "status": 0,
+      "voice": "Zachodniopomorskie",
+      "county": "Szczecin",
+      "city": "Szczecin",
+      "dataCollectionDate": "2023-09-23",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "e85fcb48-6c89-49e1-9b11-3e17b6b50c67",
       "area": 8.36,
-      "status": 2
+      "status": 2,
+      "voice": "Podlaskie",
+      "county": "Białystok",
+      "city": "Białystok",
+      "dataCollectionDate": "2023-09-24",
+      "name": "Dzierżawa Kossak"
     },
     {
       "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
       "fieldId": "a496cfb0-cf6c-4ea7-9ea0-64f6c3e12d49",
       "area": 5.91,
-      "status": 1
-    },
+      "status": 1,
+      "voice": "Kujawsko-Pomorskie",
+      "county": "Bydgoszcz",
+      "city": "Bydgoszcz",
+      "dataCollectionDate": "2023-09-25",
+      "name": "Dzierżawa Kossak"
+    }
   ]
 }
