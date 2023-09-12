@@ -30,7 +30,7 @@ export function OrdersDetails({
             headerText={TaskType[order.type]}
             headerAdditionalStyles="flex-1"
             boxAdditionalStyles="mt-8"
-            buttonText="Manage assigned workers"
+            buttonText="Manage  workers"
             onButtonClick={() => navigation.navigate('ordersAddWorker')}
           />
           <TitleValueInfoComponent
@@ -64,7 +64,7 @@ export function OrdersDetails({
             <View className="flex-row justify-between mt-4 mb-4">
               <AppButton
                 action={() => console.log('send confirmation request')}
-                context="send confirmation request"
+                context="request confirmation"
                 additionalTextStyles="text-sm"
                 additionalStyles="w-3/5 bg-[#434343]"
               />
