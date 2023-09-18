@@ -31,7 +31,9 @@ export function OrdersDetails({
             headerAdditionalStyles="flex-1"
             boxAdditionalStyles="mt-8"
             buttonText="Manage  workers"
-            onButtonClick={() => navigation.navigate('ordersAddWorker')}
+            onButtonClick={() =>
+              navigation.navigate('assignedWorkers', { orderId })
+            }
           />
           <TitleValueInfoComponent
             titles={[
@@ -55,9 +57,17 @@ export function OrdersDetails({
             headerText="Fields"
             buttonText="Add"
             variant="sm"
-            buttonAdditionalStyles="w-1/3"
+            buttonAdditionalStyles="w-1/3 flex-none"
           />
-          <FieldList orderId={orderId} navigation={navigation} />
+          <FieldList
+            orderId={orderId}
+            navigation={navigation}
+            shownFieldKeys={[
+              { key: 'taskId' },
+              { key: 'area' },
+              { key: 'status' },
+            ]}
+          />
 
           <View className="flex-col flex max-w-max">
             <LineDivider additionalStyles="mt-0 mb-0" />
