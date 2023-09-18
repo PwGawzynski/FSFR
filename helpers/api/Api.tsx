@@ -18,6 +18,7 @@ import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { checkCurrentSession } from '../handlers/checkIfLogged';
 import { GetUserDataResponse } from '../../FarmServiceTypes/Respnse/UserService/GetUserDataResponse';
 import {
+  AddNewTasksI,
   FieldI,
   NewClientShortCreateI,
   NewOrderI,
@@ -254,6 +255,12 @@ export class Api {
     return data;
   }
 
+  static async getWorkers() {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const data = require('../../tmpData');
+    return data;
+  }
+
   static async getAllFieldsByOrderId(id: string): Promise<Array<FieldI>> {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const data = require('../../tmpData');
@@ -270,6 +277,11 @@ export class Api {
 
   static async addNewOrder(data: NewOrderI) {
     console.log('NEW ORDER DATA: ', data);
+    return true;
+  }
+
+  static async addNewTasks(data: AddNewTasksI) {
+    console.log('NEW TASKS DATA: ', data);
     return true;
   }
 
