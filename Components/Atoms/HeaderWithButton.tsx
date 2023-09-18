@@ -14,7 +14,7 @@ export function HeaderWithButton({
   buttonTextAdditionalStyles,
 }: OrderDetailsHeaderProps) {
   return (
-    <View className={`flex justify-between flex-row ${boxAdditionalStyles}`}>
+    <View className={`flex justify-between flex-row  ${boxAdditionalStyles}`}>
       <ScreenTitleHeader
         variant={variant}
         additionalStyles={`${headerAdditionalStyles}`}
@@ -24,7 +24,7 @@ export function HeaderWithButton({
       <AppButton
         action={onButtonClick}
         context={buttonText}
-        additionalStyles={`bg-[#279840] ${buttonAdditionalStyles}`}
+        additionalStyles={`bg-[#279840] flex-1 ${buttonAdditionalStyles}`}
         additionalTextStyles={`text-sm ${buttonTextAdditionalStyles}`}
       />
     </View>
