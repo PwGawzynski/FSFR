@@ -9,7 +9,7 @@ export type OrdersTopTabParamList = {
   };
   ordersManageWorkers: undefined;
 
-  ordersAddWorker: undefined;
+  assignedWorkers: { orderId?: string };
 
   ordersAddField: undefined;
 
