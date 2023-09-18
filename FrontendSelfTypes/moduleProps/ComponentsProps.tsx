@@ -9,6 +9,7 @@ import {
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { bool } from 'yup';
 import {
   ForgotPasswordBase,
   LoginBase,
@@ -135,6 +136,7 @@ export interface ProfilePhotoProps {
   additionalImageStyles?: string;
 
   imgLink?: string;
+  focused?: boolean;
 }
 // TODO move to united types
 export interface ActivityProps {
@@ -292,11 +294,17 @@ export interface OrderDetailsInfoProps {
 }
 
 export interface FieldListProps {
-  orderId: string;
+  checkOn?: true;
+  orderId?: string;
   navigation: CompositeNavigationProp<
     MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
+  lPOff?: true;
+
+  shownFieldKeys: Array<{ key: keyof FieldI; alternativeName?: string }>;
+
+  setSelected?: React.Dispatch<React.SetStateAction<Array<string>>>;
 }
 
 export interface LineDividerProps {
@@ -305,4 +313,59 @@ export interface LineDividerProps {
 
 export interface ContainerWCenteredLinedTextProps {
   messages?: Array<string> | string;
+}
+
+export interface CheckBoxProps<T extends () => void> {
+  onPress: T;
+}
+
+export interface Worker {
+  id: string;
+  name: string;
+  surname: string;
+  photoUrl: string;
+}
+
+export interface WorkerSelectorProps {
+  focusedWorker?: Worker;
+  setFocusedWorker: React.Dispatch<React.SetStateAction<Worker | undefined>>;
+}
+
+export interface NewTaskI {
+  fieldId: string;
+  workerId: string;
+  type: TaskType;
+}
+
+export interface SelectWorkerPanelProps {
+  fieldsIds: Array<string>;
+  validationError: boolean;
+  setValidationError: React.Dispatch<React.SetStateAction<boolean>>;
+  navigation: CompositeNavigationProp<
+    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    StackNavigationProp<OwnerDesktopRootStackParamList, any>
+  >;
+}
+
+export interface AddNewTasksI {
+  fieldsIds: Array<string>;
+  workerId: string;
+  type: TaskType;
+}
+
+export interface FieldTableRowProps {
+  fields: Array<FieldI> | undefined;
+  navigation: CompositeNavigationProp<
+    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    StackNavigationProp<OwnerDesktopRootStackParamList, any>
+  >;
+  lPOff?: true;
+  columnNames: Array<{ key: keyof FieldI; alternativeName?: string }>;
+  checkOn?: true;
+  setSelected?: React.Dispatch<React.SetStateAction<Array<string>>>;
+}
+export interface FieldTableHeadersProps {
+  checkOn?: true;
+  lPOff?: true;
+  columnNames: Array<{ key: keyof FieldI; alternativeName?: string }>;
 }
