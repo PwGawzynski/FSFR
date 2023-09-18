@@ -61,8 +61,8 @@ export function OperationConfirmedAnimation({
   }, [animationStart]);
 
   return (
-    <View className="w-full h-full">
-      <SafeAreaView className="w-full h-full items-center justify-center flex flex-col">
+    <SafeAreaView className="w-full h-full">
+      <View className="w-full h-full items-center justify-center flex flex-col">
         <Animated.View
           style={[
             {
@@ -81,12 +81,12 @@ export function OperationConfirmedAnimation({
             }}
           />
         </Animated.View>
-        <View className="flex-1 w-full mt-4">
+        <View className="flex-1 w-3/4 mt-4">
           <Text className="w-max text-lg text-center font-bold uppercase">
             {shownMessage}
           </Text>
         </View>
-      </SafeAreaView>
-    </View>
+      </View>
+    </SafeAreaView>
   );
 }
