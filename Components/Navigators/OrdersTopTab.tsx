@@ -7,7 +7,7 @@ import { AddOrder } from '../Pages/Mobi/OwnerPages/Orders/AddOrder';
 import { AllOrders } from '../Pages/Mobi/OwnerPages/Orders/AllOrders';
 import { OrdersSearch } from '../Pages/Mobi/OwnerPages/Orders/OrdersSearch';
 import { OrdersAddField } from '../Pages/Mobi/OwnerPages/Orders/OrdersAddField';
-import { OrdersAddWorker } from '../Pages/Mobi/OwnerPages/Orders/OrdersAddWorker';
+import { AssignedWorkers } from '../Pages/Mobi/OwnerPages/Orders/AssignedWorkers';
 import { OrdersLocations } from '../Pages/Mobi/OwnerPages/Orders/OrdersLocations';
 import { OrdersManageWorkers } from '../Pages/Mobi/OwnerPages/Orders/OrdersManageWorkers';
 import { OrdersDetails } from '../Pages/Mobi/OwnerPages/Orders/OrdersDetails';
@@ -49,8 +49,8 @@ export function OrdersTopTab() {
       />
       <TabNavigator.Screen
         options={topLabelOff}
-        name="ordersAddWorker"
-        component={OrdersAddWorker}
+        name="assignedWorkers"
+        component={AssignedWorkers}
       />
       <TabNavigator.Screen
         options={topLabelOff}
