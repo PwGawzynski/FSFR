@@ -23,15 +23,14 @@ export function FieldList({
     ['fields', orderId],
     ({ queryKey }) => getAllFieldsByOrderId(`${queryKey[1]}`),
   );
-  console.log(orderConnectedFields === undefined);
   const fieldList = useMemo(() => {
     return (
       <FieldTableRow
         fields={orderConnectedFields}
         navigation={navigation}
-        lPOff
+        lPOff={lPOff}
         columnNames={shownFieldKeys}
-        checkOn
+        checkOn={checkOn}
         setSelected={setSelected}
       />
     );
