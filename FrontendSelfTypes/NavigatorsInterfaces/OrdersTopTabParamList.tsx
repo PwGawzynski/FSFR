@@ -15,7 +15,7 @@ export type OrdersTopTabParamList = {
 
   allOrders: undefined;
 
-  ordersFinishAndAccount: undefined;
+  ordersFinishAndAccount: { orderId?: string };
 
   ordersSearch: undefined;
 };
