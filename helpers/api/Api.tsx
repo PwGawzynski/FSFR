@@ -22,6 +22,7 @@ import {
   FieldI,
   NewClientShortCreateI,
   NewOrderI,
+  OrderBaseI,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export class Api {
@@ -277,6 +278,11 @@ export class Api {
 
   static async addNewOrder(data: NewOrderI) {
     console.log('NEW ORDER DATA: ', data);
+    return true;
+  }
+
+  static async orderFinishAndAccount(data: OrderBaseI) {
+    console.log('ORDER UPDATE SET_PRICE_PER_UNIT', data);
     return true;
   }
 
