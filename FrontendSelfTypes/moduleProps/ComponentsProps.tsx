@@ -9,7 +9,6 @@ import {
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { bool } from 'yup';
 import {
   ForgotPasswordBase,
   LoginBase,
@@ -272,6 +271,17 @@ export interface FieldI {
   name: string;
 }
 
+export interface OrderAccountingField extends FieldI {
+  price: number;
+  priceWTax: number;
+}
+export interface OrderAccountingFieldListProps {
+  fields: Array<OrderAccountingField>;
+}
+
+export interface OrderAccountingFieldListItemProps {
+  item: OrderAccountingField;
+}
 export interface OrderDetailsHeaderProps {
   onButtonClick: () => void;
   headerText: string;
@@ -368,4 +378,55 @@ export interface FieldTableHeadersProps {
   checkOn?: true;
   lPOff?: true;
   columnNames: Array<{ key: keyof FieldI; alternativeName?: string }>;
+}
+
+export interface TableSettings<T> {
+  field: keyof T;
+  header: string;
+  colWidth?: string;
+}
+
+export interface TableProps<T extends Record<string, any>> {
+  navigation: CompositeNavigationProp<
+    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    StackNavigationProp<OwnerDesktopRootStackParamList, any>
+  >;
+  columns: Array<TableSettings<T>>;
+  rows: Array<T>;
+  checkBoxSelection?: true;
+  onSelect?: (rowElement: T) => void;
+  LP?: true;
+}
+
+export interface AccountingPdfContentI {
+  header: string;
+  headerFooter: string;
+  documentBottomFooter: string;
+  priceSum: string;
+  priceWTaxSum: string;
+}
+
+export interface NumericInputProps {
+  value: string;
+  setter: React.Dispatch<React.SetStateAction<string>>;
+  label: string;
+  onBlur?:
+    | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
+    | undefined;
+  additionalBoxStyles?: string;
+}
+
+export type OrderAccountingPrintColumnsSettings = Array<
+  TableSettings<OrderAccountingField>
+>;
+
+export interface AccountingSummaryAndPrintProps {
+  fields: Array<OrderAccountingField>;
+  columnsSettings: OrderAccountingPrintColumnsSettings;
+}
+
+export interface PriceSetterProps {
+  price: string;
+  setPrice: React.Dispatch<React.SetStateAction<string>>;
+  setReRender?: React.Dispatch<React.SetStateAction<boolean>>;
 }
