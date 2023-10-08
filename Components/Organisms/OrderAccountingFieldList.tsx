@@ -1,7 +1,14 @@
 import { FlatList } from 'react-native';
 import React, { memo } from 'react';
-import { OrderAccountingFieldListProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import {
+  AccountingFieldFlatListItem,
+  OrderAccountingFieldListProps,
+} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { OrderAccountingFieldListItem } from '../Molecules/OrderAccountingFieldListItem';
+
+function RenderField({ item }: AccountingFieldFlatListItem) {
+  return <OrderAccountingFieldListItem item={item} />;
+}
 
 const OrderAccountingFieldList = memo(
   ({ fields }: OrderAccountingFieldListProps) => {
@@ -11,7 +18,7 @@ const OrderAccountingFieldList = memo(
         keyExtractor={item => item.fieldId}
         showsVerticalScrollIndicator={false}
         data={fields}
-        renderItem={({ item }) => <OrderAccountingFieldListItem item={item} />}
+        renderItem={RenderField}
       />
     );
   },
