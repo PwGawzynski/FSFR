@@ -209,6 +209,8 @@ export interface OrderBaseI {
   area: number;
   status: OrderStats;
 
+  pricePerUnit?: number;
+
   doneArea: number;
 }
 
@@ -432,4 +434,7 @@ export interface PriceSetterProps {
   price: string;
   setPrice: React.Dispatch<React.SetStateAction<string>>;
   setReRender?: React.Dispatch<React.SetStateAction<boolean>>;
+  onCalculatePress?: () => void;
+  onSavePress?: () => void;
+  calculateOption?: true;
 }

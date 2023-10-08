@@ -23,3 +23,14 @@ export async function addNewOrder(
     return undefined;
   }
 }
+
+export async function orderFinishAndAccount(
+  data: OrderBaseI,
+): Promise<boolean | undefined> {
+  try {
+    console.log(await Api.orderFinishAndAccount(data));
+    return Api.orderFinishAndAccount(data);
+  } catch (e) {
+    return undefined;
+  }
+}

@@ -6,7 +6,7 @@ export function TitleValueInfoComponent({
   keys,
 }: OrderDetailsInfoProps) {
   return (
-    <View className="flex flex-col ">
+    <View className="flex flex-col">
       {titles.map((t, index) => (
         <View className="flex flex-row mt-2" key={Math.random()}>
           <Text className="flex-1 uppercase text-lg font-bold text-left">
