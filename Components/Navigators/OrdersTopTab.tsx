@@ -11,6 +11,7 @@ import { AssignedWorkers } from '../Pages/Mobi/OwnerPages/Orders/AssignedWorkers
 import { OrdersLocations } from '../Pages/Mobi/OwnerPages/Orders/OrdersLocations';
 import { OrdersManageWorkers } from '../Pages/Mobi/OwnerPages/Orders/OrdersManageWorkers';
 import { OrdersDetails } from '../Pages/Mobi/OwnerPages/Orders/OrdersDetails';
+import { OrderFinishAndAccount } from '../Pages/Mobi/OwnerPages/Orders/OrderFinishAndAccount';
 
 const TabNavigator = createMaterialTopTabNavigator<OrdersTopTabParamList>();
 
@@ -55,7 +56,7 @@ export function OrdersTopTab() {
       <TabNavigator.Screen
         options={topLabelOff}
         name="ordersFinishAndAccount"
-        component={OrdersAddField}
+        component={OrderFinishAndAccount}
       />
       <TabNavigator.Screen
         options={topLabelOff}
