@@ -275,6 +275,9 @@ export interface OrderAccountingField extends FieldI {
   price: number;
   priceWTax: number;
 }
+export interface AccountingFieldFlatListItem {
+  item: OrderAccountingField;
+}
 export interface OrderAccountingFieldListProps {
   fields: Array<OrderAccountingField>;
 }
