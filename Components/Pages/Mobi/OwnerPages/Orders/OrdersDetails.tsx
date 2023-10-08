@@ -94,7 +94,9 @@ export function OrdersDetails({
               />
             </View>
             <AppButton
-              action={() => console.log('Finish and account')}
+              action={() =>
+                navigation.navigate('ordersFinishAndAccount', { orderId })
+              }
               context="Finish and account"
               additionalStyles="bg-[#279840]"
             />
