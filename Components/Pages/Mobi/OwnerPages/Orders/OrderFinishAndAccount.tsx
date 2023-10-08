@@ -1,6 +1,6 @@
 import { SafeAreaView, Text, View } from 'react-native';
-import { useQuery } from 'react-query';
-import React, { useMemo, useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
+import React, { useEffect, useMemo, useState } from 'react';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 import {
@@ -9,12 +9,14 @@ import {
   OrderAccountingPrintColumnsSettings,
   OrderBaseI,
   OrderStats,
+  TaskType,
 } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { LineDivider } from '../../../../Atoms/LineDivider';
 import { TitleValueInfoComponent } from '../../../../Atoms/TitleValueInfoComponent';
 import { AccountingSummaryAndPrint } from '../../../../Molecules/AccountingSummaryAndPrint';
 import { PriceSetter } from '../../../../Molecules/PriceSetter';
 import OrderAccountingFieldList from '../../../../Organisms/OrderAccountingFieldList';
+import { orderFinishAndAccount } from '../../../../../helpers/api/Services/OrdersService';
 
 const fieldDataColumnSettings: OrderAccountingPrintColumnsSettings = [
   {
@@ -84,6 +86,17 @@ export function OrderFinishAndAccount({
     [orderConnectedFields, reRenderListIndicator],
   );
 
+  const { isSuccess, mutate: accountOrder } = useMutation(
+    orderFinishAndAccount,
+  );
+
+  useEffect(() => {
+    if (isSuccess)
+      navigation.navigate('OperationConfirmed', {
+        redirectScreenName: 'ordersRoot',
+        shownMessage: `It's done, your client will receive mail with invoice and accounting details within fev minutes`,
+      });
+  }, [isSuccess]);
   return (
     <SafeAreaView className="flex w-max h-full flex-col ml-4 mr-4">
       <ScreenTitleHeader variant="lg" additionalStyles="w-full">
@@ -91,19 +104,13 @@ export function OrderFinishAndAccount({
       </ScreenTitleHeader>
       {order && (
         <TitleValueInfoComponent
-          titles={[
-            'purchaser',
-            'performance date',
-            'area',
-            'status',
-            'rest area',
-          ]}
+          titles={['purchaser', 'performance date', 'area', 'status', 'type']}
           keys={[
             order.client,
             order.performanceDate,
             order.area.toString(),
             OrderStats[order.status],
-            (order.area - order.doneArea).toFixed(2),
+            TaskType[order.type],
           ]}
         />
       )}
@@ -112,10 +119,11 @@ export function OrderFinishAndAccount({
           price={pricePerHa}
           setPrice={setPricePerHa}
           setReRender={setReRenderListIndicator}
+          onSavePress={() => order && accountOrder(order)}
         />
       )}
       {fieldsData && (
-        <View className="h-1/2 mt-4">
+        <View className="flex-1 mt-4">
           <ScreenTitleHeader variant="sm" additionalTextStyles="text-[#279840]">
             Fields info
           </ScreenTitleHeader>
@@ -125,12 +133,14 @@ export function OrderFinishAndAccount({
         </View>
       )}
 
-      {fieldsData && (
-        <AccountingSummaryAndPrint
-          fields={fieldsData}
-          columnsSettings={fieldDataColumnSettings}
-        />
-      )}
+      <View className="flex-[0.5] max-h-[80] mb-2">
+        {fieldsData && (
+          <AccountingSummaryAndPrint
+            fields={fieldsData}
+            columnsSettings={fieldDataColumnSettings}
+          />
+        )}
+      </View>
     </SafeAreaView>
   );
 }
