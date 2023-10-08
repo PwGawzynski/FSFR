@@ -10,11 +10,11 @@ import {
   OrderBaseI,
   OrderStats,
 } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
-import { OrderAccountingFieldList } from '../../../../Organisms/OrderAccountingFieldList';
 import { LineDivider } from '../../../../Atoms/LineDivider';
 import { TitleValueInfoComponent } from '../../../../Atoms/TitleValueInfoComponent';
 import { AccountingSummaryAndPrint } from '../../../../Molecules/AccountingSummaryAndPrint';
 import { PriceSetter } from '../../../../Molecules/PriceSetter';
+import OrderAccountingFieldList from '../../../../Organisms/OrderAccountingFieldList';
 
 const fieldDataColumnSettings: OrderAccountingPrintColumnsSettings = [
   {
