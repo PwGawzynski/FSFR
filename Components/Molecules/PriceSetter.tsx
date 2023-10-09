@@ -11,6 +11,7 @@ export function PriceSetter({
   onCalculatePress,
   onSavePress,
   onBlur,
+  calculateOption,
 }: PriceSetterProps) {
   return (
     <View className="flex-col justify-center">
@@ -25,16 +26,20 @@ export function PriceSetter({
         label="Price Per Ha"
       />
       <View className="grow w-full flex-row justify-between items-center">
+        {calculateOption && (
+          <AppButton
+            additionalStyles="bg-[#808080] mt-2 w-1/3"
+            action={() => {
+              if (setReRender) setReRender(prevState => !prevState);
+              if (onCalculatePress) onCalculatePress();
+            }}
+            context="calculate"
+          />
+        )}
         <AppButton
-          additionalStyles="bg-[#808080] mt-2 w-1/3"
-          action={() => {
-            if (setReRender) setReRender(prevState => !prevState);
-            if (onCalculatePress) onCalculatePress();
-          }}
-          context="calculate"
-        />
-        <AppButton
-          additionalStyles="bg-[#279840] mt-2 w-1/2"
+          additionalStyles={`bg-[#279840] mt-2 w-1/2 ${
+            !calculateOption && 'w-full'
+          }`}
           action={() => {
             if (setReRender) setReRender(prevState => !prevState);
             if (onSavePress) onSavePress();
