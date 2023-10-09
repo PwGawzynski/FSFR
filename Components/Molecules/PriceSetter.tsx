@@ -10,12 +10,16 @@ export function PriceSetter({
   setReRender,
   onCalculatePress,
   onSavePress,
+  onBlur,
 }: PriceSetterProps) {
   return (
     <View className="flex-col justify-center">
       <NumericInput
         additionalBoxStyles="flex-grow-0"
-        onBlur={() => setReRender && setReRender(prevState => !prevState)}
+        onBlur={e => {
+          if (setReRender) setReRender(prevState => !prevState);
+          if (onBlur) onBlur(e);
+        }}
         value={price}
         setter={setPrice}
         label="Price Per Ha"
