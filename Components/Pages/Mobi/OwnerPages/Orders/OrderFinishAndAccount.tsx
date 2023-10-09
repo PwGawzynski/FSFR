@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { useMutation, useQuery } from 'react-query';
 import React, { useEffect, useMemo, useState } from 'react';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
@@ -126,6 +126,7 @@ export function OrderFinishAndAccount({
             </ErrorInfoText>
           )}
           <PriceSetter
+            calculateOption
             price={pricePerHa}
             setPrice={setPricePerHa}
             setReRender={setReRenderListIndicator}
