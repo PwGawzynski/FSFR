@@ -7,7 +7,10 @@ import {
   TextInputFocusEventData,
 } from 'react-native';
 import { CompositeNavigationProp } from '@react-navigation/native';
-import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
+import {
+  MaterialTopTabNavigationProp,
+  MaterialTopTabScreenProps,
+} from '@react-navigation/material-top-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
 import {
   ForgotPasswordBase,
@@ -280,6 +283,16 @@ export interface OrderAccountingField extends FieldI {
 export interface AccountingFieldFlatListItem {
   item: OrderAccountingField;
 }
+export interface OrderListItemI {
+  item: OrderBaseI;
+  navigation: CompositeNavigationProp<
+    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    StackNavigationProp<OwnerDesktopRootStackParamList, any>
+  >;
+}
+export interface OrderListRenderItem {
+  item: OrderBaseI;
+}
 export interface OrderAccountingFieldListProps {
   fields: Array<OrderAccountingField>;
 }
@@ -440,4 +453,21 @@ export interface PriceSetterProps {
   onBlur?:
     | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
     | undefined;
+}
+
+export interface OrdersListProps {
+  navigation: CompositeNavigationProp<
+    MaterialTopTabNavigationProp<OrdersTopTabParamList, 'ordersRoot'>,
+    StackNavigationProp<OwnerDesktopRootStackParamList, 'orders'>
+  >;
+  route: MaterialTopTabScreenProps<
+    OrdersTopTabParamList,
+    'ordersRoot'
+  >['route'];
+  sort?: ((a: OrderBaseI, b: OrderBaseI) => number) | undefined;
+}
+export interface SmallHeaderProps {
+  children: string;
+  additionalBoxStyles?: string;
+  additionalTextStyles?: string;
 }
