@@ -17,6 +17,7 @@ import { AccountingSummaryAndPrint } from '../../../../Molecules/AccountingSumma
 import { PriceSetter } from '../../../../Molecules/PriceSetter';
 import OrderAccountingFieldList from '../../../../Organisms/OrderAccountingFieldList';
 import { orderFinishAndAccount } from '../../../../../helpers/api/Services/OrdersService';
+import { ErrorInfoText } from '../../../../Atoms/ErrorInfoText';
 
 const fieldDataColumnSettings: OrderAccountingPrintColumnsSettings = [
   {
@@ -61,6 +62,8 @@ export function OrderFinishAndAccount({
   route,
   navigation,
 }: OwnerMobiOrdersTopTabProps<'ordersFinishAndAccount', 'orders'>) {
+  const DEF_PRICE_PER_HA = '0.00';
+
   const orderId = route.params?.orderId;
   const { data: orderConnectedFields } = useQuery<Array<FieldI> | undefined>([
     'fields',
@@ -69,8 +72,9 @@ export function OrderFinishAndAccount({
   const { data } = useQuery<Array<OrderBaseI> | undefined>('orders');
   const order = data?.find(orderItem => orderItem.taskId === orderId);
 
-  const [pricePerHa, setPricePerHa] = useState<string>('0.00');
+  const [pricePerHa, setPricePerHa] = useState<string>(DEF_PRICE_PER_HA);
   const [reRenderListIndicator, setReRenderListIndicator] = useState(false);
+  const [validationError, setValidationError] = useState(false);
   const PRICE_PER_HA = Number(pricePerHa);
   const fieldsData = useMemo(
     () =>
@@ -115,12 +119,25 @@ export function OrderFinishAndAccount({
         />
       )}
       {fieldsData && (
-        <PriceSetter
-          price={pricePerHa}
-          setPrice={setPricePerHa}
-          setReRender={setReRenderListIndicator}
-          onSavePress={() => order && accountOrder(order)}
-        />
+        <View>
+          {validationError && (
+            <ErrorInfoText additionalStyles="text-center">
+              Set price per ha
+            </ErrorInfoText>
+          )}
+          <PriceSetter
+            price={pricePerHa}
+            setPrice={setPricePerHa}
+            setReRender={setReRenderListIndicator}
+            onSavePress={() => {
+              if (order && pricePerHa !== DEF_PRICE_PER_HA) accountOrder(order);
+              if (pricePerHa === DEF_PRICE_PER_HA) setValidationError(true);
+            }}
+            onBlur={() =>
+              pricePerHa !== DEF_PRICE_PER_HA && setValidationError(false)
+            }
+          />
+        </View>
       )}
       {fieldsData && (
         <View className="flex-1 mt-4">

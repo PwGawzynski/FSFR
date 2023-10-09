@@ -437,4 +437,7 @@ export interface PriceSetterProps {
   onCalculatePress?: () => void;
   onSavePress?: () => void;
   calculateOption?: true;
+  onBlur?:
+    | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
+    | undefined;
 }
