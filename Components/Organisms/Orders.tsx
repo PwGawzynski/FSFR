@@ -9,6 +9,7 @@ import {
   OrdersListProps,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getAllOrders } from '../../helpers/api/Services/OrdersService';
+import { OrdersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersTopTabParamList';
 
 function OrderListItem({ item: order, navigation }: OrderListItemI) {
   return (
@@ -29,26 +30,34 @@ function OrderListItem({ item: order, navigation }: OrderListItemI) {
   );
 }
 
-const Orders = memo(({ navigation, sort }: OrdersListProps) => {
-  console.log('OrdersListRerender');
-  const { data: orders } = useQuery<Array<OrderBaseI> | undefined>(
-    'orders',
-    getAllOrders,
-  );
-  const ordersData = sort ? orders?.sort(sort) : orders;
-  const RenderItem = ({ item }: OrderListRenderItem) =>
-    OrderListItem({ item, navigation });
+const Orders = memo(
+  <T extends keyof OrdersTopTabParamList>({
+    navigation,
+    sort,
+    filterMethod,
+  }: OrdersListProps<T>) => {
+    const { data: orders } = useQuery<Array<OrderBaseI> | undefined>(
+      'orders',
+      getAllOrders,
+    );
+    const ordersDataSorted = sort && orders?.sort(sort);
+    const ordersDataFiltered = filterMethod && orders?.filter(filterMethod);
+    const RenderItem = ({ item }: OrderListRenderItem) =>
+      OrderListItem({ item, navigation });
 
-  return (
-    <FlatList
-      data={ordersData}
-      keyExtractor={item => item.taskId}
-      renderItem={RenderItem}
-      className="flex-1 h-max"
-      showsVerticalScrollIndicator={false}
-    />
-  );
-});
+    return (
+      <FlatList
+        data={ordersDataSorted || ordersDataFiltered || orders}
+        keyExtractor={item => item.taskId}
+        renderItem={RenderItem}
+        className="flex-1 h-max"
+        showsVerticalScrollIndicator={false}
+      />
+    );
+  },
+  (prevProps, nextProps) =>
+    prevProps.reloadIndicator === nextProps.reloadIndicator,
+);
 
 Orders.displayName = 'Orders';
 export default Orders;
