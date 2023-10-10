@@ -10,6 +10,7 @@ import {
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getAllOrders } from '../../helpers/api/Services/OrdersService';
 import { OrdersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersTopTabParamList';
+import { LoadingAnimation } from '../Atoms/LoadingAnimation';
 
 function OrderListItem({ item: order, navigation }: OrderListItemI) {
   return (
@@ -35,6 +36,7 @@ const Orders = memo(
     navigation,
     sort,
     filterMethod,
+    ListEmptyComponent,
   }: OrdersListProps<T>) => {
     const { data: orders } = useQuery<Array<OrderBaseI> | undefined>(
       'orders',
@@ -44,15 +46,17 @@ const Orders = memo(
     const ordersDataFiltered = filterMethod && orders?.filter(filterMethod);
     const RenderItem = ({ item }: OrderListRenderItem) =>
       OrderListItem({ item, navigation });
-
-    return (
+    return orders || ordersDataSorted || ordersDataFiltered ? (
       <FlatList
+        ListEmptyComponent={ListEmptyComponent}
         data={ordersDataSorted || ordersDataFiltered || orders}
         keyExtractor={item => item.taskId}
         renderItem={RenderItem}
         className="flex-1 h-max"
         showsVerticalScrollIndicator={false}
       />
+    ) : (
+      <LoadingAnimation />
     );
   },
   (prevProps, nextProps) =>
