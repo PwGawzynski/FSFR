@@ -1,10 +1,11 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import {
   TextInput,
   TextInputProps,
   ImageProps,
   NativeSyntheticEvent,
   TextInputFocusEventData,
+  GestureResponderEvent,
 } from 'react-native';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import {
@@ -455,19 +456,37 @@ export interface PriceSetterProps {
     | undefined;
 }
 
-export interface OrdersListProps {
+export interface OrdersListProps<T extends keyof OrdersTopTabParamList> {
   navigation: CompositeNavigationProp<
-    MaterialTopTabNavigationProp<OrdersTopTabParamList, 'ordersRoot'>,
+    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
     StackNavigationProp<OwnerDesktopRootStackParamList, 'orders'>
   >;
-  route: MaterialTopTabScreenProps<
-    OrdersTopTabParamList,
-    'ordersRoot'
-  >['route'];
+  route: MaterialTopTabScreenProps<OrdersTopTabParamList, T>['route'];
   sort?: ((a: OrderBaseI, b: OrderBaseI) => number) | undefined;
+  filterMethod?: ((order: OrderBaseI) => boolean) | undefined;
+  reloadIndicator?: any;
+  ListEmptyComponent?: ReactElement;
 }
 export interface SmallHeaderProps {
   children: string;
   additionalBoxStyles?: string;
   additionalTextStyles?: string;
+}
+
+export interface MagnifierButtonProps {
+  onPress?: (event: GestureResponderEvent) => void | undefined;
+}
+
+export interface searchEngineProps {
+  value?: string;
+  onChangeText?: ((text: string) => void) | undefined;
+  /**
+   * text value is only updated when search-magnifier click
+   */
+  onSearchPress?: ((text: string) => void) | undefined;
+}
+
+export interface EmptyListProps {
+  text: string;
+  children: ReactNode;
 }
