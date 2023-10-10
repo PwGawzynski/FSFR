@@ -253,7 +253,9 @@ export class Api {
   static async getAllOrders() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const data = require('../../tmpData');
-    return data;
+    return new Promise(resolve => {
+      setTimeout(() => resolve(data), 6000);
+    });
   }
 
   static async getWorkers() {
