@@ -10,10 +10,12 @@ export function OrdersList<T extends keyof OrdersTopTabParamList>({
   sort,
   filterMethod,
   reloadIndicator,
+  ListEmptyComponent,
 }: OrdersListProps<T>) {
   return (
     <View className="flex-1 flex flex-col">
       <Orders
+        ListEmptyComponent={ListEmptyComponent}
         reloadIndicator={reloadIndicator}
         navigation={navigation}
         route={route}
