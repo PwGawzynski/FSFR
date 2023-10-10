@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import {
   TextInput,
   TextInputProps,
@@ -465,6 +465,7 @@ export interface OrdersListProps<T extends keyof OrdersTopTabParamList> {
   sort?: ((a: OrderBaseI, b: OrderBaseI) => number) | undefined;
   filterMethod?: ((order: OrderBaseI) => boolean) | undefined;
   reloadIndicator?: any;
+  ListEmptyComponent?: ReactElement;
 }
 export interface SmallHeaderProps {
   children: string;
@@ -483,4 +484,9 @@ export interface searchEngineProps {
    * text value is only updated when search-magnifier click
    */
   onSearchPress?: ((text: string) => void) | undefined;
+}
+
+export interface EmptyListProps {
+  text: string;
+  children: ReactNode;
 }
