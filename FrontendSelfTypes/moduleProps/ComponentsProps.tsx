@@ -490,3 +490,9 @@ export interface EmptyListProps {
   text: string;
   children: ReactNode;
 }
+
+export interface FiltersSetterProps<T> {
+  optionsRows: Array<Array<keyof T>>;
+  onFilterOnOff: (filterName: keyof T) => void;
+  filterOn: keyof T | undefined;
+}

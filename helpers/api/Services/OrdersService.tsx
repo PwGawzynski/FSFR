@@ -7,6 +7,8 @@ import {
 export async function getAllOrders(): Promise<Array<OrderBaseI> | undefined> {
   try {
     const data = await Api.getAllOrders();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return data.orders as Array<OrderBaseI>;
   } catch (e) {
     return undefined;
