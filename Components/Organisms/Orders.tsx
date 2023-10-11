@@ -51,10 +51,10 @@ const Orders = memo(
 
     const RenderItem = ({ item }: OrderListRenderItem) =>
       OrderListItem({ item, navigation });
-    return orders || ordersDataSorted || ordersDataFiltered ? (
+    return ordersData ? (
       <FlatList
         ListEmptyComponent={ListEmptyComponent}
-        data={ordersDataSorted || ordersDataFiltered || orders}
+        data={ordersData}
         keyExtractor={item => item.taskId}
         renderItem={RenderItem}
         className="flex-1 h-max"
