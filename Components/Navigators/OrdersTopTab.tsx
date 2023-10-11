@@ -18,7 +18,7 @@ const TabNavigator = createMaterialTopTabNavigator<OrdersTopTabParamList>();
 
 export function OrdersTopTab() {
   return (
-    <TabNavigator.Navigator>
+    <TabNavigator.Navigator initialRouteName="ordersRoot">
       <TabNavigator.Screen
         options={topLabelOff}
         name="ordersRoot"
