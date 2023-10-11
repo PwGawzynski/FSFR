@@ -12,6 +12,7 @@ import { OrdersLocations } from '../Pages/Mobi/OwnerPages/Orders/OrdersLocations
 import { OrdersManageWorkers } from '../Pages/Mobi/OwnerPages/Orders/OrdersManageWorkers';
 import { OrdersDetails } from '../Pages/Mobi/OwnerPages/Orders/OrdersDetails';
 import { OrderFinishAndAccount } from '../Pages/Mobi/OwnerPages/Orders/OrderFinishAndAccount';
+import { OrdersHistory } from '../Pages/Mobi/OwnerPages/Orders/OrdersHistory';
 
 const TabNavigator = createMaterialTopTabNavigator<OrdersTopTabParamList>();
 
@@ -22,6 +23,11 @@ export function OrdersTopTab() {
         options={topLabelOff}
         name="ordersRoot"
         component={OrdersRoot}
+      />
+      <TabNavigator.Screen
+        options={topLabelOff}
+        name="ordersHistory"
+        component={OrdersHistory}
       />
       <TabNavigator.Screen
         options={topLabelOff}
