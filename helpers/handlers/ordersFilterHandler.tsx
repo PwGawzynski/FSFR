@@ -41,3 +41,6 @@ export const doneOrdersFilterMethod = (
 
 export const UpcomingOrdersFilter = (order: OrderBaseI) =>
   order.status !== OrderStatus.Done;
+
+export const filterByStatus = (order: OrderBaseI, searchStatusValue: string) =>
+  OrderStatus[order.status] === searchStatusValue;
