@@ -1,7 +1,4 @@
-import {
-  CardStyleInterpolators,
-  createStackNavigator,
-} from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 import { WorkersTabNavigator } from './WorkersTopTab';
 import { OrdersTopTab } from './OrdersTopTab';
@@ -10,7 +7,7 @@ import { OperationConfirmedAnimation } from '../Pages/Mobi/Common/OperationConfi
 import { OperationDanger } from '../Pages/Mobi/Common/OperationDanger';
 import { FieldsTopTab } from './FieldsTopTab';
 
-const Stack = createStackNavigator<OwnerDesktopRootStackParamList>();
+const Stack = createNativeStackNavigator<OwnerDesktopRootStackParamList>();
 
 export function OwnerDesktopMobiRootStack() {
   return (
@@ -19,60 +16,51 @@ export function OwnerDesktopMobiRootStack() {
         name="desktop"
         component={DesktopTopTab}
         options={{
-          headerShown: false,
           gestureDirection: 'vertical',
-          gestureResponseDistance: 800,
-          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+          headerShown: false,
+          gestureEnabled: true,
         }}
       />
       <Stack.Screen
         name="orders"
         component={OrdersTopTab}
         options={{
-          headerShown: false,
           gestureDirection: 'vertical',
-          gestureResponseDistance: 800,
-          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+          headerShown: false,
+          gestureEnabled: true,
         }}
       />
       <Stack.Screen
         name="workers"
         component={WorkersTabNavigator}
         options={{
-          headerShown: false,
           gestureDirection: 'vertical',
-          gestureResponseDistance: 800,
-          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+          headerShown: false,
+          gestureEnabled: true,
         }}
       />
       <Stack.Screen
         name="OperationConfirmed"
         component={OperationConfirmedAnimation}
         options={{
-          headerShown: false,
           gestureDirection: 'vertical',
-          gestureResponseDistance: 800,
-          cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name="OperationDanger"
         component={OperationDanger}
         options={{
-          headerShown: false,
           gestureDirection: 'vertical',
-          gestureResponseDistance: 800,
-          cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name="fields"
         component={FieldsTopTab}
         options={{
-          headerShown: false,
           gestureDirection: 'vertical',
-          gestureResponseDistance: 800,
-          cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
