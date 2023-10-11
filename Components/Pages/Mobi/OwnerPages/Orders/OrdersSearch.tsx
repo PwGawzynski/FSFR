@@ -2,6 +2,7 @@ import { SafeAreaView } from 'react-native';
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { OrdersListSearchAndFilter } from '../../../../Organisms/OrdersListSearchAndFilter';
+import { UpcomingOrdersFilter } from '../../../../../helpers/handlers/ordersFilterHandler';
 
 export function OrdersSearch({
   route,
@@ -15,7 +16,11 @@ export function OrdersSearch({
       >
         Search Order
       </ScreenTitleHeader>
-      <OrdersListSearchAndFilter navigation={navigation} route={route} />
+      <OrdersListSearchAndFilter
+        navigation={navigation}
+        route={route}
+        filterMethod={UpcomingOrdersFilter}
+      />
     </SafeAreaView>
   );
 }
