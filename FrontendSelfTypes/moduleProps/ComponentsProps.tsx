@@ -16,6 +16,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import {
   ForgotPasswordBase,
   LoginBase,
+  OwnerMobiDesktopRootStackProps,
   RegisterAskBase,
   RegisterTabFormBase,
 } from '../navigation/types';
@@ -195,7 +196,7 @@ export enum TaskType {
   Harvesting,
 }
 
-export enum OrderStats {
+export enum OrderStatus {
   Added,
   Confirmed,
   Done,
@@ -211,7 +212,7 @@ export interface OrderBaseI {
   client: string;
 
   area: number;
-  status: OrderStats;
+  status: OrderStatus;
 
   pricePerUnit?: number;
 
@@ -477,7 +478,7 @@ export interface MagnifierButtonProps {
   onPress?: (event: GestureResponderEvent) => void | undefined;
 }
 
-export interface searchEngineProps {
+export interface SearchEngineProps {
   value?: string;
   onChangeText?: ((text: string) => void) | undefined;
   /**
@@ -488,11 +489,33 @@ export interface searchEngineProps {
 
 export interface EmptyListProps {
   text: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export interface FiltersSetterProps<T> {
   optionsRows: Array<Array<keyof T>>;
   onFilterOnOff: (filterName: keyof T) => void;
   filterOn: keyof T | undefined;
+}
+
+export type SearchModuleInterfaceBasedProps<T> = FiltersSetterProps<T> &
+  SearchEngineProps;
+
+export interface OrdersListSearchAndFilterProps<
+  T extends keyof OrdersTopTabParamList,
+  N extends keyof OwnerDesktopRootStackParamList,
+> {
+  navigation: CompositeNavigationProp<
+    MaterialTopTabScreenProps<OrdersTopTabParamList, T>['navigation'],
+    OwnerMobiDesktopRootStackProps<N>['navigation']
+  >;
+  route: MaterialTopTabScreenProps<OrdersTopTabParamList, T>['route'];
+  filterMethod?:
+    | ((
+        Order: OrderBaseI,
+        filter: keyof OrderBaseI,
+        searchValue: string,
+        initSearchValue?: string,
+      ) => boolean)
+    | undefined;
 }

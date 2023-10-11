@@ -1,13 +1,13 @@
 import { TextInput, View } from 'react-native';
 import { useState } from 'react';
 import { MagnifierButton } from '../Molecules/MagnifierButton';
-import { searchEngineProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { SearchEngineProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function SearchEngine({
   onSearchPress,
   onChangeText,
   value,
-}: searchEngineProps) {
+}: SearchEngineProps) {
   const [searchValue, setSearchValue] = useState('');
   return (
     <View className="flex-row justify-between w-max items-center">

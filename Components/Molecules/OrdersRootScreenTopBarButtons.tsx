@@ -10,7 +10,7 @@ export function OrdersRootScreenTopBarButtons({
   return (
     <View className="flex-1 flex items-center w-full flex-row">
       <AppButton
-        action={() => console.log('History')}
+        action={() => navigation.navigate('ordersHistory')}
         context="History"
         additionalStyles="flex-1 h-8 mr-32"
       />

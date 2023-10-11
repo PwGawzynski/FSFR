@@ -42,14 +42,19 @@ const Orders = memo(
       'orders',
       getAllOrders,
     );
-    const ordersDataSorted = sort && orders?.sort(sort);
-    const ordersDataFiltered = filterMethod && orders?.filter(filterMethod);
+    const ordersData =
+      (orders &&
+        ((sort && filterMethod && orders.sort(sort).filter(filterMethod)) ||
+          (sort && orders.sort(sort)) ||
+          (filterMethod && orders.filter(filterMethod)))) ||
+      orders;
+
     const RenderItem = ({ item }: OrderListRenderItem) =>
       OrderListItem({ item, navigation });
-    return orders || ordersDataSorted || ordersDataFiltered ? (
+    return ordersData ? (
       <FlatList
         ListEmptyComponent={ListEmptyComponent}
-        data={ordersDataSorted || ordersDataFiltered || orders}
+        data={ordersData}
         keyExtractor={item => item.taskId}
         renderItem={RenderItem}
         className="flex-1 h-max"

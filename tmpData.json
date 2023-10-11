@@ -120,7 +120,7 @@
     },
     {
       "area": 200,
-      "status": 0,
+      "status": 2,
       "doneArea": 193.9,
       "taskId": "63780ffc-ccc9-4a83-a88c-b084be9e7216",
       "name": "Kordeyś koszenie",
@@ -132,7 +132,7 @@
     },
     {
       "area": 200,
-      "status": 0,
+      "status": 2,
       "doneArea": 193.9,
       "taskId": "e4c88ef7-10a4-44a6-8aff-ff8189ca5939",
       "name": "Kordeyś koszenie",

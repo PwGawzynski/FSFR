@@ -4,6 +4,7 @@ import { OrdersRootScreenTopBar } from '../../../../Organisms/OrdersRootScreenTo
 import { OrdersList } from '../../../../Organisms/OrdersList';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { SmallHeader } from '../../../../Molecules/SmallHeader';
+import { UpcomingOrdersFilter } from '../../../../../helpers/handlers/ordersFilterHandler';
 
 export function OrdersRoot({
   route,
@@ -16,6 +17,7 @@ export function OrdersRoot({
       <OrdersList
         navigation={navigation}
         route={route}
+        filterMethod={UpcomingOrdersFilter}
         sort={(a, b) =>
           new Date(a.performanceDate).getTime() >=
           new Date(b.performanceDate).getTime()
