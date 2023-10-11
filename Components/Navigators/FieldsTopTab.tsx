@@ -7,7 +7,7 @@ export function FieldsTopTab() {
   const TabNavigator = createMaterialTopTabNavigator<FieldTopTabParamList>();
 
   return (
-    <TabNavigator.Navigator>
+    <TabNavigator.Navigator initialRouteName="fieldDetails">
       <TabNavigator.Screen
         options={topLabelOff}
         name="fieldDetails"

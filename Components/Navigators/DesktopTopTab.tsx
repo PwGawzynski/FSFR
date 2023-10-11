@@ -8,7 +8,7 @@ const TabNavigator = createMaterialTopTabNavigator<DesktopTopTabParamList>();
 
 export function DesktopTopTab() {
   return (
-    <TabNavigator.Navigator>
+    <TabNavigator.Navigator initialRouteName="desktopRoot">
       <TabNavigator.Screen
         options={topLabelOff}
         name="desktopRoot"
