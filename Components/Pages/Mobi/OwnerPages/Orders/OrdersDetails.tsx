@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import {
   OrderBaseI,
-  OrderStats,
+  OrderStatus,
   TaskType,
 } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { AppButton } from '../../../../Atoms/AppButton';
@@ -47,7 +47,7 @@ export function OrdersDetails({
               order.client,
               order.performanceDate,
               order.area.toString(),
-              OrderStats[order.status],
+              OrderStatus[order.status],
               (order.area - order.doneArea).toFixed(2),
             ]}
           />
