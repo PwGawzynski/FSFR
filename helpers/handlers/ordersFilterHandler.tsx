@@ -9,7 +9,6 @@ export const defaultOrdersFilterMethod = (
   searchValue: string,
   initSearchValue = '',
 ) => {
-  console.log('def fn sort invoked');
   if (order[filter]) {
     if (searchValue === initSearchValue) return true;
     if (typeof order[filter] === 'string')
