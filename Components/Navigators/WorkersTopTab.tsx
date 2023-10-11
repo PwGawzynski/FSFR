@@ -13,9 +13,9 @@ const TabNavigator = createMaterialTopTabNavigator<WorkersTopTabParamList>();
 
 export function WorkersTabNavigator() {
   return (
-    <TabNavigator.Navigator>
+    <TabNavigator.Navigator initialRouteName="workersRoot">
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={{ ...topLabelOff }}
         name="workersRoot"
         component={WorkersRoot}
       />
