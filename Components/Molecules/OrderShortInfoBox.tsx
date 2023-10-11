@@ -2,6 +2,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import {
   OrderProps,
+  OrderStatus,
   TaskType,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
@@ -11,13 +12,20 @@ export function OrderShortInfoBox({
   client,
   performanceDate,
   navigation,
+  status,
 }: OrderProps) {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('orderDetails', { orderId: taskId })}
-      className="w-max h-32 flex flex-row rounded-2xl border-dotted border-black border-2 mb-8"
+      className={`w-max h-32 flex flex-row rounded-2xl border-dotted ${
+        status === OrderStatus.Done ? 'border-[#848484]' : 'border-black'
+      } border-2 mb-8`}
     >
-      <TouchableOpacity className="w-1/2 h-8 items-center justify-center bg-black absolute top-28 left-1/4 rounded-full">
+      <TouchableOpacity
+        className={`w-1/2 h-8 items-center justify-center ${
+          status === OrderStatus.Done ? 'bg-[#848484]' : 'bg-black'
+        } absolute top-28 left-1/4 rounded-full`}
+      >
         <Text className="text-lg font-bold text-white uppercase">More</Text>
       </TouchableOpacity>
       <View className="flex-col flex-1 flex">
