@@ -8,7 +8,7 @@ import {
   OrderAccountingField,
   OrderAccountingPrintColumnsSettings,
   OrderBaseI,
-  OrderStats,
+  OrderStatus,
   TaskType,
 } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { LineDivider } from '../../../../Atoms/LineDivider';
@@ -113,7 +113,7 @@ export function OrderFinishAndAccount({
             order.client,
             order.performanceDate,
             order.area.toString(),
-            OrderStats[order.status],
+            OrderStatus[order.status],
             TaskType[order.type],
           ]}
         />
