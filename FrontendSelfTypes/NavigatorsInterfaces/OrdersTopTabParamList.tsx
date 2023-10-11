@@ -7,6 +7,8 @@ export type OrdersTopTabParamList = {
   orderDetails: {
     orderId: string | undefined;
   };
+  ordersHistory: undefined;
+
   ordersManageWorkers: undefined;
 
   assignedWorkers: { orderId?: string };
