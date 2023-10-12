@@ -8,21 +8,20 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 import { CompositeNavigationProp } from '@react-navigation/native';
-import {
-  MaterialTopTabNavigationProp,
-  MaterialTopTabScreenProps,
-} from '@react-navigation/material-top-tabs';
+import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
 import {
   ForgotPasswordBase,
   LoginBase,
-  OwnerMobiDesktopRootStackProps,
+  OwnerOrdersMaterialRootNavigationProps,
+  OwnerOrdersMaterialRootRouteProps,
   RegisterAskBase,
   RegisterTabFormBase,
 } from '../navigation/types';
 import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
 import { OrdersTopTabParamList } from '../NavigatorsInterfaces/OrdersTopTabParamList';
 import { OwnerDesktopRootStackParamList } from '../NavigatorsInterfaces/OwnerDesktopRootStackParamList';
+import { MaterialOrdersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 
 export interface AppButtonProps {
   action: () => void;
@@ -224,11 +223,12 @@ export type NewOrderI = Omit<
   'taskId' | 'clientId' | 'area' | 'status' | 'doneArea'
 >;
 
-export interface OrderProps extends OrderBaseI {
-  navigation: CompositeNavigationProp<
-    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
-    StackNavigationProp<OwnerDesktopRootStackParamList, any>
-  >;
+export interface OrderProps<
+  T extends keyof MaterialOrdersRootTopTabParamList,
+  N extends keyof OrdersTopTabParamList,
+  M extends keyof OwnerDesktopRootStackParamList,
+> extends OrderBaseI {
+  navigation: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
 }
 
 export interface NewClientShortCreateI {
@@ -285,12 +285,13 @@ export interface OrderAccountingField extends FieldI {
 export interface AccountingFieldFlatListItem {
   item: OrderAccountingField;
 }
-export interface OrderListItemI {
+export interface OrderListItemI<
+  T extends keyof MaterialOrdersRootTopTabParamList,
+  N extends keyof OrdersTopTabParamList,
+  M extends keyof OwnerDesktopRootStackParamList,
+> {
   item: OrderBaseI;
-  navigation: CompositeNavigationProp<
-    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
-    StackNavigationProp<OwnerDesktopRootStackParamList, any>
-  >;
+  navigation: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
 }
 export interface OrderListRenderItem {
   item: OrderBaseI;
@@ -457,12 +458,13 @@ export interface PriceSetterProps {
     | undefined;
 }
 
-export interface OrdersListProps<T extends keyof OrdersTopTabParamList> {
-  navigation: CompositeNavigationProp<
-    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
-    StackNavigationProp<OwnerDesktopRootStackParamList, 'orders'>
-  >;
-  route: MaterialTopTabScreenProps<OrdersTopTabParamList, T>['route'];
+export interface OrdersListProps<
+  T extends keyof MaterialOrdersRootTopTabParamList,
+  N extends keyof OrdersTopTabParamList,
+  M extends keyof OwnerDesktopRootStackParamList,
+> {
+  navigation: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
+  route: OwnerOrdersMaterialRootRouteProps<T>;
   sort?: ((a: OrderBaseI, b: OrderBaseI) => number) | undefined;
   filterMethod?: ((order: OrderBaseI) => boolean) | undefined;
   reloadIndicator?: any;
@@ -502,14 +504,12 @@ export type SearchModuleInterfaceBasedProps<T> = FiltersSetterProps<T> &
   SearchEngineProps;
 
 export interface OrdersListSearchAndFilterProps<
-  T extends keyof OrdersTopTabParamList,
-  N extends keyof OwnerDesktopRootStackParamList,
+  T extends keyof MaterialOrdersRootTopTabParamList,
+  N extends keyof OrdersTopTabParamList,
+  M extends keyof OwnerDesktopRootStackParamList,
 > {
-  navigation: CompositeNavigationProp<
-    MaterialTopTabScreenProps<OrdersTopTabParamList, T>['navigation'],
-    OwnerMobiDesktopRootStackProps<N>['navigation']
-  >;
-  route: MaterialTopTabScreenProps<OrdersTopTabParamList, T>['route'];
+  navigation: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
+  route: OwnerOrdersMaterialRootRouteProps<T>;
   filterMethod?:
     | ((
         Order: OrderBaseI,
