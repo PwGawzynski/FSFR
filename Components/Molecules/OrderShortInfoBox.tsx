@@ -1,19 +1,21 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
   OrderProps,
   OrderStatus,
   TaskType,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { OwnerMobiOrdersTopTabProps } from '../../FrontendSelfTypes/navigation/types';
 
 export function OrderShortInfoBox({
   type,
   taskId,
   client,
   performanceDate,
-  navigation,
   status,
 }: OrderProps) {
+  const navigation = useNavigation<any>();
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('orderDetails', { orderId: taskId })}
