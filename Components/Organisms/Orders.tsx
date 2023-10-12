@@ -14,17 +14,12 @@ import { LoadingAnimation } from '../Atoms/LoadingAnimation';
 import { MaterialOrdersRootTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 
-function OrderListItem<
-  T extends keyof MaterialOrdersRootTopTabParamList,
-  N extends keyof OrdersTopTabParamList,
-  M extends keyof OwnerDesktopRootStackParamList,
->({ item: order, navigation }: OrderListItemI<T, N, M>) {
+function OrderListItem({ item: order }: OrderListItemI) {
   return (
     <OrderShortInfoBox
       area={order.area}
       status={order.status}
       doneArea={order.doneArea}
-      navigation={navigation}
       key={order.taskId}
       taskId={order.taskId}
       name={order.name}
@@ -41,12 +36,7 @@ function MemoizedOrders<
   T extends keyof MaterialOrdersRootTopTabParamList,
   N extends keyof OrdersTopTabParamList,
   M extends keyof OwnerDesktopRootStackParamList,
->({
-  navigation,
-  sort,
-  filterMethod,
-  ListEmptyComponent,
-}: OrdersListProps<T, N, M>) {
+>({ sort, filterMethod, ListEmptyComponent }: OrdersListProps) {
   const { data: orders } = useQuery<Array<OrderBaseI> | undefined>(
     'orders',
     getAllOrders,
@@ -58,8 +48,7 @@ function MemoizedOrders<
         (filterMethod && orders.filter(filterMethod)))) ||
     orders;
 
-  const RenderItem = ({ item }: OrderListRenderItem) =>
-    OrderListItem({ item, navigation });
+  const RenderItem = ({ item }: OrderListRenderItem) => OrderListItem({ item });
   return ordersData ? (
     <FlatList
       ListEmptyComponent={ListEmptyComponent}
