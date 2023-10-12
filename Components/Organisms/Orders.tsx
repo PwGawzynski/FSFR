@@ -32,11 +32,11 @@ function OrderListItem({ item: order }: OrderListItemI) {
   );
 }
 
-function MemoizedOrders<
-  T extends keyof MaterialOrdersRootTopTabParamList,
-  N extends keyof OrdersTopTabParamList,
-  M extends keyof OwnerDesktopRootStackParamList,
->({ sort, filterMethod, ListEmptyComponent }: OrdersListProps) {
+function MemoizedOrders({
+  sort,
+  filterMethod,
+  ListEmptyComponent,
+}: OrdersListProps) {
   const { data: orders } = useQuery<Array<OrderBaseI> | undefined>(
     'orders',
     getAllOrders,
