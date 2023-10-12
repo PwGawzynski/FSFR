@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { WorkersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/WorkersTopTabParamList';
 import { WorkersRoot } from '../Pages/Mobi/OwnerPages/Workers/WorkersRoot';
-import { topLabelOff } from '../../helpers/style/TopLabelOff';
+import { OrdersStackScreenOptions } from '../../helpers/style/OrdersStackScreenOptions';
 import { WorkerDetails } from '../Pages/Mobi/OwnerPages/Workers/WorkerDetails';
 import { WorkerSearch } from '../Pages/Mobi/OwnerPages/Workers/WorkerSearch';
 import { WorkersLocations } from '../Pages/Mobi/OwnerPages/Workers/WorkersLocations';
@@ -15,37 +15,37 @@ export function WorkersTabNavigator() {
   return (
     <TabNavigator.Navigator initialRouteName="workersRoot">
       <TabNavigator.Screen
-        options={{ ...topLabelOff }}
+        options={OrdersStackScreenOptions}
         name="workersRoot"
         component={WorkersRoot}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="addWorker"
         component={AddWorker}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="workerDetails"
         component={WorkerDetails}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="workerSearch"
         component={WorkerSearch}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="workersLocation"
         component={WorkersLocations}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="workerWorkDayDetails"
         component={WorkerWorkDayDetails}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="workerWorkDaysInfo"
         component={WorkerWorkDaysInfo}
       />

@@ -1,6 +1,6 @@
 import { MaterialTopTabNavigationOptions } from '@react-navigation/material-top-tabs';
 
-export const topLabelOff = {
+export const MaterialTopTabScreenOptions = {
   tabBarStyle: {
     backgroundColor: 'transparent',
     elevation: 0,
@@ -17,4 +17,5 @@ export const topLabelOff = {
     backgroundColor: 'transparent',
   },
   tabBarShowLabel: false,
+  headerShown: false,
 } as MaterialTopTabNavigationOptions;

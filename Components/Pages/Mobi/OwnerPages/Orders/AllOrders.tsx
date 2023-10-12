@@ -5,13 +5,13 @@ import { FiltersSetter } from '../../../../Molecules/FiltersSetter';
 import { EmptyListInfo } from '../../../../Molecules/EmptyListInfo';
 import { filterByStatus } from '../../../../../helpers/handlers/ordersFilterHandler';
 import { OrdersList } from '../../../../Organisms/OrdersList';
-import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
+import { OwnerOrdersMaterialRootProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 
 export function AllOrders({
   navigation,
   route,
-}: OwnerMobiOrdersTopTabProps<'allOrders', 'orders'>) {
+}: OwnerOrdersMaterialRootProps<'materialOrdersRoot', 'ordersRoot', 'orders'>) {
   const INIT_FILTER_NAME: string = OrderStatus[OrderStatus.Added];
   const filterValues = Object.keys(OrderStatus).filter(enumValue =>
     Number.isNaN(Number(enumValue)),

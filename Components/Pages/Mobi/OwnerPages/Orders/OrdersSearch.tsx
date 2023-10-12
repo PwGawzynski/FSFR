@@ -1,13 +1,13 @@
 import { SafeAreaView } from 'react-native';
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
-import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
+import { OwnerOrdersMaterialRootProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { OrdersListSearchAndFilter } from '../../../../Organisms/OrdersListSearchAndFilter';
-import { UpcomingOrdersFilter } from '../../../../../helpers/handlers/ordersFilterHandler';
+import { OnlyOpenOrdersFilter } from '../../../../../helpers/handlers/ordersFilterHandler';
 
 export function OrdersSearch({
   route,
   navigation,
-}: OwnerMobiOrdersTopTabProps<'ordersSearch', 'orders'>) {
+}: OwnerOrdersMaterialRootProps<'ordersSearch', 'ordersRoot', 'orders'>) {
   return (
     <SafeAreaView className="flex-col h-full justify-center mr-4 ml-4 ">
       <ScreenTitleHeader
@@ -19,7 +19,7 @@ export function OrdersSearch({
       <OrdersListSearchAndFilter
         navigation={navigation}
         route={route}
-        filterMethod={UpcomingOrdersFilter}
+        filterMethod={OnlyOpenOrdersFilter}
       />
     </SafeAreaView>
   );

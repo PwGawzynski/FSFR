@@ -37,9 +37,25 @@ export const doneOrdersFilterMethod = (
   }
   return false;
 };
-
-export const UpcomingOrdersFilter = (order: OrderBaseI) =>
+export const RemDoneOrdersFilter = (order: OrderBaseI) =>
   order.status !== OrderStatus.Done;
+
+export const OnlyOpenOrdersFilter = (
+  order: OrderBaseI,
+  filter: keyof OrderBaseI,
+  searchValue: string,
+  initSearchValue = '',
+) => {
+  if (order.status !== OrderStatus.Done) {
+    return defaultOrdersFilterMethod(
+      order,
+      filter,
+      searchValue,
+      initSearchValue,
+    );
+  }
+  return false;
+};
 
 export const filterByStatus = (order: OrderBaseI, searchStatusValue: string) =>
   OrderStatus[order.status] === searchStatusValue;

@@ -10,11 +10,17 @@ import { EmptyListInfo } from '../Molecules/EmptyListInfo';
 import { OrdersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersTopTabParamList';
 import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 import { defaultOrdersFilterMethod } from '../../helpers/handlers/ordersFilterHandler';
+import { MaterialOrdersRootTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 
 export function OrdersListSearchAndFilter<
-  T extends keyof OrdersTopTabParamList,
-  N extends keyof OwnerDesktopRootStackParamList,
->({ route, navigation, filterMethod }: OrdersListSearchAndFilterProps<T, N>) {
+  T extends keyof MaterialOrdersRootTopTabParamList,
+  N extends keyof OrdersTopTabParamList,
+  M extends keyof OwnerDesktopRootStackParamList,
+>({
+  route,
+  navigation,
+  filterMethod,
+}: OrdersListSearchAndFilterProps<T, N, M>) {
   const INIT_SEARCH_VALUE = '';
   const INIT_FILTER_NAME: keyof OrderBaseI = 'name';
   const [searchValue, setSearchValue] = useState(INIT_SEARCH_VALUE);

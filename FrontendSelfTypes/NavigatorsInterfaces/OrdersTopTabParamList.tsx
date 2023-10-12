@@ -1,7 +1,7 @@
-export type OrdersTopTabParamList = {
-  ordersRoot: undefined;
-  addOrder: undefined;
+import { MaterialOrdersRootTopTabParamList } from './MaterialOrdersRootTopTabParamLIst';
 
+export type OrdersTopTabParamList = {
+  ordersRoot: MaterialOrdersRootTopTabParamList;
   ordersLocations: undefined;
 
   orderDetails: {
@@ -18,6 +18,4 @@ export type OrdersTopTabParamList = {
   allOrders: undefined;
 
   ordersFinishAndAccount: { orderId?: string };
-
-  ordersSearch: undefined;
 };

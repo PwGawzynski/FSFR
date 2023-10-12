@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { FieldTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/FieldTopTabParamList';
 import { FieldDetails } from '../Pages/Mobi/OwnerPages/Fields/FieldDetails';
-import { topLabelOff } from '../../helpers/style/TopLabelOff';
+import { OrdersStackScreenOptions } from '../../helpers/style/OrdersStackScreenOptions';
 
 export function FieldsTopTab() {
   const TabNavigator = createMaterialTopTabNavigator<FieldTopTabParamList>();
@@ -9,7 +9,7 @@ export function FieldsTopTab() {
   return (
     <TabNavigator.Navigator initialRouteName="fieldDetails">
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="fieldDetails"
         component={FieldDetails}
       />
