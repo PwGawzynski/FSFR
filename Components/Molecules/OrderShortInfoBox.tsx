@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
   OrderProps,
   OrderStatus,
@@ -11,9 +12,10 @@ export function OrderShortInfoBox({
   taskId,
   client,
   performanceDate,
-  navigation,
   status,
 }: OrderProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const navigation = useNavigation<any>();
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('orderDetails', { orderId: taskId })}

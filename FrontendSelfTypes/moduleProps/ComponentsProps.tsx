@@ -223,13 +223,7 @@ export type NewOrderI = Omit<
   'taskId' | 'clientId' | 'area' | 'status' | 'doneArea'
 >;
 
-export interface OrderProps<
-  T extends keyof MaterialOrdersRootTopTabParamList,
-  N extends keyof OrdersTopTabParamList,
-  M extends keyof OwnerDesktopRootStackParamList,
-> extends OrderBaseI {
-  navigation: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
-}
+export type OrderProps = OrderBaseI;
 
 export interface NewClientShortCreateI {
   name: string;
@@ -285,13 +279,8 @@ export interface OrderAccountingField extends FieldI {
 export interface AccountingFieldFlatListItem {
   item: OrderAccountingField;
 }
-export interface OrderListItemI<
-  T extends keyof MaterialOrdersRootTopTabParamList,
-  N extends keyof OrdersTopTabParamList,
-  M extends keyof OwnerDesktopRootStackParamList,
-> {
+export interface OrderListItemI {
   item: OrderBaseI;
-  navigation: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
 }
 export interface OrderListRenderItem {
   item: OrderBaseI;
@@ -466,13 +455,7 @@ export interface PriceSetterProps {
     | undefined;
 }
 
-export interface OrdersListProps<
-  T extends keyof MaterialOrdersRootTopTabParamList,
-  N extends keyof OrdersTopTabParamList,
-  M extends keyof OwnerDesktopRootStackParamList,
-> {
-  navigation: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
-  route: OwnerOrdersMaterialRootRouteProps<T>;
+export interface OrdersListProps {
   sort?: ((a: OrderBaseI, b: OrderBaseI) => number) | undefined;
   filterMethod?: ((order: OrderBaseI) => boolean) | undefined;
   reloadIndicator?: unknown;

@@ -10,6 +10,7 @@ import { OrdersDetails } from '../Pages/Mobi/OwnerPages/Orders/OrdersDetails';
 import { OrderFinishAndAccount } from '../Pages/Mobi/OwnerPages/Orders/OrderFinishAndAccount';
 import { OrdersHistory } from '../Pages/Mobi/OwnerPages/Orders/OrdersHistory';
 import { MaterialOrdersRootTopTab } from './MaterialOrdersRootTopTab';
+import { AllOrders } from '../Pages/Mobi/OwnerPages/Orders/AllOrders';
 
 const TabNavigator = createNativeStackNavigator<OrdersTopTabParamList>();
 
@@ -20,6 +21,11 @@ export function OrdersTopTab() {
         options={OrdersStackScreenOptions}
         name="ordersHistory"
         component={OrdersHistory}
+      />
+      <TabNavigator.Screen
+        options={OrdersStackScreenOptions}
+        name="allOrders"
+        component={AllOrders}
       />
       <TabNavigator.Screen
         options={OrdersStackScreenOptions}
