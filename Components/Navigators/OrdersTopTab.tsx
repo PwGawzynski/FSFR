@@ -1,11 +1,7 @@
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { OrdersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersTopTabParamList';
 
-import { topLabelOff } from '../../helpers/style/TopLabelOff';
-import { OrdersRoot } from '../Pages/Mobi/OwnerPages/Orders/OrdersRoot';
-import { AddOrder } from '../Pages/Mobi/OwnerPages/Orders/AddOrder';
-import { AllOrders } from '../Pages/Mobi/OwnerPages/Orders/AllOrders';
-import { OrdersSearch } from '../Pages/Mobi/OwnerPages/Orders/OrdersSearch';
+import { OrdersStackScreenOptions } from '../../helpers/style/OrdersStackScreenOptions';
 import { OrdersAddField } from '../Pages/Mobi/OwnerPages/Orders/OrdersAddField';
 import { AssignedWorkers } from '../Pages/Mobi/OwnerPages/Orders/AssignedWorkers';
 import { OrdersLocations } from '../Pages/Mobi/OwnerPages/Orders/OrdersLocations';
@@ -13,64 +9,50 @@ import { OrdersManageWorkers } from '../Pages/Mobi/OwnerPages/Orders/OrdersManag
 import { OrdersDetails } from '../Pages/Mobi/OwnerPages/Orders/OrdersDetails';
 import { OrderFinishAndAccount } from '../Pages/Mobi/OwnerPages/Orders/OrderFinishAndAccount';
 import { OrdersHistory } from '../Pages/Mobi/OwnerPages/Orders/OrdersHistory';
+import { MaterialOrdersRootTopTab } from './MaterialOrdersRootTopTab';
 
-const TabNavigator = createMaterialTopTabNavigator<OrdersTopTabParamList>();
+const TabNavigator = createNativeStackNavigator<OrdersTopTabParamList>();
 
 export function OrdersTopTab() {
   return (
     <TabNavigator.Navigator initialRouteName="ordersRoot">
       <TabNavigator.Screen
-        options={topLabelOff}
-        name="ordersRoot"
-        component={OrdersRoot}
-      />
-      <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="ordersHistory"
         component={OrdersHistory}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
-        name="addOrder"
-        component={AddOrder}
+        options={OrdersStackScreenOptions}
+        name="ordersRoot"
+        component={MaterialOrdersRootTopTab}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="orderDetails"
         component={OrdersDetails}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
-        name="allOrders"
-        component={AllOrders}
-      />
-      <TabNavigator.Screen
-        options={topLabelOff}
-        name="ordersSearch"
-        component={OrdersSearch}
-      />
-      <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="ordersAddField"
         component={OrdersAddField}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="assignedWorkers"
         component={AssignedWorkers}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="ordersFinishAndAccount"
         component={OrderFinishAndAccount}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="ordersLocations"
         component={OrdersLocations}
       />
       <TabNavigator.Screen
-        options={topLabelOff}
+        options={OrdersStackScreenOptions}
         name="ordersManageWorkers"
         component={OrdersManageWorkers}
       />
