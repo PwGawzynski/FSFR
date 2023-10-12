@@ -474,7 +474,14 @@ export interface OrdersListProps<
   navigation: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
   route: OwnerOrdersMaterialRootRouteProps<T>;
   sort?: ((a: OrderBaseI, b: OrderBaseI) => number) | undefined;
-  filterMethod?: ((order: OrderBaseI) => boolean) | undefined;
+  filterMethod?:
+    | ((
+        Order: OrderBaseI,
+        filter: keyof OrderBaseI,
+        searchValue: string,
+        initSearchValue?: string,
+      ) => boolean)
+    | undefined;
   reloadIndicator?: unknown;
   ListEmptyComponent?: ReactElement;
 }
