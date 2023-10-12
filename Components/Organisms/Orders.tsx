@@ -1,5 +1,5 @@
 import { FlatList } from 'react-native';
-import React, { Component, FunctionComponent, memo } from 'react';
+import React, { memo } from 'react';
 import { useQuery } from 'react-query';
 import { OrderShortInfoBox } from '../Molecules/OrderShortInfoBox';
 import {
