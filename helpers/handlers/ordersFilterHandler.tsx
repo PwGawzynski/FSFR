@@ -37,6 +37,8 @@ export const doneOrdersFilterMethod = (
   }
   return false;
 };
+export const RemDoneOrdersFilter = (order: OrderBaseI) =>
+  order.status !== OrderStatus.Done;
 
 export const OnlyOpenOrdersFilter = (
   order: OrderBaseI,
