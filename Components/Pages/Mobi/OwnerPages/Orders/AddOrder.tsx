@@ -7,7 +7,7 @@ import {
   TaskType,
 } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { addNewOrder } from '../../../../../helpers/api/Services/OrdersService';
-import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
+import { OwnerOrdersMaterialRootProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { AddNewClientShortService } from '../../../../../helpers/api/Services/Client';
 import { useValidation } from '../../../../../helpers/hooks/validationHook';
 import {
@@ -32,7 +32,7 @@ const initClient = (): NewClientShortCreateI => ({
 });
 export function AddOrder({
   navigation,
-}: OwnerMobiOrdersTopTabProps<'addOrder', 'orders'>) {
+}: OwnerOrdersMaterialRootProps<'addOrder', 'ordersRoot', 'orders'>) {
   const {
     isSuccess: hasOrderBeenAdded,
     mutate: createNewOrder,
