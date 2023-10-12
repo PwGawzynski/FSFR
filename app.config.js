@@ -1,7 +1,12 @@
-module.exports = {
-  name: 'FarmService',
-  version: '1.0.0',
-  extra: {
-    apiUrl: '192.168.55.104',
-  },
+import { address } from 'ip';
+
+// eslint-disable-next-line no-console
+console.log(
+  `Server is running using IP address  ${address()} as backend default`,
+);
+
+export const name = 'FarmService';
+export const version = '1.0.0';
+export const extra = {
+  apiUrl: address(),
 };
