@@ -1,12 +1,12 @@
 import { View } from 'react-native';
 import React from 'react';
 import { AppButton } from '../Atoms/AppButton';
-import { OwnerMobiOrdersTopTabProps } from '../../FrontendSelfTypes/navigation/types';
+import { OwnerOrdersMaterialRootProps } from '../../FrontendSelfTypes/navigation/types';
 import { MagnifierButton } from './MagnifierButton';
 
 export function OrdersRootScreenTopBarButtons({
   navigation,
-}: OwnerMobiOrdersTopTabProps<'ordersRoot', 'orders'>) {
+}: OwnerOrdersMaterialRootProps<'materialOrdersRoot', 'ordersRoot', 'orders'>) {
   return (
     <View className="flex-1 flex items-center w-full flex-row">
       <AppButton
