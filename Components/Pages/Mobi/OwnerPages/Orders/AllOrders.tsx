@@ -5,13 +5,9 @@ import { FiltersSetter } from '../../../../Molecules/FiltersSetter';
 import { EmptyListInfo } from '../../../../Molecules/EmptyListInfo';
 import { filterByStatus } from '../../../../../helpers/handlers/ordersFilterHandler';
 import { OrdersList } from '../../../../Organisms/OrdersList';
-import { OwnerOrdersMaterialRootProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 
-export function AllOrders({
-  navigation,
-  route,
-}: OwnerOrdersMaterialRootProps<'materialOrdersRoot', 'ordersRoot', 'orders'>) {
+export function AllOrders() {
   const INIT_FILTER_NAME: string = OrderStatus[OrderStatus.Added];
   const filterValues = Object.keys(OrderStatus).filter(enumValue =>
     Number.isNaN(Number(enumValue)),
@@ -29,8 +25,6 @@ export function AllOrders({
       />
       <OrdersList
         ListEmptyComponent={<EmptyListInfo text="Nothing to see here..." />}
-        navigation={navigation}
-        route={route}
         filterMethod={order => filterByStatus(order, filter)}
         reloadIndicator={filter}
       />
