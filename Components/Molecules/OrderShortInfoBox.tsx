@@ -6,7 +6,6 @@ import {
   OrderStatus,
   TaskType,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
-import { OwnerMobiOrdersTopTabProps } from '../../FrontendSelfTypes/navigation/types';
 
 export function OrderShortInfoBox({
   type,
@@ -15,6 +14,7 @@ export function OrderShortInfoBox({
   performanceDate,
   status,
 }: OrderProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
   return (
     <TouchableOpacity
