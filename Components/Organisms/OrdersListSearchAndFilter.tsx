@@ -25,7 +25,6 @@ export function OrdersListSearchAndFilter<
   const INIT_FILTER_NAME: keyof OrderBaseI = 'name';
   const [searchValue, setSearchValue] = useState(INIT_SEARCH_VALUE);
   const [filter, setFilter] = useState<keyof OrderBaseI>(INIT_FILTER_NAME);
-  console.log('test');
   return (
     <>
       <SearchModuleInterfaceBased<OrderBaseI>
