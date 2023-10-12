@@ -328,7 +328,9 @@ export interface FieldListProps {
   checkOn?: true;
   orderId?: string;
   navigation: CompositeNavigationProp<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
   lPOff?: true;
@@ -373,7 +375,9 @@ export interface SelectWorkerPanelProps {
   validationError: boolean;
   setValidationError: React.Dispatch<React.SetStateAction<boolean>>;
   navigation: CompositeNavigationProp<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
 }
@@ -387,7 +391,9 @@ export interface AddNewTasksI {
 export interface FieldTableRowProps {
   fields: Array<FieldI> | undefined;
   navigation: CompositeNavigationProp<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
   lPOff?: true;
@@ -406,10 +412,12 @@ export interface TableSettings<T> {
   header: string;
   colWidth?: string;
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface TableProps<T extends Record<string, any>> {
   navigation: CompositeNavigationProp<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
   columns: Array<TableSettings<T>>;
@@ -467,7 +475,7 @@ export interface OrdersListProps<
   route: OwnerOrdersMaterialRootRouteProps<T>;
   sort?: ((a: OrderBaseI, b: OrderBaseI) => number) | undefined;
   filterMethod?: ((order: OrderBaseI) => boolean) | undefined;
-  reloadIndicator?: any;
+  reloadIndicator?: unknown;
   ListEmptyComponent?: ReactElement;
 }
 export interface SmallHeaderProps {
