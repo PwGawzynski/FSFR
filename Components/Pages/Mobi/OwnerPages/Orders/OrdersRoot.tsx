@@ -2,12 +2,9 @@ import { SafeAreaView } from 'react-native';
 import React from 'react';
 import { OrdersRootScreenTopBar } from '../../../../Organisms/OrdersRootScreenTopBar';
 import { OrdersList } from '../../../../Organisms/OrdersList';
-import {
-  OwnerMobiOrdersTopTabProps,
-  OwnerOrdersMaterialRootProps,
-} from '../../../../../FrontendSelfTypes/navigation/types';
+import { OwnerOrdersMaterialRootProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { SmallHeader } from '../../../../Molecules/SmallHeader';
-import { OnlyOpenOrdersFilter } from '../../../../../helpers/handlers/ordersFilterHandler';
+import { RemDoneOrdersFilter } from '../../../../../helpers/handlers/ordersFilterHandler';
 
 export function OrdersRoot({
   route,
@@ -20,7 +17,7 @@ export function OrdersRoot({
       <OrdersList
         navigation={navigation}
         route={route}
-        filterMethod={OnlyOpenOrdersFilter}
+        filterMethod={RemDoneOrdersFilter}
         sort={(a, b) =>
           new Date(a.performanceDate).getTime() >=
           new Date(b.performanceDate).getTime()
