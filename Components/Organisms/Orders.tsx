@@ -9,10 +9,7 @@ import {
   OrdersListProps,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getAllOrders } from '../../helpers/api/Services/OrdersService';
-import { OrdersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersTopTabParamList';
 import { LoadingAnimation } from '../Atoms/LoadingAnimation';
-import { MaterialOrdersRootTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
-import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 
 function OrderListItem({ item: order }: OrderListItemI) {
   return (
