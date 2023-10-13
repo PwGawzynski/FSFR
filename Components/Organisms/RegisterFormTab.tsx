@@ -4,8 +4,8 @@ import { LayoutAnimation, Platform, TextInput, UIManager } from 'react-native';
 import { DeviceType } from 'expo-device';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
-import { RegisterFormProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 import { AppSettings } from '../../helpers/appSettings/contexts';
+import { RegisterFormProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
   const { deviceType } = useContext(AppSettings).settings;
