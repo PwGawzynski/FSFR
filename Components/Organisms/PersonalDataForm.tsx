@@ -1,7 +1,6 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
-import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
 import {
   handleRestoreData,
@@ -11,6 +10,7 @@ import { NameAndSurnameData } from '../../FrontendSelfTypes/RegisterMobi/Registe
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 import { PersonalDataSchema } from '../../helpers/validation/mobileSchemas/PersonalDataSchema';
+import { RegisterMobiPropsBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function PersonalDataForm({
   navigation,
