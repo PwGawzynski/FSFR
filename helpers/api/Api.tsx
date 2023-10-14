@@ -297,4 +297,9 @@ export class Api {
     console.log('NEW CLIENT', data);
     return true;
   }
+
+  static async sendConfirmationAsk(data: string) {
+    console.log('CONFIRMATION ASK FOR ORDER_ID', data);
+    return true;
+  }
 }
