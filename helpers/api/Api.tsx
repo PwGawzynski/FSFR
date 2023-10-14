@@ -240,14 +240,12 @@ export class Api {
 
   static async getAllActivities() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const data = require('../../tmpData');
-    return data;
+    return require('../../tmpData');
   }
 
   static async getAllEvents() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const data = require('../../tmpData');
-    return data;
+    return require('../../tmpData');
   }
 
   static async getAllOrders() {
@@ -260,8 +258,7 @@ export class Api {
 
   static async getWorkers() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const data = require('../../tmpData');
-    return data;
+    return require('../../tmpData');
   }
 
   static async getAllFieldsByOrderId(id: string): Promise<Array<FieldI>> {
@@ -279,26 +276,31 @@ export class Api {
   }
 
   static async addNewOrder(data: NewOrderI) {
+    // eslint-disable-next-line no-console
     console.log('NEW ORDER DATA: ', data);
     return true;
   }
 
   static async orderFinishAndAccount(data: OrderBaseI) {
+    // eslint-disable-next-line no-console
     console.log('ORDER UPDATE SET_PRICE_PER_UNIT', data);
     return true;
   }
 
   static async addNewTasks(data: AddNewTasksI) {
+    // eslint-disable-next-line no-console
     console.log('NEW TASKS DATA: ', data);
     return true;
   }
 
   static async createNewClientShort(data: NewClientShortCreateI) {
+    // eslint-disable-next-line no-console
     console.log('NEW CLIENT', data);
     return true;
   }
 
   static async sendConfirmationAsk(data: string) {
+    // eslint-disable-next-line no-console
     console.log('CONFIRMATION ASK FOR ORDER_ID', data);
     return true;
   }
