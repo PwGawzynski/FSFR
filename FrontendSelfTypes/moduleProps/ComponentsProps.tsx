@@ -499,7 +499,7 @@ export interface OrdersListSearchAndFilterProps<
   N extends keyof OrdersTopTabParamList,
   M extends keyof OwnerDesktopRootStackParamList,
 > {
-  navigation: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
+  navigation?: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
   route: OwnerOrdersMaterialRootRouteProps<T>;
   filterMethod?:
     | ((

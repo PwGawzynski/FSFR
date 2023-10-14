@@ -15,8 +15,6 @@ export function OrdersRoot({
       <OrdersRootScreenTopBar navigation={navigation} route={route} />
       <SmallHeader>Upcoming Orders</SmallHeader>
       <OrdersList
-        navigation={navigation}
-        route={route}
         filterMethod={RemDoneOrdersFilter}
         sort={(a, b) =>
           new Date(a.performanceDate).getTime() >=

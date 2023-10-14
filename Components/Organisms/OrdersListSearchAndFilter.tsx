@@ -16,11 +16,7 @@ export function OrdersListSearchAndFilter<
   T extends keyof MaterialOrdersRootTopTabParamList,
   N extends keyof OrdersTopTabParamList,
   M extends keyof OwnerDesktopRootStackParamList,
->({
-  route,
-  navigation,
-  filterMethod,
-}: OrdersListSearchAndFilterProps<T, N, M>) {
+>({ filterMethod }: OrdersListSearchAndFilterProps<T, N, M>) {
   const INIT_SEARCH_VALUE = '';
   const INIT_FILTER_NAME: keyof OrderBaseI = 'name';
   const [searchValue, setSearchValue] = useState(INIT_SEARCH_VALUE);
@@ -39,8 +35,6 @@ export function OrdersListSearchAndFilter<
       <View className="flex-1 mt-8">
         <OrdersList
           ListEmptyComponent={<EmptyListInfo text="Nothing to see here..." />}
-          navigation={navigation}
-          route={route}
           filterMethod={order =>
             filterMethod
               ? filterMethod(order, filter, searchValue, INIT_SEARCH_VALUE)
