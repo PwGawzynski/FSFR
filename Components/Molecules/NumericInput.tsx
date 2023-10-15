@@ -8,10 +8,10 @@ export function NumericInput({
   setter,
   label,
   onBlur,
-  additionalBoxStyles,
+  abs,
 }: NumericInputProps) {
   return (
-    <View className={`grow flex-col ${additionalBoxStyles}`}>
+    <View className={`grow flex-col ${abs}`}>
       <TextInput
         onBlur={onBlur}
         textAlignVertical="center"
