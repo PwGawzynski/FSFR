@@ -15,7 +15,7 @@ export function AllOrders() {
   const [filter, setFilter] = useState<string>(INIT_FILTER_NAME);
   return (
     <SafeAreaView className="flex-col h-full justify-center mr-4 ml-4">
-      <ScreenTitleHeader variant="lg" additionalStyles="mb-8 mt-4">
+      <ScreenTitleHeader variant="lg" abs="mb-8 mt-4">
         All Orders
       </ScreenTitleHeader>
       <FiltersSetter
