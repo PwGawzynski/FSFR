@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
 import { InfoText } from '../Atoms/InfoText';
 import { AppInput } from '../Molecules/AppInput';
-import { AuthCodeData } from '../../frontendSelfTypes/ApiDataTypes/AuthCodeData';
 import { AppButton } from '../Atoms/AppButton';
+import { AuthCodeData } from '../../FrontendSelfTypes/ApiDataTypes/AuthCodeData';
 
 const codeSplitter = (code: string): string => {
   const clearStr = code.replace(/\s+/g, '');
@@ -19,7 +19,7 @@ export function AuthCode() {
   return (
     <View className="w-screen h-screen bg-white items-center flex-1">
       <LogoImageCurtain />
-      <InfoText additionalStyles="w-10/12 text-base mb-12 mt-24">
+      <InfoText abs="w-10/12 text-base mb-12 mt-24">
         We’ve sent you e-mail message on given address, please click on link
         inside it, to activate your account. This action is crucial to achieve
         safety for your data. After activation we will sent you sms message with
@@ -43,8 +43,8 @@ export function AuthCode() {
         setter={setData}
         ObjectKey="code"
         value={`${codeSplitter(data.code)}`}
-        additionalStyles="w-1/2"
-        additionalTextStyles="text-center text-3xl tracking-widest"
+        abs="w-1/2"
+        ats="text-center text-3xl tracking-widest"
       />
       <View
         className={`w-full  items-center flex-1 ${
@@ -52,7 +52,7 @@ export function AuthCode() {
         }`}
       >
         <AppButton
-          additionalStyles="w-9/12 mb-20 mt-4"
+          abs="w-9/12 mb-20 mt-4"
           action={() => console.log('Submit code')}
           context="confirm"
         />
