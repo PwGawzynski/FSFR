@@ -12,14 +12,14 @@ export function AppInput<T extends object>({
   underlyingLabel,
   ObjectKey,
   isPwd,
-  additionalStyles,
+  abs,
   keyboardType,
   onFocus,
   onDeFocus,
   refGetter,
   onSubmit,
   maxLength,
-  additionalTextStyles,
+  ats,
   keyboardHideOnSubmit,
   autoFocus,
 }: AppInputProps<T>) {
@@ -27,7 +27,7 @@ export function AppInput<T extends object>({
   const { settings } = context;
   const { theme } = settings;
   return (
-    <View className={`w-full  ${additionalStyles}`}>
+    <View className={`w-full  ${abs}`}>
       <TextInput
         autoFocus={autoFocus}
         blurOnSubmit={keyboardHideOnSubmit}
@@ -40,7 +40,7 @@ export function AppInput<T extends object>({
           theme === ThemeOptions.dark ? 'text-white' : 'text-black'
         } w-max border-solid border-b-4 ${
           theme === ThemeOptions.dark ? 'border-white' : 'border-black'
-        } text-lg pb-2 h-14 ${additionalTextStyles}`}
+        } text-lg pb-2 h-14 ${ats}`}
         autoCorrect={false}
         value={value}
         autoComplete={autoComplete ?? 'off'}
