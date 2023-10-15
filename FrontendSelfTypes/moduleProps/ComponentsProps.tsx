@@ -26,8 +26,8 @@ import { MaterialOrdersRootTopTabParamList } from '../NavigatorsInterfaces/Mater
 export interface AppButtonProps {
   action: () => void;
   context: string;
-  additionalStyles?: string;
-  additionalTextStyles?: string;
+  abs?: string;
+  ats?: string;
 }
 
 export interface AppInputProps<T extends object> {
@@ -64,8 +64,8 @@ export interface AppInputProps<T extends object> {
 
   maxLength?: number;
 
-  additionalStyles?: string;
-  additionalTextStyles?: string;
+  abs?: string;
+  ats?: string;
 
   keyboardHideOnSubmit?: boolean;
 
@@ -73,14 +73,14 @@ export interface AppInputProps<T extends object> {
 }
 
 export interface ForgotPasswordProps extends ForgotPasswordBase {
-  additionalTxtStyles?: string;
-  additionalBtnStyles?: string;
-  additionalStyles?: string;
+  ats?: string;
+  btnStyles?: string;
+  abs?: string;
 }
 
 export interface InfoTextProps {
   children: ReactNode;
-  additionalStyles?: string;
+  abs?: string;
 }
 
 export interface InputLabelProps {
@@ -101,21 +101,21 @@ export interface LogoImageAnimatedProps {
   onOff: boolean;
 }
 export interface LogoProps {
-  additionalBoxStyles?: string;
+  abs?: string;
   additionalImageStyles?: string;
 
   resizeMode?: ImageProps['resizeMode'];
 }
 
 export interface LogoImageProps {
-  additionalBoxStyles?: string;
+  abs?: string;
 
   resizeMode?: ImageProps['resizeMode'];
 }
 
 export interface RegisterAskProps extends RegisterAskBase {
-  additionalTxtStyles?: string;
-  additionalStyles?: string;
+  ats?: string;
+  abs?: string;
   additionalBtnStyles?: string;
 }
 
@@ -125,8 +125,8 @@ export interface RegisterFormProps extends RegisterTabFormBase {
 }
 
 export interface ScreenTitleHeaderProps {
-  additionalStyles?: string;
-  additionalTextStyles?: string;
+  abs?: string;
+  ats?: string;
   children: ReactNode;
 
   variant: 'sm' | 'lg';
@@ -134,7 +134,7 @@ export interface ScreenTitleHeaderProps {
 
 export interface ProfilePhotoProps {
   resizeMode?: ImageProps['resizeMode'];
-  additionalBoxStyles?: string;
+  abs?: string;
 
   additionalImageStyles?: string;
 
@@ -330,7 +330,7 @@ export interface FieldListProps {
 }
 
 export interface LineDividerProps {
-  additionalStyles?: string;
+  abs?: string;
 }
 
 export interface ContainerWCenteredLinedTextProps {
@@ -431,7 +431,7 @@ export interface NumericInputProps {
   onBlur?:
     | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
     | undefined;
-  additionalBoxStyles?: string;
+  abs?: string;
 }
 
 export type OrderAccountingPrintColumnsSettings = Array<
@@ -463,8 +463,8 @@ export interface OrdersListProps {
 }
 export interface SmallHeaderProps {
   children: string;
-  additionalBoxStyles?: string;
-  additionalTextStyles?: string;
+  abs?: string;
+  ats?: string;
 }
 
 export interface MagnifierButtonProps {

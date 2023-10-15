@@ -15,17 +15,14 @@ export function HeaderWithButton({
 }: OrderDetailsHeaderProps) {
   return (
     <View className={`flex justify-between flex-row  ${boxAdditionalStyles}`}>
-      <ScreenTitleHeader
-        variant={variant}
-        additionalStyles={`${headerAdditionalStyles}`}
-      >
+      <ScreenTitleHeader variant={variant} abs={`${headerAdditionalStyles}`}>
         {headerText}
       </ScreenTitleHeader>
       <AppButton
         action={onButtonClick}
         context={buttonText}
-        additionalStyles={`bg-[#279840] flex-1 ${buttonAdditionalStyles}`}
-        additionalTextStyles={`text-sm ${buttonTextAdditionalStyles}`}
+        abs={`bg-[#279840] flex-1 ${buttonAdditionalStyles}`}
+        ats={`text-sm ${buttonTextAdditionalStyles}`}
       />
     </View>
   );

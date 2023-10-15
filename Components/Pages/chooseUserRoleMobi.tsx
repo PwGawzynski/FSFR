@@ -1,7 +1,6 @@
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
-import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppButton } from '../Atoms/AppButton';
 import { AccountType } from '../Molecules/AccountType';
 import { BigBoldText } from '../Molecules/BigBoldText';
@@ -10,10 +9,10 @@ import {
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
 import { UserRoleMobiScreen } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
+import { RegisterMobiPropsBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function ChooseUserRoleMobi({
   navigation,
-  route,
 }: RegisterMobiPropsBase<'ChooseUserRole'>) {
   const [onFlag, setOnFlag] = useState({
     worker: true,
@@ -43,7 +42,7 @@ export function ChooseUserRoleMobi({
           );
         }}
         context="Next"
-        additionalStyles="w-11/12  mt-10"
+        abs="w-11/12  mt-10"
       />
     </View>
   );

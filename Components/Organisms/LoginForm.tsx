@@ -75,7 +75,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
             console.log(loginMutation.mutate(data));
           }}
           context="Login"
-          additionalStyles={`${deviceType === DeviceType.PHONE ? 'mt-10' : ''}`}
+          abs={`${deviceType === DeviceType.PHONE ? 'mt-10' : ''}`}
         />
         <OrLabel />
         <AppButton
@@ -83,7 +83,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
             console.log('GOOGLE LOGIN ACTION');
           }}
           context="Login with google"
-          additionalStyles={`${deviceType === DeviceType.PHONE ? '' : ''}`}
+          abs={`${deviceType === DeviceType.PHONE ? '' : ''}`}
         />
       </View>
     </View>

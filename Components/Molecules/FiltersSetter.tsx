@@ -9,9 +9,7 @@ export function FiltersSetter<T>({
 }: FiltersSetterProps<T>) {
   return (
     <View className="flex-col items-center mb-8">
-      <SmallHeader additionalBoxStyles="w-full items-start">
-        Filters
-      </SmallHeader>
+      <SmallHeader abs="w-full items-start">Filters</SmallHeader>
       {optionsRows.map(option => (
         <View
           key={Math.random()}

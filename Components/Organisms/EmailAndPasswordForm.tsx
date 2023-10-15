@@ -4,7 +4,6 @@ import { useMutation } from 'react-query';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
-import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import {
   handleRemoveDataFromStore,
   handleRestoreData,
@@ -19,6 +18,7 @@ import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorT
 import { EmailAndPasswordSchema } from '../../helpers/validation/mobileSchemas/emailAndPasswordSchema';
 import { AppSettings, ModalState } from '../../helpers/appSettings/contexts';
 import { handleSaveToSecureStore } from '../../helpers/handlers/SecureStoreHelpers';
+import { RegisterMobiPropsBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function EmailAndPasswordForm({
   navigation,
@@ -116,7 +116,7 @@ export function EmailAndPasswordForm({
         value={data.password}
         inputMode="password"
         autoComplete="password"
-        additionalStyles="mt-5"
+        abs="mt-5"
         isPwd
       />
       <AppButton
@@ -125,11 +125,11 @@ export function EmailAndPasswordForm({
           setBtnClicked(true);
         }}
         context="Next"
-        additionalStyles="mt-10 mb-2"
+        abs="mt-10 mb-2"
       />
       <OrLabel />
       <AppButton
-        additionalStyles="mt-2"
+        abs="mt-2"
         action={() => console.log('Register w Google')}
         context="Use Google account To register"
       />

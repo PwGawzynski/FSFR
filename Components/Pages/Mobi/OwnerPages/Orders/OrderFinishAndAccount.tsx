@@ -103,7 +103,7 @@ export function OrderFinishAndAccount({
   }, [isSuccess]);
   return (
     <SafeAreaView className="flex w-max h-full flex-col ml-4 mr-4">
-      <ScreenTitleHeader variant="lg" additionalStyles="w-full">
+      <ScreenTitleHeader variant="lg" abs="w-full">
         Order Accounting
       </ScreenTitleHeader>
       {order && (
@@ -142,12 +142,12 @@ export function OrderFinishAndAccount({
       )}
       {fieldsData && (
         <View className="flex-1 mt-4">
-          <ScreenTitleHeader variant="sm" additionalTextStyles="text-[#279840]">
+          <ScreenTitleHeader variant="sm" ats="text-[#279840]">
             Fields info
           </ScreenTitleHeader>
-          <LineDivider additionalStyles="m-0" />
+          <LineDivider abs="m-0" />
           <OrderAccountingFieldList fields={fieldsData} />
-          <LineDivider additionalStyles="m-0" />
+          <LineDivider abs="m-0" />
         </View>
       )}
 

@@ -82,13 +82,13 @@ export function OrdersDetails({
           />
 
           <View className="flex-col flex max-w-max">
-            <LineDivider additionalStyles="mt-0 mb-0" />
+            <LineDivider abs="mt-0 mb-0" />
             <View className="flex-row justify-between mt-4 mb-4">
               <AppButton
                 action={() => sendConfirmationAsk(order.taskId)}
                 context="request confirmation"
-                additionalTextStyles="text-sm"
-                additionalStyles="w-3/5 bg-[#434343]"
+                ats="text-sm"
+                abs="w-3/5 bg-[#434343]"
               />
               <AppButton
                 action={() =>
@@ -102,7 +102,7 @@ export function OrdersDetails({
                   })
                 }
                 context="Close"
-                additionalStyles="w-1/4 bg-[#FF0000]"
+                abs="w-1/4 bg-[#FF0000]"
               />
             </View>
             <AppButton
@@ -110,7 +110,7 @@ export function OrdersDetails({
                 navigation.navigate('ordersFinishAndAccount', { orderId })
               }
               context="Finish and account"
-              additionalStyles="bg-[#279840]"
+              abs="bg-[#279840]"
             />
           </View>
         </SafeAreaView>

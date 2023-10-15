@@ -49,10 +49,10 @@ export function FieldDetails({
         style={[{ top: '85%' }, animatedStyles]}
       >
         <TouchableOpacity className="w-full items-center" onPress={handlePress}>
-          <LineDivider additionalStyles="h-2 rounded w-2/5" />
+          <LineDivider abs="h-2 rounded w-2/5" />
         </TouchableOpacity>
         <View className="w-full">
-          <ScreenTitleHeader variant="sm" additionalTextStyles="">
+          <ScreenTitleHeader variant="sm" ats="">
             {field?.name}
           </ScreenTitleHeader>
           {field && (

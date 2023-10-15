@@ -59,7 +59,7 @@ export function CompanyNameAndNipForm({ navigation }: any) {
           )
         }
         context="Next"
-        additionalStyles="mt-36"
+        abs="mt-36"
       />
     </View>
   );

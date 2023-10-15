@@ -36,10 +36,10 @@ export function AssignedWorkers({
         validationError={validationError}
         setValidationError={setValidationError}
       />
-      <LineDivider additionalStyles="mt-2" />
+      <LineDivider abs="mt-2" />
       <ScreenTitleHeader
         variant="sm"
-        additionalTextStyles={validationError ? 'text-[#f00]' : ''}
+        ats={validationError ? 'text-[#f00]' : ''}
       >
         Select fields
       </ScreenTitleHeader>

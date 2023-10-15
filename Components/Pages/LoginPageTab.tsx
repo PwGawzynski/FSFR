@@ -10,19 +10,19 @@ import { LoginPageTabBase } from '../../frontendSelfTypes/navigation/types';
 export function LoginPageTab({ navigation }: LoginPageTabBase) {
   return (
     <View className="w-max h-screen bg-white flex flex-row">
-      <LogoImage additionalBoxStyles="w-1/3 h-full" resizeMode="cover" />
+      <LogoImage abs="w-1/3 h-full" resizeMode="cover" />
       <View className="flex-1 ml-20 mr-20 justify-center items-center">
-        <Logo additionalBoxStyles="w-1/3 flex-1" resizeMode="stretch" />
+        <Logo abs="w-1/3 flex-1" resizeMode="stretch" />
         <LoginForm />
         <RegisterAsk
           additionalBtnStyles="w-7/12"
-          additionalStyles="flex-1"
+          abs="flex-1"
           navigation={navigation}
         />
         <ForgotPasswordReset
-          additionalTxtStyles="m-0"
-          additionalStyles="flex-1"
-          additionalBtnStyles="w-7/12"
+          ats="m-0"
+          abs="flex-1"
+          btnStyles="w-7/12"
           navigation={navigation}
         />
       </View>
