@@ -1,8 +1,7 @@
 import { TextInput, View } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { AppButton } from '../Atoms/AppButton';
-import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
 import { handleRestoreData } from '../../helpers/handlers/AsyncStoreHelpers';
 import { CompanyAddressDataCdn } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
@@ -11,6 +10,7 @@ import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorT
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { AddressesCdnSchema } from '../../helpers/validation/mobileSchemas/AddressesCdnSchema';
 import { registerService } from '../../helpers/api/Services/Auth';
+import { RegisterMobiPropsBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function AddressFormCdn({
   navigation,
@@ -91,7 +91,7 @@ export function AddressFormCdn({
           setBtnClicked(true);
         }}
         context="Next"
-        additionalStyles="mt-10"
+        abs="mt-10"
       />
     </View>
   );
