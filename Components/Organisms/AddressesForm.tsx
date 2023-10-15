@@ -1,7 +1,6 @@
 import { TextInput, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
-import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
 import {
   handleRestoreData,
@@ -11,6 +10,7 @@ import { CompanyAddressData } from '../../FrontendSelfTypes/RegisterMobi/Registe
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 import { AddressesSchema } from '../../helpers/validation/mobileSchemas/AddressesSchema';
+import { RegisterMobiPropsBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function AddressesForm({
   navigation,
@@ -94,7 +94,7 @@ export function AddressesForm({
           setBtnClicked(true);
         }}
         context="Next"
-        additionalStyles="mt-3"
+        abs="mt-3"
       />
     </ScrollView>
   );
