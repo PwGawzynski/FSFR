@@ -9,12 +9,12 @@ export function DesktopBottomButtons({
   return (
     <View className="flex flex-row mb-10 mt-6">
       <AppButton
-        additionalStyles="flex-1 mr-2"
-        action={() => navigation.navigate('orders')}
+        abs="flex-1 mr-2"
+        action={() => navigation.navigate('orders', { screen: 'ordersRoot' })}
         context="Orders"
       />
       <AppButton
-        additionalStyles="flex-1 ml-2"
+        abs="flex-1 ml-2"
         action={() => navigation.navigate('workers')}
         context="Workers"
       />
