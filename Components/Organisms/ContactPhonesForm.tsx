@@ -1,7 +1,6 @@
 import { TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AppButton } from '../Atoms/AppButton';
-import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AppInput } from '../Molecules/AppInput';
 import {
   handleRestoreData,
@@ -11,6 +10,7 @@ import { ContactPhonesData } from '../../FrontendSelfTypes/RegisterMobi/Register
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 import { ContactPhonesSchema } from '../../helpers/validation/mobileSchemas/ContactPhonesSchema';
+import { RegisterMobiPropsBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function ContactPhonesForm({
   navigation,
@@ -64,7 +64,7 @@ export function ContactPhonesForm({
           setBtnClicked(true);
         }}
         context="Next"
-        additionalStyles="mt-36"
+        abs="mt-36"
       />
     </View>
   );
