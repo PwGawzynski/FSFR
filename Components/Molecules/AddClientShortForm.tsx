@@ -13,7 +13,7 @@ export function AddClientShortForm({
         ObjectKey="name"
         value={newClient.name}
         underlyingLabel="Name"
-        additionalStyles="flex-1 justify-end "
+        abs="flex-1 justify-end "
       />
       <AppInput
         setter={setNewClient}
@@ -21,14 +21,14 @@ export function AddClientShortForm({
         value={newClient.phoneNumber}
         keyboardType="phone-pad"
         underlyingLabel="Phone Number"
-        additionalStyles="flex-1 justify-end "
+        abs="flex-1 justify-end "
       />
       <AppInput
         setter={setNewClient}
         ObjectKey="email"
         value={newClient.email}
         underlyingLabel="Email"
-        additionalStyles="flex-1 justify-end "
+        abs="flex-1 justify-end "
       />
     </>
   );
