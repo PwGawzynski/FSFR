@@ -6,13 +6,13 @@ import { ForgotPasswordProps } from '../../frontendSelfTypes/moduleProps/Compone
 
 export function ForgotPasswordReset({
   navigation,
-  additionalTxtStyles,
-  additionalBtnStyles,
-  additionalStyles,
+  ats,
+  btnStyles,
+  abs,
 }: ForgotPasswordProps) {
   return (
-    <View className={`w-full items-center ${additionalStyles}`}>
-      <InfoText additionalStyles={`mt-10 ${additionalTxtStyles}`}>
+    <View className={`w-full items-center ${abs}`}>
+      <InfoText abs={`mt-10 ${ats}`}>
         FORGOT YOUR PASSWORD ? DON’T WORRY, CLICK RESET PASSWORD BUTTON BELLOW{' '}
       </InfoText>
       <AppButton
@@ -20,7 +20,7 @@ export function ForgotPasswordReset({
           navigation.navigate('ResetPassword');
         }}
         context="Reset Password"
-        additionalStyles={`mt-10 ${additionalBtnStyles}`}
+        abs={`mt-10 ${btnStyles}`}
       />
     </View>
   );
