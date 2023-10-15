@@ -47,12 +47,12 @@ export function OperationDanger({
         <AppButton
           action={() => navigation.goBack()}
           context="back"
-          additionalStyles="w-2/5 bg-[#279840]"
+          abs="w-2/5 bg-[#279840]"
         />
         <AppButton
           action={() => navigation.navigate(afterDangerScreenName as any)}
           context={dangerButtonSign || 'CONFIRM'}
-          additionalStyles="w-2/5 bg-[#f00]"
+          abs="w-2/5 bg-[#f00]"
         />
       </View>
     </SafeAreaView>
