@@ -12,13 +12,13 @@ export function OrdersRootScreenTopBarButtons({
       <AppButton
         action={() => navigation.navigate('ordersHistory')}
         context="History"
-        additionalStyles="flex-1 h-8 mr-32"
+        abs="flex-1 h-8 mr-32"
       />
       <View className="flex-1 flex-row items-center">
         <AppButton
           action={() => navigation.navigate('allOrders')}
           context="All"
-          additionalStyles="flex-1 h-8 bg-[#279840]"
+          abs="flex-1 h-8 bg-[#279840]"
         />
         <MagnifierButton onPress={() => navigation.navigate('ordersSearch')} />
       </View>
