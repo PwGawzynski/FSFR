@@ -32,7 +32,7 @@ export function GlobalModal() {
               });
             }}
             context={modalContext.customDisapproveButtonText || 'Confirm'}
-            additionalStyles="mt-10"
+            abs="mt-10"
           />
         )}
         {modalContext.onApproveCallback && (
@@ -46,7 +46,7 @@ export function GlobalModal() {
               });
             }}
             context={modalContext.customApproveButtonText || 'Go Back'}
-            additionalStyles="mt-6"
+            abs="mt-6"
           />
         )}
       </View>
