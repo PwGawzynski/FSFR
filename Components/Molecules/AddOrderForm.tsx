@@ -16,29 +16,29 @@ export function AddOrderForm({ setNewOrder, newOrder }: AddOrderFormProps) {
         ObjectKey="name"
         value={newOrder.name}
         underlyingLabel="Task Name"
-        additionalStyles="flex-1 justify-end"
-        additionalTextStyles="h-max"
+        abs="flex-1 justify-end"
+        ats="h-max"
       />
       <AppInput
         setter={setNewOrder}
         ObjectKey="additionalInfo"
         value={newOrder.additionalInfo}
         underlyingLabel="Additional Info"
-        additionalStyles="grow justify-end "
+        abs="grow justify-end "
       />
       <AppInput
         setter={setNewOrder}
         ObjectKey="performanceDate"
         value={newOrder.performanceDate}
         underlyingLabel="Performance Date"
-        additionalStyles="flex-1 justify-end "
+        abs="flex-1 justify-end "
       />
       <AppInput
         setter={setNewOrder}
         ObjectKey="client"
         value={newOrder.client}
         underlyingLabel="Client"
-        additionalStyles="flex-1 justify-end "
+        abs="flex-1 justify-end "
       />
       <View className="flex-1 max-h-12 pb-4 border-solid border-b-4 mt-4 mb-8 order-2 justify-end">
         <RNPickerSelect
