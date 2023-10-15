@@ -24,7 +24,7 @@ export function AddOrderAndClientForm({
       <AddOrderForm newOrder={newOrder} setNewOrder={setNewOrder} />
 
       <OrLabel />
-      <InfoText additionalStyles="text-left text-base font-bold uppercase mt-8">
+      <InfoText abs="text-left text-base font-bold uppercase mt-8">
         Create New Client in Short Way
       </InfoText>
 
@@ -47,7 +47,7 @@ export function AddOrderAndClientForm({
           setBtnClicked(true);
         }}
         context="Create"
-        additionalStyles="mt-4 mb-8 flex-1"
+        abs="mt-4 mb-8 flex-1"
       />
     </KeyboardAwareScrollView>
   );
