@@ -23,7 +23,7 @@ export function ResetPassword() {
       onPress={() => inputRef.current?.blur()}
     >
       <LogoImageCurtain />
-      <InfoText additionalStyles="w-9/12 mt-24">
+      <InfoText abs="w-9/12 mt-24">
         ENTER YOUR ACCOUNT E-MAIL ADDRESS OR NIP OR USER NAME AND WE WILL SEND
         YOU MAIL WITH LINK TO RESET YOUR PASSWORD
       </InfoText>
@@ -40,7 +40,7 @@ export function ResetPassword() {
           setInputFocused(true);
         }}
         onDeFocus={() => setInputFocused(false)}
-        additionalStyles="w-9/12 mt-10"
+        abs="w-9/12 mt-10"
         setter={setData}
         ObjectKey="email"
         value={data.email}
@@ -52,7 +52,7 @@ export function ResetPassword() {
         }`}
       >
         <AppButton
-          additionalStyles="w-9/12 mb-28 mt-20"
+          abs="w-9/12 mb-28 mt-20"
           action={() => console.log('Reset password')}
           context="Reset your password"
         />
