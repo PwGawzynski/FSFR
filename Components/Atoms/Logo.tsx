@@ -1,5 +1,5 @@
 import { Image, View } from 'react-native';
-import { LogoProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
+import { LogoProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function Logo({ abs, additionalImageStyles, resizeMode }: LogoProps) {
   return (
