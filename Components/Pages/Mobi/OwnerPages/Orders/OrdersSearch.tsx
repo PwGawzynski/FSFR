@@ -10,10 +10,7 @@ export function OrdersSearch({
 }: OwnerOrdersMaterialRootProps<'ordersSearch', 'ordersRoot', 'orders'>) {
   return (
     <SafeAreaView className="flex-col h-full justify-center mr-4 ml-4 ">
-      <ScreenTitleHeader
-        variant="lg"
-        additionalStyles="w-full justify-start mb-4"
-      >
+      <ScreenTitleHeader variant="lg" abs="w-full justify-start mb-4">
         Search Order
       </ScreenTitleHeader>
       <OrdersListSearchAndFilter
