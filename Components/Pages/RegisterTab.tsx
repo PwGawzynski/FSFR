@@ -2,7 +2,7 @@ import { View, Animated, Dimensions } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { RegisterFormTab } from '../Organisms/RegisterFormTab';
 import { LogoImage } from '../Atoms/LogoImage';
-import { RegisterTabBase } from '../../frontendSelfTypes/navigation/types';
+import { RegisterTabBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function RegisterTab({ navigation }: RegisterTabBase) {
   const [isFocused, setFocused] = useState<boolean>(false);
@@ -33,7 +33,7 @@ export function RegisterTab({ navigation }: RegisterTabBase) {
           top: imgHeight,
         }}
       >
-        <LogoImage additionalBoxStyles="w-full h-full" resizeMode="cover" />
+        <LogoImage abs="w-full h-full" resizeMode="cover" />
       </Animated.View>
       <View className="flex-1  items-center">
         <RegisterFormTab
