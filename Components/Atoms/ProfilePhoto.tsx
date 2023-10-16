@@ -6,7 +6,7 @@ import UserSvg from '../../assets/user.svg';
 export function ProfilePhoto({
   resizeMode,
   additionalImageStyles,
-  additionalBoxStyles,
+  abs,
   imgLink,
   focused,
 }: ProfilePhotoProps) {
@@ -14,7 +14,7 @@ export function ProfilePhoto({
     <View
       className={`w-8 h-8 rounded-full overflow-hidden items-center justify-center ${
         focused && 'border-solid border-[#279840] border-4'
-      } ${additionalBoxStyles}`}
+      } ${abs}`}
     >
       {imgLink ? (
         <Image
