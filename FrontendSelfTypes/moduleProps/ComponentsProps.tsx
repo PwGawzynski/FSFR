@@ -500,7 +500,7 @@ export interface OrdersListSearchAndFilterProps<
   M extends keyof OwnerDesktopRootStackParamList,
 > {
   navigation?: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
-  route: OwnerOrdersMaterialRootRouteProps<T>;
+  route?: OwnerOrdersMaterialRootRouteProps<T>;
   filterMethod?:
     | ((
         Order: OrderBaseI,
