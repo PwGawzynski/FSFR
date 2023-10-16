@@ -5,9 +5,9 @@ import { WorkersTopTabParamList } from './WorkersTopTabParamList';
 import { FieldTopTabParamList } from './FieldTopTabParamList';
 
 export type OwnerDesktopRootStackParamList = {
-  desktop: NavigatorScreenParams<DesktopTopTabParamList>;
-  orders: NavigatorScreenParams<OrdersTopTabParamList>;
-  workers: NavigatorScreenParams<WorkersTopTabParamList>;
+  desktop: NavigatorScreenParams<DesktopTopTabParamList> | undefined;
+  orders: NavigatorScreenParams<OrdersTopTabParamList> | undefined;
+  workers: NavigatorScreenParams<WorkersTopTabParamList> | undefined;
   OperationConfirmed: {
     redirectScreenName:
       | keyof OwnerDesktopRootStackParamList
@@ -25,5 +25,5 @@ export type OwnerDesktopRootStackParamList = {
       | keyof WorkersTopTabParamList;
     dangerButtonSign?: string;
   };
-  fields: NavigatorScreenParams<FieldTopTabParamList>;
+  fields: NavigatorScreenParams<FieldTopTabParamList> | undefined;
 };
