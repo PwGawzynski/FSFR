@@ -1,5 +1,4 @@
-import { Image, TouchableOpacity, View } from 'react-native';
-import { useState } from 'react';
+import { Image, View } from 'react-native';
 import { ProfilePhotoProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import UserSvg from '../../assets/user.svg';
 
