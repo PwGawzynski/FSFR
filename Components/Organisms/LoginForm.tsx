@@ -6,9 +6,9 @@ import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
 import { AppSettings } from '../../helpers/appSettings/contexts';
-import { LoginFormProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
 import { LoginUser } from '../../FarmServiceTypes/User/LoginUser';
 import { Api } from '../../helpers/api/Api';
+import { LoginFormProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
   const [data, setData] = useState({
@@ -72,6 +72,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
       >
         <AppButton
           action={() => {
+            // eslint-disable-next-line no-console
             console.log(loginMutation.mutate(data));
           }}
           context="Login"
@@ -80,6 +81,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
         <OrLabel />
         <AppButton
           action={() => {
+            // eslint-disable-next-line no-console
             console.log('GOOGLE LOGIN ACTION');
           }}
           context="Login with google"

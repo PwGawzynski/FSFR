@@ -81,7 +81,7 @@ export function PersonalDataForm({
           setBtnClicked(true);
         }}
         context="Next"
-        additionalStyles="mt-36"
+        abs="mt-36"
       />
     </View>
   );

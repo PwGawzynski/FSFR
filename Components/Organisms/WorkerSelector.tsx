@@ -24,7 +24,7 @@ export function WorkerSelector({
         >
           <ProfilePhoto
             focused={worker.id === focusedWorker?.id}
-            additionalBoxStyles="w-14 h-14"
+            abs="w-14 h-14"
           />
           <Text className="mt-1">{worker.name}</Text>
         </TouchableOpacity>

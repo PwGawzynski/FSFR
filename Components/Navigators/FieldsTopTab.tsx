@@ -1,7 +1,6 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { FieldTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/FieldTopTabParamList';
 import { FieldDetails } from '../Pages/Mobi/OwnerPages/Fields/FieldDetails';
-import { OrdersStackScreenOptions } from '../../helpers/style/OrdersStackScreenOptions';
 import { MaterialTopTabScreenOptions } from '../../helpers/style/MaterialTopTabScreenOptions';
 
 export function FieldsTopTab() {

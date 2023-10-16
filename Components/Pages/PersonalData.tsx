@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
 import { PersonalDataForm } from '../Organisms/PersonalDataForm';
-import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
+import { RegisterMobiPropsBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function PersonalData({
   navigation,

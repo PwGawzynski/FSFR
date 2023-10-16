@@ -48,7 +48,7 @@ export function SelectWorkerPanel({
       />
       {focusedWorker && (
         <View className="grow">
-          <ScreenTitleHeader additionalTextStyles="text-base" variant="sm">
+          <ScreenTitleHeader ats="text-base" variant="sm">
             Worker {focusedWorker?.name}
           </ScreenTitleHeader>
           <RNPickerSelect
@@ -73,7 +73,7 @@ export function SelectWorkerPanel({
           </View>
           <Text className="ml-1 text-xs">Employee Workload</Text>
           <AppButton
-            additionalStyles="mt-4"
+            abs="mt-4"
             action={() => {
               if (!fieldsIds.length || !taskType) setValidationError(true);
               else

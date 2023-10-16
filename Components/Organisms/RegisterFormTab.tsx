@@ -81,7 +81,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         value={data.password}
         inputMode="password"
         autoComplete="password"
-        additionalStyles="mt-5"
+        abs="mt-5"
         isPwd
       />
       <AppInput
@@ -97,7 +97,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         value={data.name}
         inputMode="givenName"
         autoComplete="name-given"
-        additionalStyles="mt-5"
+        abs="mt-5"
       />
       <AppInput
         onFocus={() => setFocused(true)}
@@ -111,7 +111,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         ObjectKey="surname"
         value={data.surname}
         autoComplete="name-middle"
-        additionalStyles="mt-5"
+        abs="mt-5"
       />
       <AppInput
         onFocus={() => setFocused(true)}
@@ -124,7 +124,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         underlyingLabel="CompanyName"
         ObjectKey="companyName"
         value={data.companyName}
-        additionalStyles="mt-5"
+        abs="mt-5"
       />
       <AppInput
         onFocus={() => setFocused(true)}
@@ -137,7 +137,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         underlyingLabel="NIP"
         ObjectKey="nip"
         value={data.nip}
-        additionalStyles="mt-5"
+        abs="mt-5"
         keyboardType="number-pad"
       />
       <AppInput
@@ -152,7 +152,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         ObjectKey="contactPhone"
         autoComplete="tel"
         value={data.contactPhone}
-        additionalStyles="mt-5"
+        abs="mt-5"
         keyboardType="phone-pad"
       />
       <AppInput
@@ -167,7 +167,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         ObjectKey="companyCompactPhone"
         value={data.companyCompactPhone}
         autoComplete="tel"
-        additionalStyles="mt-5"
+        abs="mt-5"
         keyboardType="phone-pad"
       />
       <AppInput
@@ -183,7 +183,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         value={data.city}
         inputMode="addressCity"
         autoComplete="street-address"
-        additionalStyles="mt-5"
+        abs="mt-5"
       />
       <AppInput
         onFocus={() => setFocused(true)}
@@ -198,7 +198,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         value={data.postalCode}
         inputMode="postalCode"
         autoComplete="postal-code"
-        additionalStyles="mt-5"
+        abs="mt-5"
         keyboardType="numbers-and-punctuation"
       />
       <AppInput
@@ -212,7 +212,7 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         underlyingLabel="House Number"
         ObjectKey="houseNumber"
         value={data.houseNumber}
-        additionalStyles="mt-5"
+        abs="mt-5"
         keyboardType="number-pad"
       />
       <AppInput
@@ -223,12 +223,12 @@ export function RegisterFormTab({ navigation, setFocused }: RegisterFormProps) {
         underlyingLabel="Circumference"
         ObjectKey="circumference"
         value={data.circumference}
-        additionalStyles="mt-5"
+        abs="mt-5"
       />
       <AppButton
         action={() => navigation.navigate('AuthCode')}
         context="RegisterMobi"
-        additionalStyles="mt-5 mb-24"
+        abs="mt-5 mb-24"
       />
     </KeyboardAwareScrollView>
   );
