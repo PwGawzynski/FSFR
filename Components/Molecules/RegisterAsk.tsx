@@ -2,17 +2,17 @@ import { View } from 'react-native';
 import React from 'react';
 import { InfoText } from '../Atoms/InfoText';
 import { AppButton } from '../Atoms/AppButton';
-import { RegisterAskProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
+import { RegisterAskProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function RegisterAsk({
   navigation,
-  additionalTxtStyles,
-  additionalStyles,
+  ats,
+  abs,
   additionalBtnStyles,
 }: RegisterAskProps) {
   return (
-    <View className={`w-full items-center ${additionalStyles}`}>
-      <InfoText additionalStyles={`mt-10 ${additionalTxtStyles}`}>
+    <View className={`w-full items-center ${abs}`}>
+      <InfoText abs={`mt-10 ${ats}`}>
         {`DON'T YOU HAVE AN ACCOUNT ? RELAX CLICK BELLOW AND CREATE ONE`}
       </InfoText>
       <AppButton
@@ -20,7 +20,7 @@ export function RegisterAsk({
           navigation.navigate('Register');
         }}
         context="Register"
-        additionalStyles={`mt-10 ${additionalBtnStyles}`}
+        abs={`mt-10 ${additionalBtnStyles}`}
       />
     </View>
   );
