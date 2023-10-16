@@ -16,7 +16,7 @@ export function PriceSetter({
   return (
     <View className="flex-col justify-center">
       <NumericInput
-        additionalBoxStyles="flex-grow-0"
+        abs="flex-grow-0"
         onBlur={e => {
           if (setReRender) setReRender(prevState => !prevState);
           if (onBlur) onBlur(e);
@@ -28,7 +28,7 @@ export function PriceSetter({
       <View className="grow w-full flex-row justify-between items-center">
         {calculateOption && (
           <AppButton
-            additionalStyles="bg-[#808080] mt-2 w-1/3"
+            abs="bg-[#808080] mt-2 w-1/3"
             action={() => {
               if (setReRender) setReRender(prevState => !prevState);
               if (onCalculatePress) onCalculatePress();
@@ -37,9 +37,7 @@ export function PriceSetter({
           />
         )}
         <AppButton
-          additionalStyles={`bg-[#279840] mt-2 w-1/2 ${
-            !calculateOption && 'w-full'
-          }`}
+          abs={`bg-[#279840] mt-2 w-1/2 ${!calculateOption && 'w-full'}`}
           action={() => {
             if (setReRender) setReRender(prevState => !prevState);
             if (onSavePress) onSavePress();
