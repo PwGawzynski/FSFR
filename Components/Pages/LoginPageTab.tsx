@@ -5,7 +5,7 @@ import { LoginForm } from '../Organisms/LoginForm';
 import { RegisterAsk } from '../Molecules/RegisterAsk';
 import { ForgotPasswordReset } from '../Molecules/ForgotPasswordReset';
 import { Logo } from '../Atoms/Logo';
-import { LoginPageTabBase } from '../../frontendSelfTypes/navigation/types';
+import { LoginPageTabBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function LoginPageTab({ navigation }: LoginPageTabBase) {
   return (
