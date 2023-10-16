@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Text } from 'react-native';
 import { AppSettings, ThemeOptions } from '../../helpers/appSettings/contexts';
-import { InputLabelProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
+import { InputLabelProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function InputLabel({ children }: InputLabelProps) {
   const context = useContext(AppSettings);
