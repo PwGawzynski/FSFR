@@ -23,6 +23,7 @@ import {
   NewClientShortCreateI,
   NewOrderI,
   OrderBaseI,
+  OrderTask,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export class Api {
@@ -303,5 +304,12 @@ export class Api {
     // eslint-disable-next-line no-console
     console.log('CONFIRMATION ASK FOR ORDER_ID', data);
     return true;
+  }
+
+  static async getAllOrdersTasks(orderid: string) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const data = require('../../tmpData');
+    // TEMPORARY
+    return data.orderTasks as Array<OrderTask>;
   }
 }
