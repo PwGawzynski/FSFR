@@ -44,7 +44,7 @@ export function OrdersDetails({
             boxAdditionalStyles="mt-8"
             buttonText="Manage  workers"
             onButtonClick={() =>
-              navigation.navigate('assignedWorkers', { orderId })
+              navigation.navigate('ordersManageWorkers', { orderId })
             }
           />
           <TitleValueInfoComponent
