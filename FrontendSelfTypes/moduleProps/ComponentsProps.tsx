@@ -351,6 +351,8 @@ export interface Worker {
 export interface WorkerSelectorProps {
   focusedWorker?: Worker;
   setFocusedWorker: React.Dispatch<React.SetStateAction<Worker | undefined>>;
+  data?: Array<Worker> | undefined;
+  externalData?: true;
 }
 
 export interface NewTaskI {
@@ -509,4 +511,10 @@ export interface OrdersListSearchAndFilterProps<
         initSearchValue?: string,
       ) => boolean)
     | undefined;
+}
+
+export interface OrderTask {
+  type: TaskType;
+  worker: Worker;
+  field: FieldI;
 }
