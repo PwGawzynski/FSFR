@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React, { useEffect, useMemo, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Device from 'expo-device';
@@ -61,16 +61,18 @@ export default function App() {
 
   const queryClient = new QueryClient();
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <QueryClientProvider client={queryClient}>
-          <AppSettings.Provider value={memoSettings}>
-            <GlobalModal />
-            {!isLogged && <LoginRegisterStack />}
-            {isLogged && <Desktop />}
-          </AppSettings.Provider>
-        </QueryClientProvider>
-      </NavigationContainer>
-    </PaperProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <PaperProvider>
+        <NavigationContainer>
+          <QueryClientProvider client={queryClient}>
+            <AppSettings.Provider value={memoSettings}>
+              <GlobalModal />
+              {!isLogged && <LoginRegisterStack />}
+              {isLogged && <Desktop />}
+            </AppSettings.Provider>
+          </QueryClientProvider>
+        </NavigationContainer>
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }
