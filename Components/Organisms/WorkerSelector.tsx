@@ -5,11 +5,14 @@ import { getAllWorkers } from '../../helpers/api/Services/Worker';
 import { WorkerSelectorProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function WorkerSelector({
+  data,
   focusedWorker,
   setFocusedWorker,
+  externalData,
 }: WorkerSelectorProps) {
-  const { data: workers } = useQuery('workers', getAllWorkers);
-
+  const { data: workers } = useQuery('workers', () =>
+    getAllWorkers(externalData),
+  );
   return (
     <ScrollView
       horizontal
@@ -17,6 +20,19 @@ export function WorkerSelector({
       className="mb-2"
     >
       {workers?.map(worker => (
+        <TouchableOpacity
+          onPress={() => setFocusedWorker(worker)}
+          className="flex flex-col items-center justify-center pr-2"
+          key={worker.id}
+        >
+          <ProfilePhoto
+            focused={worker.id === focusedWorker?.id}
+            abs="w-14 h-14"
+          />
+          <Text className="mt-1">{worker.name}</Text>
+        </TouchableOpacity>
+      ))}
+      {data?.map(worker => (
         <TouchableOpacity
           onPress={() => setFocusedWorker(worker)}
           className="flex flex-col items-center justify-center pr-2"

@@ -1,11 +1,13 @@
 import { Worker } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { Api } from '../Api';
 
-export async function getAllWorkers(): Promise<Array<Worker> | undefined> {
-  console.log('WORKER DATA FETCH');
+export async function getAllWorkers(
+  externalDataOn?: true,
+): Promise<Array<Worker> | undefined> {
+  console.log('data');
   try {
-    const data = await Api.getWorkers();
-    return data.workers as Array<Worker>;
+    if (externalDataOn) return undefined;
+    return (await Api.getWorkers()).workers;
   } catch (e) {
     return undefined;
   }
