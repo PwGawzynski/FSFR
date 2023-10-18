@@ -193,6 +193,7 @@ export interface ThreeOptionSwitchProps {
 
 export enum TaskType {
   Harvesting,
+  Transport,
 }
 
 export enum OrderStatus {
@@ -517,4 +518,12 @@ export interface OrderTask {
   type: TaskType;
   worker: Worker;
   field: FieldI;
+}
+
+export interface WorkersTaskList {
+  data: Array<OrderTask>;
+}
+
+export interface WorkerTaskListElement extends OrderTask {
+  index: number;
 }
