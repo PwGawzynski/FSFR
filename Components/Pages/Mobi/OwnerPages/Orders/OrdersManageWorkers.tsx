@@ -12,15 +12,15 @@ import { getAllOrdersTasks } from '../../../../../helpers/api/Services/Task';
 import { WorkersTasksList } from '../../../../Organisms/WorkersTasksList';
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 
-const getExplicitWorkersEntities = (orderAssignedTasks: Array<OrderTask>) =>
-  orderAssignedTasks
-    .filter(
-      orderTask =>
-        orderAssignedTasks?.filter(
-          task => task.worker.id === orderTask.worker.id,
-        ).length === 1,
-    )
-    .map(orderTask => orderTask.worker);
+const getExplicitWorkersEntities = (orderAssignedTasks: Array<OrderTask>) => {
+  const filtered: Array<Worker> = [];
+  orderAssignedTasks.forEach(
+    orderTask =>
+      !filtered.find(worker => worker.id === orderTask.worker.id) &&
+      filtered.push(orderTask.worker),
+  );
+  return filtered;
+};
 
 export function OrdersManageWorkers({
   navigation,
@@ -37,7 +37,7 @@ export function OrdersManageWorkers({
   const [selectedWorkerTasks, setSelectedWorkerTasks] = useState<
     Array<OrderTask> | undefined
   >(undefined);
-
+  console.log(orderAssignedTasks, 'TASKS');
   useEffect(() => {
     if (focusedWorker && orderAssignedTasks)
       setSelectedWorkerTasks(
