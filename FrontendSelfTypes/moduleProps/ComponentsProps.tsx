@@ -515,6 +515,7 @@ export interface OrdersListSearchAndFilterProps<
 }
 
 export interface OrderTask {
+  id: string;
   type: TaskType;
   worker: Worker;
   field: FieldI;
@@ -526,4 +527,5 @@ export interface WorkersTaskList {
 
 export interface WorkerTaskListElement extends OrderTask {
   index: number;
+  onRemoveTask: (taskId: string) => void;
 }
