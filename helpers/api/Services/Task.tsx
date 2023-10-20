@@ -18,17 +18,15 @@ export async function getAllOrdersTasks(
   data: string,
 ): Promise<Array<OrderTask> | undefined> {
   try {
-    const res = await Api.getAllOrdersTasks(data);
-    const filtered: Array<OrderTask> = [];
-    res.forEach(
-      orderTask =>
-        !filtered.find(
-          filteredOrderTask =>
-            filteredOrderTask.worker.id === orderTask.worker.id,
-        ) && filtered.push(orderTask),
-    );
-    console.log(filtered, 'filtered');
-    return filtered;
+    return await Api.getAllOrdersTasks(data);
+  } catch (e) {
+    return undefined;
+  }
+}
+
+export async function remTask(taskId: string): Promise<string | undefined> {
+  try {
+    return Api.remTaskListElement(taskId);
   } catch (e) {
     return undefined;
   }

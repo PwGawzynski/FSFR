@@ -252,8 +252,8 @@ export class Api {
   static async getAllOrders() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const data = require('../../tmpData');
-    return new Promise(resolve => {
-      setTimeout(() => resolve(data), 6000);
+    return new Promise(r => {
+      setTimeout(() => r(data), 1);
     });
   }
 
@@ -311,5 +311,10 @@ export class Api {
     const data = require('../../tmpData');
     // TEMPORARY
     return data.orderTasks as Array<OrderTask>;
+  }
+
+  static async remTaskListElement(TaskId: string): Promise<string> {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires,no-promise-executor-return
+    return new Promise(res => setTimeout(() => res(TaskId), 2000));
   }
 }
