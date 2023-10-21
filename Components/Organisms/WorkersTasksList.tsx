@@ -9,7 +9,6 @@ export function WorkersTasksList({ data }: WorkersTaskList) {
   const { mutate: removeTask } = useMutation(remTask);
   const [remTaskId, setRemTaskId] = useState<string | undefined>();
   const afterRemData = data.filter(orderTask => {
-    console.log(orderTask.id !== remTaskId);
     return orderTask.id !== remTaskId;
   });
   useEffect(() => {
