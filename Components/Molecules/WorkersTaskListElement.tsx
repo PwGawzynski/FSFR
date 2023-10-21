@@ -23,7 +23,6 @@ export function WorkersTaskListElement({
   const [visible, setVisible] = useState(true);
   const screenWidth = Dimensions.get('screen').width;
   const open = useRef(false);
-  console.log('render_element', id, visible);
   useEffect(() => {
     if (!visible)
       animated.value = withTiming(0, {
@@ -49,7 +48,7 @@ export function WorkersTaskListElement({
         <TouchableHighlight
           underlayColor="#848484"
           activeOpacity={1}
-          onPress={() => console.log('pres')}
+          onPress={() => ''}
           className="flex-1 h-16 flex flex-col bg-white justify-center rounded "
         >
           <View className="grow justify-center">
