@@ -37,7 +37,6 @@ export function OrdersManageWorkers({
   const [selectedWorkerTasks, setSelectedWorkerTasks] = useState<
     Array<OrderTask> | undefined
   >(undefined);
-  console.log(orderAssignedTasks, 'TASKS');
   useEffect(() => {
     if (focusedWorker && orderAssignedTasks)
       setSelectedWorkerTasks(
