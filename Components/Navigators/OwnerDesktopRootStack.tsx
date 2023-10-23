@@ -1,11 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OwnerDesktopRootStackParamList';
-import { WorkersTabNavigator } from './WorkersTopTab';
-import { OrdersTopTab } from './OrdersTopTab';
+import { OrdersStack } from './OrdersStack';
 import { DesktopTopTab } from './DesktopTopTab';
 import { OperationConfirmedAnimation } from '../Pages/Mobi/Common/OperationConfirmedAnimation';
 import { OperationDanger } from '../Pages/Mobi/Common/OperationDanger';
 import { FieldsTopTab } from './FieldsTopTab';
+import { WorkersTabNavigator } from './WorkersStack';
 
 const Stack = createNativeStackNavigator<OwnerDesktopRootStackParamList>();
 
@@ -23,7 +23,7 @@ export function OwnerDesktopMobiRootStack() {
       />
       <Stack.Screen
         name="orders"
-        component={OrdersTopTab}
+        component={OrdersStack}
         options={{
           gestureDirection: 'vertical',
           headerShown: false,
