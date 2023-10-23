@@ -19,7 +19,7 @@ import {
   RegisterTabFormBase,
 } from '../navigation/types';
 import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
-import { OrdersTopTabParamList } from '../NavigatorsInterfaces/OrdersTopTabParamList';
+import { OrdersStackParamList } from '../NavigatorsInterfaces/OrdersStackParamList';
 import { OwnerDesktopRootStackParamList } from '../NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 import { MaterialOrdersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 
@@ -319,7 +319,7 @@ export interface FieldListProps {
   orderId?: string;
   navigation: CompositeNavigationProp<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    MaterialTopTabNavigationProp<OrdersStackParamList, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
@@ -368,7 +368,7 @@ export interface SelectWorkerPanelProps {
   setValidationError: React.Dispatch<React.SetStateAction<boolean>>;
   navigation: CompositeNavigationProp<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    MaterialTopTabNavigationProp<OrdersStackParamList, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
@@ -384,7 +384,7 @@ export interface FieldTableRowProps {
   fields: Array<FieldI> | undefined;
   navigation: CompositeNavigationProp<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    MaterialTopTabNavigationProp<OrdersStackParamList, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
@@ -408,7 +408,7 @@ export interface TableSettings<T> {
 export interface TableProps<T extends Record<string, any>> {
   navigation: CompositeNavigationProp<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MaterialTopTabNavigationProp<OrdersTopTabParamList, any>,
+    MaterialTopTabNavigationProp<OrdersStackParamList, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
@@ -499,7 +499,7 @@ export type SearchModuleInterfaceBasedProps<T> = FiltersSetterProps<T> &
 
 export interface OrdersListSearchAndFilterProps<
   T extends keyof MaterialOrdersRootTopTabParamList,
-  N extends keyof OrdersTopTabParamList,
+  N extends keyof OrdersStackParamList,
   M extends keyof OwnerDesktopRootStackParamList,
 > {
   navigation?: OwnerOrdersMaterialRootNavigationProps<T, N, M>;
