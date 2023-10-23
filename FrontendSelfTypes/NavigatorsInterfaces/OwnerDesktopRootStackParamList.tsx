@@ -1,19 +1,19 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { DesktopTopTabParamList } from './DesktopTopTabParamList';
-import { OrdersTopTabParamList } from './OrdersTopTabParamList';
-import { WorkersTopTabParamList } from './WorkersTopTabParamList';
+import { OrdersStackParamList } from './OrdersStackParamList';
+import { WorkersStackParamList } from './WorkersStackParamList';
 import { FieldTopTabParamList } from './FieldTopTabParamList';
 
 export type OwnerDesktopRootStackParamList = {
   desktop: NavigatorScreenParams<DesktopTopTabParamList> | undefined;
-  orders: NavigatorScreenParams<OrdersTopTabParamList> | undefined;
-  workers: NavigatorScreenParams<WorkersTopTabParamList> | undefined;
+  orders: NavigatorScreenParams<OrdersStackParamList> | undefined;
+  workers: NavigatorScreenParams<WorkersStackParamList> | undefined;
   OperationConfirmed: {
     redirectScreenName:
       | keyof OwnerDesktopRootStackParamList
       | keyof DesktopTopTabParamList
-      | keyof OrdersTopTabParamList
-      | keyof WorkersTopTabParamList;
+      | keyof OrdersStackParamList
+      | keyof WorkersStackParamList;
     shownMessage?: string;
   };
   OperationDanger: {
@@ -21,8 +21,8 @@ export type OwnerDesktopRootStackParamList = {
     afterDangerScreenName:
       | keyof OwnerDesktopRootStackParamList
       | keyof DesktopTopTabParamList
-      | keyof OrdersTopTabParamList
-      | keyof WorkersTopTabParamList;
+      | keyof OrdersStackParamList
+      | keyof WorkersStackParamList;
     dangerButtonSign?: string;
   };
   fields: NavigatorScreenParams<FieldTopTabParamList> | undefined;
