@@ -535,3 +535,7 @@ export interface WorkerTaskListElement extends OrderTask {
   index: number;
   onRemoveTask: (taskId: string) => void;
 }
+
+export interface WorkerComponentI {
+  item: Worker;
+}
