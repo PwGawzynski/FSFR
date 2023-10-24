@@ -26,6 +26,7 @@ export function WorkerSelector({
           key={worker.id}
         >
           <ProfilePhoto
+            imgLink={worker.photoUrl}
             focused={worker.id === focusedWorker?.id}
             abs="w-14 h-14"
           />
@@ -39,6 +40,7 @@ export function WorkerSelector({
           key={worker.id}
         >
           <ProfilePhoto
+            imgLink={worker.photoUrl}
             focused={worker.id === focusedWorker?.id}
             abs="w-14 h-14"
           />
