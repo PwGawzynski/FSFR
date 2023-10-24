@@ -342,11 +342,17 @@ export interface CheckBoxProps<T extends () => void> {
   onPress: T;
 }
 
+export enum WorkerPosition {
+  Operator,
+  Coordinator,
+}
+
 export interface Worker {
   id: string;
   name: string;
   surname: string;
   photoUrl: string;
+  position: WorkerPosition;
 }
 
 export interface WorkerSelectorProps {
