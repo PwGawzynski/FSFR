@@ -6,6 +6,7 @@ import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
   GestureResponderEvent,
+  StyleProp,
 } from 'react-native';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
@@ -538,4 +539,10 @@ export interface WorkerTaskListElement extends OrderTask {
 
 export interface WorkerComponentI {
   item: Worker;
+}
+
+export interface SquaredProfilePictureProps {
+  abs?: string;
+  additionalImageStyles?: StyleProp<ImageProps>;
+  imageLink?: string;
 }
