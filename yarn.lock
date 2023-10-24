@@ -2174,6 +2174,11 @@
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
+"@types/qs@^6.9.7":
+  version "6.9.9"
+  resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.9.tgz#66f7b26288f6799d279edf13da7ccd40d2fa9197"
+  integrity sha512-wYLxw35euwqGvTDx6zfY1vokBFnsK0HNrzc6xNHchxfO2hpuRg74GbkEW7e3sSmPvj0TjCDT1VCa6OtHXnubsg==
+
 "@types/react-native@~0.70.6":
   version "0.70.12"
   resolved "https://registry.npmjs.org/@types/react-native/-/react-native-0.70.12.tgz"
@@ -4424,6 +4429,24 @@ expo-keep-awake@~12.3.0:
   version "12.3.0"
   resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-12.3.0.tgz"
   integrity sha512-ujiJg1p9EdCOYS05jh5PtUrfiZnK0yyLy+UewzqrjUqIT8eAGMQbkfOn3C3fHE7AKd5AefSMzJnS3lYZcZYHDw==
+
+expo-linking@~5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/expo-linking/-/expo-linking-5.0.2.tgz#273c9dfec0c5542a13638bd422ef9acbf4638bc5"
+  integrity sha512-SPQus0+tYGx9c69Uw4wmdo3rkKX8vRT1vyJz/mvkpSlZN986s0NmP/V0M5vDv5Zv2qZzVdqJyuITFe0Pg5aI+A==
+  dependencies:
+    "@types/qs" "^6.9.7"
+    expo-constants "~14.4.2"
+    invariant "^2.2.4"
+    qs "^6.11.0"
+    url-parse "^1.5.9"
+
+expo-mail-composer@~12.3.0:
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/expo-mail-composer/-/expo-mail-composer-12.3.0.tgz#c6850da035a16b53f5a5774d8859c48c59bb454f"
+  integrity sha512-eJN/Phr8DSjXImUMu1WTZpgLq55NkpQsGBwZrshNXfE4rmeCDYu7Yam0axUFNeWANpI64B0rKX7tfYb60SisCQ==
+  dependencies:
+    query-string "^6.2.0"
 
 expo-manifests@~0.7.0:
   version "0.7.2"
@@ -7416,7 +7439,7 @@ qs@6.11.0:
   dependencies:
     side-channel "^1.0.4"
 
-qs@^6.11.2:
+qs@^6.11.0, qs@^6.11.2:
   version "6.11.2"
   resolved "https://registry.npmjs.org/qs/-/qs-6.11.2.tgz"
   integrity sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==
@@ -7431,6 +7454,16 @@ query-string@^5.0.1:
     decode-uri-component "^0.2.0"
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
+
+query-string@^6.2.0:
+  version "6.14.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.14.1.tgz#7ac2dca46da7f309449ba0f86b1fd28255b0c86a"
+  integrity sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    filter-obj "^1.1.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
 
 query-string@^7.1.3:
   version "7.1.3"

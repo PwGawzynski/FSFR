@@ -18,7 +18,7 @@ export function WorkerComponent({ item: worker }: WorkerComponentI) {
       >
     >();
   const navigateToWorkersDetails = () =>
-    navigation.navigate('workerDetails', { workerId: worker.id });
+    navigation.navigate('workerDetails', { worker });
 
   return (
     <TouchableOpacity
@@ -26,7 +26,7 @@ export function WorkerComponent({ item: worker }: WorkerComponentI) {
       className="w-full h-20 flex flex-row items-center"
     >
       <View className="w-16 h-full flex-col pt-1">
-        <ProfilePhoto abs="h-12 w-12" />
+        <ProfilePhoto abs="h-12 w-12" imgLink={worker.photoUrl} />
       </View>
       <View className="grow h-full flex-col justify-between shrink overflow-hidden">
         <Text

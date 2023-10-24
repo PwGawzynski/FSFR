@@ -6,10 +6,13 @@ import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
   GestureResponderEvent,
+  StyleProp,
 } from 'react-native';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
+// eslint-disable-next-line import/extensions
+import { MailComposerOptions } from 'expo-mail-composer/src/MailComposer.types';
 import {
   ForgotPasswordBase,
   LoginBase,
@@ -311,7 +314,7 @@ export interface OrderDetailsHeaderProps {
 
 export interface OrderDetailsInfoProps {
   titles: Array<string>;
-  keys: Array<string>;
+  keys: Array<string | ReactNode>;
 }
 
 export interface FieldListProps {
@@ -346,13 +349,27 @@ export enum WorkerPosition {
   Operator,
   Coordinator,
 }
-
+export enum WorkerStatus {
+  Active,
+  Dismissed,
+  Suspended,
+  OnSickLeave,
+  OnHoliday,
+}
 export interface Worker {
   id: string;
   name: string;
   surname: string;
   photoUrl: string;
   position: WorkerPosition;
+  status: WorkerStatus;
+  dateOfBirth: string;
+  address: string;
+  phone: string;
+  email: string;
+  dateOfEmployment: string;
+  province: string;
+  county: string;
 }
 
 export interface WorkerSelectorProps {
@@ -538,4 +555,14 @@ export interface WorkerTaskListElement extends OrderTask {
 
 export interface WorkerComponentI {
   item: Worker;
+}
+
+export interface SquaredProfilePictureProps {
+  abs?: string;
+  additionalImageStyles?: StyleProp<ImageProps>;
+  imageLink?: string;
+}
+export interface CallAndCreateEmailButtonsProps {
+  phoneNumber: string;
+  emailOptions: MailComposerOptions;
 }

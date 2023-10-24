@@ -1,11 +1,11 @@
 import { View } from 'react-native';
 import React from 'react';
 import { AppButton } from '../Atoms/AppButton';
-import { OwnerMobiDesktopRootStackProps } from '../../FrontendSelfTypes/navigation/types';
+import { OwnerMobiDesktopTopTabProps } from '../../FrontendSelfTypes/navigation/types';
 
 export function DesktopBottomButtons({
   navigation,
-}: OwnerMobiDesktopRootStackProps<'desktop'>) {
+}: OwnerMobiDesktopTopTabProps<'desktopRoot', 'desktop'>) {
   return (
     <View className="flex flex-row mb-10 mt-6">
       <AppButton

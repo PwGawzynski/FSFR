@@ -1,11 +1,12 @@
 import { MaterialWorkersRootTopTabParamList } from './MaterialWorkersRootTopTabParamList';
+import { Worker } from '../moduleProps/ComponentsProps';
 
 export type WorkersStackParamList = {
   workersRoot: MaterialWorkersRootTopTabParamList;
 
   workersLocation: undefined;
 
-  workerDetails: { workerId: string };
+  workerDetails: { worker: Worker };
 
   workerWorkDayDetails: undefined;
 
