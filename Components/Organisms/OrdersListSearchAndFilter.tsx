@@ -7,14 +7,14 @@ import {
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { OrdersList } from './OrdersList';
 import { EmptyListInfo } from '../Molecules/EmptyListInfo';
-import { OrdersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersTopTabParamList';
+import { OrdersStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersStackParamList';
 import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 import { defaultOrdersFilterMethod } from '../../helpers/handlers/ordersFilterHandler';
 import { MaterialOrdersRootTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 
 export function OrdersListSearchAndFilter<
   T extends keyof MaterialOrdersRootTopTabParamList,
-  N extends keyof OrdersTopTabParamList,
+  N extends keyof OrdersStackParamList,
   M extends keyof OwnerDesktopRootStackParamList,
 >({ filterMethod }: OrdersListSearchAndFilterProps<T, N, M>) {
   const INIT_SEARCH_VALUE = '';

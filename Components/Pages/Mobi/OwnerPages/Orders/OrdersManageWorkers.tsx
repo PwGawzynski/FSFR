@@ -30,7 +30,7 @@ export function OrdersManageWorkers({
   const [focusedWorker, setFocusedWorker] = useState<Worker | undefined>(
     undefined,
   );
-  const { data: orderAssignedTasks, isSuccess: areTasksLoaded } = useQuery(
+  const { data: orderAssignedTasks } = useQuery(
     ['orderAssignedTasks', orderId],
     ({ queryKey }) => getAllOrdersTasks(`${queryKey[1]}`),
   );

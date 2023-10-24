@@ -8,10 +8,11 @@ import { RootStackParamList } from '../NavigatorsInterfaces/RootStackParamList';
 import { RegisterStackParamList } from '../NavigatorsInterfaces/RegisterStack';
 import { OwnerDesktopRootStackParamList } from '../NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 import { DesktopTopTabParamList } from '../NavigatorsInterfaces/DesktopTopTabParamList';
-import { OrdersTopTabParamList } from '../NavigatorsInterfaces/OrdersTopTabParamList';
-import { WorkersTopTabParamList } from '../NavigatorsInterfaces/WorkersTopTabParamList';
+import { OrdersStackParamList } from '../NavigatorsInterfaces/OrdersStackParamList';
+import { WorkersStackParamList } from '../NavigatorsInterfaces/WorkersStackParamList';
 import { FieldTopTabParamList } from '../NavigatorsInterfaces/FieldTopTabParamList';
 import { MaterialOrdersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
+import { MaterialWorkersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialWorkersRootTopTabParamList';
 
 export type LoginPageBase = StackScreenProps<RootStackParamList, 'Login'>;
 export type LoginPageTabBase = LoginPageBase;
@@ -59,25 +60,60 @@ export type OwnerMobiDesktopTopTabProps<
 >;
 
 export type OwnerMobiOrdersTopTabProps<
-  T extends keyof OrdersTopTabParamList,
+  T extends keyof OrdersStackParamList,
   N extends keyof OwnerDesktopRootStackParamList,
 > = CompositeScreenProps<
-  MaterialTopTabScreenProps<OrdersTopTabParamList, T>,
+  MaterialTopTabScreenProps<OrdersStackParamList, T>,
+  OwnerMobiDesktopRootStackProps<N>
+>;
+
+export type OwnerWorkersStackProps<
+  T extends keyof WorkersStackParamList,
+  N extends keyof OwnerDesktopRootStackParamList,
+> = CompositeScreenProps<
+  MaterialTopTabScreenProps<WorkersStackParamList, T>,
   OwnerMobiDesktopRootStackProps<N>
 >;
 
 export type OwnerOrdersMaterialRootProps<
   T extends keyof MaterialOrdersRootTopTabParamList,
-  N extends keyof OrdersTopTabParamList,
+  N extends keyof OrdersStackParamList,
   M extends keyof OwnerDesktopRootStackParamList,
 > = CompositeScreenProps<
   MaterialTopTabScreenProps<MaterialOrdersRootTopTabParamList, T>,
   OwnerMobiOrdersTopTabProps<N, M>
 >;
 
+export type OwnerWorkersMaterialRootProps<
+  T extends keyof MaterialWorkersRootTopTabParamList,
+  N extends keyof WorkersStackParamList,
+  M extends keyof OwnerDesktopRootStackParamList,
+> = CompositeScreenProps<
+  MaterialTopTabScreenProps<MaterialWorkersRootTopTabParamList, T>,
+  OwnerWorkersStackProps<N, M>
+>;
+
+export type OwnerWorkersMaterialRootNavigation<
+  T extends keyof MaterialWorkersRootTopTabParamList,
+  N extends keyof WorkersStackParamList,
+  M extends keyof OwnerDesktopRootStackParamList,
+> = CompositeScreenProps<
+  MaterialTopTabScreenProps<MaterialWorkersRootTopTabParamList, T>,
+  OwnerWorkersStackProps<N, M>
+>['navigation'];
+
+export type OwnerWorkersMaterialRootRouteParams<
+  T extends keyof MaterialWorkersRootTopTabParamList,
+  N extends keyof WorkersStackParamList,
+  M extends keyof OwnerDesktopRootStackParamList,
+> = CompositeScreenProps<
+  MaterialTopTabScreenProps<MaterialWorkersRootTopTabParamList, T>,
+  OwnerWorkersStackProps<N, M>
+>['route'];
+
 export type OwnerOrdersMaterialRootNavigationProps<
   T extends keyof MaterialOrdersRootTopTabParamList,
-  N extends keyof OrdersTopTabParamList,
+  N extends keyof OrdersStackParamList,
   M extends keyof OwnerDesktopRootStackParamList,
 > = CompositeScreenProps<
   MaterialTopTabScreenProps<MaterialOrdersRootTopTabParamList, T>,
@@ -87,14 +123,6 @@ export type OwnerOrdersMaterialRootNavigationProps<
 export type OwnerOrdersMaterialRootRouteProps<
   T extends keyof MaterialOrdersRootTopTabParamList,
 > = MaterialTopTabScreenProps<MaterialOrdersRootTopTabParamList, T>['route'];
-
-export type OwnerMobiWorkersTopTabProps<
-  T extends keyof WorkersTopTabParamList,
-  N extends keyof OwnerDesktopRootStackParamList,
-> = CompositeScreenProps<
-  MaterialTopTabScreenProps<WorkersTopTabParamList, T>,
-  OwnerMobiDesktopRootStackProps<N>
->;
 
 export type OwnerMobiFieldsTopTabProps<
   T extends keyof FieldTopTabParamList,

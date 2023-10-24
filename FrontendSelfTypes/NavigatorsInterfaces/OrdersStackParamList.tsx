@@ -1,6 +1,6 @@
 import { MaterialOrdersRootTopTabParamList } from './MaterialOrdersRootTopTabParamLIst';
 
-export type OrdersTopTabParamList = {
+export type OrdersStackParamList = {
   ordersRoot: MaterialOrdersRootTopTabParamList;
   ordersLocations: undefined;
 

@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { OrdersTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersTopTabParamList';
+import { OrdersStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersStackParamList';
 
 import { OrdersStackScreenOptions } from '../../helpers/style/OrdersStackScreenOptions';
 import { OrdersAddField } from '../Pages/Mobi/OwnerPages/Orders/OrdersAddField';
@@ -12,9 +12,9 @@ import { OrdersHistory } from '../Pages/Mobi/OwnerPages/Orders/OrdersHistory';
 import { MaterialOrdersRootTopTab } from './MaterialOrdersRootTopTab';
 import { AllOrders } from '../Pages/Mobi/OwnerPages/Orders/AllOrders';
 
-const TabNavigator = createNativeStackNavigator<OrdersTopTabParamList>();
+const TabNavigator = createNativeStackNavigator<OrdersStackParamList>();
 
-export function OrdersTopTab() {
+export function OrdersStack() {
   return (
     <TabNavigator.Navigator initialRouteName="ordersRoot">
       <TabNavigator.Screen
