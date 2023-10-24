@@ -408,61 +408,71 @@
       "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
       "name": "John",
       "surname": "Doe",
-      "photoUrl": "https://www.example.com/photo1.jpg"
+      "photoUrl": "https://www.example.com/photo1.jpg",
+      "position": 1
     },
     {
       "id": "2f842abc-8f94-4ce0-ae2e-6d73935e0c12",
       "name": "Alice",
       "surname": "Smith",
-      "photoUrl": "https://www.example.com/photo2.jpg"
+      "photoUrl": "https://www.example.com/photo2.jpg",
+      "position": 0
     },
     {
       "id": "f6a1d3ca-2fe6-45c4-9e82-3d0b7a042d76",
       "name": "Bob",
       "surname": "Johnson",
-      "photoUrl": "https://www.example.com/photo3.jpg"
+      "photoUrl": "https://www.example.com/photo3.jpg",
+      "position": 1
     },
     {
       "id": "1d8a3f1b-d14c-47dd-8ff7-37ae9bf2f7cf",
       "name": "Eva",
       "surname": "Brown",
-      "photoUrl": "https://www.example.com/photo4.jpg"
+      "photoUrl": "https://www.example.com/photo4.jpg",
+      "position": 0
     },
     {
       "id": "3c6f0a5d-9ca9-4594-aae2-9b84cfb0a03d",
       "name": "Michael",
       "surname": "Wilson",
-      "photoUrl": "https://www.example.com/photo5.jpg"
+      "photoUrl": "https://www.example.com/photo5.jpg",
+      "position": 0
     },
     {
       "id": "9d3e49a0-ef6e-4b6d-81af-d37f8c848ffa",
       "name": "Olivia",
       "surname": "Jones",
-      "photoUrl": "https://www.example.com/photo6.jpg"
+      "photoUrl": "https://www.example.com/photo6.jpg",
+      "position": 0
     },
     {
       "id": "7b624019-3c4a-4cbf-95c0-0df72c418c2b",
       "name": "David",
       "surname": "Davis",
-      "photoUrl": "https://www.example.com/photo7.jpg"
+      "photoUrl": "https://www.example.com/photo7.jpg",
+      "position": 0
     },
     {
       "id": "50b2b8c6-947d-493a-85c6-92d7ff5d24e3",
       "name": "Sophia",
       "surname": "Martinez",
-      "photoUrl": "https://www.example.com/photo8.jpg"
+      "photoUrl": "https://www.example.com/photo8.jpg",
+      "position": 0
     },
     {
       "id": "f3d9c12a-0e14-477a-b146-cd15c6c9f9b9",
       "name": "William",
       "surname": "Anderson",
-      "photoUrl": "https://www.example.com/photo9.jpg"
+      "photoUrl": "https://www.example.com/photo9.jpg",
+      "position": 0
     },
     {
       "id": "d0ee352f-93b8-4cb7-8cbf-e30d28e051c8",
       "name": "Emily",
       "surname": "White",
-      "photoUrl": "https://www.example.com/photo10.jpg"
+      "photoUrl": "https://www.example.com/photo10.jpg",
+      "position": 0
     }
   ],
    "orderTasks": [
