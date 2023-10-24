@@ -22,7 +22,7 @@ export function MaterialWorkersTopTab() {
         options={MaterialTopTabScreenOptions}
       />
       <MaterialWorkersTopTabNavigator.Screen
-        name="searchOrder"
+        name="searchWorker"
         component={WorkerSearch}
         options={MaterialTopTabScreenOptions}
       />
