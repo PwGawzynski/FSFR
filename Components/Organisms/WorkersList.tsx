@@ -1,10 +1,4 @@
-import {
-  Dimensions,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { useQuery } from 'react-query';
 import { useNavigation } from '@react-navigation/native';
 import { getAllWorkers } from '../../helpers/api/Services/Worker';
