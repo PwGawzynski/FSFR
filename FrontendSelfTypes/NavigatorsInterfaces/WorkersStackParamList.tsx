@@ -5,7 +5,7 @@ export type WorkersStackParamList = {
 
   workersLocation: undefined;
 
-  workerDetails: undefined;
+  workerDetails: { workerId: string };
 
   workerWorkDayDetails: undefined;
 
