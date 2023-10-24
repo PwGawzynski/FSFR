@@ -403,78 +403,159 @@
       "name": "Dzierżawa Kossak"
     }
   ],
-  "workers":[
-    {
-      "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
-      "name": "John",
-      "surname": "Doe",
-      "photoUrl": "https://randomuser.me/api/portraits/men/22.jpg",
-      "position": 1
-    },
-    {
-      "id": "2f842abc-8f94-4ce0-ae2e-6d73935e0c12",
-      "name": "Alice",
-      "surname": "Smith",
-      "photoUrl": "https://randomuser.me/api/portraits/men/46.jpg",
-      "position": 0
-    },
-    {
-      "id": "f6a1d3ca-2fe6-45c4-9e82-3d0b7a042d76",
-      "name": "Bob",
-      "surname": "Johnson",
-      "photoUrl": "https://randomuser.me/api/portraits/men/67.jpg",
-      "position": 1
-    },
-    {
-      "id": "1d8a3f1b-d14c-47dd-8ff7-37ae9bf2f7cf",
-      "name": "Eva",
-      "surname": "Brown",
-      "photoUrl": "https://randomuser.me/api/portraits/men/23.jpg",
-      "position": 0
-    },
-    {
-      "id": "3c6f0a5d-9ca9-4594-aae2-9b84cfb0a03d",
-      "name": "Michael",
-      "surname": "Wilson",
-      "photoUrl": "https://cdn.pixabay.com/photo/2023/10/16/10/37/cathedral-8318952_1280.jpg",
-      "position": 0
-    },
-    {
-      "id": "9d3e49a0-ef6e-4b6d-81af-d37f8c848ffa",
-      "name": "Olivia",
-      "surname": "Jones",
-      "photoUrl": "https://randomuser.me/api/portraits/men/25.jpg",
-      "position": 0
-    },
-    {
-      "id": "7b624019-3c4a-4cbf-95c0-0df72c418c2b",
-      "name": "David",
-      "surname": "Davis",
-      "photoUrl": "https://randomuser.me/api/portraits/men/43.jpg",
-      "position": 0
-    },
-    {
-      "id": "50b2b8c6-947d-493a-85c6-92d7ff5d24e3",
-      "name": "Sophia",
-      "surname": "Martinez",
-      "photoUrl": "https://randomuser.me/api/portraits/men/33.jpg",
-      "position": 0
-    },
-    {
-      "id": "f3d9c12a-0e14-477a-b146-cd15c6c9f9b9",
-      "name": "William",
-      "surname": "Anderson",
-      "photoUrl": "https://randomuser.me/api/portraits/men/6.jpg",
-      "position": 0
-    },
-    {
-      "id": "d0ee352f-93b8-4cb7-8cbf-e30d28e051c8",
-      "name": "Emily",
-      "surname": "White",
-      "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg",
-      "position": 0
-    }
-  ],
+   "workers":[
+     {
+       "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+       "name": "John",
+       "surname": "Doe",
+       "photoUrl": "https://randomuser.me/api/portraits/men/22.jpg",
+       "position": 1,
+       "status": 2,
+       "dateOfBirth": "1985-03-15",
+       "address": "123 Main Street",
+       "phone": "123-456-7890",
+       "email": "john.doe@example.com",
+       "dateOfEmployment": "2010-07-20",
+       "province": "Mazowieckie",
+       "county": "Warszawa"
+     },
+     {
+       "id": "2f842abc-8f94-4ce0-ae2e-6d73935e0c12",
+       "name": "Alice",
+       "surname": "Smith",
+       "photoUrl": "https://randomuser.me/api/portraits/men/46.jpg",
+       "position": 0,
+       "status": 1,
+       "dateOfBirth": "1990-12-10",
+       "address": "456 Elm Street",
+       "phone": "987-654-3210",
+       "email": "alice.smith@example.com",
+       "dateOfEmployment": "2015-04-05",
+       "province": "Łódzkie",
+       "county": "Łódź"
+     },
+     {
+       "id": "f6a1d3ca-2fe6-45c4-9e82-3d0b7a042d76",
+       "name": "Bob",
+       "surname": "Johnson",
+       "photoUrl": "https://randomuser.me/api/portraits/men/67.jpg",
+       "position": 1,
+       "status": 4,
+       "dateOfBirth": "1988-09-20",
+       "address": "789 Oak Street",
+       "phone": "555-123-4567",
+       "email": "bob.johnson@example.com",
+       "dateOfEmployment": "2008-12-12",
+       "province": "Wielkopolskie",
+       "county": "Poznań"
+     },
+     {
+       "id": "1d8a3f1b-d14c-47dd-8ff7-37ae9bf2f7cf",
+       "name": "Eva",
+       "surname": "Brown",
+       "photoUrl": "https://randomuser.me/api/portraits/men/23.jpg",
+       "position": 0,
+       "status": 0,
+       "dateOfBirth": "1995-06-05",
+       "address": "567 Pine Street",
+       "phone": "777-555-8888",
+       "email": "eva.brown@example.com",
+       "dateOfEmployment": "2019-03-28",
+       "province": "Dolnośląskie",
+       "county": "Wrocław"
+     },
+     {
+       "id": "3c6f0a5d-9ca9-4594-aae2-9b84cfb0a03d",
+       "name": "Michael",
+       "surname": "Wilson",
+       "photoUrl": "https://cdn.pixabay.com/photo/2023/10/16/10/37/cathedral-8318952_1280.jpg",
+       "position": 0,
+       "status": 0,
+       "dateOfBirth": "1982-01-25",
+       "address": "345 Cedar Street",
+       "phone": "222-333-4444",
+       "email": "michael.wilson@example.com",
+       "dateOfEmployment": "2007-08-15",
+       "province": "Małopolskie",
+       "county": "Kraków"
+     },
+     {
+       "id": "9d3e49a0-ef6e-4b6d-81af-d37f8c848ffa",
+       "name": "Olivia",
+       "surname": "Jones",
+       "photoUrl": "https://randomuser.me/api/portraits/men/25.jpg",
+       "position": 0,
+       "status": 0,
+       "dateOfBirth": "1993-04-18",
+       "address": "234 Maple Street",
+       "phone": "888-777-6666",
+       "email": "olivia.jones@example.com",
+       "dateOfEmployment": "2013-11-10",
+       "province": "Pomorskie",
+       "county": "Gdańsk"
+     },
+     {
+       "id": "7b624019-3c4a-4cbf-95c0-0df72c418c2b",
+       "name": "David",
+       "surname": "Davis",
+       "photoUrl": "https://randomuser.me/api/portraits/men/43.jpg",
+       "position": 0,
+       "status": 0,
+       "dateOfBirth": "1991-08-30",
+       "address": "876 Birch Street",
+       "phone": "666-999-1111",
+       "email": "david.davis@example.com",
+       "dateOfEmployment": "2016-06-22",
+       "province": "Podkarpackie",
+       "county": "Rzeszów"
+     },
+     {
+       "id": "50b2b8c6-947d-493a-85c6-92d7ff5d24e3",
+       "name": "Sophia",
+       "surname": "Martinez",
+       "photoUrl": "https://randomuser.me/api/portraits/men/33.jpg",
+       "position": 0,
+       "status": 0,
+       "dateOfBirth": "1998-03-12",
+       "address": "321 Cedar Street",
+       "phone": "444-222-3333",
+       "email": "sophia.martinez@example.com",
+       "dateOfEmployment": "2020-05-18",
+       "province": "Śląskie",
+       "county": "Katowice"
+     },
+     {
+       "id": "f3d9c12a-0e14-477a-b146-cd15c6c9f9b9",
+       "name": "William",
+       "surname": "Anderson",
+       "photoUrl": "https://randomuser.me/api/portraits/men/6.jpg",
+       "position": 0,
+       "status": 0,
+       "dateOfBirth": "1987-11-08",
+       "address": "456 Pine Street",
+       "phone": "777-444-9999",
+       "email": "william.anderson@example.com",
+       "dateOfEmployment": "2011-09-14",
+       "province": "Lubelskie",
+       "county": "Lublin"
+     },
+     {
+       "id": "d0ee352f-93b8-4cb7-8cbf-e30d28e051c8",
+       "name": "Emily",
+       "surname": "White",
+       "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg",
+       "position": 0,
+       "status": 3,
+       "dateOfBirth": "1994-07-25",
+       "address": "789 Oak Street",
+       "phone": "333-888-5555",
+       "email": "emily.white@example.com",
+       "dateOfEmployment": "2017-12-30",
+       "province": "Warmińsko-Mazurskie",
+       "county": "Olsztyn"
+     }
+   ],
+
    "orderTasks": [
      {
        "id": "f970e3b8-5566-4099-93a2-5186009108h1",
