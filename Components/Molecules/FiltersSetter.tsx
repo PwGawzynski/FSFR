@@ -18,20 +18,28 @@ export function FiltersSetter<T>({
         >
           {option.map(value => (
             <TouchableOpacity
-              onPress={() => onFilterOnOff(value)}
+              onPress={() =>
+                onFilterOnOff({
+                  main: value.main,
+                  subOptions: value.subOptions,
+                  active: {
+                    main: value.main,
+                  },
+                })
+              }
               key={Math.random()}
               className={`flex-1 ${
-                filterOn === value ? 'bg-black' : 'bg-white'
+                filterOn.main === value.main ? 'bg-black' : 'bg-white'
               } h-6 border-2 border-black border-solid rounded-full items-center justify-center pl-1 pr-1`}
             >
               <Text
                 numberOfLines={1}
                 adjustsFontSizeToFit
                 className={`font-bold uppercase ${
-                  filterOn === value ? 'text-white' : 'text-black'
+                  filterOn.main === value.main ? 'text-white' : 'text-black'
                 }`}
               >
-                {value as string}
+                {value.main as string}
               </Text>
             </TouchableOpacity>
           ))}
