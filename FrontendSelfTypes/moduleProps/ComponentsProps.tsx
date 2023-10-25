@@ -510,9 +510,12 @@ export interface EmptyListProps {
   text: string;
   children?: ReactNode;
 }
-
+export type OptionsRowWSubOptions<T> = {
+  main: keyof T;
+  subOptions: Array<string>;
+};
 export interface FiltersSetterProps<T> {
-  optionsRows: Array<Array<keyof T>>;
+  optionsRows: Array<Array<keyof T | OptionsRowWSubOptions<T>>>;
   onFilterOnOff: (filterName: keyof T) => void;
   filterOn: keyof T | undefined;
 }
