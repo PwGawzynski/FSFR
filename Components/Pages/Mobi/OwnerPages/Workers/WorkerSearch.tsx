@@ -16,7 +16,9 @@ export function WorkerSearch() {
   return (
     <SafeAreaView className="w-full h-full flex-col">
       <View className="flex-1 mr-4 ml-4">
-        <ScreenTitleHeader variant="lg">Search Worker</ScreenTitleHeader>
+        <ScreenTitleHeader variant="lg" abs="mb-6">
+          Search Worker
+        </ScreenTitleHeader>
         <SearchModuleInterfaceBased
           onSearchPress={handleOnSearchPress}
           optionsRows={[
