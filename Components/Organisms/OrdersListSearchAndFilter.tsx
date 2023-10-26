@@ -2,8 +2,10 @@ import { View } from 'react-native';
 import { useState } from 'react';
 import { SearchModuleInterfaceBased } from './SearchModuleInterfaceBased';
 import {
+  ActiveFilterValue,
   OrderBaseI,
   OrdersListSearchAndFilterProps,
+  OrderStatus,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { OrdersList } from './OrdersList';
 import { EmptyListInfo } from '../Molecules/EmptyListInfo';
@@ -11,6 +13,7 @@ import { OrdersStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfac
 import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 import { defaultOrdersFilterMethod } from '../../helpers/handlers/ordersFilterHandler';
 import { MaterialOrdersRootTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
+import { mapEnumToSubOptionPairs } from '../../helpers/handlers/mapEnumToSubOptionsPairsHandler';
 
 export function OrdersListSearchAndFilter<
   T extends keyof MaterialOrdersRootTopTabParamList,
@@ -18,15 +21,27 @@ export function OrdersListSearchAndFilter<
   M extends keyof OwnerDesktopRootStackParamList,
 >({ filterMethod }: OrdersListSearchAndFilterProps<T, N, M>) {
   const INIT_SEARCH_VALUE = '';
-  const INIT_FILTER_NAME: keyof OrderBaseI = 'name';
+  const INIT_FILTER_NAME: ActiveFilterValue<OrderBaseI> = {
+    main: 'name',
+    active: { main: 'name' },
+  };
   const [searchValue, setSearchValue] = useState(INIT_SEARCH_VALUE);
-  const [filter, setFilter] = useState<keyof OrderBaseI>(INIT_FILTER_NAME);
+  const [filter, setFilter] =
+    useState<ActiveFilterValue<OrderBaseI>>(INIT_FILTER_NAME);
+
   return (
     <>
       <SearchModuleInterfaceBased<OrderBaseI>
         optionsRows={[
-          ['client', 'name'],
-          ['status', 'area', 'performanceDate'],
+          [{ main: 'client' }, { main: 'name' }],
+          [
+            {
+              main: 'status',
+              subOptions: mapEnumToSubOptionPairs(OrderStatus),
+            },
+            { main: 'area' },
+            { main: 'performanceDate' },
+          ],
         ]}
         onFilterOnOff={filterName => setFilter(filterName)}
         filterOn={filter}
@@ -45,7 +60,11 @@ export function OrdersListSearchAndFilter<
                   INIT_SEARCH_VALUE,
                 )
           }
-          reloadIndicator={searchValue}
+          reloadIndicator={
+            filter.active?.subOption !== undefined
+              ? filter.active.subOption
+              : searchValue
+          }
         />
       </View>
     </>
