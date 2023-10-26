@@ -566,3 +566,7 @@ export interface CallAndCreateEmailButtonsProps {
   phoneNumber: string;
   emailOptions: MailComposerOptions;
 }
+
+export interface WorkerListProps {
+  filterMethod?: ((worker: Worker) => boolean) | undefined;
+}
