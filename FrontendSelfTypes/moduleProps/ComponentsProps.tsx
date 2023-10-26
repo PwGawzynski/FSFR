@@ -486,6 +486,7 @@ export interface OrdersListProps {
   filterMethod?: ((order: OrderBaseI) => boolean) | undefined;
   reloadIndicator?: unknown;
   ListEmptyComponent?: ReactElement;
+  abs?: string;
 }
 export interface SmallHeaderProps {
   children: string;
@@ -549,7 +550,7 @@ export interface OrdersListSearchAndFilterProps<
   filterMethod?:
     | ((
         Order: OrderBaseI,
-        filter: keyof OrderBaseI,
+        filter: ActiveFilterValue<OrderBaseI>,
         searchValue: string,
         initSearchValue?: string,
       ) => boolean)

@@ -8,9 +8,10 @@ export function OrdersList({
   filterMethod,
   reloadIndicator,
   ListEmptyComponent,
+  abs,
 }: OrdersListProps) {
   return (
-    <View className="flex-1 flex flex-col">
+    <View className={`flex-1 flex flex-col ${abs}`}>
       <Orders
         ListEmptyComponent={ListEmptyComponent}
         reloadIndicator={reloadIndicator}

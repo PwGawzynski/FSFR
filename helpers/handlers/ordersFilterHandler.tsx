@@ -1,29 +1,46 @@
 import {
+  ActiveFilterValue,
   OrderBaseI,
   OrderStatus,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export const defaultOrdersFilterMethod = (
   order: OrderBaseI,
-  filter: keyof OrderBaseI,
+  filter: ActiveFilterValue<OrderBaseI>,
   searchValue: string,
   initSearchValue = '',
 ) => {
-  if (order[filter]) {
-    if (searchValue === initSearchValue) return true;
-    if (typeof order[filter] === 'string')
-      return (order[filter] as string)
+  if (!filter.active) return true;
+  if (order[filter.active.main] !== undefined) {
+    if (
+      searchValue === initSearchValue &&
+      filter.active.subOption === undefined
+    )
+      return true;
+    if (
+      filter.active.subOption !== undefined &&
+      order[filter.active.main] !== undefined
+    )
+      return order[filter.active.main] === filter.active.subOption;
+    if (
+      order[filter.active.main] !== undefined &&
+      typeof order[filter.active.main] === 'string'
+    )
+      return (order[filter.active.main] as string)
         ?.toLowerCase()
         .includes(searchValue.toLowerCase());
-    if (typeof order[filter] === 'number')
-      return order[filter]?.toString() === searchValue;
+    if (
+      order[filter.active.main] !== undefined &&
+      typeof order[filter.active.main] === 'number'
+    )
+      return order[filter.active.main]?.toString() === searchValue;
   }
   return false;
 };
 
 export const doneOrdersFilterMethod = (
   order: OrderBaseI,
-  filter: keyof OrderBaseI,
+  filter: ActiveFilterValue<OrderBaseI>,
   searchValue: string,
   initSearchValue = '',
 ) => {
@@ -42,7 +59,7 @@ export const RemDoneOrdersFilter = (order: OrderBaseI) =>
 
 export const OnlyOpenOrdersFilter = (
   order: OrderBaseI,
-  filter: keyof OrderBaseI,
+  filter: ActiveFilterValue<OrderBaseI>,
   searchValue: string,
   initSearchValue = '',
 ) => {
@@ -57,5 +74,10 @@ export const OnlyOpenOrdersFilter = (
   return false;
 };
 
-export const filterByStatus = (order: OrderBaseI, searchStatusValue: string) =>
-  OrderStatus[order.status] === searchStatusValue;
+export const filterByStatus = (
+  order: OrderBaseI,
+  searchStatusValue: string | number,
+) => {
+  console.log(order.status, Number(searchStatusValue));
+  return order.status === Number(searchStatusValue);
+};
