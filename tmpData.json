@@ -564,7 +564,7 @@
          "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
          "name": "John",
          "surname": "Doe",
-         "photoUrl": "https://www.example.com/photo1.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -606,7 +606,7 @@
          "id": "1d8a3f1b-d14c-47dd-8ff7-37ae9bf2f7cf",
          "name": "Eva",
          "surname": "Brown",
-         "photoUrl": "https://www.example.com/photo4.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/12.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -627,7 +627,7 @@
          "id": "3c6f0a5d-9ca9-4594-aae2-9b84cfb0a03d",
          "name": "Michael",
          "surname": "Wilson",
-         "photoUrl": "https://www.example.com/photo5.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/21.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -648,7 +648,7 @@
          "id": "9d3e49a0-ef6e-4b6d-81af-d37f8c848ffa",
          "name": "Olivia",
          "surname": "Jones",
-         "photoUrl": "https://www.example.com/photo6.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/33.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -669,7 +669,7 @@
          "id": "7b624019-3c4a-4cbf-95c0-0df72c418c2b",
          "name": "David",
          "surname": "Davis",
-         "photoUrl": "https://www.example.com/photo7.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/44.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -690,7 +690,7 @@
          "id": "50b2b8c6-947d-493a-85c6-92d7ff5d24e3",
          "name": "Sophia",
          "surname": "Martinez",
-         "photoUrl": "https://www.example.com/photo8.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/55.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -711,7 +711,28 @@
          "id": "f3d9c12a-0e14-477a-b146-cd15c6c9f9b9",
          "name": "William",
          "surname": "Anderson",
-         "photoUrl": "https://www.example.com/photo9.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/60.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "b91abfc4-862a-4877-85c5-1d94e225ab66",
+         "area": 2.18,
+         "status": 1,
+         "voice": "Podlaskie",
+         "county": "Białystok",
+         "city": "Białystok",
+         "dataCollectionDate": "2023-09-16",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-556s-4099-93a2-5186009108kg",
+       "type": 0,
+       "worker": {
+         "id": "f3d9c12a-0e14-477a-b146-cd15c6c9f9b9",
+         "name": "William",
+         "surname": "Anderson",
+         "photoUrl": "https://randomuser.me/api/portraits/men/60.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -732,7 +753,7 @@
          "id": "d0ee352f-93b8-4cb7-8cbf-e30d28e051c8",
          "name": "Emily",
          "surname": "White",
-         "photoUrl": "https://www.example.com/photo10.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/1.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -754,7 +775,7 @@
          "id": "f6a1d3ca-2fe6-45c4-9e82-3d0b7a042d76",
          "name": "Bob",
          "surname": "Johnson",
-         "photoUrl": "https://www.example.com/photo3.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/5.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -775,7 +796,7 @@
          "id": "1d8a3f1b-d14c-47dd-8ff7-37ae9bf2f7cf",
          "name": "Eva",
          "surname": "Brown",
-         "photoUrl": "https://www.example.com/photo4.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/6.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -796,7 +817,7 @@
          "id": "3c6f0a5d-9ca9-4594-aae2-9b84cfb0a03d",
          "name": "Michael",
          "surname": "Wilson",
-         "photoUrl": "https://www.example.com/photo5.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/9.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -817,7 +838,7 @@
          "id": "9d3e49a0-ef6e-4b6d-81af-d37f8c848ffa",
          "name": "Olivia",
          "surname": "Jones",
-         "photoUrl": "https://www.example.com/photo6.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/15.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
@@ -838,7 +859,7 @@
          "id": "f3d9c12a-0e14-477a-b146-cd15c6c9f9b9",
          "name": "William",
          "surname": "Anderson",
-         "photoUrl": "https://www.example.com/photo9.jpg"
+         "photoUrl": "https://randomuser.me/api/portraits/men/41.jpg"
        },
        "field": {
          "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
