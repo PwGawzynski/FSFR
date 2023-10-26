@@ -4,7 +4,6 @@ import { Api } from '../Api';
 export async function getAllWorkers(
   externalDataOn?: true,
 ): Promise<Array<Worker> | undefined> {
-  console.log('data');
   try {
     if (externalDataOn) return undefined;
     return (await Api.getWorkers()).workers;
