@@ -510,11 +510,30 @@ export interface EmptyListProps {
   text: string;
   children?: ReactNode;
 }
+export interface SubOptionsI {
+  value: number | string;
+  text: string;
+}
 
+export type ActiveFilterValue<T> = {
+  main: keyof T;
+  subOptions?: Array<SubOptionsI>;
+  active?: FilterValue<T>;
+};
+export type FilterValue<T> = {
+  main: keyof T;
+  subOption?: string | number;
+};
 export interface FiltersSetterProps<T> {
-  optionsRows: Array<Array<keyof T>>;
-  onFilterOnOff: (filterName: keyof T) => void;
-  filterOn: keyof T | undefined;
+  optionsRows: Array<Array<ActiveFilterValue<T>>>;
+  onFilterOnOff: (filterName: ActiveFilterValue<T>) => void;
+  filterOn: ActiveFilterValue<T>;
+}
+
+export interface SubOptionFilterSetterProps<T> {
+  options: ActiveFilterValue<T>;
+  onFilterOnOff: (filterName: ActiveFilterValue<T>) => void;
+  filterOn: ActiveFilterValue<T>;
 }
 
 export type SearchModuleInterfaceBasedProps<T> = FiltersSetterProps<T> &

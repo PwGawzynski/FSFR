@@ -1,6 +1,7 @@
 import { FiltersSetter } from '../Molecules/FiltersSetter';
 import { SearchModuleInterfaceBasedProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { SearchEngine } from './SearchEngine';
+import { SubOptionFilterSetter } from '../Molecules/SubOptionFilterSetter';
 
 export function SearchModuleInterfaceBased<T>({
   filterOn,
@@ -17,11 +18,21 @@ export function SearchModuleInterfaceBased<T>({
         filterOn={filterOn}
         optionsRows={optionsRows}
       />
-      <SearchEngine
-        onSearchPress={onSearchPress}
-        onChangeText={onChangeText}
-        value={value}
-      />
+      {!filterOn.active ||
+        (!filterOn.subOptions && (
+          <SearchEngine
+            onSearchPress={onSearchPress}
+            onChangeText={onChangeText}
+            value={value}
+          />
+        ))}
+      {filterOn.subOptions && (
+        <SubOptionFilterSetter
+          options={filterOn}
+          onFilterOnOff={onFilterOnOff}
+          filterOn={filterOn}
+        />
+      )}
     </>
   );
 }
