@@ -1,4 +1,4 @@
-import { FlatList, ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import { useMutation } from 'react-query';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
