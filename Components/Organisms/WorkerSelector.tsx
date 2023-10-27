@@ -1,17 +1,23 @@
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import { useQuery } from 'react-query';
+import { useState } from 'react';
 import { ProfilePhoto } from '../Atoms/ProfilePhoto';
 import { getAllWorkers } from '../../helpers/api/Services/Worker';
-import { WorkerSelectorProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import {
+  Worker,
+  WorkerSelectorProps,
+} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function WorkerSelector({
   data,
-  focusedWorker,
-  setFocusedWorker,
+  onFocusWorker,
   externalData,
 }: WorkerSelectorProps) {
   const { data: workers } = useQuery('workers', () =>
     getAllWorkers(externalData),
+  );
+  const [focusedWorker, setFocusedWorker] = useState<Worker | undefined>(
+    undefined,
   );
   return (
     <ScrollView
@@ -35,7 +41,10 @@ export function WorkerSelector({
       ))}
       {data?.map(worker => (
         <TouchableOpacity
-          onPress={() => setFocusedWorker(worker)}
+          onPress={() => {
+            setFocusedWorker(worker);
+            onFocusWorker(worker);
+          }}
           className="flex flex-col items-center justify-center pr-2"
           key={worker.id}
         >
