@@ -84,8 +84,7 @@ export function OrdersManageWorkers({
         <ScreenTitleHeader variant="sm" abs="mt-6 mb-4">
           {focusedWorker?.name} Task&apos;s
         </ScreenTitleHeader>
-        {selectedWorkerTasks && <WorkersTasksList data={selectedWorkerTasks} />}
-        <View className="grow" />
+        <View className="flex-1">{selectedWorkerTasksList}</View>
       </View>
     </SafeAreaView>
   );
