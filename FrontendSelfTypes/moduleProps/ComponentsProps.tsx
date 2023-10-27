@@ -373,8 +373,7 @@ export interface Worker {
 }
 
 export interface WorkerSelectorProps {
-  focusedWorker?: Worker;
-  setFocusedWorker: React.Dispatch<React.SetStateAction<Worker | undefined>>;
+  onFocusWorker: (worker: Worker) => void;
   data?: Array<Worker> | undefined;
   externalData?: true;
 }
@@ -566,6 +565,11 @@ export interface OrderTask {
 
 export interface WorkersTaskList {
   data: Array<OrderTask>;
+}
+
+export interface WorkerTaskListRenderItem {
+  item: OrderTask;
+  index: number;
 }
 
 export interface WorkerTaskListElement extends OrderTask {
