@@ -45,6 +45,27 @@ export function OrdersManageWorkers({
         ),
       );
   }, [focusedWorker]);
+
+  const OrderAssignedWorkerSelector = useMemo(
+    () =>
+      orderAssignedTasks && (
+        <WorkerSelector
+          externalData
+          data={
+            orderAssignedTasks && getExplicitWorkersEntities(orderAssignedTasks)
+          }
+          onFocusWorker={worker => setFocusedWorker(worker)}
+        />
+      ),
+    [orderAssignedTasks],
+  );
+
+  const selectedWorkerTasksList = useMemo(
+    () =>
+      selectedWorkerTasks && <WorkersTasksList data={selectedWorkerTasks} />,
+    [selectedWorkerTasks],
+  );
+
   return (
     <SafeAreaView className="w-full h-full  bg-white">
       <View className="flex  ml-2 mr-2">
