@@ -1,5 +1,5 @@
 import { SafeAreaView, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { HeaderWithButton } from '../../../../Atoms/HeaderWithButton';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
@@ -67,8 +67,8 @@ export function OrdersManageWorkers({
   );
 
   return (
-    <SafeAreaView className="w-full h-full  bg-white">
-      <View className="flex  ml-2 mr-2">
+    <SafeAreaView className="w-full h-full bg-white">
+      <View className="flex h-full ml-2 mr-2">
         <HeaderWithButton
           variant="lg"
           buttonAdditionalStyles="ml-4 flex-1"
