@@ -1,5 +1,5 @@
 import { SafeAreaView, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { HeaderWithButton } from '../../../../Atoms/HeaderWithButton';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
@@ -45,9 +45,30 @@ export function OrdersManageWorkers({
         ),
       );
   }, [focusedWorker]);
+
+  const OrderAssignedWorkerSelector = useMemo(
+    () =>
+      orderAssignedTasks && (
+        <WorkerSelector
+          externalData
+          data={
+            orderAssignedTasks && getExplicitWorkersEntities(orderAssignedTasks)
+          }
+          onFocusWorker={worker => setFocusedWorker(worker)}
+        />
+      ),
+    [orderAssignedTasks],
+  );
+
+  const selectedWorkerTasksList = useMemo(
+    () =>
+      selectedWorkerTasks && <WorkersTasksList data={selectedWorkerTasks} />,
+    [selectedWorkerTasks],
+  );
+
   return (
-    <SafeAreaView className="w-full h-full  bg-white">
-      <View className="flex  ml-2 mr-2">
+    <SafeAreaView className="w-full h-full bg-white">
+      <View className="flex h-full ml-2 mr-2">
         <HeaderWithButton
           variant="lg"
           buttonAdditionalStyles="ml-4 flex-1"
@@ -59,22 +80,11 @@ export function OrdersManageWorkers({
             navigation.navigate('assignedWorkers', { orderId })
           }
         />
-        <View className="mt-4">
-          <WorkerSelector
-            externalData
-            data={
-              orderAssignedTasks &&
-              getExplicitWorkersEntities(orderAssignedTasks)
-            }
-            focusedWorker={focusedWorker}
-            setFocusedWorker={setFocusedWorker}
-          />
-        </View>
+        <View className="mt-4">{OrderAssignedWorkerSelector}</View>
         <ScreenTitleHeader variant="sm" abs="mt-6 mb-4">
           {focusedWorker?.name} Task&apos;s
         </ScreenTitleHeader>
-        {selectedWorkerTasks && <WorkersTasksList data={selectedWorkerTasks} />}
-        <View className="grow" />
+        <View className="flex-1">{selectedWorkerTasksList}</View>
       </View>
     </SafeAreaView>
   );

@@ -1,36 +1,48 @@
 import { FlatList } from 'react-native';
 import { useMutation } from 'react-query';
-import { useEffect, useMemo, useState } from 'react';
-import { WorkersTaskList } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  WorkersTaskList,
+  WorkerTaskListRenderItem,
+} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { WorkersTaskListElement } from '../Molecules/WorkersTaskListElement';
 import { remTask } from '../../helpers/api/Services/Task';
 
 export function WorkersTasksList({ data }: WorkersTaskList) {
   const { mutate: removeTask } = useMutation(remTask);
-  const [remTaskId, setRemTaskId] = useState<string | undefined>();
-  const afterRemData = data.filter(orderTask => {
-    return orderTask.id !== remTaskId;
-  });
+  const [afterRemData, setAfterRemData] = useState(data);
   useEffect(() => {
-    if (remTaskId) removeTask(remTaskId);
-  }, [remTaskId]);
+    setAfterRemData(data);
+  }, [data]);
+
+  const renderItem = useCallback(
+    ({ item, index }: WorkerTaskListRenderItem) => (
+      <WorkersTaskListElement
+        key={Math.random()}
+        field={item.field}
+        worker={item.worker}
+        id={item.id}
+        index={index}
+        type={item.type}
+        onRemoveTask={taskId => {
+          setAfterRemData(prevState => [
+            ...prevState.filter(orderTask => orderTask.id !== taskId),
+          ]);
+          removeTask(taskId);
+        }}
+      />
+    ),
+    [],
+  );
+
   return useMemo(
     () => (
       <FlatList
+        keyExtractor={item => item.id}
+        removeClippedSubviews
+        showsVerticalScrollIndicator={false}
         data={afterRemData}
-        keyExtractor={({ id }) => id}
-        renderItem={({ item, index }) => (
-          <WorkersTaskListElement
-            worker={item.worker}
-            id={item.id}
-            index={index}
-            type={item.type}
-            onRemoveTask={taskId => {
-              setRemTaskId(taskId);
-            }}
-            field={item.field}
-          />
-        )}
+        renderItem={renderItem}
       />
     ),
     [afterRemData],

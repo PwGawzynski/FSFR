@@ -579,6 +579,384 @@
        }
      },
      {
+       "id": "f970e3b8-5566-4099-93a2-518600910801",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910802",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910803",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910804",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910805",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910806",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910807",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910808",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910809",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910810",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910811",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910812",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910814",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910815",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910816",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910817",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910818",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
+       "id": "f970e3b8-5566-4099-93a2-518600910819",
+       "type": 0,
+       "worker": {
+         "id": "4ee8e98f-7f8b-4ac3-96ea-3a74dbd493a2",
+         "name": "John",
+         "surname": "Doe",
+         "photoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+       },
+       "field": {
+         "taskId": "f970e3b8-5566-4099-93a2-5186009108c1",
+         "fieldId": "ea3cacb6-a2d2-4b4d-be69-6ff801bf5c18",
+         "area": 9.32,
+         "status": 1,
+         "voice": "Mazowieckie",
+         "county": "Warszawa",
+         "city": "Warszawa",
+         "dataCollectionDate": "2023-09-08",
+         "name": "Dzierżawa Kossak"
+       }
+     },
+     {
        "type": 0,
        "id": "f970e3b8-5566-4099-93a2-5186009108s1",
        "worker": {
