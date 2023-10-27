@@ -80,17 +80,7 @@ export function OrdersManageWorkers({
             navigation.navigate('assignedWorkers', { orderId })
           }
         />
-        <View className="mt-4">
-          <WorkerSelector
-            externalData
-            data={
-              orderAssignedTasks &&
-              getExplicitWorkersEntities(orderAssignedTasks)
-            }
-            focusedWorker={focusedWorker}
-            setFocusedWorker={setFocusedWorker}
-          />
-        </View>
+        <View className="mt-4">{OrderAssignedWorkerSelector}</View>
         <ScreenTitleHeader variant="sm" abs="mt-6 mb-4">
           {focusedWorker?.name} Task&apos;s
         </ScreenTitleHeader>
