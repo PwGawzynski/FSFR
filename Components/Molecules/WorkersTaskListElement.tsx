@@ -26,19 +26,19 @@ export function WorkersTaskListElement({
   useEffect(() => {
     if (!visible)
       animated.value = withTiming(0, {
-        duration: 400,
+        duration: 800,
         easing: Easing.poly(2),
       });
   }, [visible, animated]);
 
   return (
-    <Animated.View style={{ transform: [{ scale: animated }] }} key={id}>
+    <Animated.View style={{ transform: [{ scale: animated }] }}>
       <Swipeable
         leftThreshold={screenWidth * 0.25}
         onSwipeableOpen={direction => {
           if (direction === 'left') {
-            onRemoveTask(id);
             setVisible(false);
+            setTimeout(() => onRemoveTask(id), 800);
           }
         }}
         renderLeftActions={(progressAnimatedValue, dragAnimatedValue) =>
