@@ -1,63 +1,72 @@
 import { FlatList } from 'react-native';
-import React, { memo } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
+import { FlashList } from '@shopify/flash-list';
 import { OrderShortInfoBox } from '../Molecules/OrderShortInfoBox';
 import {
   OrderBaseI,
   OrderListItemI,
-  OrderListRenderItem,
   OrdersListProps,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getAllOrders } from '../../helpers/api/Services/OrdersService';
 import { LoadingAnimation } from '../Atoms/LoadingAnimation';
-
-function OrderListItem({ item: order }: OrderListItemI) {
-  return (
-    <OrderShortInfoBox
-      area={order.area}
-      status={order.status}
-      doneArea={order.doneArea}
-      key={order.taskId}
-      taskId={order.taskId}
-      name={order.name}
-      type={order.type}
-      additionalInfo={order.additionalInfo}
-      performanceDate={order.performanceDate}
-      clientId={order.clientId}
-      client={order.client}
-    />
-  );
-}
 
 function MemoizedOrders({
   sort,
   filterMethod,
   ListEmptyComponent,
 }: OrdersListProps) {
+  const OrderListItem = useCallback(({ item: order }: OrderListItemI) => {
+    return (
+      <OrderShortInfoBox
+        area={order.area}
+        status={order.status}
+        doneArea={order.doneArea}
+        key={order.taskId}
+        taskId={order.taskId}
+        name={order.name}
+        type={order.type}
+        additionalInfo={order.additionalInfo}
+        performanceDate={order.performanceDate}
+        clientId={order.clientId}
+        client={order.client}
+      />
+    );
+  }, []);
+
   const { data: orders } = useQuery<Array<OrderBaseI> | undefined>(
     'orders',
     getAllOrders,
   );
-  const ordersData =
-    (orders &&
-      ((sort && filterMethod && orders.sort(sort).filter(filterMethod)) ||
-        (sort && orders.sort(sort)) ||
-        (filterMethod && orders.filter(filterMethod)))) ||
-    orders;
+  const [ordersData, setOrdersData] = useState<Array<OrderBaseI> | undefined>();
 
-  const RenderItem = ({ item }: OrderListRenderItem) => OrderListItem({ item });
-  return ordersData ? (
-    <FlatList
-      ListEmptyComponent={ListEmptyComponent}
-      data={ordersData}
-      keyExtractor={item => item.taskId}
-      renderItem={RenderItem}
-      className="flex-1 h-max"
-      showsVerticalScrollIndicator={false}
-    />
-  ) : (
-    <LoadingAnimation />
+  useEffect(() => {
+    const filteredOrders =
+      (orders &&
+        ((sort && filterMethod && orders.sort(sort).filter(filterMethod)) ||
+          (sort && orders.sort(sort)) ||
+          (filterMethod && orders.filter(filterMethod)))) ||
+      orders;
+    if (orders) setOrdersData(filteredOrders);
+  }, [orders]);
+
+  const list = useMemo(
+    () => (
+      <FlashList
+        onLoad={info => console.log('WorkersList has been loaded in ', info)}
+        estimatedItemSize={130}
+        ListEmptyComponent={ListEmptyComponent}
+        data={ordersData}
+        keyExtractor={item => item.taskId}
+        renderItem={OrderListItem}
+        className="flex-1 h-max"
+        showsVerticalScrollIndicator={false}
+      />
+    ),
+    [ordersData],
   );
+
+  return (ordersData && list) || <LoadingAnimation />;
 }
 
 const Orders = memo(
