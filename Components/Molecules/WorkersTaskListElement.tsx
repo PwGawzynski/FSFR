@@ -6,6 +6,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import * as inspector from 'inspector';
 import {
   TaskType,
   WorkerTaskListElement,
@@ -17,9 +18,11 @@ export function WorkersTaskListElement({
   field,
   type,
   id,
+  index,
   onRemoveTask,
 }: WorkerTaskListElement) {
   const animated = useSharedValue(1);
+  const opacity = useSharedValue(0);
   const [visible, setVisible] = useState(true);
   const screenWidth = Dimensions.get('screen').width;
   const open = useRef(false);
@@ -31,8 +34,24 @@ export function WorkersTaskListElement({
       });
   }, [visible, animated]);
 
+  useEffect(() => {
+    if (field)
+      opacity.value = withTiming(1, {
+        duration: 400,
+        easing: Easing.poly(2),
+      });
+  }, [field]);
+
+  // useEffect(() => {}, [lastRemItemIndex]);
+
   return (
-    <Animated.View style={{ transform: [{ scale: animated }] }}>
+    <Animated.View
+      style={{
+        transform: [{ scale: animated }],
+        opacity,
+        position: 'relative',
+      }}
+    >
       <Swipeable
         leftThreshold={screenWidth * 0.25}
         onSwipeableOpen={direction => {
@@ -48,8 +67,8 @@ export function WorkersTaskListElement({
         <TouchableHighlight
           underlayColor="#848484"
           activeOpacity={1}
-          onPress={() => ''}
-          className="flex-1 h-16 flex flex-col bg-white justify-center rounded "
+          onPress={() => console.log('Touched', index)}
+          className="flex-1 h-[70] flex flex-col bg-white justify-center rounded "
         >
           <View className="grow justify-center">
             <Text
