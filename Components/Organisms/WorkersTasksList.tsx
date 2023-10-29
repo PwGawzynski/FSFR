@@ -1,6 +1,6 @@
-import { FlatList } from 'react-native';
 import { useMutation } from 'react-query';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { FlashList } from '@shopify/flash-list';
 import {
   WorkersTaskList,
   WorkerTaskListRenderItem,
@@ -11,6 +11,7 @@ import { remTask } from '../../helpers/api/Services/Task';
 export function WorkersTasksList({ data }: WorkersTaskList) {
   const { mutate: removeTask } = useMutation(remTask);
   const [afterRemData, setAfterRemData] = useState(data);
+
   useEffect(() => {
     setAfterRemData(data);
   }, [data]);
@@ -37,7 +38,11 @@ export function WorkersTasksList({ data }: WorkersTaskList) {
 
   return useMemo(
     () => (
-      <FlatList
+      <FlashList
+        onLoad={info =>
+          console.log('WorkersTaskList has been loaded in ', info)
+        }
+        estimatedItemSize={70}
         keyExtractor={item => item.id}
         removeClippedSubviews
         showsVerticalScrollIndicator={false}

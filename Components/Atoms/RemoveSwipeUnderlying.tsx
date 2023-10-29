@@ -15,7 +15,6 @@ export function RemoveSwipeUnderlying(
     outputRange: [0.5, 1],
   });
   const leftSwipeThresholdWidth = Dimensions.get('window').width * 0.25;
-  console.log(willOpen);
   let isOpen = false;
   dragAnimatedValue.addListener(({ value }) => {
     if (
