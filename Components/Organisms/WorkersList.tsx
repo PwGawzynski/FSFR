@@ -1,23 +1,38 @@
-import { FlatList } from 'react-native';
 import { useQuery } from 'react-query';
+import { FlashList } from '@shopify/flash-list';
+import { useEffect, useMemo, useState } from 'react';
 import { getAllWorkers } from '../../helpers/api/Services/Worker';
 import { WorkerComponent } from './WorkerComponent';
 import { SpaceDivider } from '../Molecules/SpaceDivider';
-import { WorkerListProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import {
+  Worker,
+  WorkerListProps,
+} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function WorkersList({ filterMethod }: WorkerListProps) {
   const { data: workers } = useQuery('workers', () => getAllWorkers());
-  const filtered =
-    (filterMethod && workers && workers.filter(filterMethod)) || workers;
-  console.log('Worker list Render');
-  return (
-    <FlatList
-      keyExtractor={({ id }) => id}
-      ItemSeparatorComponent={SpaceDivider}
-      showsVerticalScrollIndicator={false}
-      className="mt-8"
-      data={filtered}
-      renderItem={({ item }) => <WorkerComponent item={item} />}
-    />
+  const [filtered, setFiltered] = useState<Array<Worker> | undefined>(
+    undefined,
+  );
+  useEffect(() => {
+    if (workers)
+      setFiltered(
+        (filterMethod && workers && workers.filter(filterMethod)) || workers,
+      );
+  }, [workers]);
+  return useMemo(
+    () => (
+      <FlashList
+        onLoad={info => console.log('WorkersList has been loaded in ', info)}
+        keyExtractor={({ id }) => id}
+        ItemSeparatorComponent={SpaceDivider}
+        showsVerticalScrollIndicator={false}
+        data={filtered}
+        contentContainerStyle={{ paddingTop: 20 }}
+        estimatedItemSize={80}
+        renderItem={({ item }) => <WorkerComponent item={item} />}
+      />
+    ),
+    [filtered],
   );
 }
