@@ -23,7 +23,7 @@ export function WorkerComponent({ item: worker }: WorkerComponentI) {
   return (
     <TouchableOpacity
       onPress={navigateToWorkersDetails}
-      className="w-full h-20 flex flex-row items-center"
+      className="w-full h-[80] flex flex-row items-center"
     >
       <View className="w-16 h-full flex-col pt-1">
         <ProfilePhoto abs="h-12 w-12" imgLink={worker.photoUrl} />
