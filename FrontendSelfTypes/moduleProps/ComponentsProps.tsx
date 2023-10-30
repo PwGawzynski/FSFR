@@ -377,7 +377,14 @@ export interface WorkerSelectorProps {
   data?: Array<Worker> | undefined;
   externalData?: true;
 }
+export interface WorkerSelectorItemProps {
+  onFocusWorker: (worker: Worker) => void;
+  worker: Worker;
+  focusedWorker?: Worker | undefined;
+  setFocusedWorker: React.Dispatch<React.SetStateAction<Worker | undefined>>;
+}
 
+export type WorkerSelectorListItem = { item: Worker };
 export interface NewTaskI {
   fieldId: string;
   workerId: string;

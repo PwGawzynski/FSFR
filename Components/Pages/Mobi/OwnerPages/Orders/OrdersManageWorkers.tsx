@@ -80,11 +80,13 @@ export function OrdersManageWorkers({
             navigation.navigate('assignedWorkers', { orderId })
           }
         />
-        <View className="mt-4">{OrderAssignedWorkerSelector}</View>
-        <ScreenTitleHeader variant="sm" abs="mt-6 mb-4">
+        <View style={{ minHeight: 80, height: 80 }} className="mt-4 flex-row">
+          {OrderAssignedWorkerSelector}
+        </View>
+        <ScreenTitleHeader variant="sm" abs="mt-6  mb-4">
           {focusedWorker?.name} Task&apos;s
         </ScreenTitleHeader>
-        <View className="flex-1">{selectedWorkerTasksList}</View>
+        <View className="flex-1 w-full">{selectedWorkerTasksList}</View>
       </View>
     </SafeAreaView>
   );
