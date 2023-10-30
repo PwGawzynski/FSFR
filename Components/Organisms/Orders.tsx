@@ -46,7 +46,7 @@ function MemoizedOrders({
           (sort && orders.sort(sort)) ||
           (filterMethod && orders.filter(filterMethod)))) ||
       orders;
-    if (orders) setOrdersData(filteredOrders && [...filteredOrders]);
+    if (filteredOrders) setOrdersData(filteredOrders && [...filteredOrders]);
   }, [orders, reloadIndicator]);
 
   const list = useMemo(
