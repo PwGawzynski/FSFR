@@ -32,7 +32,7 @@ export function Notifications({ filterOptions }: NotificationsProps) {
   const SingleNotification = useCallback(
     ({ item }: NotificationItem) => (
       <Notification
-        key={Math.random()}
+        id={item.id}
         causer={item.causer}
         causerRole={item.causerRole}
         message={item.message}
@@ -54,6 +54,7 @@ export function Notifications({ filterOptions }: NotificationsProps) {
             info.elapsedTimeInMs,
           )
         }
+        keyExtractor={item => item.id}
         renderItem={SingleNotification}
         data={data}
         estimatedItemSize={120}
