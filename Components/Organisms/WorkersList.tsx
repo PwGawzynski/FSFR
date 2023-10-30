@@ -14,7 +14,6 @@ export function WorkersList({ filterMethod }: WorkerListProps) {
   const [filtered, setFiltered] = useState<Array<Worker> | undefined>(
     undefined,
   );
-  console.log(filtered?.length);
   useEffect(() => {
     if (workers)
       setFiltered(
