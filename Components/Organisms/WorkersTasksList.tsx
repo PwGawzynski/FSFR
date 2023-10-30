@@ -7,6 +7,7 @@ import {
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { WorkersTaskListElement } from '../Molecules/WorkersTaskListElement';
 import { remTask } from '../../helpers/api/Services/Task';
+import { LoadingAnimation } from '../Atoms/LoadingAnimation';
 
 export function WorkersTasksList({ data }: WorkersTaskList) {
   const { mutate: removeTask } = useMutation(remTask);
@@ -37,19 +38,22 @@ export function WorkersTasksList({ data }: WorkersTaskList) {
   );
 
   return useMemo(
-    () => (
-      <FlashList
-        onLoad={info =>
-          console.log('WorkersTaskList has been loaded in ', info)
-        }
-        estimatedItemSize={70}
-        keyExtractor={item => item.id}
-        removeClippedSubviews
-        showsVerticalScrollIndicator={false}
-        data={afterRemData}
-        renderItem={renderItem}
-      />
-    ),
+    () =>
+      afterRemData.length ? (
+        <FlashList
+          onLoad={info =>
+            console.log('WorkersTaskList has been loaded in ', info)
+          }
+          estimatedItemSize={70}
+          keyExtractor={item => item.id}
+          removeClippedSubviews
+          showsVerticalScrollIndicator={false}
+          data={afterRemData}
+          renderItem={renderItem}
+        />
+      ) : (
+        <LoadingAnimation />
+      ),
     [afterRemData],
   );
 }
