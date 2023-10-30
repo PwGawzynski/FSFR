@@ -14,6 +14,7 @@ export function WorkersList({ filterMethod }: WorkerListProps) {
   const [filtered, setFiltered] = useState<Array<Worker> | undefined>(
     undefined,
   );
+  console.log(filtered?.length);
   useEffect(() => {
     if (workers)
       setFiltered(
@@ -21,18 +22,19 @@ export function WorkersList({ filterMethod }: WorkerListProps) {
       );
   }, [workers]);
   return useMemo(
-    () => (
-      <FlashList
-        onLoad={info => console.log('WorkersList has been loaded in ', info)}
-        keyExtractor={({ id }) => id}
-        ItemSeparatorComponent={SpaceDivider}
-        showsVerticalScrollIndicator={false}
-        data={filtered}
-        contentContainerStyle={{ paddingTop: 20 }}
-        estimatedItemSize={80}
-        renderItem={({ item }) => <WorkerComponent item={item} />}
-      />
-    ),
+    () =>
+      filtered?.length && (
+        <FlashList
+          onLoad={info => console.log('WorkersList has been loaded in ', info)}
+          keyExtractor={({ id }) => id}
+          ItemSeparatorComponent={SpaceDivider}
+          showsVerticalScrollIndicator={false}
+          data={filtered}
+          contentContainerStyle={{ paddingTop: 20 }}
+          estimatedItemSize={80}
+          renderItem={({ item }) => <WorkerComponent item={item} />}
+        />
+      ),
     [filtered],
   );
 }
