@@ -8,6 +8,7 @@ import {
   Worker,
   WorkerListProps,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { LoadingAnimation } from '../Atoms/LoadingAnimation';
 
 export function WorkersList({ filterMethod }: WorkerListProps) {
   const { data: workers } = useQuery('workers', () => getAllWorkers());
@@ -22,7 +23,7 @@ export function WorkersList({ filterMethod }: WorkerListProps) {
   }, [workers]);
   return useMemo(
     () =>
-      filtered?.length && (
+      filtered?.length ? (
         <FlashList
           onLoad={info => console.log('WorkersList has been loaded in ', info)}
           keyExtractor={({ id }) => id}
@@ -33,6 +34,8 @@ export function WorkersList({ filterMethod }: WorkerListProps) {
           estimatedItemSize={80}
           renderItem={({ item }) => <WorkerComponent item={item} />}
         />
+      ) : (
+        <LoadingAnimation />
       ),
     [filtered],
   );
