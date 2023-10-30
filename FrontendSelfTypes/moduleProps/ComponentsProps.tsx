@@ -180,6 +180,9 @@ export type NotificationProps = NotificationI;
 export interface NotificationsProps {
   filterOptions: ThreeOptionSwitchStates;
 }
+
+export type NotificationItem = { item: NotificationProps };
+
 export interface ThreeOptionSwitchStates {
   firstOptionName: string;
   firstOptionState: boolean;
