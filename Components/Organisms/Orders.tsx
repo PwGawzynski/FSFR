@@ -1,4 +1,3 @@
-import { FlatList } from 'react-native';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { FlashList } from '@shopify/flash-list';
@@ -15,6 +14,7 @@ function MemoizedOrders({
   sort,
   filterMethod,
   ListEmptyComponent,
+  reloadIndicator,
 }: OrdersListProps) {
   const OrderListItem = useCallback(({ item: order }: OrderListItemI) => {
     return (
@@ -39,7 +39,6 @@ function MemoizedOrders({
     getAllOrders,
   );
   const [ordersData, setOrdersData] = useState<Array<OrderBaseI> | undefined>();
-
   useEffect(() => {
     const filteredOrders =
       (orders &&
@@ -47,8 +46,8 @@ function MemoizedOrders({
           (sort && orders.sort(sort)) ||
           (filterMethod && orders.filter(filterMethod)))) ||
       orders;
-    if (orders) setOrdersData(filteredOrders);
-  }, [orders]);
+    if (orders) setOrdersData(filteredOrders && [...filteredOrders]);
+  }, [orders, reloadIndicator]);
 
   const list = useMemo(
     () => (

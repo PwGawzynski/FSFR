@@ -28,7 +28,6 @@ export function OrdersListSearchAndFilter<
   const [searchValue, setSearchValue] = useState(INIT_SEARCH_VALUE);
   const [filter, setFilter] =
     useState<ActiveFilterValue<OrderBaseI>>(INIT_FILTER_NAME);
-
   return (
     <>
       <SearchModuleInterfaceBased<OrderBaseI>
