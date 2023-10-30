@@ -23,7 +23,9 @@ export function DesktopNotificationCenter() {
         <ScreenTitleHeader variant="sm">Notifications</ScreenTitleHeader>
         <ThreeOptionSwitch options={filterOptions} setter={setFilterOptions} />
       </View>
-      <Notifications filterOptions={filterOptions} />
+      <View className="flex-1 mt-[85]">
+        <Notifications filterOptions={filterOptions} />
+      </View>
     </SafeAreaView>
   );
 }

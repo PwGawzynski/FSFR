@@ -1,6 +1,7 @@
  {
   "lastActivities": [
     {
+      "id": "f970e3b8-5566-4099-93a2-5186009108c1",
       "activityLogCauser": "Jan Kowalski",
       "activityCauserRole": 0,
       "activityType": 1,
@@ -11,6 +12,7 @@
       "date": "23/08/2023"
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-518600910ec1",
       "activityLogCauser": "Jan Kowalski",
       "activityCauserRole": 0,
       "activityType": 1,
@@ -21,6 +23,7 @@
       "date": "23/08/2023"
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-5186009d08c1",
       "activityLogCauser": "Jan Kowalski",
       "activityCauserRole": 0,
       "activityType": 1,
@@ -31,6 +34,7 @@
       "date": "23/08/2023"
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-5186009108cr",
       "activityLogCauser": "Jan Kowalski",
       "activityCauserRole": 0,
       "activityType": 1,
@@ -41,6 +45,7 @@
       "date": "23/08/2023"
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-5186k09108c1",
       "activityLogCauser": "Jan Kowalski",
       "activityCauserRole": 0,
       "activityType": 1,
@@ -51,6 +56,7 @@
       "date": "23/08/2023"
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-5186009f08c1",
       "activityLogCauser": "Jan Kowalski",
       "activityCauserRole": 0,
       "activityType": 1,
@@ -63,6 +69,7 @@
   ],
   "events": [
     {
+      "id": "f970e3b8-5566-4099-93a2-5186009f08f1",
       "causer": "Jan Kowalski",
       "causerRole": 0,
       "message": "Your client has confirmed order",
@@ -70,6 +77,7 @@
       "eventType": 0
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-518kd09f08c1",
       "causer": "Jan Kowalski",
       "causerRole": 0,
       "message": "Your client has confirmed order",
@@ -77,6 +85,7 @@
       "eventType": 1
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-5186009flsc1",
       "causer": "Jan Kowalski",
       "causerRole": 0,
       "message": "Your client has confirmed order",
@@ -84,6 +93,7 @@
       "eventType": 2
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-5186009f0oa1",
       "causer": "Jan Kowalski",
       "causerRole": 0,
       "message": "Your client has confirmed order",
@@ -91,6 +101,7 @@
       "eventType": 0
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-5186009fksc1",
       "causer": "Jan Kowalski",
       "causerRole": 0,
       "message": "Your client has confirmed order",
@@ -98,6 +109,7 @@
       "eventType": 1
     },
     {
+      "id": "f970e3b8-5566-4099-93a2-51860brf08c1",
       "causer": "Jan Kowalski",
       "causerRole": 0,
       "message": "Your client has confirmed order",

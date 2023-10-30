@@ -1,4 +1,6 @@
 import { Text, View } from 'react-native';
+import Animated, { useSharedValue, withTiming } from 'react-native-reanimated';
+import { useEffect } from 'react';
 import CheckIco from '../../assets/check.svg';
 import GearsIco from '../../assets/gears.svg';
 import WarnIco from '../../assets/warning.svg';
@@ -14,16 +16,26 @@ export function Notification({
   message,
   rightBottomSign,
   eventType,
+  id,
 }: NotificationProps) {
+  const visible = useSharedValue(0);
+  useEffect(() => {
+    if (!visible.value) visible.value = withTiming(1, { duration: 600 });
+  }, []);
+
   return (
-    <View
+    <Animated.View
       className="flex-1 h-20 mb-8"
-      style={{
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#000',
-      }}
+      style={[
+        {
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          borderStyle: 'solid',
+          borderColor: '#000',
+        },
+        { opacity: visible },
+      ]}
+      key={id}
     >
       <View className="h-6 bg-black absolute top-[-12] justify-center">
         <Text className="text-white text-sm font-bold uppercase pl-2 pr-2 text-center">
@@ -43,6 +55,6 @@ export function Notification({
       <View className="absolute w-full top-[60] items-center justify-center s">
         <Text className="w-full text-right pr-4">{rightBottomSign}</Text>
       </View>
-    </View>
+    </Animated.View>
   );
 }

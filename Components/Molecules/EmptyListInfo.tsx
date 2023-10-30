@@ -10,7 +10,7 @@ export function EmptyListInfo({ text, children }: EmptyListProps) {
           <EmptyIco width={100} style={{ width: 100, height: 100 }} />
         )}
       </View>
-      <Text className="text-xl text-[#848484]">{text}</Text>
+      <Text className="text-xl text-center text-[#848484]">{text}</Text>
     </View>
   );
 }
