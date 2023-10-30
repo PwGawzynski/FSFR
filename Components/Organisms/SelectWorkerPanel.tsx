@@ -42,10 +42,9 @@ export function SelectWorkerPanel({
 
   return (
     <View className="flex-col justify-start mt-4">
-      <WorkerSelector
-        focusedWorker={focusedWorker}
-        setFocusedWorker={setFocusedWorker}
-      />
+      <View style={{ height: 80 }} className="flex-row">
+        <WorkerSelector onFocusWorker={setFocusedWorker} />
+      </View>
       {focusedWorker && (
         <View className="grow">
           <ScreenTitleHeader ats="text-base" variant="sm">
