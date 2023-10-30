@@ -50,18 +50,19 @@ function MemoizedOrders({
   }, [orders, reloadIndicator]);
 
   const list = useMemo(
-    () => (
-      <FlashList
-        onLoad={info => console.log('WorkersList has been loaded in ', info)}
-        estimatedItemSize={130}
-        ListEmptyComponent={ListEmptyComponent}
-        data={ordersData}
-        keyExtractor={item => item.taskId}
-        renderItem={OrderListItem}
-        className="flex-1 h-max"
-        showsVerticalScrollIndicator={false}
-      />
-    ),
+    () =>
+      ordersData?.length && (
+        <FlashList
+          onLoad={info => console.log('OrdersList has been loaded in ', info)}
+          estimatedItemSize={130}
+          ListEmptyComponent={ListEmptyComponent}
+          data={ordersData}
+          keyExtractor={item => item.taskId}
+          renderItem={OrderListItem}
+          className="flex-1 h-max"
+          showsVerticalScrollIndicator={false}
+        />
+      ),
     [ordersData],
   );
 
