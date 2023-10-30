@@ -1,8 +1,9 @@
-import { ScrollView } from 'react-native';
-import { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
+import { FlashList } from '@shopify/flash-list';
 import {
   NotificationI,
+  NotificationItem,
   NotificationsProps,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getAllNotifications } from '../../helpers/api/Services/NotificationsService';
@@ -10,36 +11,54 @@ import { Notification } from '../Molecules/Notification';
 
 export function Notifications({ filterOptions }: NotificationsProps) {
   const [data, setData] = useState<Array<NotificationI> | undefined>();
-  const {
-    mutate: notificationsMutate,
-    data: notifications,
-    isSuccess,
-  } = useMutation(getAllNotifications);
+  const { data: notifications, isSuccess } = useQuery(
+    'ownerAllNotifications',
+    getAllNotifications,
+  );
 
   useEffect(() => {
-    if (!data) notificationsMutate();
-  }, [data]);
+    if (notifications)
+      setData([
+        ...notifications.filter(
+          e =>
+            (e.eventType === 0 && filterOptions.firstOptionState) ||
+            (e.eventType === 1 && filterOptions.secondOptionState) ||
+            (e.eventType === 2 && filterOptions.thirdOptionState),
+        ),
+      ]);
+  }, [notifications, filterOptions]);
   useEffect(() => setData(notifications), [isSuccess]);
-  return (
-    <ScrollView className="flex-1 flex flex-col mt-4 mb-12 pt-8">
-      {data &&
-        data
-          .filter(
-            e =>
-              (e.eventType === 0 && filterOptions.firstOptionState) ||
-              (e.eventType === 1 && filterOptions.secondOptionState) ||
-              (e.eventType === 2 && filterOptions.thirdOptionState),
+
+  const SingleNotification = useCallback(
+    ({ item }: NotificationItem) => (
+      <Notification
+        key={Math.random()}
+        causer={item.causer}
+        causerRole={item.causerRole}
+        message={item.message}
+        rightBottomSign={item.rightBottomSign}
+        eventType={item.eventType}
+      />
+    ),
+    [],
+  );
+
+  return useMemo(
+    () => (
+      <FlashList
+        contentContainerStyle={{ paddingTop: 30 }}
+        onLoad={info =>
+          // eslint-disable-next-line no-console
+          console.log(
+            'Desktop Root notifications List has been rendered in: ',
+            info.elapsedTimeInMs,
           )
-          .map(singleNotification => (
-            <Notification
-              key={Math.random()}
-              causer={singleNotification.causer}
-              causerRole={singleNotification.causerRole}
-              message={singleNotification.message}
-              rightBottomSign={singleNotification.rightBottomSign}
-              eventType={singleNotification.eventType}
-            />
-          ))}
-    </ScrollView>
+        }
+        renderItem={SingleNotification}
+        data={data}
+        estimatedItemSize={120}
+      />
+    ),
+    [data],
   );
 }
