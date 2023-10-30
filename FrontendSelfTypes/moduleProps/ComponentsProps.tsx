@@ -146,6 +146,7 @@ export interface ProfilePhotoProps {
 }
 // TODO move to united types
 export interface ActivityProps {
+  id: string;
   activityLogCauser: string;
   activityCauserRole: number;
   activityType: number;
@@ -167,6 +168,7 @@ export enum EventType {
 }
 // TODO move to united types
 export interface NotificationI {
+  id: string;
   causer: string;
   causerRole: UserRole;
   message: string;
@@ -182,6 +184,8 @@ export interface NotificationsProps {
 }
 
 export type NotificationItem = { item: NotificationProps };
+
+export type LasActivitiesItem = { item: ActivityProps };
 
 export interface ThreeOptionSwitchStates {
   firstOptionName: string;
