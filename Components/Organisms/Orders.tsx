@@ -1,4 +1,3 @@
-import { FlatList } from 'react-native';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { FlashList } from '@shopify/flash-list';
