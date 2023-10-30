@@ -16,6 +16,7 @@ export function Notification({
   message,
   rightBottomSign,
   eventType,
+  id,
 }: NotificationProps) {
   const visible = useSharedValue(0);
   useEffect(() => {
@@ -34,6 +35,7 @@ export function Notification({
         },
         { opacity: visible },
       ]}
+      key={id}
     >
       <View className="h-6 bg-black absolute top-[-12] justify-center">
         <Text className="text-white text-sm font-bold uppercase pl-2 pr-2 text-center">
