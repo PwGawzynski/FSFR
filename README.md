@@ -68,7 +68,9 @@ https://github.com/PwGawzynski/FSFR/assets/80092350/c6fca216-ba76-4f8a-8573-a5d3
 #### Accounting
 https://github.com/PwGawzynski/FSFR/assets/80092350/36ce47ba-b827-4ec4-a70b-1d8bf2834105
 
-#### Printing invoices from aplication
+#### Sending Invoice via mail 
+https://github.com/PwGawzynski/FSFR/assets/80092350/613f7d2c-a673-459c-a2ea-decf972fd50b
+
 
 
 
