@@ -72,6 +72,19 @@ https://github.com/PwGawzynski/FSFR/assets/80092350/36ce47ba-b827-4ec4-a70b-1d8b
 https://github.com/PwGawzynski/FSFR/assets/80092350/613f7d2c-a673-459c-a2ea-decf972fd50b
 
 
+#### Printing invoices from App
+https://github.com/PwGawzynski/FSFR/assets/80092350/33b6448d-091f-41f7-bec0-ba5ddba10bb9
+
+#### Workers List
+https://github.com/PwGawzynski/FSFR/assets/80092350/5e7093dc-e50a-435f-8c05-99e02789f4c5
+
+#### Workers search engine 
+https://github.com/PwGawzynski/FSFR/assets/80092350/4264bea3-d427-46f4-9af9-348f184b781d
+
+
+#### Workers Details mail and call directly from app 
+https://github.com/PwGawzynski/FSFR/assets/80092350/b67a7572-938f-481b-9b07-ffb815964785
+
 
 
 
