@@ -379,6 +379,8 @@ export interface Worker {
   county: string;
 }
 
+export type NewWorker = Omit<Worker, 'id' | 'dateOfEmployment'>;
+
 export interface WorkerSelectorProps {
   onFocusWorker: (worker: Worker) => void;
   data?: Array<Worker> | undefined;
