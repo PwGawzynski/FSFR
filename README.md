@@ -32,5 +32,20 @@ FarmService Owner app is designed to manage three basic units occurring in agric
 
 ### It provides features like: 
 
+#### Account and sesion manage: 
+https://github.com/PwGawzynski/FSFR/assets/80092350/9290e331-f4d4-4796-bb7a-5985ceebca3e
+
+![IMG_6912](https://github.com/PwGawzynski/FSFR/assets/80092350/b4863e7d-c773-4481-b9d5-216598aa5867)
+
+#### Notifications with filters
+
+
+https://github.com/PwGawzynski/FSFR/assets/80092350/8488a88e-8391-48b3-bfa9-d096082a0c3e
+
+
+
+
+
+
 
 
