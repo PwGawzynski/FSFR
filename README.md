@@ -50,7 +50,25 @@ https://github.com/PwGawzynski/FSFR/assets/80092350/c634faa7-be74-439d-94f4-3376
 https://github.com/PwGawzynski/FSFR/assets/80092350/540efd3c-14d1-4318-a58c-e2eae5af918b
 
 
+#### Swipable Navigation
+https://github.com/PwGawzynski/FSFR/assets/80092350/abde18d6-b0d0-4738-894a-1539b7222c1f
 
+#### Creating new order
+https://github.com/PwGawzynski/FSFR/assets/80092350/2d6d4050-c628-46ca-aef8-25c97855beb5
+
+
+####  Assigning tasks to employees 
+https://github.com/PwGawzynski/FSFR/assets/80092350/35ebafee-46b8-4918-b6ed-e997c4b0a3e0
+
+
+#### Close order and request confiramtion action 
+https://github.com/PwGawzynski/FSFR/assets/80092350/c6fca216-ba76-4f8a-8573-a5d372e65668
+
+
+#### Accounting
+https://github.com/PwGawzynski/FSFR/assets/80092350/36ce47ba-b827-4ec4-a70b-1d8bf2834105
+
+#### Printing invoices from aplication
 
 
 
