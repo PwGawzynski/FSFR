@@ -53,7 +53,6 @@ export function AddWorker({
   const [profileSign, setProfileSign] =
     useState<NewWorkerSign>(INIT_PROFILE_SIGN);
 
-  console.log(newWorker);
   const handleSetProfileName = () =>
     setProfileSign(prevState => ({
       ...prevState,
