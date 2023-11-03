@@ -607,4 +607,5 @@ export interface CallAndCreateEmailButtonsProps {
 
 export interface WorkerListProps {
   filterMethod?: ((worker: Worker) => boolean) | undefined;
+  reloadIndicator: string;
 }
