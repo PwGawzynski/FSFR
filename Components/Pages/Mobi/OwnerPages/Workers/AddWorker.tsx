@@ -106,6 +106,16 @@ export function AddWorker({
               <Plus fill="#fff" width={48} height={48} />
             )}
           </TouchableOpacity>
+          <Animated.Text
+            adjustsFontSizeToFit
+            numberOfLines={1}
+            className="text-center font-semibold"
+            style={{ fontSize: getFontScaledSize(24), opacity }}
+          >
+            {profileSign.name &&
+              profileSign.surname &&
+              `${profileSign.name} ${profileSign.surname}`}
+          </Animated.Text>
         </View>
         <KeyboardAwareScrollView
           className="flex-1"
