@@ -256,7 +256,7 @@ export class Api {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const data = require('../../tmpData');
     return new Promise(r => {
-      setTimeout(() => r(data), 1);
+      setTimeout(() => r(data), 1000);
     });
   }
 
