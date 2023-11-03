@@ -48,21 +48,19 @@ function MemoizedOrders({
       orders;
     if (filteredOrders) setOrdersData(filteredOrders && [...filteredOrders]);
   }, [orders, reloadIndicator]);
-
   const list = useMemo(
-    () =>
-      ordersData?.length && (
-        <FlashList
-          onLoad={info => console.log('OrdersList has been loaded in ', info)}
-          estimatedItemSize={130}
-          ListEmptyComponent={ListEmptyComponent}
-          data={ordersData}
-          keyExtractor={item => item.taskId}
-          renderItem={OrderListItem}
-          className="flex-1 h-max"
-          showsVerticalScrollIndicator={false}
-        />
-      ),
+    () => (
+      <FlashList
+        onLoad={info => console.log('OrdersList has been loaded in ', info)}
+        estimatedItemSize={130}
+        ListEmptyComponent={ListEmptyComponent}
+        data={ordersData}
+        keyExtractor={item => item.taskId}
+        renderItem={OrderListItem}
+        className="flex-1 h-max"
+        showsVerticalScrollIndicator={false}
+      />
+    ),
     [ordersData],
   );
 
