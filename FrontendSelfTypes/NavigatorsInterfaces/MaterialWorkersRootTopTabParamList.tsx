@@ -1,5 +1,5 @@
 export type MaterialWorkersRootTopTabParamList = {
-  addWorker: undefined;
+  addWorker: { imgUri?: string };
   materialWorkersRoot: undefined;
   searchWorker: undefined;
 };
