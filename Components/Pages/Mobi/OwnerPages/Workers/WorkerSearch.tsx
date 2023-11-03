@@ -49,6 +49,9 @@ export function WorkerSearch() {
           filterOn={filter}
         />
         <WorkersList
+          reloadIndicator={`${searchValue}${
+            filter && filter.active ? filter.active.subOption : ''
+          }`}
           filterMethod={worker =>
             defaultWorkerFilter(worker, filter, searchValue)
           }
