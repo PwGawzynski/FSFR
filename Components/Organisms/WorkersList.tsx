@@ -9,8 +9,12 @@ import {
   WorkerListProps,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { LoadingAnimation } from '../Atoms/LoadingAnimation';
+import { EmptyListInfo } from '../Molecules/EmptyListInfo';
 
-export function WorkersList({ filterMethod }: WorkerListProps) {
+export function WorkersList({
+  filterMethod,
+  reloadIndicator,
+}: WorkerListProps) {
   const { data: workers } = useQuery('workers', () => getAllWorkers());
   const [filtered, setFiltered] = useState<Array<Worker> | undefined>(
     undefined,
@@ -20,11 +24,14 @@ export function WorkersList({ filterMethod }: WorkerListProps) {
       setFiltered(
         (filterMethod && workers && workers.filter(filterMethod)) || workers,
       );
-  }, [workers]);
-  return useMemo(
+  }, [workers, reloadIndicator]);
+  const list = useMemo(
     () =>
-      filtered?.length ? (
+      filtered && (
         <FlashList
+          ListEmptyComponent={
+            <EmptyListInfo text="Sorry, cannot find this worker :( " />
+          }
           onLoad={info => console.log('WorkersList has been loaded in ', info)}
           keyExtractor={({ id }) => id}
           ItemSeparatorComponent={SpaceDivider}
@@ -34,9 +41,8 @@ export function WorkersList({ filterMethod }: WorkerListProps) {
           estimatedItemSize={80}
           renderItem={({ item }) => <WorkerComponent item={item} />}
         />
-      ) : (
-        <LoadingAnimation />
       ),
     [filtered],
   );
+  return (filtered && list) || <LoadingAnimation />;
 }
