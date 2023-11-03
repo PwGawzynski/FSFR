@@ -389,6 +389,7 @@ export type NewWorker = Omit<Worker, 'id' | 'dateOfEmployment'>;
 export interface AppEnumBasedPickerInputProps<
   T extends { [p: string]: unknown },
 > {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (value: any, index: number) => void;
   enumName: T;
 }
