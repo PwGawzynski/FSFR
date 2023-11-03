@@ -379,7 +379,19 @@ export interface Worker {
   county: string;
 }
 
+export interface NewWorkerSign {
+  name: string;
+  surname: string;
+}
+
 export type NewWorker = Omit<Worker, 'id' | 'dateOfEmployment'>;
+
+export interface AppEnumBasedPickerInputProps<
+  T extends { [p: string]: unknown },
+> {
+  onChange: (value: any, index: number) => void;
+  enumName: T;
+}
 
 export interface WorkerSelectorProps {
   onFocusWorker: (worker: Worker) => void;
