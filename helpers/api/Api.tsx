@@ -22,6 +22,7 @@ import {
   FieldI,
   NewClientShortCreateI,
   NewOrderI,
+  NewWorker,
   OrderBaseI,
   OrderTask,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
@@ -34,7 +35,7 @@ export class Api {
   private static access_token: string;
 
   /**
-   * This varialble is used to store refresh token and use it in axios instance
+   * This variable is used to store refresh token and use it in axios instance
    * @private
    */
   private static refresh_token: string;
@@ -283,6 +284,15 @@ export class Api {
     // eslint-disable-next-line no-console
     console.log('NEW ORDER DATA: ', data);
     return true;
+  }
+
+  static async addNewWorker(data: NewWorker): Promise<boolean> {
+    // eslint-disable-next-line no-console
+    console.log('NEW ORDER DATA: ', data);
+    const respose = new Promise(resolve => {
+      setTimeout(() => resolve(true), 3000);
+    });
+    return respose as Promise<boolean>;
   }
 
   static async orderFinishAndAccount(data: OrderBaseI) {

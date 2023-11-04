@@ -25,6 +25,7 @@ import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInte
 import { OrdersStackParamList } from '../NavigatorsInterfaces/OrdersStackParamList';
 import { OwnerDesktopRootStackParamList } from '../NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 import { MaterialOrdersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
+import { MaterialWorkersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialWorkersRootTopTabParamList';
 
 export interface AppButtonProps {
   action: () => void;
@@ -367,7 +368,7 @@ export interface Worker {
   id: string;
   name: string;
   surname: string;
-  photoUrl: string;
+  photoUrl?: string | undefined;
   position: WorkerPosition;
   status: WorkerStatus;
   dateOfBirth: string;
@@ -384,7 +385,23 @@ export interface NewWorkerSign {
   surname: string;
 }
 
-export type NewWorker = Omit<Worker, 'id' | 'dateOfEmployment'>;
+export interface NewWorker
+  extends Omit<Worker, 'id' | 'dateOfEmployment' | 'position' | 'status'> {
+  position?: WorkerPosition;
+  status?: WorkerStatus;
+}
+
+export interface NewWorkerFormProps {
+  setProfileSign: React.Dispatch<React.SetStateAction<NewWorkerSign>>;
+  profilePhotoUrl?: string | undefined;
+  setLoadingIndicator: React.Dispatch<React.SetStateAction<boolean>>;
+  navigation: CompositeNavigationProp<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MaterialTopTabNavigationProp<MaterialWorkersRootTopTabParamList, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    StackNavigationProp<OwnerDesktopRootStackParamList, any>
+  >;
+}
 
 export interface AppEnumBasedPickerInputProps<
   T extends { [p: string]: unknown },
