@@ -2,7 +2,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import React, { memo, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import Animated, { useSharedValue, withTiming } from 'react-native-reanimated';
-import { useNavigation } from '@react-navigation/native';
 import { AppInput } from '../Molecules/AppInput';
 import { AppEnumBasedPickerInput } from '../Atoms/AppEnumBasedPickerInput';
 import {
