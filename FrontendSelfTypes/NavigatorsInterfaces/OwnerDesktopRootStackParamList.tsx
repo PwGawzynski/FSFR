@@ -26,4 +26,7 @@ export type OwnerDesktopRootStackParamList = {
     dangerButtonSign?: string;
   };
   fields: NavigatorScreenParams<FieldTopTabParamList> | undefined;
+  takePhoto: {
+    onSuccessRedirectionLink?: string;
+  };
 };

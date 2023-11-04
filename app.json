@@ -11,6 +11,17 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow FarmServiceOwner to access your camera.",
+          "photosPermission": "Allow FarmServiceOwner to access your photos.",
+          "savePhotosPermission": "Allow FarmServiceOwner to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
     "updates": {
       "fallbackToCacheTimeout": 0
     },

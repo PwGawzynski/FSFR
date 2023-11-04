@@ -9,7 +9,7 @@ export function InputLabel({ children }: InputLabelProps) {
   return (
     <Text
       className={`${
-        theme === ThemeOptions.dark ? 'text-white' : 'text-black'
+        theme === ThemeOptions.dark ? 'text-white' : 'text-[#848484]'
       } text-sm`}
     >
       {children}

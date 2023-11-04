@@ -6,6 +6,7 @@ import { OperationConfirmedAnimation } from '../Pages/Mobi/Common/OperationConfi
 import { OperationDanger } from '../Pages/Mobi/Common/OperationDanger';
 import { FieldsTopTab } from './FieldsTopTab';
 import { WorkersTabNavigator } from './WorkersStack';
+import { TakePhoto } from '../Pages/Mobi/Common/TakePhoto';
 
 const Stack = createNativeStackNavigator<OwnerDesktopRootStackParamList>();
 
@@ -58,6 +59,14 @@ export function OwnerDesktopMobiRootStack() {
       <Stack.Screen
         name="fields"
         component={FieldsTopTab}
+        options={{
+          gestureDirection: 'vertical',
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="takePhoto"
+        component={TakePhoto}
         options={{
           gestureDirection: 'vertical',
           headerShown: false,
