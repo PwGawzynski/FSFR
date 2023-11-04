@@ -3,6 +3,8 @@ import { DesktopTopTabParamList } from './DesktopTopTabParamList';
 import { OrdersStackParamList } from './OrdersStackParamList';
 import { WorkersStackParamList } from './WorkersStackParamList';
 import { FieldTopTabParamList } from './FieldTopTabParamList';
+import { MaterialWorkersRootTopTabParamList } from './MaterialWorkersRootTopTabParamList';
+import { MaterialOrdersRootTopTabParamList } from './MaterialOrdersRootTopTabParamLIst';
 
 export type OwnerDesktopRootStackParamList = {
   desktop: NavigatorScreenParams<DesktopTopTabParamList> | undefined;
@@ -13,7 +15,10 @@ export type OwnerDesktopRootStackParamList = {
       | keyof OwnerDesktopRootStackParamList
       | keyof DesktopTopTabParamList
       | keyof OrdersStackParamList
-      | keyof WorkersStackParamList;
+      | keyof WorkersStackParamList
+      | keyof MaterialWorkersRootTopTabParamList
+      | keyof FieldTopTabParamList
+      | keyof MaterialOrdersRootTopTabParamList;
     shownMessage?: string;
   };
   OperationDanger: {
@@ -22,7 +27,10 @@ export type OwnerDesktopRootStackParamList = {
       | keyof OwnerDesktopRootStackParamList
       | keyof DesktopTopTabParamList
       | keyof OrdersStackParamList
-      | keyof WorkersStackParamList;
+      | keyof WorkersStackParamList
+      | keyof MaterialWorkersRootTopTabParamList
+      | keyof FieldTopTabParamList
+      | keyof MaterialOrdersRootTopTabParamList;
     dangerButtonSign?: string;
   };
   fields: NavigatorScreenParams<FieldTopTabParamList> | undefined;
