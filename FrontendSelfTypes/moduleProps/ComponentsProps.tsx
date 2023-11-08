@@ -162,6 +162,7 @@ export interface ActivityProps {
 export type ActivityI = ActivityProps;
 
 // TODO move to united types
+// TODO Moved to united types change when fetch from github
 export enum EventType {
   Action,
   Warning,
@@ -222,7 +223,7 @@ export interface OrderBaseI {
   clientId: string;
   client: string;
 
-  area: number;
+  totalArea: number;
   status: OrderStatus;
 
   pricePerUnit?: number;
@@ -232,7 +233,7 @@ export interface OrderBaseI {
 
 export type NewOrderI = Omit<
   OrderBaseI,
-  'taskId' | 'clientId' | 'area' | 'status' | 'doneArea'
+  'taskId' | 'clientId' | 'totalArea' | 'status' | 'doneArea'
 >;
 
 export type OrderProps = OrderBaseI;
