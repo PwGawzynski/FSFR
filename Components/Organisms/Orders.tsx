@@ -19,7 +19,7 @@ function MemoizedOrders({
   const OrderListItem = useCallback(({ item: order }: OrderListItemI) => {
     return (
       <OrderShortInfoBox
-        area={order.area}
+        totalArea={order.totalArea}
         status={order.status}
         doneArea={order.doneArea}
         key={order.taskId}
