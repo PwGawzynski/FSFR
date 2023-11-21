@@ -38,7 +38,7 @@ export function OrdersListSearchAndFilter<
               main: 'status',
               subOptions: mapEnumToSubOptionPairs(OrderStatus),
             },
-            { main: 'area' },
+            { main: 'totalArea' },
             { main: 'performanceDate' },
           ],
         ]}
