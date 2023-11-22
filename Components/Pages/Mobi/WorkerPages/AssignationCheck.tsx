@@ -15,11 +15,9 @@ export function AssignationCheck({
   navigation,
 }: WorkerRootStackProps<'assignationCheck'>) {
   const { currentUser } = useContext(AppSettings).settings;
-  const { data, isLoading } = useQuery(
-    `myId${currentUser?.email}`,
-    getWorkerId,
-    { refetchOnMount: 'always' },
-  );
+  const { data } = useQuery(`myId${currentUser?.email}`, getWorkerId, {
+    refetchOnMount: 'always',
+  });
   const [workersCompanyId, setWorkersCompanyId] = useState<
     undefined | PersonalDataBase
   >(undefined);

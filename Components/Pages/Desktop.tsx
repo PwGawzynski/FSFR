@@ -4,7 +4,6 @@ import { AxiosError, HttpStatusCode } from 'axios';
 import { getUserDataService } from '../../helpers/api/Services/User';
 import { AppSettings, ModalState } from '../../helpers/appSettings/contexts';
 import { OwnerDesktopMobiRootStack } from '../Navigators/Mobi/Owner/OwnerDesktopRootStack';
-import { AssignationCheck } from './Mobi/WorkerPages/AssignationCheck';
 import { UserRole } from '../../FarmServiceTypes/User/Enums';
 import { WorkerRootStack } from '../Navigators/Mobi/Worker/WorkerRootStack';
 

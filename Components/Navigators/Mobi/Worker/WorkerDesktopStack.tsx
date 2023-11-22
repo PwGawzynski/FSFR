@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Desktop } from '../../../Pages/Mobi/WorkerPages/Desktop';
 import { WorkerStackParamList } from '../../../../FrontendSelfTypes/NavigatorsInterfaces/Worker/WorkerStackParamList';
 import { WorkerDesktopMaterial } from './WorkerDesktopMaterial';
 
