@@ -1,14 +1,12 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import Constants from 'expo-constants';
+import RNEventSource, { ListenerCallback } from 'react-native-event-source';
 import {
   EmailAndPasswordData,
   RegisterScreensDataCollection,
 } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
-import {
-  RegisterNewUserDataDtoInterfaceMobi,
-  Theme,
-} from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+
 import {
   IdentityAuthTokenLoginRaw,
   IdentityAuthTokenLoginStored,
@@ -26,6 +24,10 @@ import {
   OrderBaseI,
   OrderTask,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { CreateWorkerReqI } from '../../FarmServiceTypes/Worker/Requests';
+import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
+import { Theme } from '../../FarmServiceTypes/Account/Constants';
+import { CreateUserReqI } from '../../FarmServiceTypes/User/Requests';
 
 export class Api {
   /**
@@ -207,7 +209,7 @@ export class Api {
         theme: Theme.light,
       },
       userRole: userData.userRole,
-    } as RegisterNewUserDataDtoInterfaceMobi;
+    } as CreateUserReqI;
     return Api.axiosInstance.post('/user', serializedData, {
       headers: {
         Authorization: `Bearer ${Api.access_token}`,
@@ -330,4 +332,41 @@ export class Api {
     // eslint-disable-next-line @typescript-eslint/no-var-requires,no-promise-executor-return
     return new Promise(res => setTimeout(() => res(TaskId), 2000));
   }
+
+  static async getWorkerId() {
+    return (await Api.axiosInstance.get(`/user/id`)).data.payload;
+  }
+
+  static async createWorker(data: CreateWorkerReqI) {
+    return (await Api.axiosInstance.post(`/worker`, data)).data
+      .payload as WorkerResponseBase;
+  }
+
+  static workerAssignedListener(
+    workerId: string,
+    { open, message, error }: workerAsyncListenerParams,
+  ) {
+    const eventSource = new RNEventSource(
+      `http://localhost:3002/worker/sse/${workerId}`,
+      { headers: { Authorization: `Bearer ${Api.access_token}` } },
+    );
+
+    eventSource.addEventListener('message', data => {
+      message(data);
+      eventSource.removeAllListeners();
+      eventSource.close();
+    });
+    eventSource.addEventListener('error', data => {
+      error(data);
+      eventSource.removeAllListeners();
+      eventSource.close();
+    });
+    eventSource.addEventListener('open', open);
+  }
+}
+
+export interface workerAsyncListenerParams {
+  open: ListenerCallback;
+  message: ListenerCallback;
+  error: ListenerCallback;
 }

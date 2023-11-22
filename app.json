@@ -20,6 +20,12 @@
           "savePhotosPermission": "Allow FarmServiceOwner to save photos.",
           "isAccessMediaLocationEnabled": true
         }
+      ],
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Allow FarmService to access camera."
+        }
       ]
     ],
     "updates": {

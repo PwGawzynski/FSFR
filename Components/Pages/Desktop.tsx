@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { AxiosError, HttpStatusCode } from 'axios';
-import { SafeAreaView } from 'react-native';
 import { getUserDataService } from '../../helpers/api/Services/User';
 import { AppSettings, ModalState } from '../../helpers/appSettings/contexts';
-import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
 import { OwnerDesktopMobiRootStack } from '../Navigators/OwnerDesktopRootStack';
+import { WorkerDesktopRootStack } from './Mobi/WorkerPages/WorkerDesktopRootStack';
+import { UserRole } from '../../FarmServiceTypes/User/Enums';
 
 export function Desktop() {
   const {
@@ -44,8 +44,7 @@ export function Desktop() {
   }, [currentUser]);
 
   return (
-    (currentUser?.role === UserRole.owner && <OwnerDesktopMobiRootStack />) || (
-      <SafeAreaView />
-    )
+    (currentUser?.role === UserRole.Owner && <OwnerDesktopMobiRootStack />) ||
+    (currentUser?.role === UserRole.Worker && <WorkerDesktopRootStack />)
   );
 }

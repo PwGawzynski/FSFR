@@ -8,7 +8,7 @@ import {
   EventType,
   NotificationProps,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
-import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+import { UserRole } from '../../FarmServiceTypes/User/Enums';
 
 export function Notification({
   causer,
@@ -39,8 +39,8 @@ export function Notification({
     >
       <View className="h-6 bg-black absolute top-[-12] justify-center">
         <Text className="text-white text-sm font-bold uppercase pl-2 pr-2 text-center">
-          {(causerRole === UserRole.worker && 'worker') ||
-            (causerRole === UserRole.owner && 'owner')}{' '}
+          {(causerRole === UserRole.Worker && 'worker') ||
+            (causerRole === UserRole.Owner && 'owner')}{' '}
           {causer}
         </Text>
       </View>
