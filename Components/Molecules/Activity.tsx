@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Animated, { useSharedValue, withTiming } from 'react-native-reanimated';
 import { ProfilePhoto } from '../Atoms/ProfilePhoto';
 import { ActivityProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
-import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+import { UserRole } from '../../FarmServiceTypes/User/Enums';
 
 export function Activity({
   activityType,
@@ -33,7 +33,7 @@ export function Activity({
           <Text className="text-black font-bold text-left ml-6 uppercase">
             {activityLogCauser}
             --
-            {activityCauserRole === UserRole.owner ? 'OWNER' : 'WORKER'}
+            {activityCauserRole === UserRole.Owner ? 'OWNER' : 'WORKER'}
           </Text>
         </View>
         <View className="w-full h-14  bg-black rounded-full">
