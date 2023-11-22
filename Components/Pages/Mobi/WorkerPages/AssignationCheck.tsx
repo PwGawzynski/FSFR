@@ -9,8 +9,11 @@ import { AppSettings } from '../../../../helpers/appSettings/contexts';
 import { Api } from '../../../../helpers/api/Api';
 import { PersonalDataBase } from '../../../../FarmServiceTypes/UserPersonalData/Responses';
 import { AppearingText } from '../../../Molecules/AppearingText';
+import { WorkerRootStackProps } from '../../../../FrontendSelfTypes/navigation/types';
 
-export function WorkerDesktopRootStack() {
+export function AssignationCheck({
+  navigation,
+}: WorkerRootStackProps<'assignationCheck'>) {
   const { currentUser } = useContext(AppSettings).settings;
   const { data, isLoading } = useQuery(
     `myId${currentUser?.email}`,
@@ -20,7 +23,9 @@ export function WorkerDesktopRootStack() {
   const [workersCompanyId, setWorkersCompanyId] = useState<
     undefined | PersonalDataBase
   >(undefined);
-  const handleOpenSse = (event: MessageEvent) => console.log(event, 'testOp');
+  const [sseOpen, setSseOpen] = useState(false);
+  const handleOpenSse = (event: MessageEvent) =>
+    event.lastEventId && setSseOpen(true);
   const handleErrorSse = (event: MessageEvent) => console.log(event, 'testER');
   const handleMessageSse = (message: MessageEvent) => {
     if (message.data) {
@@ -29,6 +34,9 @@ export function WorkerDesktopRootStack() {
       setWorkersCompanyId(res);
     }
   };
+
+  const handleAnimationEnd = () =>
+    navigation.navigate('desktop', { root: { materialDesktop: undefined } });
 
   useEffect(() => {
     if (data && !workersCompanyId) {
@@ -42,33 +50,45 @@ export function WorkerDesktopRootStack() {
   return (
     <SafeAreaView className="w-full h-full flex flex-col">
       <View className="ml-4 mr-4 flex-1 flex flex-col">
-        <View className="flex-col flex-1 items-center justify-center relative">
-          <View className="flex-1 flex-col justify-center items-center">
-            {isLoading && <ActivityIndicator size={200} />}
-            {data?.id && <QRCode size={200} color="#279840" value={data.id} />}
-            <Text
-              adjustsFontSizeToFit
-              numberOfLines={1}
-              className="mt-16 text-[#848484]"
-            >
-              * To connect your account with company
-            </Text>
-            <Text
-              adjustsFontSizeToFit
-              numberOfLines={1}
-              className="text-[#848484]"
-            >
-              Please scan the code
-            </Text>
-          </View>
+        <View className="flex-col flex-1 items-center justify-center">
+          {sseOpen && !workersCompanyId && (
+            <View className="flex-1 flex-col justify-center items-center">
+              <View className="w-[200] h-[200] flex-col items-center justify-center">
+                <QRCode size={200} color="#279840" value={data?.id} />
+              </View>
+              <View className="flex-col items-center justify-center">
+                <Text
+                  adjustsFontSizeToFit
+                  numberOfLines={1}
+                  className="mt-16 text-[#848484]"
+                >
+                  * To connect your account with company
+                </Text>
+                <Text
+                  adjustsFontSizeToFit
+                  numberOfLines={1}
+                  className="text-[#848484]"
+                >
+                  Please scan the code
+                </Text>
+              </View>
+            </View>
+          )}
           <View className="flex-1 flex-col items-center justify-center">
             <View className="w-full h-24">
               {workersCompanyId && (
-                <AppearingText>{`Welcome on board ${workersCompanyId.name}`}</AppearingText>
+                <AppearingText
+                  onAnimationEnd={handleAnimationEnd}
+                >{`Welcome on board ${workersCompanyId.name}`}</AppearingText>
               )}
             </View>
           </View>
         </View>
+        {!workersCompanyId && (
+          <View className="flex-1 flex-col items-center justify-center">
+            <ActivityIndicator size={40} color="#279840" />
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
