@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OwnerDesktopRootStackParamList';
+import { OwnerDesktopRootStackParamList } from '../../../../FrontendSelfTypes/NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 import { OrdersStack } from './OrdersStack';
 import { DesktopTopTab } from './DesktopTopTab';
-import { OperationConfirmedAnimation } from '../Pages/Mobi/Common/OperationConfirmedAnimation';
-import { OperationDanger } from '../Pages/Mobi/Common/OperationDanger';
+import { OperationConfirmedAnimation } from '../../../Pages/Mobi/Common/OperationConfirmedAnimation';
+import { OperationDanger } from '../../../Pages/Mobi/Common/OperationDanger';
 import { FieldsTopTab } from './FieldsTopTab';
 import { WorkersTabNavigator } from './WorkersStack';
-import { TakePhoto } from '../Pages/Mobi/Common/TakePhoto';
+import { TakePhoto } from '../../../Pages/Mobi/Common/TakePhoto';
 
 const Stack = createNativeStackNavigator<OwnerDesktopRootStackParamList>();
 
