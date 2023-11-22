@@ -14,7 +14,7 @@ export function MaterialWorkersTopTab() {
       <MaterialWorkersTopTabNavigator.Screen
         name="addWorker"
         component={AddWorker}
-        options={MaterialTopTabScreenOptions}
+        options={{ ...MaterialTopTabScreenOptions, lazy: true }}
       />
       <MaterialWorkersTopTabNavigator.Screen
         name="materialWorkersRoot"
