@@ -3,6 +3,10 @@ import {
   Worker,
 } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { Api } from '../Api';
+import { CreateWorkerReqI } from '../../../FarmServiceTypes/Worker/Requests';
+import { PersonalDataBase } from '../../../FarmServiceTypes/UserPersonalData/Responses';
+import { ResponseObject } from '../../../FarmServiceTypes/Respnse/responseGeneric';
+import { WorkerResponseBase } from '../../../FarmServiceTypes/Worker/Responses';
 
 export async function getAllWorkers(
   externalDataOn?: true,
@@ -16,11 +20,19 @@ export async function getAllWorkers(
 }
 
 export async function addNewWorker(
-  data: NewWorker,
-): Promise<boolean | undefined> {
+  data: CreateWorkerReqI,
+): Promise<WorkerResponseBase | undefined> {
   try {
     // eslint-disable-next-line no-console
-    return Api.addNewWorker(data);
+    return Api.createWorker(data);
+  } catch (e) {
+    return undefined;
+  }
+}
+
+export async function getWorkerId(): Promise<{ id: string } | undefined> {
+  try {
+    return Api.getWorkerId();
   } catch (e) {
     return undefined;
   }
