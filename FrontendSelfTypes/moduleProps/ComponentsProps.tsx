@@ -21,11 +21,11 @@ import {
   RegisterAskBase,
   RegisterTabFormBase,
 } from '../navigation/types';
-import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
 import { OrdersStackParamList } from '../NavigatorsInterfaces/OrdersStackParamList';
 import { OwnerDesktopRootStackParamList } from '../NavigatorsInterfaces/OwnerDesktopRootStackParamList';
 import { MaterialOrdersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 import { MaterialWorkersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialWorkersRootTopTabParamList';
+import { UserRole } from '../../FarmServiceTypes/User/Enums';
 
 export interface AppButtonProps {
   action: () => void;
@@ -640,5 +640,19 @@ export interface CallAndCreateEmailButtonsProps {
 
 export interface WorkerListProps {
   filterMethod?: ((worker: Worker) => boolean) | undefined;
-  reloadIndicator: string;
+  reloadIndicator?: string;
+}
+export interface handleBarCodeScannedData {
+  type: string;
+  data: string;
+}
+export interface QRScannerProps {
+  scanned: boolean;
+  handleBarCodeScanned: (data: handleBarCodeScannedData) => void;
+}
+
+export interface AppearingTextProps {
+  onAnimationEnd?: () => void;
+  onUnmountAnimationEnd?: () => void;
+  children: ReactNode;
 }
