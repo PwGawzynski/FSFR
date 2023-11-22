@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { WorkersStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/WorkersStackParamList';
-import { OrdersStackScreenOptions } from '../../helpers/style/OrdersStackScreenOptions';
-import { WorkerDetails } from '../Pages/Mobi/OwnerPages/Workers/WorkerDetails';
-import { WorkersLocations } from '../Pages/Mobi/OwnerPages/Workers/WorkersLocations';
-import { WorkerWorkDayDetails } from '../Pages/Mobi/OwnerPages/Workers/WorkerWorkDayDetails';
-import { WorkerWorkDaysInfo } from '../Pages/Mobi/OwnerPages/Workers/WorkerWorkDaysInfo';
+import { WorkersStackParamList } from '../../../../FrontendSelfTypes/NavigatorsInterfaces/WorkersStackParamList';
+import { OrdersStackScreenOptions } from '../../../../helpers/style/OrdersStackScreenOptions';
+import { WorkerDetails } from '../../../Pages/Mobi/OwnerPages/Workers/WorkerDetails';
+import { WorkersLocations } from '../../../Pages/Mobi/OwnerPages/Workers/WorkersLocations';
+import { WorkerWorkDayDetails } from '../../../Pages/Mobi/OwnerPages/Workers/WorkerWorkDayDetails';
+import { WorkerWorkDaysInfo } from '../../../Pages/Mobi/OwnerPages/Workers/WorkerWorkDaysInfo';
 import { MaterialWorkersTopTab } from './MaterialWorkersTopTab';
 
 const TabNavigator = createNativeStackNavigator<WorkersStackParamList>();
