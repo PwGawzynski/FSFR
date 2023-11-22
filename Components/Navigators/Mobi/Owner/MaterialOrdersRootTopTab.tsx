@@ -1,9 +1,9 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { MaterialOrdersRootTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
-import { OrdersRoot } from '../Pages/Mobi/OwnerPages/Orders/OrdersRoot';
-import { AddOrder } from '../Pages/Mobi/OwnerPages/Orders/AddOrder';
-import { OrdersSearch } from '../Pages/Mobi/OwnerPages/Orders/OrdersSearch';
-import { MaterialTopTabScreenOptions } from '../../helpers/style/MaterialTopTabScreenOptions';
+import { MaterialOrdersRootTopTabParamList } from '../../../../FrontendSelfTypes/NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
+import { OrdersRoot } from '../../../Pages/Mobi/OwnerPages/Orders/OrdersRoot';
+import { AddOrder } from '../../../Pages/Mobi/OwnerPages/Orders/AddOrder';
+import { OrdersSearch } from '../../../Pages/Mobi/OwnerPages/Orders/OrdersSearch';
+import { MaterialTopTabScreenOptions } from '../../../../helpers/style/MaterialTopTabScreenOptions';
 
 const MaterialTopTab =
   createMaterialTopTabNavigator<MaterialOrdersRootTopTabParamList>();
