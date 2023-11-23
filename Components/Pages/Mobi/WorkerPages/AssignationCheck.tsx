@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native-paper';
 import { MessageEvent } from 'react-native-event-source';
-import { getWorkerId } from '../../../../helpers/api/Services/Worker';
+import { getWorker } from '../../../../helpers/api/Services/Worker';
 import { AppSettings } from '../../../../helpers/appSettings/contexts';
 import { Api } from '../../../../helpers/api/Api';
 import { PersonalDataBase } from '../../../../FarmServiceTypes/UserPersonalData/Responses';
@@ -15,15 +15,16 @@ export function AssignationCheck({
   navigation,
 }: WorkerRootStackProps<'assignationCheck'>) {
   const { currentUser } = useContext(AppSettings).settings;
-  const { data } = useQuery(`myId${currentUser?.email}`, getWorkerId, {
+  const { data } = useQuery(`myId${currentUser?.email}`, getWorker, {
     refetchOnMount: 'always',
   });
   const [workersCompanyId, setWorkersCompanyId] = useState<
     undefined | PersonalDataBase
   >(undefined);
   const [sseOpen, setSseOpen] = useState(false);
-  const handleOpenSse = (event: MessageEvent) =>
-    event.lastEventId && setSseOpen(true);
+  const handleOpenSse = (event: MessageEvent) => {
+    setSseOpen(true);
+  };
   const handleErrorSse = (event: MessageEvent) => console.log(event, 'testER');
   const handleMessageSse = (message: MessageEvent) => {
     if (message.data) {
@@ -49,7 +50,7 @@ export function AssignationCheck({
     <SafeAreaView className="w-full h-full flex flex-col">
       <View className="ml-4 mr-4 flex-1 flex flex-col">
         <View className="flex-col flex-1 items-center justify-center">
-          {sseOpen && !workersCompanyId && (
+          {!data?.companyId && sseOpen && !workersCompanyId && (
             <View className="flex-1 flex-col justify-center items-center">
               <View className="w-[200] h-[200] flex-col items-center justify-center">
                 <QRCode size={200} color="#279840" value={data?.id} />
@@ -82,7 +83,7 @@ export function AssignationCheck({
             </View>
           </View>
         </View>
-        {!workersCompanyId && (
+        {!sseOpen && (
           <View className="flex-1 flex-col items-center justify-center">
             <ActivityIndicator size={40} color="#279840" />
           </View>
