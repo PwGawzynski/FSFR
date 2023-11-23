@@ -1,8 +1,8 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { DesktopTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/DesktopTopTabParamList';
-import { DesktopRootMobi } from '../Pages/DesktopRootMobi';
-import { DesktopNotificationCenter } from '../Pages/DesktopNotificationCenter';
-import { MaterialTopTabScreenOptions } from '../../helpers/style/MaterialTopTabScreenOptions';
+import { DesktopTopTabParamList } from '../../../../FrontendSelfTypes/NavigatorsInterfaces/DesktopTopTabParamList';
+import { DesktopRootMobi } from '../../../Pages/DesktopRootMobi';
+import { DesktopNotificationCenter } from '../../../Pages/DesktopNotificationCenter';
+import { MaterialTopTabScreenOptions } from '../../../../helpers/style/MaterialTopTabScreenOptions';
 
 const TabNavigator = createMaterialTopTabNavigator<DesktopTopTabParamList>();
 

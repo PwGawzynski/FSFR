@@ -13,6 +13,7 @@ import { WorkersStackParamList } from '../NavigatorsInterfaces/WorkersStackParam
 import { FieldTopTabParamList } from '../NavigatorsInterfaces/FieldTopTabParamList';
 import { MaterialOrdersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 import { MaterialWorkersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialWorkersRootTopTabParamList';
+import { WorkerRootStackParamList } from '../NavigatorsInterfaces/Worker/WorkerRootStackParamList';
 
 export type LoginPageBase = StackScreenProps<RootStackParamList, 'Login'>;
 export type LoginPageTabBase = LoginPageBase;
@@ -131,3 +132,6 @@ export type OwnerMobiFieldsTopTabProps<
   MaterialTopTabScreenProps<FieldTopTabParamList, T>,
   OwnerMobiDesktopRootStackProps<N>
 >;
+
+export type WorkerRootStackProps<T extends keyof WorkerRootStackParamList> =
+  StackScreenProps<WorkerRootStackParamList, T>;

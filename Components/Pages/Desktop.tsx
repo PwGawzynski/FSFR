@@ -3,9 +3,9 @@ import { useMutation } from 'react-query';
 import { AxiosError, HttpStatusCode } from 'axios';
 import { getUserDataService } from '../../helpers/api/Services/User';
 import { AppSettings, ModalState } from '../../helpers/appSettings/contexts';
-import { OwnerDesktopMobiRootStack } from '../Navigators/OwnerDesktopRootStack';
-import { WorkerDesktopRootStack } from './Mobi/WorkerPages/WorkerDesktopRootStack';
+import { OwnerDesktopMobiRootStack } from '../Navigators/Mobi/Owner/OwnerDesktopRootStack';
 import { UserRole } from '../../FarmServiceTypes/User/Enums';
+import { WorkerRootStack } from '../Navigators/Mobi/Worker/WorkerRootStack';
 
 export function Desktop() {
   const {
@@ -45,6 +45,6 @@ export function Desktop() {
 
   return (
     (currentUser?.role === UserRole.Owner && <OwnerDesktopMobiRootStack />) ||
-    (currentUser?.role === UserRole.Worker && <WorkerDesktopRootStack />)
+    (currentUser?.role === UserRole.Worker && <WorkerRootStack />)
   );
 }

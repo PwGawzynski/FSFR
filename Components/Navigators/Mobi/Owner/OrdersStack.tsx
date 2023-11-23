@@ -1,16 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { OrdersStackParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/OrdersStackParamList';
+import { OrdersStackParamList } from '../../../../FrontendSelfTypes/NavigatorsInterfaces/OrdersStackParamList';
 
-import { OrdersStackScreenOptions } from '../../helpers/style/OrdersStackScreenOptions';
-import { OrdersAddField } from '../Pages/Mobi/OwnerPages/Orders/OrdersAddField';
-import { AssignedWorkers } from '../Pages/Mobi/OwnerPages/Orders/AssignedWorkers';
-import { OrdersLocations } from '../Pages/Mobi/OwnerPages/Orders/OrdersLocations';
-import { OrdersManageWorkers } from '../Pages/Mobi/OwnerPages/Orders/OrdersManageWorkers';
-import { OrdersDetails } from '../Pages/Mobi/OwnerPages/Orders/OrdersDetails';
-import { OrderFinishAndAccount } from '../Pages/Mobi/OwnerPages/Orders/OrderFinishAndAccount';
-import { OrdersHistory } from '../Pages/Mobi/OwnerPages/Orders/OrdersHistory';
+import { OrdersStackScreenOptions } from '../../../../helpers/style/OrdersStackScreenOptions';
+import { OrdersAddField } from '../../../Pages/Mobi/OwnerPages/Orders/OrdersAddField';
+import { AssignedWorkers } from '../../../Pages/Mobi/OwnerPages/Orders/AssignedWorkers';
+import { OrdersLocations } from '../../../Pages/Mobi/OwnerPages/Orders/OrdersLocations';
+import { OrdersManageWorkers } from '../../../Pages/Mobi/OwnerPages/Orders/OrdersManageWorkers';
+import { OrdersDetails } from '../../../Pages/Mobi/OwnerPages/Orders/OrdersDetails';
+import { OrderFinishAndAccount } from '../../../Pages/Mobi/OwnerPages/Orders/OrderFinishAndAccount';
+import { OrdersHistory } from '../../../Pages/Mobi/OwnerPages/Orders/OrdersHistory';
 import { MaterialOrdersRootTopTab } from './MaterialOrdersRootTopTab';
-import { AllOrders } from '../Pages/Mobi/OwnerPages/Orders/AllOrders';
+import { AllOrders } from '../../../Pages/Mobi/OwnerPages/Orders/AllOrders';
 
 const TabNavigator = createNativeStackNavigator<OrdersStackParamList>();
 
