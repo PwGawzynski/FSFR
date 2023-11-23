@@ -30,9 +30,11 @@ export async function addNewWorker(
   }
 }
 
-export async function getWorkerId(): Promise<{ id: string } | undefined> {
+export async function getWorker(): Promise<
+  { id: string; companyId: string } | undefined
+> {
   try {
-    return Api.getWorkerId();
+    return Api.getWorker();
   } catch (e) {
     return undefined;
   }
