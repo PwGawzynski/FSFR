@@ -333,8 +333,8 @@ export class Api {
     return new Promise(res => setTimeout(() => res(TaskId), 2000));
   }
 
-  static async getWorkerId() {
-    return (await Api.axiosInstance.get(`/user/id`)).data.payload;
+  static async getWorker() {
+    return (await Api.axiosInstance.get(`/worker/id`)).data.payload;
   }
 
   static async createWorker(data: CreateWorkerReqI) {
