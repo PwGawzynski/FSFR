@@ -3,13 +3,14 @@ import {
   NewOrderI,
   OrderBaseI,
 } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { OrderResponseBase } from '../../../FarmServiceTypes/Order/Ressponses';
 
-export async function getAllOrders(): Promise<Array<OrderBaseI> | undefined> {
+export async function getAllOrders(): Promise<
+  Array<OrderResponseBase> | undefined
+> {
   try {
-    const data = await Api.getAllOrders();
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return data.orders as Array<OrderBaseI>;
+    const { data } = await Api.getAllOrders();
+    return data as Array<OrderResponseBase>;
   } catch (e) {
     return undefined;
   }
