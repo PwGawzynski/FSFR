@@ -4,23 +4,23 @@ import RNPickerSelect from 'react-native-picker-select';
 import { useMutation } from 'react-query';
 import { WorkerSelector } from './WorkerSelector';
 import { ScreenTitleHeader } from '../Atoms/ScreenTitleHeader';
-import {
-  SelectWorkerPanelProps,
-  TaskType,
-  Worker,
-} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { SelectWorkerPanelProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { AppButton } from '../Atoms/AppButton';
 import { addNewTask } from '../../helpers/api/Services/Task';
+import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
+import { TaskType } from '../../FarmServiceTypes/Task/Enums';
 
 export function SelectWorkerPanel({
   fieldsIds,
   navigation,
   validationError,
   setValidationError,
+  orderId,
 }: SelectWorkerPanelProps) {
-  const [focusedWorker, setFocusedWorker] = useState<Worker | undefined>(
-    undefined,
-  );
+  const [focusedWorker, setFocusedWorker] = useState<
+    WorkerResponseBase | undefined
+  >(undefined);
+
   const [taskType, setTaskType] = useState<number | undefined>();
   const { mutate: createNewTasks, isSuccess } = useMutation(addNewTask);
 
@@ -40,6 +40,8 @@ export function SelectWorkerPanel({
     return undefined;
   }, [validationError]);
 
+  console.log(taskType, 'rrrr');
+
   return (
     <View className="flex-col justify-start mt-4">
       <View style={{ height: 80 }} className="flex-row">
@@ -48,10 +50,10 @@ export function SelectWorkerPanel({
       {focusedWorker && (
         <View className="grow">
           <ScreenTitleHeader ats="text-base" variant="sm">
-            Worker {focusedWorker?.name}
+            Worker {focusedWorker?.personalData.name}
           </ScreenTitleHeader>
           <RNPickerSelect
-            onValueChange={(v, i) => setTaskType(i)}
+            onValueChange={(v, i) => setTaskType(i - 1)}
             style={{
               placeholder: {
                 color: validationError ? 'red' : '#808080',
@@ -76,11 +78,14 @@ export function SelectWorkerPanel({
             action={() => {
               if (!fieldsIds.length || !taskType) setValidationError(true);
               else
-                createNewTasks({
-                  workerId: focusedWorker?.id,
-                  type: taskType,
-                  fieldsIds,
-                });
+                createNewTasks(
+                  fieldsIds.map(fieldId => ({
+                    worker: focusedWorker?.id,
+                    order: orderId,
+                    field: fieldId,
+                    type: taskType,
+                  })),
+                );
             }}
             context="Assign selected Tasks"
           />
