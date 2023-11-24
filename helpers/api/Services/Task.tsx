@@ -1,8 +1,6 @@
-import {
-  AddNewTasksI,
-  OrderTask,
-} from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { AddNewTasksI } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { Api } from '../Api';
+import { TaskResponseBase } from '../../../FarmServiceTypes/Task/Restonses';
 
 export async function addNewTask(
   data: AddNewTasksI,
@@ -16,9 +14,9 @@ export async function addNewTask(
 
 export async function getAllOrdersTasks(
   data: string,
-): Promise<Array<OrderTask> | undefined> {
+): Promise<Array<TaskResponseBase> | undefined> {
   try {
-    return await Api.getAllOrdersTasks(data);
+    return (await Api.getAllOrdersTasks(data)).data;
   } catch (e) {
     return undefined;
   }
