@@ -23,13 +23,14 @@ export function WorkersTasksList({ data }: WorkersTaskList) {
         key={Math.random()}
         field={item.field}
         worker={item.worker}
-        id={item.id}
+        /* id={item.id} */
         index={index}
         type={item.type}
         onRemoveTask={taskId => {
-          setAfterRemData(prevState => [
+          // TODO
+          /* setAfterRemData(prevState => [
             ...prevState.filter(orderTask => orderTask.id !== taskId),
-          ]);
+          ]); */
           removeTask(taskId);
         }}
       />
@@ -45,7 +46,8 @@ export function WorkersTasksList({ data }: WorkersTaskList) {
             console.log('WorkersTaskList has been loaded in ', info)
           }
           estimatedItemSize={70}
-          keyExtractor={item => item.id}
+          // TODO
+          /* keyExtractor={item => item.id} */
           removeClippedSubviews
           showsVerticalScrollIndicator={false}
           data={afterRemData}
