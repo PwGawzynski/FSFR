@@ -6,7 +6,6 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import * as inspector from 'inspector';
 import {
   TaskType,
   WorkerTaskListElement,
@@ -17,10 +16,10 @@ import { getFontScaledSize } from '../../helpers/style/fontSize';
 export function WorkersTaskListElement({
   field,
   type,
-  id,
+  /* WAZNE id, */
   index,
-  onRemoveTask,
-}: WorkerTaskListElement) {
+}: /* onRemoveTask, */
+WorkerTaskListElement) {
   const animated = useSharedValue(1);
   const opacity = useSharedValue(0);
   const [visible, setVisible] = useState(true);
@@ -57,7 +56,8 @@ export function WorkersTaskListElement({
         onSwipeableOpen={direction => {
           if (direction === 'left') {
             setVisible(false);
-            setTimeout(() => onRemoveTask(id), 800);
+            // TODO fix on remove, TaskResponseBase should have on remove
+            setTimeout(() => '' /* onRemoveTask(id) */, 800);
           }
         }}
         renderLeftActions={(progressAnimatedValue, dragAnimatedValue) =>
@@ -81,10 +81,9 @@ export function WorkersTaskListElement({
             </Text>
             <View className="flex-row flex w-full justify-between">
               <Text>
-                ID:{' '}
-                {field.fieldId.split('-')[field.fieldId.split('-').length - 1]}
+                ID: {field.id.split('-')[field.id.split('-').length - 1]}
               </Text>
-              <Text>{field.name}</Text>
+              <Text>{field.polishSystemId}</Text>
               <Text className="text-right">{field.area}Ha</Text>
             </View>
           </View>
