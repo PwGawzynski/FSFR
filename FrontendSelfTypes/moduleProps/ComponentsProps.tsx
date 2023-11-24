@@ -29,6 +29,8 @@ import { UserRole } from '../../FarmServiceTypes/User/Enums';
 import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
 import { OrderStatus } from '../../FarmServiceTypes/Order/Enums';
 import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
+import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
+import { TaskResponseBase } from '../../FarmServiceTypes/Task/Restonses';
 
 export interface AppButtonProps {
   action: () => void;
@@ -280,7 +282,7 @@ export interface FieldI {
   name: string;
 }
 
-export interface OrderAccountingField extends FieldI {
+export interface OrderAccountingField extends FieldResponseBase {
   price: number;
   priceWTax: number;
 }
@@ -411,18 +413,20 @@ export interface AppEnumBasedPickerInputProps<
 }
 
 export interface WorkerSelectorProps {
-  onFocusWorker: (worker: Worker) => void;
-  data?: Array<Worker> | undefined;
+  onFocusWorker: (worker: WorkerResponseBase) => void;
+  data?: Array<WorkerResponseBase> | undefined;
   externalData?: true;
 }
 export interface WorkerSelectorItemProps {
-  onFocusWorker: (worker: Worker) => void;
-  worker: Worker;
-  focusedWorker?: Worker | undefined;
-  setFocusedWorker: React.Dispatch<React.SetStateAction<Worker | undefined>>;
+  onFocusWorker: (worker: WorkerResponseBase) => void;
+  worker: WorkerResponseBase;
+  focusedWorker?: WorkerResponseBase | undefined;
+  setFocusedWorker: React.Dispatch<
+    React.SetStateAction<WorkerResponseBase | undefined>
+  >;
 }
 
-export type WorkerSelectorListItem = { item: Worker };
+export type WorkerSelectorListItem = { item: WorkerResponseBase };
 export interface NewTaskI {
   fieldId: string;
   workerId: string;
@@ -615,15 +619,15 @@ export interface OrderTask {
 }
 
 export interface WorkersTaskList {
-  data: Array<OrderTask>;
+  data: Array<TaskResponseBase>;
 }
 
 export interface WorkerTaskListRenderItem {
-  item: OrderTask;
+  item: TaskResponseBase;
   index: number;
 }
 
-export interface WorkerTaskListElement extends OrderTask {
+export interface WorkerTaskListElement extends TaskResponseBase {
   index: number;
   onRemoveTask: (taskId: string) => void;
 }
