@@ -1,11 +1,8 @@
 import { Text, TouchableOpacity } from 'react-native';
 import { DataTable } from 'react-native-paper';
-import {
-  FieldI,
-  FieldStatus,
-  FieldTableRowProps,
-} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { FieldTableRowProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { CheckBox } from '../Atoms/CheckBox';
+import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
 
 export const FieldTableRow = ({
   fields,
@@ -15,14 +12,14 @@ export const FieldTableRow = ({
   columnNames,
   checkOn,
 }: FieldTableRowProps) => {
-  return fields?.map((f: FieldI, i) => (
+  return fields?.map((f: FieldResponseBase, i) => (
     <TouchableOpacity
-      key={f.fieldId}
+      key={f.id}
       onPress={() =>
         navigation.navigate('fields', {
           screen: 'fieldDetails',
           params: {
-            fieldId: f.fieldId,
+            fieldId: f.id,
           },
         })
       }
@@ -56,9 +53,9 @@ export const FieldTableRow = ({
             numeric={typeof f[key] === 'number'}
           >
             <Text className="text-black text-sm">
-              {key === 'status' && FieldStatus[f[key]]}
-              {key === 'fieldId' && f[key].slice(-4)}
-              {key !== 'status' && key !== 'fieldId' && f[key]}
+              {key === 'id' && f[key].slice(-4)}
+              {key === 'polishSystemId' && f[key].slice(-15)}
+              {key !== 'id' && key !== 'polishSystemId' && f[key].toString()}
             </Text>
           </DataTable.Cell>
         ))}
@@ -73,8 +70,7 @@ export const FieldTableRow = ({
           >
             <CheckBox
               onPress={() => {
-                if (setSelected)
-                  setSelected(prevState => [...prevState, f.fieldId]);
+                if (setSelected) setSelected(prevState => [...prevState, f.id]);
               }}
             />
           </DataTable.Cell>
