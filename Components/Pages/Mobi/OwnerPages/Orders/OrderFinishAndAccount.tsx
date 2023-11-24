@@ -4,12 +4,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 import {
-  FieldI,
   OrderAccountingField,
   OrderAccountingPrintColumnsSettings,
-  OrderBaseI,
-  OrderStatus,
-  TaskType,
 } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { LineDivider } from '../../../../Atoms/LineDivider';
 import { TitleValueInfoComponent } from '../../../../Atoms/TitleValueInfoComponent';
@@ -18,35 +14,25 @@ import { PriceSetter } from '../../../../Molecules/PriceSetter';
 import OrderAccountingFieldList from '../../../../Organisms/OrderAccountingFieldList';
 import { orderFinishAndAccount } from '../../../../../helpers/api/Services/OrdersService';
 import { ErrorInfoText } from '../../../../Atoms/ErrorInfoText';
+import {
+  OrderStatus,
+  ServiceType,
+} from '../../../../../FarmServiceTypes/Order/Enums';
+import { FieldResponseBase } from '../../../../../FarmServiceTypes/Field/Ressponses';
+import { OrderResponseBase } from '../../../../../FarmServiceTypes/Order/Ressponses';
 
 const fieldDataColumnSettings: OrderAccountingPrintColumnsSettings = [
   {
-    field: 'fieldId',
+    field: 'id',
     header: 'Field_id',
   },
   {
-    field: 'name',
-    header: 'Name',
+    field: 'polishSystemId',
+    header: 'PLID',
   },
   {
     field: 'area',
     header: 'Area',
-  },
-  {
-    field: 'city',
-    header: 'City',
-  },
-  {
-    field: 'county',
-    header: 'County',
-  },
-  {
-    field: 'dataCollectionDate',
-    header: 'DOCD',
-  },
-  {
-    field: 'voice',
-    header: 'voice',
   },
   {
     field: 'price',
@@ -65,12 +51,11 @@ export function OrderFinishAndAccount({
   const DEF_PRICE_PER_HA = '0.00';
 
   const orderId = route.params?.orderId;
-  const { data: orderConnectedFields } = useQuery<Array<FieldI> | undefined>([
-    'fields',
-    orderId,
-  ]);
-  const { data } = useQuery<Array<OrderBaseI> | undefined>('orders');
-  const order = data?.find(orderItem => orderItem.taskId === orderId);
+  const { data: orderConnectedFields } = useQuery<
+    Array<FieldResponseBase> | undefined
+  >(['fields', orderId]);
+  const { data } = useQuery<Array<OrderResponseBase> | undefined>('orders');
+  const order = data?.find(orderItem => orderItem.id === orderId);
 
   const [pricePerHa, setPricePerHa] = useState<string>(DEF_PRICE_PER_HA);
   const [reRenderListIndicator, setReRenderListIndicator] = useState(false);
@@ -108,13 +93,13 @@ export function OrderFinishAndAccount({
       </ScreenTitleHeader>
       {order && (
         <TitleValueInfoComponent
-          titles={['purchaser', 'performance date', 'area', 'status', 'type']}
+          titles={['name', 'performance date', 'area', 'status', 'type']}
           keys={[
-            order.client,
-            order.performanceDate,
-            order.area.toString(),
+            order.name,
+            new Date(order.performanceDate).toLocaleDateString(),
+            order.totalArea,
             OrderStatus[order.status],
-            TaskType[order.type],
+            ServiceType[order.serviceType],
           ]}
         />
       )}
