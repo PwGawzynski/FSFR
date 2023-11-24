@@ -7,7 +7,7 @@ export function OrderAccountingFieldListItem({
   return (
     <TouchableOpacity className="grow flex-col items-start justify-center">
       <View className="grow">
-        <Text className="text-lg font-semibold">{item.name}</Text>
+        <Text className="text-lg font-semibold">{item.polishSystemId}</Text>
       </View>
       <View className="grow flex-row">
         <Text className="flex-1">Price</Text>
