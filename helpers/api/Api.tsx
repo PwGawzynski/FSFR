@@ -21,8 +21,6 @@ import {
   NewClientShortCreateI,
   NewOrderI,
   NewWorker,
-  OrderBaseI,
-  OrderTask,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { CreateWorkerReqI } from '../../FarmServiceTypes/Worker/Requests';
 import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
@@ -30,6 +28,7 @@ import { Theme } from '../../FarmServiceTypes/Account/Constants';
 import { CreateUserReqI } from '../../FarmServiceTypes/User/Requests';
 import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
 import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
+import { TaskResponseBase } from '../../FarmServiceTypes/Task/Restonses';
 
 export class Api {
   /**
@@ -266,7 +265,9 @@ export class Api {
 
   static async getWorkers() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    return require('../../tmpData');
+    return Api.axiosInstance.get('/company/workers') as Promise<
+      AxiosResponse<Array<WorkerResponseBase>>
+    >;
   }
 
   static async getAllFieldsByOrderId(
@@ -298,7 +299,7 @@ export class Api {
     return respose as Promise<boolean>;
   }
 
-  static async orderFinishAndAccount(data: OrderBaseI) {
+  static async orderFinishAndAccount(data: OrderResponseBase) {
     // eslint-disable-next-line no-console
     console.log('ORDER UPDATE SET_PRICE_PER_UNIT', data);
     return true;
@@ -326,7 +327,9 @@ export class Api {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const data = require('../../tmpData');
     // TEMPORARY
-    return data.orderTasks as Array<OrderTask>;
+    return Api.axiosInstance.get('/task/by-order/', {
+      params: { id: orderid },
+    }) as Promise<AxiosResponse<Array<TaskResponseBase>>>;
   }
 
   static async remTaskListElement(TaskId: string): Promise<string> {
