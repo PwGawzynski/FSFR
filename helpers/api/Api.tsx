@@ -16,7 +16,6 @@ import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { checkCurrentSession } from '../handlers/checkIfLogged';
 import { GetUserDataResponse } from '../../FarmServiceTypes/Respnse/UserService/GetUserDataResponse';
 import {
-  AddNewTasksI,
   FieldI,
   NewClientShortCreateI,
   NewOrderI,
@@ -29,6 +28,7 @@ import { CreateUserReqI } from '../../FarmServiceTypes/User/Requests';
 import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
 import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
 import { TaskResponseBase } from '../../FarmServiceTypes/Task/Restonses';
+import { CreateTaskBase } from '../../FarmServiceTypes/Task/Requests';
 
 export class Api {
   /**
@@ -305,10 +305,11 @@ export class Api {
     return true;
   }
 
-  static async addNewTasks(data: AddNewTasksI) {
+  static async addNewTasks(data: Array<CreateTaskBase>) {
     // eslint-disable-next-line no-console
-    console.log('NEW TASKS DATA: ', data);
-    return true;
+    return Api.axiosInstance.post('/task', { tasks: data }) as Promise<
+      AxiosResponse<ResponseObject>
+    >;
   }
 
   static async createNewClientShort(data: NewClientShortCreateI) {
@@ -323,15 +324,15 @@ export class Api {
     return true;
   }
 
-  static async getAllOrdersTasks(orderid: string) {
+  static async getAllOrdersTasks(orderId: string) {
     return Api.axiosInstance.get('/task/by-order/', {
-      params: { id: orderid },
+      params: { id: orderId },
     }) as Promise<AxiosResponse<Array<TaskResponseBase>>>;
   }
 
   static async remTaskListElement(TaskId: string): Promise<string> {
     // eslint-disable-next-line @typescript-eslint/no-var-requires,no-promise-executor-return
-    return new Promise(res => setTimeout(() => res(TaskId), 2000));
+    return Api.axiosInstance.delete('task', { data: { task: TaskId } });
   }
 
   static async getWorker() {
