@@ -26,6 +26,9 @@ import { OwnerDesktopRootStackParamList } from '../NavigatorsInterfaces/OwnerDes
 import { MaterialOrdersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 import { MaterialWorkersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialWorkersRootTopTabParamList';
 import { UserRole } from '../../FarmServiceTypes/User/Enums';
+import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
+import { OrderStatus } from '../../FarmServiceTypes/Order/Enums';
+import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
 
 export interface AppButtonProps {
   action: () => void;
@@ -208,12 +211,6 @@ export enum TaskType {
   Transport,
 }
 
-export enum OrderStatus {
-  Added,
-  Confirmed,
-  Done,
-}
-
 export interface OrderBaseI {
   taskId: string;
   name: string;
@@ -227,8 +224,6 @@ export interface OrderBaseI {
   status: OrderStatus;
 
   pricePerUnit?: number;
-
-  doneArea: number;
 }
 
 export type NewOrderI = Omit<
@@ -236,7 +231,7 @@ export type NewOrderI = Omit<
   'taskId' | 'clientId' | 'totalArea' | 'status' | 'doneArea'
 >;
 
-export type OrderProps = OrderBaseI;
+export type OrderProps = OrderResponseBase;
 
 export interface NewClientShortCreateI {
   name: string;
@@ -293,7 +288,7 @@ export interface AccountingFieldFlatListItem {
   item: OrderAccountingField;
 }
 export interface OrderListItemI {
-  item: OrderBaseI;
+  item: OrderResponseBase;
 }
 export interface OrderListRenderItem {
   item: OrderBaseI;
@@ -337,7 +332,10 @@ export interface FieldListProps {
   >;
   lPOff?: true;
 
-  shownFieldKeys: Array<{ key: keyof FieldI; alternativeName?: string }>;
+  shownFieldKeys: Array<{
+    key: keyof FieldResponseBase;
+    alternativeName?: string;
+  }>;
 
   setSelected?: React.Dispatch<React.SetStateAction<Array<string>>>;
 }
@@ -450,7 +448,7 @@ export interface AddNewTasksI {
 }
 
 export interface FieldTableRowProps {
-  fields: Array<FieldI> | undefined;
+  fields: Array<FieldResponseBase> | undefined;
   navigation: CompositeNavigationProp<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     MaterialTopTabNavigationProp<OrdersStackParamList, any>,
@@ -458,14 +456,20 @@ export interface FieldTableRowProps {
     StackNavigationProp<OwnerDesktopRootStackParamList, any>
   >;
   lPOff?: true;
-  columnNames: Array<{ key: keyof FieldI; alternativeName?: string }>;
+  columnNames: Array<{
+    key: keyof FieldResponseBase;
+    alternativeName?: string;
+  }>;
   checkOn?: true;
   setSelected?: React.Dispatch<React.SetStateAction<Array<string>>>;
 }
 export interface FieldTableHeadersProps {
   checkOn?: true;
   lPOff?: true;
-  columnNames: Array<{ key: keyof FieldI; alternativeName?: string }>;
+  columnNames: Array<{
+    key: keyof FieldResponseBase;
+    alternativeName?: string;
+  }>;
 }
 
 export interface TableSettings<T> {
@@ -528,8 +532,8 @@ export interface PriceSetterProps {
 }
 
 export interface OrdersListProps {
-  sort?: ((a: OrderBaseI, b: OrderBaseI) => number) | undefined;
-  filterMethod?: ((order: OrderBaseI) => boolean) | undefined;
+  sort?: ((a: OrderResponseBase, b: OrderResponseBase) => number) | undefined;
+  filterMethod?: ((order: OrderResponseBase) => boolean) | undefined;
   reloadIndicator?: unknown;
   ListEmptyComponent?: ReactElement;
   abs?: string;
@@ -595,8 +599,8 @@ export interface OrdersListSearchAndFilterProps<
   route?: OwnerOrdersMaterialRootRouteProps<T>;
   filterMethod?:
     | ((
-        Order: OrderBaseI,
-        filter: ActiveFilterValue<OrderBaseI>,
+        Order: OrderResponseBase,
+        filter: ActiveFilterValue<OrderResponseBase>,
         searchValue: string,
         initSearchValue?: string,
       ) => boolean)
