@@ -10,6 +10,7 @@ import {
 import { getAllFieldsByOrderId } from '../../helpers/api/Services/FieldsService';
 import { FieldTableRow } from '../Organisms/FieldTableRow';
 import { FieldTableHeaders } from '../Organisms/FieldTableHeaders';
+import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
 
 export function FieldList({
   orderId,
@@ -19,9 +20,10 @@ export function FieldList({
   checkOn,
   setSelected,
 }: FieldListProps) {
-  const { data: orderConnectedFields } = useQuery<Array<FieldI> | undefined>(
-    ['fields', orderId],
-    ({ queryKey }) => getAllFieldsByOrderId(`${queryKey[1]}`),
+  const { data: orderConnectedFields } = useQuery<
+    Array<FieldResponseBase> | undefined
+  >(['fields', orderId], ({ queryKey }) =>
+    getAllFieldsByOrderId(`${queryKey[1]}`),
   );
   const fieldList = useMemo(() => {
     return (
