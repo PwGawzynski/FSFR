@@ -1,8 +1,6 @@
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useQuery } from 'react-query';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FlashList } from '@shopify/flash-list';
-import { ProfilePhoto } from '../Atoms/ProfilePhoto';
 import { getAllWorkers } from '../../helpers/api/Services/Worker';
 import {
   Worker,
