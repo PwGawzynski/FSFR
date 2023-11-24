@@ -1,4 +1,4 @@
-import axios, { Axios, AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import Constants from 'expo-constants';
 import RNEventSource, { ListenerCallback } from 'react-native-event-source';
@@ -324,9 +324,6 @@ export class Api {
   }
 
   static async getAllOrdersTasks(orderid: string) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const data = require('../../tmpData');
-    // TEMPORARY
     return Api.axiosInstance.get('/task/by-order/', {
       params: { id: orderid },
     }) as Promise<AxiosResponse<Array<TaskResponseBase>>>;
