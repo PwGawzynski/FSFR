@@ -3,11 +3,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FlashList } from '@shopify/flash-list';
 import { getAllWorkers } from '../../helpers/api/Services/Worker';
 import {
-  Worker,
   WorkerSelectorListItem,
   WorkerSelectorProps,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { WorkerSelectorItem } from '../Molecules/WorkerSelectorItem';
+import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
 
 export function WorkerSelector({
   data,
@@ -17,12 +17,12 @@ export function WorkerSelector({
   const { data: workers } = useQuery('workers', () =>
     getAllWorkers(externalData),
   );
-  const [selectorData, setSelectorData] = useState<Array<Worker> | undefined>(
-    undefined,
-  );
-  const [focusedWorker, setFocusedWorker] = useState<Worker | undefined>(
-    undefined,
-  );
+  const [selectorData, setSelectorData] = useState<
+    Array<WorkerResponseBase> | undefined
+  >(undefined);
+  const [focusedWorker, setFocusedWorker] = useState<
+    WorkerResponseBase | undefined
+  >(undefined);
 
   useEffect(() => {
     if (data) setSelectorData(data && [...data]);
