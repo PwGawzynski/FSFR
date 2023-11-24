@@ -2,25 +2,26 @@ import { SafeAreaView, View } from 'react-native';
 import { useMutation, useQuery } from 'react-query';
 import { useEffect } from 'react';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
-import {
-  OrderBaseI,
-  OrderStatus,
-  TaskType,
-} from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
+
 import { AppButton } from '../../../../Atoms/AppButton';
 import { HeaderWithButton } from '../../../../Atoms/HeaderWithButton';
 import { LineDivider } from '../../../../Atoms/LineDivider';
 import { FieldList } from '../../../../Molecules/FieldList';
 import { TitleValueInfoComponent } from '../../../../Atoms/TitleValueInfoComponent';
 import { sendConfirmation } from '../../../../../helpers/api/Services/OrdersService';
+import {
+  OrderStatus,
+  ServiceType,
+} from '../../../../../FarmServiceTypes/Order/Enums';
+import { OrderResponseBase } from '../../../../../FarmServiceTypes/Order/Ressponses';
 
 export function OrdersDetails({
   route,
   navigation,
 }: OwnerMobiOrdersTopTabProps<'orderDetails', 'orders'>) {
-  const { data } = useQuery<Array<OrderBaseI> | undefined>('orders');
+  const { data } = useQuery<Array<OrderResponseBase> | undefined>('orders');
   const orderId = route.params?.orderId;
-  const order = data?.find(orderItem => orderItem.taskId === orderId);
+  const order = data?.find(orderItem => orderItem.id === orderId);
   const { mutate: sendConfirmationAsk, isSuccess: askSend } =
     useMutation(sendConfirmation);
 
@@ -39,7 +40,7 @@ export function OrdersDetails({
           <HeaderWithButton
             variant="lg"
             buttonAdditionalStyles=" flex-1"
-            headerText={TaskType[order.type]}
+            headerText={ServiceType[order.serviceType]}
             headerAdditionalStyles="flex-1"
             boxAdditionalStyles="mt-8"
             buttonText="Manage  workers"
@@ -48,19 +49,12 @@ export function OrdersDetails({
             }
           />
           <TitleValueInfoComponent
-            titles={[
-              'purchaser',
-              'performance date',
-              'area',
-              'status',
-              'rest area',
-            ]}
+            titles={['Name', 'performance date', 'area', 'status']}
             keys={[
-              order.client,
-              order.performanceDate,
-              order.area.toString(),
+              order.name,
+              new Date(order.performanceDate).toLocaleDateString(),
+              order.totalArea,
               OrderStatus[order.status],
-              (order.area - order.doneArea).toFixed(2),
             ]}
           />
           <LineDivider />
@@ -75,9 +69,8 @@ export function OrdersDetails({
             orderId={orderId}
             navigation={navigation}
             shownFieldKeys={[
-              { key: 'taskId' },
+              { key: 'polishSystemId', alternativeName: 'PLID' },
               { key: 'area' },
-              { key: 'status' },
             ]}
           />
 
@@ -85,7 +78,7 @@ export function OrdersDetails({
             <LineDivider abs="mt-0 mb-0" />
             <View className="flex-row justify-between mt-4 mb-4">
               <AppButton
-                action={() => sendConfirmationAsk(order.taskId)}
+                action={() => sendConfirmationAsk(order.id)}
                 context="request confirmation"
                 ats="text-sm"
                 abs="w-3/5 bg-[#434343]"
