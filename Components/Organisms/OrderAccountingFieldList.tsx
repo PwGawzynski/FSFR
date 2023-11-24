@@ -15,7 +15,7 @@ const OrderAccountingFieldList = memo(
     console.log('order accounting list render');
     return (
       <FlatList
-        keyExtractor={item => item.fieldId}
+        keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
         data={fields}
         renderItem={RenderField}
