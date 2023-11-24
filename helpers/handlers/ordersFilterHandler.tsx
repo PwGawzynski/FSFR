@@ -1,7 +1,4 @@
-import {
-  ActiveFilterValue,
-  OrderBaseI,
-} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { ActiveFilterValue } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
 import { OrderStatus } from '../../FarmServiceTypes/Order/Enums';
 
