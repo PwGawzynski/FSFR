@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 import { FlashList } from '@shopify/flash-list';
 import { OrderShortInfoBox } from '../Molecules/OrderShortInfoBox';
 import {
-  OrderBaseI,
   OrderListItemI,
   OrdersListProps,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
