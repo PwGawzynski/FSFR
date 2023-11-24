@@ -34,12 +34,15 @@ export function AssignedWorkers({
   return (
     <SafeAreaView className="flex flex-col justify-center mr-4 ml-4 mt-4 h-full">
       <ScreenTitleHeader variant="lg">Assign Employee</ScreenTitleHeader>
-      <SelectWorkerPanel
-        navigation={navigation}
-        fieldsIds={selectedFields}
-        validationError={validationError}
-        setValidationError={setValidationError}
-      />
+      {orderId && (
+        <SelectWorkerPanel
+          orderId={orderId}
+          navigation={navigation}
+          fieldsIds={selectedFields}
+          validationError={validationError}
+          setValidationError={setValidationError}
+        />
+      )}
       <LineDivider abs="mt-2" />
       <ScreenTitleHeader
         variant="sm"
