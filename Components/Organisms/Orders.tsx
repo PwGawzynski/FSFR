@@ -9,6 +9,7 @@ import {
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getAllOrders } from '../../helpers/api/Services/OrdersService';
 import { LoadingAnimation } from '../Atoms/LoadingAnimation';
+import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
 
 function MemoizedOrders({
   sort,
@@ -21,24 +22,26 @@ function MemoizedOrders({
       <OrderShortInfoBox
         totalArea={order.totalArea}
         status={order.status}
-        doneArea={order.doneArea}
-        key={order.taskId}
-        taskId={order.taskId}
         name={order.name}
-        type={order.type}
+        id={order.id}
+        serviceType={order.serviceType}
+        pricePerUnit={order.pricePerUnit}
+        createdAt={order.createdAt}
+        openedAt={order.openedAt}
+        key={order.id}
         additionalInfo={order.additionalInfo}
         performanceDate={order.performanceDate}
-        clientId={order.clientId}
-        client={order.client}
       />
     );
   }, []);
 
-  const { data: orders } = useQuery<Array<OrderBaseI> | undefined>(
+  const { data: orders } = useQuery<Array<OrderResponseBase> | undefined>(
     'orders',
     getAllOrders,
   );
-  const [ordersData, setOrdersData] = useState<Array<OrderBaseI> | undefined>();
+  const [ordersData, setOrdersData] = useState<
+    Array<OrderResponseBase> | undefined
+  >();
   useEffect(() => {
     const filteredOrders =
       (orders &&
@@ -55,7 +58,7 @@ function MemoizedOrders({
         estimatedItemSize={130}
         ListEmptyComponent={ListEmptyComponent}
         data={ordersData}
-        keyExtractor={item => item.taskId}
+        keyExtractor={item => item.id}
         renderItem={OrderListItem}
         className="flex-1 h-max"
         showsVerticalScrollIndicator={false}
