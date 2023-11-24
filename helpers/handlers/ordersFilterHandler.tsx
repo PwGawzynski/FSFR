@@ -1,12 +1,13 @@
 import {
   ActiveFilterValue,
   OrderBaseI,
-  OrderStatus,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
+import { OrderStatus } from '../../FarmServiceTypes/Order/Enums';
 
 export const defaultOrdersFilterMethod = (
-  order: OrderBaseI,
-  filter: ActiveFilterValue<OrderBaseI>,
+  order: OrderResponseBase,
+  filter: ActiveFilterValue<OrderResponseBase>,
   searchValue: string,
   initSearchValue = '',
 ) => {
@@ -39,8 +40,8 @@ export const defaultOrdersFilterMethod = (
 };
 
 export const doneOrdersFilterMethod = (
-  order: OrderBaseI,
-  filter: ActiveFilterValue<OrderBaseI>,
+  order: OrderResponseBase,
+  filter: ActiveFilterValue<OrderResponseBase>,
   searchValue: string,
   initSearchValue = '',
 ) => {
@@ -54,12 +55,12 @@ export const doneOrdersFilterMethod = (
   }
   return false;
 };
-export const RemDoneOrdersFilter = (order: OrderBaseI) =>
+export const RemDoneOrdersFilter = (order: OrderResponseBase) =>
   order.status !== OrderStatus.Done;
 
 export const OnlyOpenOrdersFilter = (
-  order: OrderBaseI,
-  filter: ActiveFilterValue<OrderBaseI>,
+  order: OrderResponseBase,
+  filter: ActiveFilterValue<OrderResponseBase>,
   searchValue: string,
   initSearchValue = '',
 ) => {
@@ -75,7 +76,7 @@ export const OnlyOpenOrdersFilter = (
 };
 
 export const filterByStatus = (
-  order: OrderBaseI,
+  order: OrderResponseBase,
   searchStatusValue: string | number,
 ) => {
   console.log(order.status, Number(searchStatusValue));
