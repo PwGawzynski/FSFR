@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { Axios, AxiosInstance, AxiosResponse } from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import Constants from 'expo-constants';
 import RNEventSource, { ListenerCallback } from 'react-native-event-source';
@@ -28,6 +28,8 @@ import { CreateWorkerReqI } from '../../FarmServiceTypes/Worker/Requests';
 import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
 import { Theme } from '../../FarmServiceTypes/Account/Constants';
 import { CreateUserReqI } from '../../FarmServiceTypes/User/Requests';
+import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
+import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
 
 export class Api {
   /**
@@ -257,10 +259,9 @@ export class Api {
 
   static async getAllOrders() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const data = require('../../tmpData');
-    return new Promise(r => {
-      setTimeout(() => r(data), 1000);
-    });
+    return Api.axiosInstance.get('order/all') as Promise<
+      AxiosResponse<Array<OrderResponseBase>>
+    >;
   }
 
   static async getWorkers() {
@@ -268,11 +269,11 @@ export class Api {
     return require('../../tmpData');
   }
 
-  static async getAllFieldsByOrderId(id: string): Promise<Array<FieldI>> {
+  static async getAllFieldsByOrderId(
+    id: string,
+  ): Promise<AxiosResponse<ResponseObject<Array<FieldResponseBase>>>> {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const data = require('../../tmpData');
-    // TEMPORARY
-    return data.fields.filter((f: any) => f.taskId === id) as Array<FieldI>;
+    return Api.axiosInstance.get('field/all-for-order', { params: { id } });
   }
 
   static async getAllFieldsById(id: string): Promise<FieldI> {
