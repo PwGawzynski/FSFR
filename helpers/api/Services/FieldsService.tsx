@@ -1,12 +1,13 @@
 import { FieldI } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { Api } from '../Api';
+import { FieldResponseBase } from '../../../FarmServiceTypes/Field/Ressponses';
 
 export async function getAllFieldsByOrderId(
   id: string,
-): Promise<Array<FieldI> | undefined> {
+): Promise<Array<FieldResponseBase> | undefined> {
   try {
     const data = await Api.getAllFieldsByOrderId(id);
-    return data as Array<FieldI>;
+    return data.data.payload as Array<FieldResponseBase>;
   } catch (e) {
     return undefined;
   }
