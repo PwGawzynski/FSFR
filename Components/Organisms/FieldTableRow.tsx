@@ -54,7 +54,7 @@ export const FieldTableRow = ({
           >
             <Text className="text-black text-sm">
               {key === 'id' && f[key].slice(-4)}
-              {key === 'polishSystemId' && f[key].slice(-15)}
+              {key === 'polishSystemId' && f[key].slice(-8)}
               {key !== 'id' && key !== 'polishSystemId' && f[key].toString()}
             </Text>
           </DataTable.Cell>
