@@ -16,10 +16,10 @@ import { getFontScaledSize } from '../../helpers/style/fontSize';
 export function WorkersTaskListElement({
   field,
   type,
-  /* WAZNE id, */
+  id,
   index,
-}: /* onRemoveTask, */
-WorkerTaskListElement) {
+  onRemoveTask,
+}: WorkerTaskListElement) {
   const animated = useSharedValue(1);
   const opacity = useSharedValue(0);
   const [visible, setVisible] = useState(true);
@@ -57,7 +57,7 @@ WorkerTaskListElement) {
           if (direction === 'left') {
             setVisible(false);
             // TODO fix on remove, TaskResponseBase should have on remove
-            setTimeout(() => '' /* onRemoveTask(id) */, 800);
+            setTimeout(() => onRemoveTask(id), 800);
           }
         }}
         renderLeftActions={(progressAnimatedValue, dragAnimatedValue) =>
