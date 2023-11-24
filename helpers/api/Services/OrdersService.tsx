@@ -41,11 +41,10 @@ export async function sendConfirmation(
 }
 
 export async function orderFinishAndAccount(
-  data: OrderBaseI,
+  data: OrderResponseBase,
 ): Promise<boolean | undefined> {
   try {
     // eslint-disable-next-line no-console
-    console.log(await Api.orderFinishAndAccount(data));
     return Api.orderFinishAndAccount(data);
   } catch (e) {
     return undefined;
