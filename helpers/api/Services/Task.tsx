@@ -1,12 +1,16 @@
-import { AddNewTasksI } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { Api } from '../Api';
 import { TaskResponseBase } from '../../../FarmServiceTypes/Task/Restonses';
+import { CreateTaskBase } from '../../../FarmServiceTypes/Task/Requests';
+import { ResponseObject } from '../../../FarmServiceTypes/Respnse/responseGeneric';
 
 export async function addNewTask(
-  data: AddNewTasksI,
-): Promise<boolean | undefined> {
+  data: Array<CreateTaskBase>,
+): Promise<Promise<ResponseObject> | undefined> {
   try {
-    return Api.addNewTasks(data);
+    console.log(data, 'DAT_TEST');
+    const test = (await Api.addNewTasks(data)).data;
+    console.log(test, 'RES');
+    return test;
   } catch (e) {
     return undefined;
   }
