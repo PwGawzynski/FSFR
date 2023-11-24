@@ -434,6 +434,7 @@ export interface NewTaskI {
 }
 
 export interface SelectWorkerPanelProps {
+  orderId: string;
   fieldsIds: Array<string>;
   validationError: boolean;
   setValidationError: React.Dispatch<React.SetStateAction<boolean>>;
