@@ -1,8 +1,5 @@
 import { Api } from '../Api';
-import {
-  NewOrderI,
-  OrderBaseI,
-} from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { NewOrderI } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { OrderResponseBase } from '../../../FarmServiceTypes/Order/Ressponses';
 
 export async function getAllOrders(): Promise<
