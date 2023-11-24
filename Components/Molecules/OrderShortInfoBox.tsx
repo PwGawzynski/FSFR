@@ -5,13 +5,13 @@ import { OrderProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps'
 import { OrderStatus, ServiceType } from '../../FarmServiceTypes/Order/Enums';
 
 export function OrderShortInfoBox({
-  openedAt,
-  createdAt,
+  /* openedAt,
+  createdAt, */
   serviceType,
-  pricePerUnit,
-  additionalInfo,
+  /* pricePerUnit,
+  additionalInfo, */
   name,
-  totalArea,
+  /* totalArea, */
   id,
   performanceDate,
   status,
