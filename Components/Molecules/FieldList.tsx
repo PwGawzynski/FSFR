@@ -1,12 +1,9 @@
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { ActivityIndicator, DataTable } from 'react-native-paper';
 import { useQuery } from 'react-query';
 
 import { useMemo } from 'react';
-import {
-  FieldI,
-  FieldListProps,
-} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { FieldListProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getAllFieldsByOrderId } from '../../helpers/api/Services/FieldsService';
 import { FieldTableRow } from '../Organisms/FieldTableRow';
 import { FieldTableHeaders } from '../Organisms/FieldTableHeaders';
