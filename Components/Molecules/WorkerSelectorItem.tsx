@@ -8,7 +8,6 @@ export function WorkerSelectorItem({
   onFocusWorker,
   focusedWorker,
 }: WorkerSelectorItemProps) {
-  console.log(focusedWorker?.id === worker.id);
   return (
     <TouchableOpacity
       onPress={() => {
@@ -20,11 +19,11 @@ export function WorkerSelectorItem({
       key={worker.id}
     >
       <ProfilePhoto
-        imgLink={worker.photoUrl}
+        /* imgLink={worker.photoUrl} */
         focused={worker.id === focusedWorker?.id}
         abs="w-[55] h-[55]"
       />
-      <Text className="mt-1">{worker.name}</Text>
+      <Text className="mt-1">{worker.personalData.name}</Text>
     </TouchableOpacity>
   );
 }
