@@ -10,10 +10,10 @@ import { WorkerResponseBase } from '../../../FarmServiceTypes/Worker/Responses';
 
 export async function getAllWorkers(
   externalDataOn?: true,
-): Promise<Array<Worker> | undefined> {
+): Promise<Array<WorkerResponseBase> | undefined> {
   try {
     if (externalDataOn) return undefined;
-    return (await Api.getWorkers()).workers;
+    return (await Api.getWorkers()).data;
   } catch (e) {
     return undefined;
   }
