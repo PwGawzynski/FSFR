@@ -22,7 +22,11 @@ export function AssignedWorkers({
         lPOff
         checkOn
         setSelected={setSelectedFields}
-        shownFieldKeys={[{ key: 'fieldId' }, { key: 'name' }, { key: 'area' }]}
+        shownFieldKeys={[
+          { key: 'id' },
+          { key: 'polishSystemId', alternativeName: 'PLID' },
+          { key: 'area' },
+        ]}
       />
     ),
     [orderId],
