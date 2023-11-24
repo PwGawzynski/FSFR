@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { SearchModuleInterfaceBased } from './SearchModuleInterfaceBased';
 import {
   ActiveFilterValue,
-  OrderBaseI,
   OrdersListSearchAndFilterProps,
-  OrderStatus,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { OrdersList } from './OrdersList';
 import { EmptyListInfo } from '../Molecules/EmptyListInfo';
@@ -14,6 +12,8 @@ import { OwnerDesktopRootStackParamList } from '../../FrontendSelfTypes/Navigato
 import { defaultOrdersFilterMethod } from '../../helpers/handlers/ordersFilterHandler';
 import { MaterialOrdersRootTopTabParamList } from '../../FrontendSelfTypes/NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 import { mapEnumToSubOptionPairs } from '../../helpers/handlers/mapEnumToSubOptionsPairsHandler';
+import { OrderStatus } from '../../FarmServiceTypes/Order/Enums';
+import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
 
 export function OrdersListSearchAndFilter<
   T extends keyof MaterialOrdersRootTopTabParamList,
@@ -21,18 +21,17 @@ export function OrdersListSearchAndFilter<
   M extends keyof OwnerDesktopRootStackParamList,
 >({ filterMethod }: OrdersListSearchAndFilterProps<T, N, M>) {
   const INIT_SEARCH_VALUE = '';
-  const INIT_FILTER_NAME: ActiveFilterValue<OrderBaseI> = {
+  const INIT_FILTER_NAME: ActiveFilterValue<OrderResponseBase> = {
     main: 'name',
     active: { main: 'name' },
   };
   const [searchValue, setSearchValue] = useState(INIT_SEARCH_VALUE);
   const [filter, setFilter] =
-    useState<ActiveFilterValue<OrderBaseI>>(INIT_FILTER_NAME);
+    useState<ActiveFilterValue<OrderResponseBase>>(INIT_FILTER_NAME);
   return (
     <>
-      <SearchModuleInterfaceBased<OrderBaseI>
+      <SearchModuleInterfaceBased<OrderResponseBase>
         optionsRows={[
-          [{ main: 'client' }, { main: 'name' }],
           [
             {
               main: 'status',
