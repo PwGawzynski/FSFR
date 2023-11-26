@@ -18,7 +18,6 @@ import { GetUserDataResponse } from '../../FarmServiceTypes/Respnse/UserService/
 import {
   FieldI,
   NewClientShortCreateI,
-  NewOrderI,
   NewWorker,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { CreateWorkerReqI } from '../../FarmServiceTypes/Worker/Requests';
