@@ -1,6 +1,7 @@
 import { Api } from '../Api';
-import { NewOrderI } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { OrderResponseBase } from '../../../FarmServiceTypes/Order/Ressponses';
+import { CreateOrderReqI } from '../../../FarmServiceTypes/Order/Requests';
+import { ResponseObject } from '../../../FarmServiceTypes/Respnse/responseGeneric';
 
 export async function getAllOrders(): Promise<
   Array<OrderResponseBase> | undefined
@@ -14,12 +15,10 @@ export async function getAllOrders(): Promise<
 }
 
 export async function addNewOrder(
-  data: NewOrderI,
-): Promise<boolean | undefined> {
+  data: CreateOrderReqI,
+): Promise<ResponseObject | undefined> {
   try {
-    // eslint-disable-next-line no-console
-    console.log(await Api.addNewOrder(data));
-    return Api.addNewOrder(data);
+    return (await Api.addNewOrder(data)).data;
   } catch (e) {
     return undefined;
   }

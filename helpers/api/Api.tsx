@@ -18,7 +18,6 @@ import { GetUserDataResponse } from '../../FarmServiceTypes/Respnse/UserService/
 import {
   FieldI,
   NewClientShortCreateI,
-  NewOrderI,
   NewWorker,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { CreateWorkerReqI } from '../../FarmServiceTypes/Worker/Requests';
@@ -29,6 +28,7 @@ import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
 import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
 import { TaskResponseBase } from '../../FarmServiceTypes/Task/Restonses';
 import { CreateTaskBase } from '../../FarmServiceTypes/Task/Requests';
+import { CreateOrderReqI } from '../../FarmServiceTypes/Order/Requests';
 
 export class Api {
   /**
@@ -284,10 +284,10 @@ export class Api {
     return data.fields.find((f: any) => f.fieldId === id) as FieldI;
   }
 
-  static async addNewOrder(data: NewOrderI) {
-    // eslint-disable-next-line no-console
-    console.log('NEW ORDER DATA: ', data);
-    return true;
+  static async addNewOrder(data: CreateOrderReqI) {
+    return Api.axiosInstance.post('order', data) as Promise<
+      AxiosResponse<ResponseObject>
+    >;
   }
 
   static async addNewWorker(data: NewWorker): Promise<boolean> {

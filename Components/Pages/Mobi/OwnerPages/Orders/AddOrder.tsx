@@ -1,126 +1,155 @@
-import { SafeAreaView, View } from 'react-native';
-import React, { useEffect, useMemo, useState } from 'react';
+import { SafeAreaView, Text, TextInput, View } from 'react-native';
+import React, { useEffect } from 'react';
 import { useMutation } from 'react-query';
-import {
-  NewClientShortCreateI,
-  NewOrderI,
-  TaskType,
-} from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { Controller, useForm } from 'react-hook-form';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+import RNPickerSelect from 'react-native-picker-select';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { addNewOrder } from '../../../../../helpers/api/Services/OrdersService';
 import { OwnerOrdersMaterialRootProps } from '../../../../../FrontendSelfTypes/navigation/types';
-import { AddNewClientShortService } from '../../../../../helpers/api/Services/Client';
-import { useValidation } from '../../../../../helpers/hooks/validationHook';
-import {
-  AddNewClientShortSchema,
-  AddOrderSchema,
-  AddOrderSchemaI,
-} from '../../../../../helpers/validation/mobileSchemas/AddOrderSchema';
-import { AddOrderAndClientForm } from '../../../../Organisms/AddOrderAndClientForm';
-import { AddOrderErrorInfo } from '../../../../Atoms/AddOrderErrorInfo';
+import { AppButton } from '../../../../Atoms/AppButton';
+import { AppInputRhf } from '../../../../Atoms/AppInputRhf';
+import { HeaderWithButton } from '../../../../Atoms/HeaderWithButton';
+import { CreateOrderReqI } from '../../../../../FarmServiceTypes/Order/Requests';
+import { getFontScaledSize } from '../../../../../helpers/style/fontSize';
+import { ServiceType } from '../../../../../FarmServiceTypes/Order/Enums';
 
-const initOrder = (): NewOrderI => ({
-  name: '',
-  client: '',
-  additionalInfo: '',
-  type: TaskType.Harvesting,
-  performanceDate: '',
-});
-const initClient = (): NewClientShortCreateI => ({
-  name: '',
-  phoneNumber: '',
-  email: '',
-});
 export function AddOrder({
   navigation,
 }: OwnerOrdersMaterialRootProps<'addOrder', 'ordersRoot', 'orders'>) {
-  const {
-    isSuccess: hasOrderBeenAdded,
-    mutate: createNewOrder,
-    isError: isNewOrderError,
-    error: newOrderErrorValue,
-  } = useMutation(addNewOrder);
-
-  const { isSuccess: isClientMutationSuccess, mutate: createClient } =
-    useMutation(AddNewClientShortService);
-
-  /*
-  order and client data must be cleared after mutation success but
-  using only setSate with new {} with empty strings don't work properly
-  we have to store this init objects in use memo to give always new objects
-  */
-  const initOrderValue = useMemo(initOrder, [hasOrderBeenAdded]);
-  const initClientValue = useMemo(initClient, [hasOrderBeenAdded]);
-
-  const [newOrder, setNewOrder] = useState<NewOrderI>(initOrderValue);
-  const [newClient, setNewClient] =
-    useState<NewClientShortCreateI>(initClientValue);
-  const [btnClicked, setBtnClicked] = useState<boolean>(false);
-
-  const [validator, setCanValidate] = useValidation<AddOrderSchemaI>(
-    newOrder,
-    AddOrderSchema,
-    [btnClicked],
-  );
-  const [clientValidator, setCanValidateClient] =
-    useValidation<NewClientShortCreateI>(newClient, AddNewClientShortSchema, [
-      btnClicked,
-    ]);
-
-  // after client mutation mutate order
-  useEffect(() => {
-    if (isClientMutationSuccess) {
-      createNewOrder(newOrder);
-    }
-  }, [isClientMutationSuccess]);
-
-  // check if validation order is correct then mutate order
-  useEffect(() => {
-    if (!validator.isError && btnClicked) {
-      createNewOrder(newOrder);
-    }
-  }, [validator, btnClicked]);
-
-  /* check if client validation is correct then mutate client, this validation only has place
-  when newClientData has even one string longer then 0 */
-  useEffect(() => {
-    if (!clientValidator.isError && !validator.isError && btnClicked) {
-      createClient(newClient);
-    }
-  }, [clientValidator, validator, btnClicked]);
+  const { isSuccess: hasOrderBeenAdded, mutate: createOrder } =
+    useMutation(addNewOrder);
 
   // after validation clear all states and navi to confirmation
   useEffect(() => {
     if (hasOrderBeenAdded) {
-      setNewOrder(initOrderValue);
-      setNewClient(initClientValue);
       navigation.navigate('OperationConfirmed', {
         redirectScreenName: 'ordersRoot',
         shownMessage: 'Order Has Been Added',
       });
-      setCanValidate(true);
-      setBtnClicked(false);
     }
   }, [hasOrderBeenAdded]);
 
+  const onSubmitted = (data: CreateOrderReqI) => createOrder(data);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<CreateOrderReqI>({
+    defaultValues: {
+      name: '',
+      performanceDate: new Date(),
+      serviceType: ServiceType.Harvesting,
+      additionalInfo: '',
+    } as CreateOrderReqI,
+  });
+  const onReset = () => reset();
+
   return (
     <SafeAreaView className="w-full h-full">
-      <View className="flex flex-col mr-4 ml-4 mt-4 w-max h-full">
-        <AddOrderErrorInfo
-          isNewOrderError={isNewOrderError}
-          newOrderErrorValue={newOrderErrorValue}
-          btnClicked={btnClicked}
-          clientValidator={clientValidator}
-          validator={validator}
+      <View className="flex-1 flex-col mr-4 ml-4">
+        <HeaderWithButton
+          variant="lg"
+          buttonText="reset"
+          headerText="add new order"
+          onButtonClick={onReset}
+          buttonAdditionalStyles="ml-12"
         />
-        <AddOrderAndClientForm
-          setNewClient={setNewClient}
-          newClient={newClient}
-          setNewOrder={setNewOrder}
-          newOrder={newOrder}
-          setCanValidateClient={setCanValidateClient}
-          setCanValidate={setCanValidate}
-          setBtnClicked={setBtnClicked}
-        />
+        <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+          <Controller
+            control={control}
+            rules={{ min: 1, max: 50, required: true }}
+            render={({
+              field: { onChange, onBlur, value, name, ref, disabled },
+            }) => (
+              <AppInputRhf
+                abs="mt-4 mb-4"
+                controllers={{
+                  field: { onChange, onBlur, value, ref, disabled, name },
+                }}
+              />
+            )}
+            name="name"
+          />
+          <Controller
+            control={control}
+            rules={{ validate: dat => dat !== 0, required: true }}
+            render={({ field: { onChange } }) => (
+              <View className="flex-row items-center justify-between  mb-4">
+                <RNPickerSelect
+                  placeholder={{ label: 'Select Service Type' }}
+                  onValueChange={(selectedValue, index) => onChange(index)}
+                  style={{
+                    inputIOS: {
+                      textAlign: 'left',
+                      fontSize: getFontScaledSize(18),
+                      borderBottomColor: '#000',
+                      borderBottomWidth: 4,
+                      height: 60,
+                    },
+                    viewContainer: { width: '100%' },
+                    done: {
+                      textAlign: 'center',
+                      alignItems: 'center',
+                      width: '100%',
+                    },
+                    placeholder: {
+                      color: /* validationError ? 'red' : */ '#848484',
+                    },
+                  }}
+                  items={(
+                    Object.values(ServiceType).filter(e =>
+                      Number.isNaN(Number(e)),
+                    ) as Array<string>
+                  ).map((name: string) => ({
+                    label: name,
+                    value: name,
+                  }))}
+                />
+              </View>
+            )}
+            name="serviceType"
+          />
+
+          <Controller
+            control={control}
+            render={({ field: { value } }) => (
+              <View className="flex-row items-center justify-between mt-8 mb-8">
+                <Text
+                  style={{ fontSize: getFontScaledSize(18) }}
+                  className=" uppercase font-bold"
+                >
+                  Perform at:{' '}
+                </Text>
+                <RNDateTimePicker value={new Date(value)} mode="datetime" />
+              </View>
+            )}
+            name="performanceDate"
+          />
+
+          <Controller
+            control={control}
+            rules={{ min: 1, max: 10000, required: true }}
+            render={({ field: { onChange, value } }) => (
+              <View className="justify-center">
+                <Text className="uppercase font-semibold mb-1 mt-4 text-[#848484]">
+                  Additional info:
+                </Text>
+                <View className="w-full h-32 border-2 border-[#848484] rounded  mb-4">
+                  <TextInput onChangeText={onChange} value={value} multiline />
+                </View>
+              </View>
+            )}
+            name="additionalInfo"
+          />
+          <AppButton
+            abs="mt-4"
+            action={handleSubmit(onSubmitted)}
+            context="Create Order"
+          />
+        </KeyboardAwareScrollView>
       </View>
     </SafeAreaView>
   );
