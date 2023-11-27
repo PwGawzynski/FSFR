@@ -1,12 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { Text, TouchableOpacity, View } from 'react-native';
-import {
-  WorkerComponentI,
-  WorkerPosition,
-} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { WorkerComponentI } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { OwnerWorkersMaterialRootNavigation } from '../../FrontendSelfTypes/navigation/types';
 import { ProfilePhoto } from '../Atoms/ProfilePhoto';
 import { getFontScaledSize } from '../../helpers/style/fontSize';
+import { Position } from '../../FarmServiceTypes/Worker/Enums';
 
 export function WorkerComponent({ item: worker }: WorkerComponentI) {
   const navigation =
@@ -19,14 +17,14 @@ export function WorkerComponent({ item: worker }: WorkerComponentI) {
     >();
   const navigateToWorkersDetails = () =>
     navigation.navigate('workerDetails', { worker });
-
+  // TODO PHOTO {/* imgLink={worker.photoUrl} */}
   return (
     <TouchableOpacity
       onPress={navigateToWorkersDetails}
       className="w-full h-[80] flex flex-row items-center"
     >
       <View className="w-16 h-full flex-col pt-1">
-        <ProfilePhoto abs="h-12 w-12" imgLink={worker.photoUrl} />
+        <ProfilePhoto abs="h-12 w-12" />
       </View>
       <View className="grow h-full flex-col justify-between shrink overflow-hidden">
         <Text
@@ -35,7 +33,7 @@ export function WorkerComponent({ item: worker }: WorkerComponentI) {
           style={{ fontSize: getFontScaledSize(18) }}
           className="font-bold w-full leading-none text-left"
         >
-          {worker.name} {worker.surname}
+          {worker.personalData.name} {worker.personalData.surname}
         </Text>
         <View className="justify-between  flex-row">
           <Text
@@ -67,7 +65,7 @@ export function WorkerComponent({ item: worker }: WorkerComponentI) {
             numberOfLines={1}
             className="font-medium text-[#279840] leading-none text-right uppercase"
           >
-            {WorkerPosition[worker.position]}
+            {Position[worker.position]}
           </Text>
         </View>
       </View>
