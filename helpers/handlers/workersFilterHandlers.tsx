@@ -1,7 +1,4 @@
-import {
-  ActiveFilterValue,
-  Worker,
-} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { ActiveFilterValue } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
 import { PersonalDataBase } from '../../FarmServiceTypes/UserPersonalData/Responses';
 
