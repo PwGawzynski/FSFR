@@ -572,7 +572,7 @@ export interface SubOptionsI {
 }
 
 export type ActiveFilterValue<T> = {
-  main: keyof T;
+  main: keyof T | any;
   subOptions?: Array<SubOptionsI>;
   active?: FilterValue<T>;
 };
@@ -634,7 +634,7 @@ export interface WorkerTaskListElement extends TaskResponseBase {
 }
 
 export interface WorkerComponentI {
-  item: Worker;
+  item: WorkerResponseBase;
 }
 
 export interface SquaredProfilePictureProps {
@@ -648,7 +648,7 @@ export interface CallAndCreateEmailButtonsProps {
 }
 
 export interface WorkerListProps {
-  filterMethod?: ((worker: Worker) => boolean) | undefined;
+  filterMethod?: ((worker: WorkerResponseBase) => boolean) | undefined;
   reloadIndicator?: string;
 }
 export interface handleBarCodeScannedData {
