@@ -1,12 +1,12 @@
 import { MaterialWorkersRootTopTabParamList } from './MaterialWorkersRootTopTabParamList';
-import { Worker } from '../moduleProps/ComponentsProps';
+import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
 
 export type WorkersStackParamList = {
   workersRoot: MaterialWorkersRootTopTabParamList;
 
   workersLocation: undefined;
 
-  workerDetails: { worker: Worker };
+  workerDetails: { worker: WorkerResponseBase };
 
   workerWorkDayDetails: undefined;
 
