@@ -2,25 +2,23 @@ import { SafeAreaView, View } from 'react-native';
 import { useState } from 'react';
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 import { SearchModuleInterfaceBased } from '../../../../Organisms/SearchModuleInterfaceBased';
-import {
-  ActiveFilterValue,
-  Worker,
-  WorkerPosition,
-  WorkerStatus,
-} from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { ActiveFilterValue } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { WorkersList } from '../../../../Organisms/WorkersList';
 import { mapEnumToSubOptionPairs } from '../../../../../helpers/handlers/mapEnumToSubOptionsPairsHandler';
 import { defaultWorkerFilter } from '../../../../../helpers/handlers/workersFilterHandlers';
+import { Position, Status } from '../../../../../FarmServiceTypes/Worker/Enums';
+import { WorkerResponseBase } from '../../../../../FarmServiceTypes/Worker/Responses';
+import { PersonalDataBase } from '../../../../../FarmServiceTypes/UserPersonalData/Responses';
 
 export function WorkerSearch() {
   const INIT_SEARCH_VALUE = '';
-  const INIT_FILTER_NAME: ActiveFilterValue<Worker> = {
-    main: 'surname',
-    active: { main: 'surname' },
+  const INIT_FILTER_NAME: ActiveFilterValue<WorkerResponseBase> = {
+    main: 'personalData',
+    active: { main: 'personalData', subOption: 'surname' },
   };
   const [searchValue, setSearchValue] = useState(INIT_SEARCH_VALUE);
   const [filter, setFilter] =
-    useState<ActiveFilterValue<Worker>>(INIT_FILTER_NAME);
+    useState<ActiveFilterValue<WorkerResponseBase>>(INIT_FILTER_NAME);
 
   const handleOnSearchPress = (text: string) => setSearchValue(text.trim());
   return (
@@ -32,17 +30,27 @@ export function WorkerSearch() {
         <SearchModuleInterfaceBased
           onSearchPress={handleOnSearchPress}
           optionsRows={[
-            [{ main: 'name' }, { main: 'surname' }],
+            [
+              {
+                main: 'name',
+              },
+              {
+                main: 'surname',
+              },
+
+              {
+                main: 'phoneNumber',
+              },
+            ],
             [
               {
                 main: 'position',
-                subOptions: mapEnumToSubOptionPairs(WorkerPosition),
+                subOptions: mapEnumToSubOptionPairs(Position),
               },
               {
                 main: 'status',
-                subOptions: mapEnumToSubOptionPairs(WorkerStatus),
+                subOptions: mapEnumToSubOptionPairs(Status),
               },
-              { main: 'dateOfEmployment' },
             ],
           ]}
           onFilterOnOff={filterName => setFilter(filterName)}
