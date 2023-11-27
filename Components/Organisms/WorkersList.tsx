@@ -4,21 +4,19 @@ import { useEffect, useMemo, useState } from 'react';
 import { getAllWorkers } from '../../helpers/api/Services/Worker';
 import { WorkerComponent } from './WorkerComponent';
 import { SpaceDivider } from '../Molecules/SpaceDivider';
-import {
-  Worker,
-  WorkerListProps,
-} from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { WorkerListProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { LoadingAnimation } from '../Atoms/LoadingAnimation';
 import { EmptyListInfo } from '../Molecules/EmptyListInfo';
+import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
 
 export function WorkersList({
   filterMethod,
   reloadIndicator,
 }: WorkerListProps) {
   const { data: workers } = useQuery('workers', () => getAllWorkers());
-  const [filtered, setFiltered] = useState<Array<Worker> | undefined>(
-    undefined,
-  );
+  const [filtered, setFiltered] = useState<
+    Array<WorkerResponseBase> | undefined
+  >(undefined);
   useEffect(() => {
     if (workers)
       setFiltered(
