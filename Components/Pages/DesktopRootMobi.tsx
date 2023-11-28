@@ -3,7 +3,6 @@ import React from 'react';
 import { DesktopRootHeader } from '../Molecules/DesktopRootHeader';
 import { DesktopBottomButtons } from '../Molecules/DesktopBottomButtons';
 import { OwnerMobiDesktopTopTabProps } from '../../FrontendSelfTypes/navigation/types';
-import { Api } from '../../helpers/api/Api';
 import { LastActivities } from '../Organisms/LastActivities';
 
 export function DesktopRootMobi({
