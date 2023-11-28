@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { LogoImageCurtain } from '../Atoms/LogoImageCurtain';
-import { RegisterMobiPropsBase } from '../../frontendSelfTypes/navigation/types';
 import { AddressFormCdn } from '../Organisms/AddressFormCdn';
+import { RegisterMobiPropsBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function AddressDataCdnMobi({
   navigation,
