@@ -292,6 +292,10 @@ export interface AccountingFieldFlatListItem {
 export interface OrderListItemI {
   item: OrderResponseBase;
 }
+
+export interface TaskListItem {
+  item: TaskResponseBase;
+}
 export interface OrderListRenderItem {
   item: OrderBaseI;
 }
@@ -539,6 +543,12 @@ export interface PriceSetterProps {
 export interface OrdersListProps {
   sort?: ((a: OrderResponseBase, b: OrderResponseBase) => number) | undefined;
   filterMethod?: ((order: OrderResponseBase) => boolean) | undefined;
+  reloadIndicator?: unknown;
+  ListEmptyComponent?: ReactElement;
+  abs?: string;
+}
+
+export interface TaskListProps {
   reloadIndicator?: unknown;
   ListEmptyComponent?: ReactElement;
   abs?: string;
