@@ -339,6 +339,22 @@ export class Api {
     return (await Api.axiosInstance.get(`/worker/id`)).data.payload;
   }
 
+  static async getTasks(): Promise<TaskResponseBase[]> {
+    return (await Api.axiosInstance.get(`/task/worker`)).data.payload;
+  }
+
+  static async openTask(id: string): Promise<ResponseObject> {
+    return (
+      await Api.axiosInstance.post(`/task/open`, undefined, { params: { id } })
+    ).data.payload;
+  }
+
+  static async closeTask(id: string): Promise<ResponseObject> {
+    return (
+      await Api.axiosInstance.post(`/task/close`, undefined, { params: { id } })
+    ).data.payload;
+  }
+
   static async createWorker(data: CreateWorkerReqI) {
     return (await Api.axiosInstance.post(`/worker`, data)).data
       .payload as WorkerResponseBase;
