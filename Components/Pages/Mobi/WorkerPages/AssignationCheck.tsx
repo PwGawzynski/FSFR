@@ -35,7 +35,10 @@ export function AssignationCheck({
   };
 
   const handleAnimationEnd = () =>
-    navigation.navigate('desktop', { root: { materialDesktop: undefined } });
+    navigation.navigate('desktop', {
+      root: { materialDesktop: undefined },
+      task: { task: undefined },
+    });
 
   useEffect(() => {
     if (data && !workersCompanyId) {
