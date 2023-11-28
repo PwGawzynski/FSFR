@@ -2,15 +2,11 @@ import { SafeAreaView, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Sound } from 'expo-av/build/Audio/Sound';
 import { Audio } from 'expo-av';
-import { OwnerMobiDesktopRootStackProps } from '../../../../FrontendSelfTypes/navigation/types';
 import { AppButton } from '../../../Atoms/AppButton';
 import { DangerAlarmIcon } from '../../../Molecules/DangerAlarmIcon';
 import { ContainerWCenteredLinedText } from '../../../Atoms/ContainerWCenteredLinedText';
 
-export function OperationDanger({
-  route,
-  navigation,
-}: OwnerMobiDesktopRootStackProps<'OperationDanger'>) {
+export function OperationDanger({ route, navigation }: any) {
   const { shownMessage, afterDangerScreenName, dangerButtonSign } =
     route.params;
 
