@@ -9,6 +9,7 @@ import {
 import { getFontScaledSize } from '../../../../../helpers/style/fontSize';
 import { SquaredProfilePicture } from '../../../../Molecules/SquaredProfilePicture';
 import { CallAndCreateEmailButtons } from '../../../../Molecules/CallAndCreateEmailButtons';
+import { Position, Status } from '../../../../../FarmServiceTypes/Worker/Enums';
 
 export function WorkerDetails({
   route,
@@ -18,9 +19,9 @@ export function WorkerDetails({
     <SafeAreaView className="w-full h-full">
       <View className="flex-1 mr-4 ml-4 flex flex-col">
         <ScreenTitleHeader variant="lg" abs="mt-4">
-          Worker {worker.name}
+          Worker {worker.personalData.name}
         </ScreenTitleHeader>
-        <SquaredProfilePicture imageLink={worker.photoUrl} />
+        {/* <SquaredProfilePicture imageLink={worker.photoUrl} /> */}
         <Text
           adjustsFontSizeToFit
           numberOfLines={1}
@@ -36,36 +37,38 @@ export function WorkerDetails({
             'surname',
             'position',
             'Status',
-            'dateOfBirth',
-            'address',
-            'dateOfEmployment',
-            'province',
+            'voivodeship',
             'county',
+            'city',
+            'street',
+            'house number',
+            'postal code',
           ]}
           keys={[
             worker.id.split('-')[worker.id.split('-').length - 1],
-            worker.name,
-            worker.surname,
-            WorkerPosition[worker.position],
+            worker.personalData.name,
+            worker.personalData.surname,
+            worker.position ? Position[worker.position] : undefined,
             <Text
               key={Math.random()}
               className={`${
-                worker.status === WorkerStatus.Suspended
+                worker.status === Status.Suspended
                   ? 'text-[#f00]'
                   : 'text-[#279840]'
               }`}
             >
-              {WorkerStatus[worker.status]}
+              {worker.status ? WorkerStatus[worker.status] : undefined}
             </Text>,
-            worker.dateOfBirth,
-            worker.address,
-            worker.dateOfEmployment,
-            worker.province,
-            worker.county,
+            worker.address.voivodeship,
+            worker.address.county,
+            worker.address.city,
+            worker.address.street,
+            worker.address.houseNumber,
+            worker.address.postalCode,
           ]}
         />
         <CallAndCreateEmailButtons
-          phoneNumber={worker.phone}
+          phoneNumber={worker.personalData.phoneNumber}
           emailOptions={{
             body: 'Send from FarmService T.M',
             recipients: [worker.email],
