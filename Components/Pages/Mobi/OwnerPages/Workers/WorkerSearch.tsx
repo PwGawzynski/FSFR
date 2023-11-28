@@ -8,7 +8,6 @@ import { mapEnumToSubOptionPairs } from '../../../../../helpers/handlers/mapEnum
 import { defaultWorkerFilter } from '../../../../../helpers/handlers/workersFilterHandlers';
 import { Position, Status } from '../../../../../FarmServiceTypes/Worker/Enums';
 import { WorkerResponseBase } from '../../../../../FarmServiceTypes/Worker/Responses';
-import { PersonalDataBase } from '../../../../../FarmServiceTypes/UserPersonalData/Responses';
 
 export function WorkerSearch() {
   const INIT_SEARCH_VALUE = '';
