@@ -14,6 +14,8 @@ import { FieldTopTabParamList } from '../NavigatorsInterfaces/FieldTopTabParamLi
 import { MaterialOrdersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialOrdersRootTopTabParamLIst';
 import { MaterialWorkersRootTopTabParamList } from '../NavigatorsInterfaces/MaterialWorkersRootTopTabParamList';
 import { WorkerRootStackParamList } from '../NavigatorsInterfaces/Worker/WorkerRootStackParamList';
+import { WorkerDesktopMaterialParamList } from '../NavigatorsInterfaces/Worker/WorkerDesktopMaterialParamList';
+import { WorkerStackParamList } from '../NavigatorsInterfaces/Worker/WorkerStackParamList';
 
 export type LoginPageBase = StackScreenProps<RootStackParamList, 'Login'>;
 export type LoginPageTabBase = LoginPageBase;
@@ -135,3 +137,20 @@ export type OwnerMobiFieldsTopTabProps<
 
 export type WorkerRootStackProps<T extends keyof WorkerRootStackParamList> =
   StackScreenProps<WorkerRootStackParamList, T>;
+
+export type WorkerDesktopStackProps<
+  T extends keyof WorkerRootStackParamList,
+  M extends keyof WorkerStackParamList,
+> = CompositeScreenProps<
+  StackScreenProps<WorkerStackParamList, M>,
+  StackScreenProps<WorkerRootStackProps<T>>
+>;
+
+export type WorkerDesktopMaterialProps<
+  T extends keyof WorkerRootStackParamList,
+  M extends keyof WorkerStackParamList,
+  N extends keyof WorkerDesktopMaterialParamList,
+> = CompositeScreenProps<
+  MaterialTopTabScreenProps<WorkerDesktopMaterialParamList, N>,
+  WorkerDesktopStackProps<T, M>
+>;
