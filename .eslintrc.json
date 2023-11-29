@@ -24,6 +24,7 @@
     "react/destructuring-assignment": "off",
     "react/require-default-props": "off",
     "import/no-unresolved": 0,
+    "no-unused-vars": 0,
     "react/jsx-filename-extension": [1, {
       "extensions": [
         ".ts",

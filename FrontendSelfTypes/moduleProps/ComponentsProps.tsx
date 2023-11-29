@@ -547,8 +547,13 @@ export interface OrdersListProps {
   ListEmptyComponent?: ReactElement;
   abs?: string;
 }
-
+export enum FilterTask {
+  all,
+  done,
+  undone,
+}
 export interface TaskListProps {
+  filter: FilterTask;
   reloadIndicator?: unknown;
   ListEmptyComponent?: ReactElement;
   abs?: string;
