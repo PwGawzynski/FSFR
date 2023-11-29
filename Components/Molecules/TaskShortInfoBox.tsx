@@ -31,12 +31,12 @@ export function TaskShortInfoBox({
         })
       }
       className={`w-max h-[130] flex flex-row rounded-2xl border-dotted ${
-        isDone ? 'border-[#848484]' : 'border-black'
+        closedAt ? 'border-[#848484]' : 'border-black'
       } border-2 mb-8`}
     >
       <View
         className={`w-1/2 h-8 items-center justify-center ${
-          isDone ? 'bg-[#848484]' : 'bg-black'
+          closedAt ? 'bg-[#848484]' : 'bg-black'
         } absolute top-28 left-1/4 rounded-full`}
       >
         <Text className="text-lg font-bold text-white uppercase">More</Text>
