@@ -292,6 +292,10 @@ export interface AccountingFieldFlatListItem {
 export interface OrderListItemI {
   item: OrderResponseBase;
 }
+
+export interface TaskListItem {
+  item: TaskResponseBase;
+}
 export interface OrderListRenderItem {
   item: OrderBaseI;
 }
@@ -543,6 +547,12 @@ export interface OrdersListProps {
   ListEmptyComponent?: ReactElement;
   abs?: string;
 }
+
+export interface TaskListProps {
+  reloadIndicator?: unknown;
+  ListEmptyComponent?: ReactElement;
+  abs?: string;
+}
 export interface SmallHeaderProps {
   children: string;
   abs?: string;
@@ -572,6 +582,7 @@ export interface SubOptionsI {
 }
 
 export type ActiveFilterValue<T> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   main: keyof T | any;
   subOptions?: Array<SubOptionsI>;
   active?: FilterValue<T>;

@@ -2,12 +2,8 @@ import { SafeAreaView, Text, View } from 'react-native';
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 import { OwnerWorkersStackProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import { TitleValueInfoComponent } from '../../../../Atoms/TitleValueInfoComponent';
-import {
-  WorkerPosition,
-  WorkerStatus,
-} from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { WorkerStatus } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { getFontScaledSize } from '../../../../../helpers/style/fontSize';
-import { SquaredProfilePicture } from '../../../../Molecules/SquaredProfilePicture';
 import { CallAndCreateEmailButtons } from '../../../../Molecules/CallAndCreateEmailButtons';
 import { Position, Status } from '../../../../../FarmServiceTypes/Worker/Enums';
 

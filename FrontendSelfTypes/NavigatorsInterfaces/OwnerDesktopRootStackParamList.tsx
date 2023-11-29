@@ -23,6 +23,7 @@ export type OwnerDesktopRootStackParamList = {
   };
   OperationDanger: {
     shownMessage?: string | Array<string>;
+    dangerButtonSign?: string;
     afterDangerScreenName:
       | keyof OwnerDesktopRootStackParamList
       | keyof DesktopTopTabParamList
@@ -31,7 +32,6 @@ export type OwnerDesktopRootStackParamList = {
       | keyof MaterialWorkersRootTopTabParamList
       | keyof FieldTopTabParamList
       | keyof MaterialOrdersRootTopTabParamList;
-    dangerButtonSign?: string;
   };
   fields: NavigatorScreenParams<FieldTopTabParamList> | undefined;
   takePhoto: {

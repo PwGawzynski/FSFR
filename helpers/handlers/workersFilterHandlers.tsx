@@ -4,7 +4,7 @@ import { PersonalDataBase } from '../../FarmServiceTypes/UserPersonalData/Respon
 
 export const defaultWorkerFilter = (
   worker: WorkerResponseBase,
-  filter: ActiveFilterValue<WorkerResponseBase | PersonalDataBase>,
+  filter: ActiveFilterValue<WorkerResponseBase>,
   searchValue: string,
 ) => {
   if (!filter.active) return true;
@@ -14,7 +14,9 @@ export const defaultWorkerFilter = (
   ) {
     return worker[filter.active.main] === Number(filter.active.subOption);
   }
-  return (worker.personalData[filter.active.main] as any)
+  return (
+    worker.personalData[filter.active.main as keyof PersonalDataBase] as any
+  )
     ?.toString()
     .includes(searchValue);
 };

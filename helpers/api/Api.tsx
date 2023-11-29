@@ -281,6 +281,7 @@ export class Api {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const data = require('../../tmpData');
     // TEMPORARY
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return data.fields.find((f: any) => f.fieldId === id) as FieldI;
   }
 
@@ -337,6 +338,22 @@ export class Api {
 
   static async getWorker() {
     return (await Api.axiosInstance.get(`/worker/id`)).data.payload;
+  }
+
+  static async getTasks(): Promise<TaskResponseBase[]> {
+    return (await Api.axiosInstance.get(`/task/worker`)).data.payload;
+  }
+
+  static async openTask(id: string): Promise<ResponseObject> {
+    return (
+      await Api.axiosInstance.post(`/task/open`, undefined, { params: { id } })
+    ).data.payload;
+  }
+
+  static async closeTask(id: string): Promise<ResponseObject> {
+    return (
+      await Api.axiosInstance.post(`/task/close`, undefined, { params: { id } })
+    ).data.payload;
   }
 
   static async createWorker(data: CreateWorkerReqI) {

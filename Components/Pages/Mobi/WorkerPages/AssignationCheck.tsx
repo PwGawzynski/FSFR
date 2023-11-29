@@ -22,20 +22,22 @@ export function AssignationCheck({
     undefined | PersonalDataBase
   >(undefined);
   const [sseOpen, setSseOpen] = useState(false);
-  const handleOpenSse = (event: MessageEvent) => {
+  const handleOpenSse = () => {
     setSseOpen(true);
   };
   const handleErrorSse = (event: MessageEvent) => console.log(event, 'testER');
   const handleMessageSse = (message: MessageEvent) => {
     if (message.data) {
-      console.log(message.data);
       const res = JSON.parse(message.data) as PersonalDataBase;
       setWorkersCompanyId(res);
     }
   };
 
   const handleAnimationEnd = () =>
-    navigation.navigate('desktop', { root: { materialDesktop: undefined } });
+    navigation.navigate('desktop', {
+      root: { materialDesktop: undefined },
+      task: { task: undefined },
+    });
 
   useEffect(() => {
     if (data && !workersCompanyId) {

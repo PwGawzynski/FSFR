@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import React, { useState } from 'react';
 import { Login } from '../Organisms/Login';
 import { LogoImageAnimated } from '../Organisms/LogoImageAnimated';
-import { LoginPageBase } from '../../frontendSelfTypes/navigation/types';
+import { LoginPageBase } from '../../FrontendSelfTypes/navigation/types';
 
 export function LoginPage({ navigation }: LoginPageBase) {
   const [el, sEl] = useState(false);
