@@ -15,21 +15,34 @@ import {
   ModalState,
 } from '../../../../helpers/appSettings/contexts';
 import { closeTask, openTask } from '../../../../helpers/api/Services/Worker';
+import { TaskResponseBase } from '../../../../FarmServiceTypes/Task/Restonses';
 
 enum TaskState {
-  open,
-  closing,
-  closed,
+  notOpenNotClosed,
+  preOpen,
+  openNotClosed,
+  preClosed,
+  openClosed,
+  err,
+}
+
+function setTaskState(task: TaskResponseBase | undefined) {
+  if (task) {
+    const openedAt = !!task.openedAt;
+    const closedAt = !!task.closedAt;
+    if (!openedAt && !closedAt) return TaskState.notOpenNotClosed;
+    if (openedAt && !closedAt) return TaskState.openNotClosed;
+    if (openedAt && closedAt) return TaskState.openClosed;
+  }
+  return TaskState.err;
 }
 
 export function Task({ route }: WorkerDesktopStackProps<'desktop', 'task'>) {
-  const { task } = route.params;
-  const [isOpened, setIsOpened] = useState<TaskState>(
-    task?.closedAt ? TaskState.closed : TaskState.open,
-  );
-
   const nav = useNavigation<any>();
+  const { task } = route.params;
 
+  const [isOpened, setIsOpened] = useState<TaskState>(setTaskState(task));
+  console.log(isOpened, 'KURWAAA');
   const { setModalContext } = useContext(AppSettings).setters;
 
   const { mutate: openTaskAsk, isSuccess: opened } = useMutation(openTask);
@@ -42,27 +55,39 @@ export function Task({ route }: WorkerDesktopStackProps<'desktop', 'task'>) {
         shownMessage: `Confirm Closing`,
       });
     if (opened) {
-      console.log('ter');
-      setIsOpened(TaskState.open);
+      setIsOpened(TaskState.openNotClosed);
     }
   }, [closed, opened]);
-
   useEffect(() => {
-    if (isOpened === TaskState.closing) {
+    if (isOpened === TaskState.preClosed) {
       setModalContext({
         isOn: ModalState.on,
         context: 'Confirm close operation !!!',
         onApproveCallback: () => {
           if (task?.id) closeTaskAsk(task.id);
         },
-        onDisapproveCallback: () => setIsOpened(TaskState.open),
+        onDisapproveCallback: () => setIsOpened(TaskState.openClosed),
         customApproveButtonText: 'Confirm',
         customDisapproveButtonText: 'Regret',
       });
     }
+    if (isOpened === TaskState.preOpen && task?.closedAt) {
+      setModalContext({
+        isOn: ModalState.on,
+        context: 'This task has already been closed, do you want to reopen ?',
+        onApproveCallback: () => {
+          setIsOpened(TaskState.openNotClosed);
+        },
+        onDisapproveCallback: () => '',
+        customApproveButtonText: 'Confirm',
+        customDisapproveButtonText: 'Regret',
+      });
+    }
+    if (isOpened === TaskState.preOpen && !task?.closedAt && task?.id) {
+      openTaskAsk(task.id);
+    }
   }, [isOpened]);
 
-  console.log(isOpened);
   return task ? (
     <SafeAreaView className="w-full h-full">
       <View className="flex-1 flex-col mr-4 ml-4">
@@ -99,24 +124,31 @@ export function Task({ route }: WorkerDesktopStackProps<'desktop', 'task'>) {
         </View>
 
         <View className="flex-1 flex-col mt-12 mb-24">
-          {isOpened === TaskState.open && (
-            <Timer targetDate={task.openedAt as unknown as string} />
+          {isOpened === TaskState.openNotClosed && (
+            <Timer
+              targetDate={
+                task.openedAt
+                  ? (task.openedAt as unknown as string)
+                  : new Date()
+              }
+            />
           )}
           <View className="flex-1 items-center justify-center">
-            {isOpened === TaskState.closed && (
+            {(isOpened === TaskState.notOpenNotClosed ||
+              isOpened === TaskState.openClosed) && (
               <AppButton
                 abs={` bg-[#279840]`}
                 action={() => {
-                  openTaskAsk(task?.id);
+                  setIsOpened(TaskState.preOpen);
                 }}
                 context="OPEN"
               />
             )}
-            {isOpened === TaskState.open && (
+            {isOpened === TaskState.openNotClosed && (
               <AppButton
                 abs="bg-[#f00]"
                 action={() => {
-                  setIsOpened(TaskState.closing);
+                  setIsOpened(TaskState.preClosed);
                 }}
                 context="close"
               />
