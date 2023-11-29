@@ -43,6 +43,7 @@ export function Task({ route }: WorkerDesktopStackProps<'desktop', 'task'>) {
   const { task } = route.params;
 
   const [isOpened, setIsOpened] = useState<TaskState>(setTaskState(task));
+
   const { setModalContext } = useContext(AppSettings).setters;
 
   const { mutate: openTaskAsk, isSuccess: opened } = useMutation(openTask);
@@ -94,6 +95,7 @@ export function Task({ route }: WorkerDesktopStackProps<'desktop', 'task'>) {
         <ScreenTitleHeader variant="lg">
           {TaskType[task.type]} {task.field.address.city}
         </ScreenTitleHeader>
+
         <View className="mt-12">
           <SmallHeader>Task Info</SmallHeader>
           <LineDivider abs="m-0" />
