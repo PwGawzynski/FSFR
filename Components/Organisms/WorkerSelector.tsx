@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FlashList } from '@shopify/flash-list';
+import { Text, View } from 'react-native';
 import { getAllWorkers } from '../../helpers/api/Services/Worker';
 import {
   WorkerSelectorListItem,
@@ -8,6 +9,14 @@ import {
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { WorkerSelectorItem } from '../Molecules/WorkerSelectorItem';
 import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
+
+function Empty() {
+  return (
+    <View className="flex-1 w-full items-center justify-center">
+      <Text className="text-center">Add tasks firstly...</Text>
+    </View>
+  );
+}
 
 export function WorkerSelector({
   data,
@@ -26,7 +35,7 @@ export function WorkerSelector({
   >(undefined);
 
   useEffect(() => {
-    if (data) setSelectorData(data && [...data]);
+    if (data && data.length) setSelectorData(data && [...data]);
     else if (workers) setSelectorData(workers && [...workers]);
   }, [data, workers]);
   const ListItem = useCallback(
@@ -44,20 +53,20 @@ export function WorkerSelector({
   // const WorkerSelectorItem = useCallback(()=>)
 
   return useMemo(
-    () =>
-      selectorData?.length && (
-        <FlashList
-          onLoad={info =>
-            console.log('WorkersSelector rendered in: ', info.elapsedTimeInMs)
-          }
-          horizontal
-          extraData={focusedWorker}
-          showsHorizontalScrollIndicator={false}
-          estimatedItemSize={80}
-          renderItem={ListItem}
-          data={selectorData}
-        />
-      ),
+    () => (
+      <FlashList
+        onLoad={info =>
+          console.log('WorkersSelector rendered in: ', info.elapsedTimeInMs)
+        }
+        ListEmptyComponent={<Empty />}
+        horizontal
+        extraData={focusedWorker}
+        showsHorizontalScrollIndicator={false}
+        estimatedItemSize={80}
+        renderItem={ListItem}
+        data={selectorData}
+      />
+    ),
     [selectorData, focusedWorker],
   );
 }

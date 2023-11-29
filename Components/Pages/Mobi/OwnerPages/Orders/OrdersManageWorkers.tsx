@@ -16,9 +16,11 @@ const getExplicitWorkersEntities = (
   const filtered: Array<WorkerResponseBase> = [];
   orderAssignedTasks.forEach(
     orderTask =>
-      !filtered.find(worker => worker.id === orderTask.worker.id) &&
-      filtered.push(orderTask.worker),
+      !filtered.find(
+        worker => orderTask.worker && worker.id === orderTask.worker.id,
+      ) && filtered.push(orderTask.worker),
   );
+  console.log(filtered);
   return filtered;
 };
 
@@ -32,7 +34,9 @@ export function OrdersManageWorkers({
   >(undefined);
   const { data: orderAssignedTasks } = useQuery(
     ['orderAssignedTasks', orderId],
-    ({ queryKey }) => getAllOrdersTasks(`${queryKey[1]}`),
+    ({ queryKey }) => {
+      return getAllOrdersTasks(`${queryKey[1]}`);
+    },
   );
   const [selectedWorkerTasks, setSelectedWorkerTasks] = useState<
     Array<TaskResponseBase> | undefined
