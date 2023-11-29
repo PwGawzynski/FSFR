@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 
 export interface TimerProps {
-  targetDate: string;
+  targetDate: string | Date;
 }
 function Timer({ targetDate }: TimerProps) {
   function calculateTimeRemaining() {
     const now = new Date().getTime();
     const targetTime = new Date(targetDate).getTime();
     const timeElapsed = now - targetTime;
-
     if (timeElapsed <= 0) {
       return 0;
     }
