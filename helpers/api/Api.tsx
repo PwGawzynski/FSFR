@@ -281,6 +281,7 @@ export class Api {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const data = require('../../tmpData');
     // TEMPORARY
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return data.fields.find((f: any) => f.fieldId === id) as FieldI;
   }
 

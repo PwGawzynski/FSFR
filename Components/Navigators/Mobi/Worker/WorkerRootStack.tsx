@@ -3,7 +3,6 @@ import { WorkerRootStackParamList } from '../../../../FrontendSelfTypes/Navigato
 import { AssignationCheck } from '../../../Pages/Mobi/WorkerPages/AssignationCheck';
 import { WorkerDesktopStack } from './WorkerDesktopStack';
 import { OperationConfirmedAnimation } from '../../../Pages/Mobi/Common/OperationConfirmedAnimation';
-import { OperationDanger } from '../../../Pages/Mobi/Common/OperationDanger';
 
 const Stack = createNativeStackNavigator<WorkerRootStackParamList>();
 

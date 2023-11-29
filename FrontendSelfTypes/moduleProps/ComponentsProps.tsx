@@ -582,6 +582,7 @@ export interface SubOptionsI {
 }
 
 export type ActiveFilterValue<T> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   main: keyof T | any;
   subOptions?: Array<SubOptionsI>;
   active?: FilterValue<T>;

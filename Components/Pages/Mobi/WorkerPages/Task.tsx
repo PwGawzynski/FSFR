@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigation } from '@react-navigation/native';
@@ -38,11 +38,11 @@ function setTaskState(task: TaskResponseBase | undefined) {
 }
 
 export function Task({ route }: WorkerDesktopStackProps<'desktop', 'task'>) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nav = useNavigation<any>();
   const { task } = route.params;
 
   const [isOpened, setIsOpened] = useState<TaskState>(setTaskState(task));
-  console.log(isOpened, 'KURWAAA');
   const { setModalContext } = useContext(AppSettings).setters;
 
   const { mutate: openTaskAsk, isSuccess: opened } = useMutation(openTask);

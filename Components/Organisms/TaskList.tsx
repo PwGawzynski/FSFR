@@ -24,12 +24,14 @@ function TaskList({ ListEmptyComponent }: TaskListProps) {
     );
   }, []);
 
-  const { data, isSuccess } = useQuery('tasks', getTasks, {});
-  console.log(data);
+  const { data } = useQuery('tasks', getTasks, {});
   const list = useMemo(
     () => (
       <FlashList
-        onLoad={info => console.log('OrdersList has been loaded in ', info)}
+        onLoad={info => {
+          // eslint-disable-next-line no-console
+          console.log('OrdersList has been loaded in ', info);
+        }}
         estimatedItemSize={130}
         ListEmptyComponent={ListEmptyComponent}
         data={data}
