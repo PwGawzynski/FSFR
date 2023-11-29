@@ -18,9 +18,10 @@ const getExplicitWorkersEntities = (
     orderTask =>
       !filtered.find(
         worker => orderTask.worker && worker.id === orderTask.worker.id,
-      ) && filtered.push(orderTask.worker),
+      ) &&
+      orderTask.worker &&
+      filtered.push(orderTask.worker),
   );
-  console.log(filtered);
   return filtered;
 };
 
@@ -35,6 +36,7 @@ export function OrdersManageWorkers({
   const { data: orderAssignedTasks } = useQuery(
     ['orderAssignedTasks', orderId],
     ({ queryKey }) => {
+      console.log(queryKey[1]);
       return getAllOrdersTasks(`${queryKey[1]}`);
     },
   );
@@ -45,7 +47,7 @@ export function OrdersManageWorkers({
     if (focusedWorker && orderAssignedTasks)
       setSelectedWorkerTasks(
         orderAssignedTasks.filter(
-          orderTask => orderTask.worker.id === focusedWorker.id,
+          orderTask => orderTask.worker?.id === focusedWorker.id,
         ),
       );
   }, [focusedWorker]);
