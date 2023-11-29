@@ -36,7 +36,6 @@ export function OrdersManageWorkers({
   const { data: orderAssignedTasks } = useQuery(
     ['orderAssignedTasks', orderId],
     ({ queryKey }) => {
-      console.log(queryKey[1]);
       return getAllOrdersTasks(`${queryKey[1]}`);
     },
   );

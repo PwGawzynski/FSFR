@@ -23,7 +23,6 @@ export function WorkerSelector({
   onFocusWorker,
   externalData,
 }: WorkerSelectorProps) {
-  console.log('WORKER_SEL_REL');
   const { data: workers } = useQuery('workers', () =>
     getAllWorkers(externalData),
   );
