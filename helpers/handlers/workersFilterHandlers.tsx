@@ -15,8 +15,9 @@ export const defaultWorkerFilter = (
     return worker[filter.active.main] === Number(filter.active.subOption);
   }
   return (
-    worker.personalData[filter.active.main as keyof PersonalDataBase] as any
-  )
-    ?.toString()
-    .includes(searchValue);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (worker.personalData[filter.active.main as keyof PersonalDataBase] as any)
+      ?.toString()
+      .includes(searchValue)
+  );
 };

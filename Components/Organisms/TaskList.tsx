@@ -18,6 +18,7 @@ function TaskList({ ListEmptyComponent, filter }: TaskListProps) {
         createdAt={task.createdAt}
         field={task.field}
         id={task.id}
+        key={task.id}
         type={task.type}
         worker={task.worker}
         openedAt={task.openedAt}
