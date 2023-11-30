@@ -263,6 +263,10 @@ export class Api {
     >;
   }
 
+  static async getDataFromXLM(data: string) {
+    return Api.axiosInstance.post('field/xmlTranslate', { data });
+  }
+
   static async getWorkers() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     return Api.axiosInstance.get('/company/workers') as Promise<
@@ -365,6 +369,7 @@ export class Api {
     workerId: string,
     { open, message, error }: workerAsyncListenerParams,
   ) {
+    console.log(Api.access_token, 'QWAAA');
     const eventSource = new RNEventSource(
       `http://localhost:3002/worker/sse/${workerId}`,
       { headers: { Authorization: `Bearer ${Api.access_token}` } },
