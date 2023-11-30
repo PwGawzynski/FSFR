@@ -26,6 +26,12 @@
         {
           "cameraPermission": "Allow FarmService to access camera."
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow FarmService to use your location."
+        }
       ]
     ],
     "updates": {
