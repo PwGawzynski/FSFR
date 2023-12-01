@@ -40,8 +40,6 @@ export function SelectWorkerPanel({
     return undefined;
   }, [validationError]);
 
-  console.log(taskType, fieldsIds, 'rrrr');
-
   return (
     <View className="flex-col justify-start mt-4">
       <View style={{ height: 80 }} className="flex-row">
