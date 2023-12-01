@@ -5,12 +5,14 @@ import { Text, View } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { LocationObject } from 'expo-location';
 import { useMutation } from 'react-query';
+import { AxiosError } from 'axios';
 import { DataFromXMLRes } from '../../FarmServiceTypes/Field/Ressponses';
 import { AppInputRhf } from '../Atoms/AppInputRhf';
 import { AppButton } from '../Atoms/AppButton';
 import { getFontScaledSize } from '../../helpers/style/fontSize';
 import { createField } from '../../helpers/api/Services/FieldsService';
 import { OwnerMobiOrdersTopTabProps } from '../../FrontendSelfTypes/navigation/types';
+import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
 
 interface Props {
   transformedData: DataFromXMLRes;
@@ -33,7 +35,7 @@ export function AddFieldForm({
   orderId,
   navigation,
 }: Props) {
-  const { mutate, isSuccess } = useMutation('createField', createField);
+  const { mutate, isSuccess, error } = useMutation('createField', createField);
   const {
     control,
     handleSubmit,
@@ -72,10 +74,16 @@ export function AddFieldForm({
         longitude: data.longitude,
       },
     });
-
   // eslint-disable-next-line react/jsx-no-undef
+  const errorPayload: ResponseObject<{ message: string }> | undefined = (
+    error as AxiosError
+  )?.response?.data as ResponseObject<{ message: string }> | undefined;
+  const errMessage = errorPayload?.payload?.message;
   return (
     <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+      {(error as any) && (
+        <Text className="text-[#f00] text-sm mt-2 mb-2">{errMessage}</Text>
+      )}
       <Controller
         control={control}
         rules={{

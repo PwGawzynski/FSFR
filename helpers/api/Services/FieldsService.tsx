@@ -28,11 +28,6 @@ export async function getAllFieldsById(
 export async function createField(
   filed: CreateFieldReqI,
 ): Promise<FieldResponseBase | undefined> {
-  try {
-    const data = (await Api.createField(filed)).data
-      .payload as FieldResponseBase;
-    return data;
-  } catch (e) {
-    return undefined;
-  }
+  const data = (await Api.createField(filed)).data.payload as FieldResponseBase;
+  return data;
 }
