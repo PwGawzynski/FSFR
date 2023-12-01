@@ -13,7 +13,7 @@ export type OrdersStackParamList = {
 
   assignedWorkers: { orderId?: string };
 
-  ordersAddField: undefined;
+  ordersAddField: { orderId?: string };
 
   allOrders: undefined;
 
