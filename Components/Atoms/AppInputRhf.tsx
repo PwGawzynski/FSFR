@@ -1,8 +1,9 @@
 import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
 import { FieldPath, FieldValues } from 'react-hook-form/dist/types';
 import { TextInput, View } from 'react-native';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { AppSettings, ThemeOptions } from '../../helpers/appSettings/contexts';
+import { InputLabel } from './InputLabel';
 
 export type AppInputRhfProps<
   TName extends FieldPath<TFieldValues>,
@@ -40,6 +41,7 @@ export function AppInputRhf<
         onChangeText={onChange}
         value={value}
       />
+      <InputLabel>{name}</InputLabel>
     </View>
   );
 }

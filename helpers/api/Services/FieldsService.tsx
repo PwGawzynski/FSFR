@@ -1,6 +1,7 @@
 import { FieldI } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { Api } from '../Api';
 import { FieldResponseBase } from '../../../FarmServiceTypes/Field/Ressponses';
+import { CreateFieldReqI } from '../../../FarmServiceTypes/Field/Requests';
 
 export async function getAllFieldsByOrderId(
   id: string,
@@ -22,4 +23,11 @@ export async function getAllFieldsById(
   } catch (e) {
     return undefined;
   }
+}
+
+export async function createField(
+  filed: CreateFieldReqI,
+): Promise<FieldResponseBase | undefined> {
+  const data = (await Api.createField(filed)).data.payload as FieldResponseBase;
+  return data;
 }
