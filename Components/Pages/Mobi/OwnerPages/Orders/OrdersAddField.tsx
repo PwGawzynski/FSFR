@@ -24,6 +24,7 @@ export function OrdersAddField({
   route: {
     params: { orderId },
   },
+  navigation,
 }: OwnerMobiOrdersTopTabProps<'ordersAddField', 'orders'>) {
   const [machineState, setMachineState] = useState<State>(
     State.WaitingForPermissionGrant,
@@ -93,7 +94,9 @@ export function OrdersAddField({
         <View className="flex-1 flex-col mr-4 ml-4">
           {machineState !== State.DataTransformed && (
             <View className="flex-1 justify-center">
-              <Text>Loading: {State[machineState]}</Text>
+              <Text className="text-sm  uppercase">
+                Loading: {State[machineState]}...
+              </Text>
               <ProgressBar
                 style={{
                   height: 15,
@@ -114,6 +117,7 @@ export function OrdersAddField({
               <View className="flex-1">
                 <ScreenTitleHeader variant="lg">Add Field</ScreenTitleHeader>
                 <AddFieldForm
+                  navigation={navigation}
                   orderId={orderId}
                   gpsCords={locationData}
                   transformedData={transformedData}
