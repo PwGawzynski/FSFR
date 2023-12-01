@@ -2,7 +2,6 @@ import axios, { AxiosInstance } from 'axios/index';
 import { Api } from './Api';
 import { DataFromXMLRes } from '../../FarmServiceTypes/Field/Ressponses';
 import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
-// import * as convert from 'xml-js';
 // noinspection ES6ConvertRequireIntoImport
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const proj4 = require('proj4');
