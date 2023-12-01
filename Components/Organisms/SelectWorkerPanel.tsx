@@ -40,7 +40,7 @@ export function SelectWorkerPanel({
     return undefined;
   }, [validationError]);
 
-  console.log(taskType, 'rrrr');
+  console.log(taskType, fieldsIds, 'rrrr');
 
   return (
     <View className="flex-col justify-start mt-4">
@@ -76,7 +76,8 @@ export function SelectWorkerPanel({
           <AppButton
             abs="mt-4"
             action={() => {
-              if (!fieldsIds.length || !taskType) setValidationError(true);
+              if (!fieldsIds.length || taskType === undefined)
+                setValidationError(true);
               else
                 createNewTasks(
                   fieldsIds.map(fieldId => ({

@@ -70,7 +70,8 @@ export const FieldTableRow = ({
           >
             <CheckBox
               onPress={() => {
-                if (setSelected) setSelected(prevState => [...prevState, f.id]);
+                if (setSelected)
+                  setSelected(prevState => [...new Set([...prevState, f.id])]);
               }}
             />
           </DataTable.Cell>
