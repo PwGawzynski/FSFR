@@ -59,7 +59,9 @@ export function OrdersDetails({
           />
           <LineDivider />
           <HeaderWithButton
-            onButtonClick={() => navigation.navigate('ordersAddField')}
+            onButtonClick={() =>
+              navigation.navigate('ordersAddField', { orderId })
+            }
             headerText="Fields"
             buttonText="Add"
             variant="sm"
