@@ -1,26 +1,43 @@
 import { Controller, useForm } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { LocationObject } from 'expo-location';
+import { useMutation } from 'react-query';
 import { DataFromXMLRes } from '../../FarmServiceTypes/Field/Ressponses';
 import { AppInputRhf } from '../Atoms/AppInputRhf';
 import { AppButton } from '../Atoms/AppButton';
 import { getFontScaledSize } from '../../helpers/style/fontSize';
+import { createField } from '../../helpers/api/Services/FieldsService';
+import { OwnerMobiOrdersTopTabProps } from '../../FrontendSelfTypes/navigation/types';
 
 interface Props {
   transformedData: DataFromXMLRes;
   gpsCords: LocationObject;
   orderId: string;
+  navigation: OwnerMobiOrdersTopTabProps<
+    'ordersAddField',
+    'orders'
+  >['navigation'];
 }
-export function AddFieldForm({ transformedData, gpsCords, orderId }: Props) {
-  console.log(transformedData, orderId);
+
+interface ExtendedFormData extends DataFromXMLRes {
+  longitude: string;
+  latitude: string;
+}
+
+export function AddFieldForm({
+  transformedData,
+  gpsCords,
+  orderId,
+  navigation,
+}: Props) {
+  const { mutate, isSuccess } = useMutation('createField', createField);
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
-    reset,
+    formState: { errors },
   } = useForm({
     defaultValues: {
       city: transformedData.city,
@@ -28,13 +45,33 @@ export function AddFieldForm({ transformedData, gpsCords, orderId }: Props) {
       dateOfCollectionData: transformedData.dateOfCollectionData || new Date(),
       voivodeship: transformedData.voivodeship,
       polishSystemId: transformedData.polishSystemId,
-      area: transformedData.area,
+      area: transformedData.area && transformedData.area.toString(),
       longitude: gpsCords.coords.longitude.toString().slice(0, 14),
       latitude: gpsCords.coords.latitude.toString().slice(0, 14),
-    },
+    } as ExtendedFormData,
   });
 
-  const onSubmitted = (data: DataFromXMLRes) => console.log(data);
+  useEffect(() => {
+    if (isSuccess)
+      navigation.navigate('OperationConfirmed', {
+        redirectScreenName: 'ordersRoot',
+        shownMessage: 'Field Has Been Added',
+      });
+  }, [isSuccess]);
+  const onSubmitted = (data: ExtendedFormData) =>
+    mutate({
+      area: Number(data.area),
+      polishSystemId: data.polishSystemId,
+      dateOfCollectionData: data.dateOfCollectionData,
+      order: orderId,
+      address: {
+        county: data.county,
+        voivodeship: data.voivodeship,
+        city: data.city,
+        latitude: data.latitude,
+        longitude: data.longitude,
+      },
+    });
 
   // eslint-disable-next-line react/jsx-no-undef
   return (
