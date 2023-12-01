@@ -29,6 +29,7 @@ import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
 import { TaskResponseBase } from '../../FarmServiceTypes/Task/Restonses';
 import { CreateTaskBase } from '../../FarmServiceTypes/Task/Requests';
 import { CreateOrderReqI } from '../../FarmServiceTypes/Order/Requests';
+import { CreateFieldReqI } from '../../FarmServiceTypes/Field/Requests';
 
 export class Api {
   /**
@@ -265,6 +266,10 @@ export class Api {
 
   static async getDataFromXLM(data: string) {
     return Api.axiosInstance.post('field/xmlTranslate', { data });
+  }
+
+  static async createField(data: CreateFieldReqI) {
+    return Api.axiosInstance.post('field', data);
   }
 
   static async getWorkers() {
