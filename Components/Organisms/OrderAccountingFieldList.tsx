@@ -11,13 +11,13 @@ function RenderField({ item }: AccountingFieldFlatListItem) {
 }
 
 const OrderAccountingFieldList = memo(
-  ({ fields }: OrderAccountingFieldListProps) => {
+  ({ tasks }: OrderAccountingFieldListProps) => {
     console.log('order accounting list render');
     return (
       <FlatList
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
-        data={fields}
+        data={tasks}
         renderItem={RenderField}
       />
     );
