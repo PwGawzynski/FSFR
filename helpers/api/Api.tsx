@@ -16,7 +16,6 @@ import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { checkCurrentSession } from '../handlers/checkIfLogged';
 import { GetUserDataResponse } from '../../FarmServiceTypes/Respnse/UserService/GetUserDataResponse';
 import {
-  FieldI,
   NewClientShortCreateI,
   NewWorker,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
