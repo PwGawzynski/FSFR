@@ -282,7 +282,11 @@ export interface FieldI {
   name: string;
 }
 
-export interface OrderAccountingField extends FieldResponseBase {
+export interface OrderAccountingFieldPrint extends FieldResponseBase {
+  price: number;
+  priceWTax: number;
+}
+export interface OrderAccountingField extends TaskResponseBase {
   price: number;
   priceWTax: number;
 }
@@ -300,7 +304,7 @@ export interface OrderListRenderItem {
   item: OrderBaseI;
 }
 export interface OrderAccountingFieldListProps {
-  fields: Array<OrderAccountingField>;
+  tasks: Array<OrderAccountingField>;
 }
 
 export interface OrderAccountingFieldListItemProps {
@@ -520,11 +524,11 @@ export interface NumericInputProps {
 }
 
 export type OrderAccountingPrintColumnsSettings = Array<
-  TableSettings<OrderAccountingField>
+  TableSettings<OrderAccountingFieldPrint>
 >;
 
 export interface AccountingSummaryAndPrintProps {
-  fields: Array<OrderAccountingField>;
+  fields: Array<OrderAccountingFieldPrint>;
   columnsSettings: OrderAccountingPrintColumnsSettings;
 }
 
