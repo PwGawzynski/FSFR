@@ -1,4 +1,3 @@
-import { FieldI } from '../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { Api } from '../Api';
 import { FieldResponseBase } from '../../../FarmServiceTypes/Field/Ressponses';
 import { CreateFieldReqI } from '../../../FarmServiceTypes/Field/Requests';
