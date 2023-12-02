@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { OrderAccountingFieldListItemProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { TaskType } from '../../FarmServiceTypes/Task/Enums';
 
 export function OrderAccountingFieldListItem({
   item,
@@ -7,11 +8,17 @@ export function OrderAccountingFieldListItem({
   return (
     <TouchableOpacity className="grow flex-col items-start justify-center">
       <View className="grow">
-        <Text className="text-lg font-semibold">{item.polishSystemId}</Text>
+        <Text className="text-lg font-semibold">
+          {item.field.polishSystemId}
+        </Text>
       </View>
       <View className="grow flex-row">
-        <Text className="flex-1">Price</Text>
-        <Text className="flex-1 text-right">{item.priceWTax.toFixed(2)}</Text>
+        <View className="flex-1 flex-row">
+          <Text className="flex-1 text-left">{TaskType[item.type]}</Text>
+        </View>
+        <View className="flex-1 flex-row">
+          <Text className="flex-1 text-right">{item.priceWTax.toFixed(2)}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
