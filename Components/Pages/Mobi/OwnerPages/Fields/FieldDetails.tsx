@@ -1,84 +1,100 @@
-import { Dimensions, SafeAreaView, TouchableOpacity, View } from 'react-native';
-import { useQuery } from 'react-query';
-import Animated, {
-  Easing,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import { SafeAreaView, View } from 'react-native';
+import { useMutation, useQuery } from 'react-query';
+import { useContext, useEffect, useState } from 'react';
 import { OwnerMobiFieldsTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
 import {
-  FieldI,
-  FieldStatus,
-} from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
-import { getAllFieldsById } from '../../../../../helpers/api/Services/FieldsService';
-import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
-import { LineDivider } from '../../../../Atoms/LineDivider';
+  getAllFieldsById,
+  remField,
+} from '../../../../../helpers/api/Services/FieldsService';
 import { TitleValueInfoComponent } from '../../../../Atoms/TitleValueInfoComponent';
+import { FieldResponseBase } from '../../../../../FarmServiceTypes/Field/Ressponses';
+import { AppButton } from '../../../../Atoms/AppButton';
+import {
+  AppSettings,
+  ModalState,
+} from '../../../../../helpers/appSettings/contexts';
 
+enum ScreenState {
+  Init,
+  PreDelete,
+}
 export function FieldDetails({
   route,
+  navigation,
 }: OwnerMobiFieldsTopTabProps<'fieldDetails', 'fields'>) {
+  const { setModalContext } = useContext(AppSettings).setters;
+
   const { fieldId } = route.params;
-  const { data: field } = useQuery<FieldI | undefined>(
+  const { data: field } = useQuery<FieldResponseBase | undefined>(
     ['field', fieldId],
     ({ queryKey }) => getAllFieldsById(`${queryKey[1]}`),
   );
-  const translateX = useSharedValue(0);
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateY: withTiming(translateX.value, {
-          duration: 200,
-          easing: Easing.linear,
-        }),
-      },
-    ],
-  }));
-  const deviceHeight = Dimensions.get('screen').height;
+  const { mutate, isSuccess } = useMutation('remField', remField);
 
-  const handlePress = () => {
-    if (translateX.value === 0) translateX.value = -(deviceHeight * 0.5);
-    else translateX.value = 0;
-  };
+  const [screenState, setScreenState] = useState(ScreenState.Init);
+
+  useEffect(() => {
+    if (isSuccess)
+      navigation.navigate('OperationConfirmed', {
+        redirectScreenName: 'ordersRoot',
+        shownMessage: `Field Deleted`,
+      });
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (screenState === ScreenState.PreDelete && field)
+      setModalContext({
+        isOn: ModalState.on,
+        context: 'Confirm Delete operation !!!',
+        onApproveCallback: () => {
+          mutate(field.id);
+        },
+        onDisapproveCallback: () => setScreenState(ScreenState.Init),
+        customApproveButtonText: 'Confirm',
+        customDisapproveButtonText: 'Regret',
+      });
+  }, [screenState, field]);
+
   return (
-    <SafeAreaView className="w-full h-fulls">
-      <View className="h-full w-full bg-black" />
-      <Animated.View
-        className="h-full w-full absolute items-center left-0 bg-white pr-4 pl-4 rounded-t-xl"
-        style={[{ top: '85%' }, animatedStyles]}
-      >
-        <TouchableOpacity className="w-full items-center" onPress={handlePress}>
-          <LineDivider abs="h-2 rounded w-2/5" />
-        </TouchableOpacity>
-        <View className="w-full">
-          <ScreenTitleHeader variant="sm" ats="">
-            {field?.name}
-          </ScreenTitleHeader>
-          {field && (
-            <TitleValueInfoComponent
-              titles={[
-                'Field ID',
-                'voice',
-                'county',
-                'city',
-                'area',
-                'status',
-                'DCA',
-              ]}
-              keys={[
-                `...${field.fieldId.split('-')[4]}`,
-                field.voice,
-                field.county,
-                field.city,
-                field.area.toFixed(2),
-                FieldStatus[field.status],
-                field.dataCollectionDate,
-              ]}
-            />
-          )}
-        </View>
-      </Animated.View>
+    <SafeAreaView className="w-full h-full flex-col">
+      <View className="flex-1 flex-col mr-4 ml-4 justify-between">
+        {field && (
+          <TitleValueInfoComponent
+            elementAbs="mt-8"
+            titles={[
+              'Field ID',
+              'Field PL_ID',
+              'Area',
+              'Date of collection data',
+              'City',
+              'County',
+              'Voivodeship',
+              'longitude',
+              'latitude',
+            ]}
+            keys={[
+              `...${field.id.split('-')[4]}`,
+              field.polishSystemId,
+              Number.isNaN(Number(field.area))
+                ? 0
+                : Number(field.area).toFixed(2),
+              new Date(field.dateOfCollectionData).toLocaleDateString(),
+              field.address.city,
+              field.address.county,
+              field.address.voivodeship,
+              field.address.longitude,
+              field.address.latitude,
+            ]}
+          />
+        )}
+        {field && (
+          <AppButton
+            abs="bg-[#f00] mb-8"
+            action={() => setScreenState(ScreenState.PreDelete)}
+            context="Remove"
+          />
+        )}
+      </View>
     </SafeAreaView>
   );
 }

@@ -20,6 +20,10 @@ export function WorkersTasksList({ data }: WorkersTaskList) {
   const renderItem = useCallback(
     ({ item, index }: WorkerTaskListRenderItem) => (
       <WorkersTaskListElement
+        createdAt={item.createdAt}
+        isDone={item.isDone}
+        closedAt={item.closedAt}
+        openedAt={item.openedAt}
         key={Math.random()}
         field={item.field}
         worker={item.worker}

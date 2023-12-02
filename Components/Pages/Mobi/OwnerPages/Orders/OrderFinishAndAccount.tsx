@@ -50,8 +50,6 @@ export function OrderFinishAndAccount({
   route,
   navigation,
 }: OwnerMobiOrdersTopTabProps<'ordersFinishAndAccount', 'orders'>) {
-  const DEF_PRICE_PER_HA = '0.00';
-
   const orderId = route.params?.orderId;
   const { data: orderConnectedFields } = useQuery<
     Array<TaskResponseBase> | undefined
@@ -65,7 +63,11 @@ export function OrderFinishAndAccount({
   const { data } = useQuery<Array<OrderResponseBase> | undefined>('orders');
   const order = data?.find(orderItem => orderItem.id === orderId);
 
-  const [pricePerHa, setPricePerHa] = useState<string>(DEF_PRICE_PER_HA);
+  const DEF_PRICE_PER_HA = order?.pricePerUnit?.toString() || '0.00';
+
+  const [pricePerHa, setPricePerHa] = useState<string>(
+    order?.pricePerUnit?.toString() || DEF_PRICE_PER_HA,
+  );
   const [reRenderListIndicator, setReRenderListIndicator] = useState(false);
   const [validationError, setValidationError] = useState(false);
   const PRICE_PER_HA = Number(pricePerHa);
@@ -82,7 +84,6 @@ export function OrderFinishAndAccount({
       ),
     [orderConnectedFields, reRenderListIndicator],
   );
-
   const { isSuccess, mutate: accountOrder } = useMutation(
     orderFinishAndAccount,
   );
@@ -124,7 +125,11 @@ export function OrderFinishAndAccount({
             setPrice={setPricePerHa}
             setReRender={setReRenderListIndicator}
             onSavePress={() => {
-              if (order && pricePerHa !== DEF_PRICE_PER_HA) accountOrder(order);
+              if (order && pricePerHa !== DEF_PRICE_PER_HA)
+                accountOrder({
+                  order: order.id,
+                  pricePerUnit: Number(pricePerHa),
+                });
               if (pricePerHa === DEF_PRICE_PER_HA) setValidationError(true);
             }}
             onBlur={() =>

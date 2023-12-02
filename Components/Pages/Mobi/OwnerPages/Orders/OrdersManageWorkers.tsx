@@ -1,4 +1,4 @@
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { HeaderWithButton } from '../../../../Atoms/HeaderWithButton';
@@ -38,7 +38,10 @@ export function OrdersManageWorkers({
     ({ queryKey }) => {
       return getAllOrdersTasks(`${queryKey[1]}`);
     },
+    { refetchOnWindowFocus: true },
   );
+
+  console.log(orderAssignedTasks);
   const [selectedWorkerTasks, setSelectedWorkerTasks] = useState<
     Array<TaskResponseBase> | undefined
   >(undefined);
@@ -80,18 +83,31 @@ export function OrdersManageWorkers({
           headerText="Assigned Workers"
           headerAdditionalStyles="flex-1"
           boxAdditionalStyles="mt-8"
-          buttonText="Manage workers"
+          buttonText="Add Tasks"
           onButtonClick={() =>
             navigation.navigate('assignedWorkers', { orderId })
           }
         />
-        <View style={{ minHeight: 80, height: 80 }} className="mt-4 flex-row">
-          {OrderAssignedWorkerSelector}
-        </View>
-        <ScreenTitleHeader variant="sm" abs="mt-6  mb-4">
-          {focusedWorker?.personalData.name} Task&apos;s
-        </ScreenTitleHeader>
-        <View className="flex-1 w-full">{selectedWorkerTasksList}</View>
+        {!orderAssignedTasks?.length && (
+          <View className="flex-1 items-center justify-center">
+            <Text className="text-base text-[#848484]">
+              Add Tasks Firstly...
+            </Text>
+          </View>
+        )}
+        {!!orderAssignedTasks?.length && (
+          <View style={{ minHeight: 80, height: 80 }} className="mt-4 flex-row">
+            {OrderAssignedWorkerSelector}
+          </View>
+        )}
+        {!!orderAssignedTasks?.length && (
+          <ScreenTitleHeader variant="sm" abs="mt-6  mb-4">
+            {focusedWorker?.personalData.name} Task&apos;s
+          </ScreenTitleHeader>
+        )}
+        {!!orderAssignedTasks?.length && (
+          <View className="flex-1 w-full">{selectedWorkerTasksList}</View>
+        )}
       </View>
     </SafeAreaView>
   );

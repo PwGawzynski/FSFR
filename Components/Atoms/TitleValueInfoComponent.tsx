@@ -4,15 +4,28 @@ import { OrderDetailsInfoProps } from '../../FrontendSelfTypes/moduleProps/Compo
 export function TitleValueInfoComponent({
   titles,
   keys,
+  abs,
+  elementAbs,
 }: OrderDetailsInfoProps) {
   return (
-    <View className="flex flex-col">
+    <View className={`flex flex-col ${abs}`}>
       {titles.map((t, index) => (
-        <View className="flex flex-row mt-2" key={Math.random()}>
-          <Text className="flex-1 uppercase text-lg font-bold text-left">
+        <View
+          className={`flex flex-row mt-2 ${elementAbs}`}
+          key={Math.random()}
+        >
+          <Text
+            adjustsFontSizeToFit
+            numberOfLines={1}
+            className="flex-1 uppercase text-lg font-bold text-left"
+          >
             {t}
           </Text>
-          <Text className="flex-1 uppercase text-lg  text-right">
+          <Text
+            adjustsFontSizeToFit
+            numberOfLines={1}
+            className="flex-1 uppercase text-lg  text-right"
+          >
             {keys[index]}
           </Text>
         </View>

@@ -13,7 +13,7 @@ export function AccountingSummaryAndPrint({
       <View className="flex-1 flex-row justify-between items-center">
         <Text className="text-lg font-bold uppercase">Summa:</Text>
         <Text className="text-lg font-bold uppercase">
-          {fields.reduce((prev, cur) => prev + cur.price, 0).toFixed(2)}
+          {fields.reduce((prev, cur) => prev + cur.priceWTax, 0).toFixed(2)}
         </Text>
       </View>
       <AppButton

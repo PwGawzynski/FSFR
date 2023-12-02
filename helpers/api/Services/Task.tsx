@@ -19,11 +19,7 @@ export async function addNewTask(
 export async function getAllOrdersTasks(
   data: string,
 ): Promise<Array<TaskResponseBase> | undefined> {
-  try {
-    return (await Api.getAllOrdersTasks(data)).data;
-  } catch (e) {
-    return undefined;
-  }
+  return (await Api.getAllOrdersTasks(data)).data;
 }
 
 export async function remTask(taskId: string): Promise<string | undefined> {

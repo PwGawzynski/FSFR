@@ -1,4 +1,4 @@
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import { useMutation, useQuery } from 'react-query';
 import { useEffect } from 'react';
 import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/navigation/types';
@@ -8,24 +8,41 @@ import { HeaderWithButton } from '../../../../Atoms/HeaderWithButton';
 import { LineDivider } from '../../../../Atoms/LineDivider';
 import { FieldList } from '../../../../Molecules/FieldList';
 import { TitleValueInfoComponent } from '../../../../Atoms/TitleValueInfoComponent';
-import { sendConfirmation } from '../../../../../helpers/api/Services/OrdersService';
+import {
+  getAllOrders,
+  sendConfirmation,
+} from '../../../../../helpers/api/Services/OrdersService';
 import {
   OrderStatus,
   ServiceType,
 } from '../../../../../FarmServiceTypes/Order/Enums';
 import { OrderResponseBase } from '../../../../../FarmServiceTypes/Order/Ressponses';
+import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
+import { FieldResponseBase } from '../../../../../FarmServiceTypes/Field/Ressponses';
+import { getAllFieldsByOrderId } from '../../../../../helpers/api/Services/FieldsService';
 
 export function OrdersDetails({
   route,
   navigation,
 }: OwnerMobiOrdersTopTabProps<'orderDetails', 'orders'>) {
-  const { data } = useQuery<Array<OrderResponseBase> | undefined>('orders', {
-    refetchOnWindowFocus: true,
-  });
+  const { data } = useQuery<Array<OrderResponseBase> | undefined>(
+    'orders',
+    getAllOrders,
+    {
+      refetchOnWindowFocus: true,
+    },
+  );
   const orderId = route.params?.orderId;
   const order = data?.find(orderItem => orderItem.id === orderId);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { mutate: sendConfirmationAsk, isSuccess: askSend } =
     useMutation(sendConfirmation);
+
+  const { data: orderConnectedFields } = useQuery<
+    Array<FieldResponseBase> | undefined
+  >(['fields', orderId], ({ queryKey }) =>
+    getAllFieldsByOrderId(`${queryKey[1]}`),
+  );
 
   useEffect(() => {
     if (askSend)
@@ -39,17 +56,24 @@ export function OrdersDetails({
     <SafeAreaView className="w-full h-full ">
       {orderId && order && (
         <SafeAreaView className="ml-4 mr-4 flex flex-col grow">
-          <HeaderWithButton
-            variant="lg"
-            buttonAdditionalStyles=" flex-1"
-            headerText={ServiceType[order.serviceType]}
-            headerAdditionalStyles="flex-1"
-            boxAdditionalStyles="mt-8"
-            buttonText="Manage  workers"
-            onButtonClick={() =>
-              navigation.navigate('ordersManageWorkers', { orderId })
-            }
-          />
+          {order.status !== OrderStatus.Done &&
+          !!orderConnectedFields?.length ? (
+            <HeaderWithButton
+              variant="lg"
+              buttonAdditionalStyles=" flex-1"
+              headerText={ServiceType[order.serviceType]}
+              headerAdditionalStyles="flex-1"
+              boxAdditionalStyles="mt-8"
+              buttonText="Manage  workers"
+              onButtonClick={() =>
+                navigation.navigate('ordersManageWorkers', { orderId })
+              }
+            />
+          ) : (
+            <ScreenTitleHeader variant="lg">
+              {ServiceType[order.serviceType]}
+            </ScreenTitleHeader>
+          )}
           <TitleValueInfoComponent
             titles={['Name', 'performance date', 'area', 'status']}
             keys={[
@@ -60,27 +84,40 @@ export function OrdersDetails({
             ]}
           />
           <LineDivider />
-          <HeaderWithButton
-            onButtonClick={() =>
-              navigation.navigate('ordersAddField', { orderId })
-            }
-            headerText="Fields"
-            buttonText="Add"
-            variant="sm"
-            buttonAdditionalStyles="w-1/3 flex-none"
-          />
-          <FieldList
-            orderId={orderId}
-            navigation={navigation}
-            shownFieldKeys={[
-              { key: 'polishSystemId', alternativeName: 'PLID' },
-              { key: 'area' },
-            ]}
-          />
+          {order.status !== OrderStatus.Done ? (
+            <HeaderWithButton
+              onButtonClick={() =>
+                navigation.navigate('ordersAddField', { orderId })
+              }
+              headerText="Fields"
+              buttonText="Add"
+              variant="sm"
+              buttonAdditionalStyles="w-1/3 flex-none"
+            />
+          ) : (
+            <ScreenTitleHeader variant="lg">Fields</ScreenTitleHeader>
+          )}
+          {orderConnectedFields?.length ? (
+            <FieldList
+              orderId={orderId}
+              navigation={navigation}
+              shownFieldKeys={[
+                { key: 'polishSystemId', alternativeName: 'PLID' },
+                { key: 'area' },
+              ]}
+            />
+          ) : (
+            <View className="flex-1 items-center justify-center">
+              <Text className="text-base text-[#848484]">
+                * Start By adding some fields...
+              </Text>
+            </View>
+          )}
 
           <View className="flex-col flex max-w-max">
-            <LineDivider abs="mt-0 mb-0" />
-            <View className="flex-row justify-between mt-4 mb-4">
+            {!!orderConnectedFields?.length && <LineDivider abs="mt-0 mb-0" />}
+
+            {/* <View className="flex-row justify-between mt-4 mb-4">
               <AppButton
                 action={() => sendConfirmationAsk(order.id)}
                 context="request confirmation"
@@ -101,14 +138,20 @@ export function OrdersDetails({
                 context="Close"
                 abs="w-1/4 bg-[#FF0000]"
               />
-            </View>
-            <AppButton
-              action={() =>
-                navigation.navigate('ordersFinishAndAccount', { orderId })
-              }
-              context="Finish and account"
-              abs="bg-[#279840]"
-            />
+            </View> */}
+            {!!orderConnectedFields?.length && (
+              <AppButton
+                action={() =>
+                  navigation.navigate('ordersFinishAndAccount', { orderId })
+                }
+                context={`${
+                  order.status !== OrderStatus.Done
+                    ? 'Finish and account'
+                    : 'Edit Accounting'
+                }`}
+                abs="bg-[#279840] mt-4"
+              />
+            )}
           </View>
         </SafeAreaView>
       )}

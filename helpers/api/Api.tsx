@@ -16,7 +16,6 @@ import { ResponseObject } from '../../FarmServiceTypes/Respnse/responseGeneric';
 import { checkCurrentSession } from '../handlers/checkIfLogged';
 import { GetUserDataResponse } from '../../FarmServiceTypes/Respnse/UserService/GetUserDataResponse';
 import {
-  FieldI,
   NewClientShortCreateI,
   NewWorker,
 } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
@@ -28,7 +27,10 @@ import { OrderResponseBase } from '../../FarmServiceTypes/Order/Ressponses';
 import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
 import { TaskResponseBase } from '../../FarmServiceTypes/Task/Restonses';
 import { CreateTaskBase } from '../../FarmServiceTypes/Task/Requests';
-import { CreateOrderReqI } from '../../FarmServiceTypes/Order/Requests';
+import {
+  CreateOrderReqI,
+  UpdateOrderSetPricePerUnit,
+} from '../../FarmServiceTypes/Order/Requests';
 import { CreateFieldReqI } from '../../FarmServiceTypes/Field/Requests';
 
 export class Api {
@@ -286,12 +288,16 @@ export class Api {
     return Api.axiosInstance.get('field/all-for-order', { params: { id } });
   }
 
-  static async getAllFieldsById(id: string): Promise<FieldI> {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const data = require('../../tmpData');
-    // TEMPORARY
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return data.fields.find((f: any) => f.fieldId === id) as FieldI;
+  static async getAllFieldsById(id: string) {
+    return Api.axiosInstance.get('field', { params: { id } }) as Promise<
+      AxiosResponse<ResponseObject<FieldResponseBase>>
+    >;
+  }
+
+  static async remField(id: string) {
+    return Api.axiosInstance.delete('field', { params: { id } }) as Promise<
+      AxiosResponse<ResponseObject>
+    >;
   }
 
   static async addNewOrder(data: CreateOrderReqI) {
@@ -309,10 +315,8 @@ export class Api {
     return respose as Promise<boolean>;
   }
 
-  static async orderFinishAndAccount(data: OrderResponseBase) {
-    // eslint-disable-next-line no-console
-    console.log('ORDER UPDATE SET_PRICE_PER_UNIT', data);
-    return true;
+  static async orderFinishAndAccount(data: UpdateOrderSetPricePerUnit) {
+    return Api.axiosInstance.put('order', data);
   }
 
   static async addNewTasks(data: Array<CreateTaskBase>) {
@@ -374,7 +378,6 @@ export class Api {
     workerId: string,
     { open, message, error }: workerAsyncListenerParams,
   ) {
-    console.log(Api.access_token, 'QWAAA');
     const eventSource = new RNEventSource(
       `http://localhost:3002/worker/sse/${workerId}`,
       { headers: { Authorization: `Bearer ${Api.access_token}` } },

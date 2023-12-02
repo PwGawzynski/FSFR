@@ -1,6 +1,9 @@
 import { Api } from '../Api';
 import { OrderResponseBase } from '../../../FarmServiceTypes/Order/Ressponses';
-import { CreateOrderReqI } from '../../../FarmServiceTypes/Order/Requests';
+import {
+  CreateOrderReqI,
+  UpdateOrderSetPricePerUnit,
+} from '../../../FarmServiceTypes/Order/Requests';
 import { ResponseObject } from '../../../FarmServiceTypes/Respnse/responseGeneric';
 
 export async function getAllOrders(): Promise<
@@ -37,12 +40,7 @@ export async function sendConfirmation(
 }
 
 export async function orderFinishAndAccount(
-  data: OrderResponseBase,
-): Promise<boolean | undefined> {
-  try {
-    // eslint-disable-next-line no-console
-    return Api.orderFinishAndAccount(data);
-  } catch (e) {
-    return undefined;
-  }
+  data: UpdateOrderSetPricePerUnit,
+): Promise<ResponseObject | undefined> {
+  return (await Api.orderFinishAndAccount(data)).data;
 }

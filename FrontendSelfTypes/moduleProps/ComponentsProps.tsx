@@ -329,6 +329,8 @@ export interface OrderDetailsHeaderProps {
 export interface OrderDetailsInfoProps {
   titles: Array<string>;
   keys: Array<string | ReactNode>;
+  abs?: string;
+  elementAbs?: string;
 }
 
 export interface FieldListProps {
