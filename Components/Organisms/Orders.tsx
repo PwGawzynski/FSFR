@@ -37,6 +37,7 @@ function MemoizedOrders({
   const { data: orders } = useQuery<Array<OrderResponseBase> | undefined>(
     'orders',
     getAllOrders,
+    { refetchOnWindowFocus: true },
   );
   const [ordersData, setOrdersData] = useState<
     Array<OrderResponseBase> | undefined
