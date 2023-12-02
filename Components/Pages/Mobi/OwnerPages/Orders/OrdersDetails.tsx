@@ -19,7 +19,9 @@ export function OrdersDetails({
   route,
   navigation,
 }: OwnerMobiOrdersTopTabProps<'orderDetails', 'orders'>) {
-  const { data } = useQuery<Array<OrderResponseBase> | undefined>('orders');
+  const { data } = useQuery<Array<OrderResponseBase> | undefined>('orders', {
+    refetchOnWindowFocus: true,
+  });
   const orderId = route.params?.orderId;
   const order = data?.find(orderItem => orderItem.id === orderId);
   const { mutate: sendConfirmationAsk, isSuccess: askSend } =
