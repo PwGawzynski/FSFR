@@ -12,7 +12,6 @@ function RenderField({ item }: AccountingFieldFlatListItem) {
 
 const OrderAccountingFieldList = memo(
   ({ tasks }: OrderAccountingFieldListProps) => {
-    console.log('order accounting list render');
     return (
       <FlatList
         keyExtractor={item => item.id}
