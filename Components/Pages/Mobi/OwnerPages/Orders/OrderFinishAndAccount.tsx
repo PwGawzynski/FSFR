@@ -5,6 +5,7 @@ import { OwnerMobiOrdersTopTabProps } from '../../../../../FrontendSelfTypes/nav
 import { ScreenTitleHeader } from '../../../../Atoms/ScreenTitleHeader';
 import {
   OrderAccountingField,
+  OrderAccountingFieldPrint,
   OrderAccountingPrintColumnsSettings,
 } from '../../../../../FrontendSelfTypes/moduleProps/ComponentsProps';
 import { LineDivider } from '../../../../Atoms/LineDivider';
@@ -18,8 +19,9 @@ import {
   OrderStatus,
   ServiceType,
 } from '../../../../../FarmServiceTypes/Order/Enums';
-import { FieldResponseBase } from '../../../../../FarmServiceTypes/Field/Ressponses';
 import { OrderResponseBase } from '../../../../../FarmServiceTypes/Order/Ressponses';
+import { TaskResponseBase } from '../../../../../FarmServiceTypes/Task/Restonses';
+import { getAllOrdersTasks } from '../../../../../helpers/api/Services/Task';
 
 const fieldDataColumnSettings: OrderAccountingPrintColumnsSettings = [
   {
@@ -52,8 +54,14 @@ export function OrderFinishAndAccount({
 
   const orderId = route.params?.orderId;
   const { data: orderConnectedFields } = useQuery<
-    Array<FieldResponseBase> | undefined
-  >(['fields', orderId]);
+    Array<TaskResponseBase> | undefined
+  >(
+    ['orderAssignedTasks', orderId],
+    ({ queryKey }) => {
+      return getAllOrdersTasks(`${queryKey[1]}`);
+    },
+    { refetchOnWindowFocus: true },
+  );
   const { data } = useQuery<Array<OrderResponseBase> | undefined>('orders');
   const order = data?.find(orderItem => orderItem.id === orderId);
 
@@ -65,11 +73,11 @@ export function OrderFinishAndAccount({
     () =>
       orderConnectedFields &&
       orderConnectedFields.map(
-        field =>
+        task =>
           ({
-            ...field,
-            price: field.area * PRICE_PER_HA,
-            priceWTax: field.area * PRICE_PER_HA * 1.23,
+            ...task,
+            price: task.field.area * PRICE_PER_HA,
+            priceWTax: task.field.area * PRICE_PER_HA * 1.23,
           } as OrderAccountingField),
       ),
     [orderConnectedFields, reRenderListIndicator],
@@ -131,7 +139,7 @@ export function OrderFinishAndAccount({
             Fields info
           </ScreenTitleHeader>
           <LineDivider abs="m-0" />
-          <OrderAccountingFieldList fields={fieldsData} />
+          <OrderAccountingFieldList tasks={fieldsData} />
           <LineDivider abs="m-0" />
         </View>
       )}
@@ -139,7 +147,18 @@ export function OrderFinishAndAccount({
       <View className="flex-[0.5] max-h-[80] mb-2">
         {fieldsData && (
           <AccountingSummaryAndPrint
-            fields={fieldsData}
+            fields={fieldsData.map(
+              task =>
+                ({
+                  area: task.field.area,
+                  priceWTax: task.priceWTax,
+                  price: task.price,
+                  id: task.id,
+                  polishSystemId: task.field.polishSystemId,
+                  address: task.field.address,
+                  dateOfCollectionData: task.field.dateOfCollectionData,
+                } as OrderAccountingFieldPrint),
+            )}
             columnsSettings={fieldDataColumnSettings}
           />
         )}
