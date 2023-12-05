@@ -27,6 +27,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
   });
   let { error } = loginMutation;
   if (error instanceof AxiosError)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error = (error.response as any).data.payload.message;
   return (
     <View
