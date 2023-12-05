@@ -12,6 +12,7 @@ import {
 } from '../../handlers/AsyncStoreHelpers';
 import { RegisterStackParamList } from '../../../FrontendSelfTypes/NavigatorsInterfaces/RegisterStack';
 import { RegisterScreenNavBaseProps } from '../../../FrontendSelfTypes/navigation/types';
+import { UserRole } from '../../../FarmServiceTypes/User/Enums';
 
 export const registerService = async <T extends keyof RegisterStackParamList>(
   userData: CompanyAddressDataCdn,
@@ -32,7 +33,11 @@ export const registerService = async <T extends keyof RegisterStackParamList>(
         })
       ).data as ResponseObject;
       if (response.code === ResponseCode.ProcessedWithoutConfirmationWaiting) {
-        navigation.navigate('AuthCode');
+        navigation.navigate('OperationConfirmed', {
+          redirectScreenName: 'Login',
+          shownMessage:
+            'Your account is ready, go to your mailbox and activate it',
+        });
         handleRemoveDataFromStore([
           'RegisterMobiDataEmailAndPassword',
           'RegisterMobiDataNameSurname',
