@@ -8,7 +8,7 @@ import { OperationDanger } from '../../../Pages/Mobi/Common/OperationDanger';
 import { FieldsTopTab } from './FieldsTopTab';
 import { WorkersTabNavigator } from './WorkersStack';
 import { TakePhoto } from '../../../Pages/Mobi/Common/TakePhoto';
-import { CreateCompany, CreateCompanyI } from '../../../Pages/CreateCompany';
+import { CreateCompany } from '../../../Pages/CreateCompany';
 import { Landing } from '../../../Pages/Landing';
 
 const Stack = createNativeStackNavigator<OwnerDesktopRootStackParamList>();
