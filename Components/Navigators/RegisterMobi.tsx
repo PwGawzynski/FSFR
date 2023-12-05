@@ -9,7 +9,6 @@ import { AddressesData } from '../Pages/AddressesData';
 import { AddressDataCdnMobi } from '../Pages/AddressDataCdnMobi';
 import { ChooseUserRoleMobi } from '../Pages/chooseUserRoleMobi';
 import { OperationConfirmedAnimation } from '../Pages/Mobi/Common/OperationConfirmedAnimation';
-import { CreateCompany, CreateCompanyI } from '../Pages/CreateCompany';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function RegisterMobi({ navigation }: RegisterMobiBase) {
