@@ -7,6 +7,8 @@ import { MaterialWorkersRootTopTabParamList } from './MaterialWorkersRootTopTabP
 import { MaterialOrdersRootTopTabParamList } from './MaterialOrdersRootTopTabParamLIst';
 
 export type OwnerDesktopRootStackParamList = {
+  CreateCompany: undefined;
+  Landing: undefined;
   desktop: NavigatorScreenParams<DesktopTopTabParamList> | undefined;
   orders: NavigatorScreenParams<OrdersStackParamList> | undefined;
   workers: NavigatorScreenParams<WorkersStackParamList> | undefined;
