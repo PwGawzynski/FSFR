@@ -64,7 +64,7 @@ export function EmailAndPasswordForm({
     })();
   }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     return navigation.addListener('beforeRemove', () => {
       setModalContext({
         isOn: ModalState.on,
@@ -84,7 +84,7 @@ export function EmailAndPasswordForm({
       });
     });
   }, [navigation]);
-
+*/
   useEffect(() => {
     if (!validator.isError && btnClicked) registerToIdentity.mutate(data);
   }, [validator]);
