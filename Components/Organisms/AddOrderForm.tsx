@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
 import React, { useEffect } from 'react';
-import { Controller, useForm, ValidateResult } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Text, TextInput, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
