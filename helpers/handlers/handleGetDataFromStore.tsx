@@ -8,7 +8,7 @@ import {
   RegisterScreensDataCollection,
   UserRoleMobiScreen,
 } from '../../FrontendSelfTypes/RegisterMobi/RegisterScreensData';
-import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+import { UserRole } from '../../FarmServiceTypes/User/Enums';
 
 export async function handleGetDataFromStore() {
   const emailAndPassword = await restoreDataFromStorage<EmailAndPasswordData>(
@@ -41,7 +41,7 @@ export async function handleGetDataFromStore() {
       ...nameAndSurname,
       ...contactPhones,
       ...addresses,
-      userRole: userRole.owner ? UserRole.owner : UserRole.worker,
+      userRole: userRole.owner ? UserRole.Owner : UserRole.Worker,
     } as RegisterScreensDataCollection;
     console.log('STORE DEFINED', data);
     return data;
