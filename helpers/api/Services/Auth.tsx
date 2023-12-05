@@ -12,7 +12,6 @@ import {
 } from '../../handlers/AsyncStoreHelpers';
 import { RegisterStackParamList } from '../../../FrontendSelfTypes/NavigatorsInterfaces/RegisterStack';
 import { RegisterScreenNavBaseProps } from '../../../FrontendSelfTypes/navigation/types';
-import { UserRole } from '../../../FarmServiceTypes/User/Enums';
 
 export const registerService = async <T extends keyof RegisterStackParamList>(
   userData: CompanyAddressDataCdn,
