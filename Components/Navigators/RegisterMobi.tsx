@@ -8,6 +8,8 @@ import { ContactPhones } from '../Pages/ContactPhones';
 import { AddressesData } from '../Pages/AddressesData';
 import { AddressDataCdnMobi } from '../Pages/AddressDataCdnMobi';
 import { ChooseUserRoleMobi } from '../Pages/chooseUserRoleMobi';
+import { OperationConfirmedAnimation } from '../Pages/Mobi/Common/OperationConfirmedAnimation';
+import { CreateCompany, CreateCompanyI } from '../Pages/CreateCompany';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function RegisterMobi({ navigation }: RegisterMobiBase) {
@@ -19,6 +21,14 @@ export function RegisterMobi({ navigation }: RegisterMobiBase) {
         headerShown: false,
       }}
     >
+      <RegisterStack.Screen
+        name="OperationConfirmed"
+        component={OperationConfirmedAnimation}
+        options={{
+          gestureDirection: 'vertical',
+          headerShown: false,
+        }}
+      />
       <RegisterStack.Screen
         name="EmailAndPassword"
         component={EmailAndPassword}
