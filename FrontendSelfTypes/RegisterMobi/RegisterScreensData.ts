@@ -1,4 +1,4 @@
-import { UserRole } from '../../FarmServiceTypes/User/RegisterNewUserDataDtoInterfaceMobi';
+import { UserRole } from '../../FarmServiceTypes/User/Enums';
 
 /**
  * Mobile devices screen data object contains information about  user's email and password
