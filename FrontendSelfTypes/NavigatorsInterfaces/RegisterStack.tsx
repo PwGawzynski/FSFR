@@ -1,5 +1,3 @@
-import { RegisterScreensDataCollection } from '../RegisterMobi/RegisterScreensData';
-
 export type RegisterStackParamList = {
   EmailAndPassword: undefined;
 
