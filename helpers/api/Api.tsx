@@ -350,7 +350,6 @@ export class Api {
   }
 
   static async createCompany(data: CreateCompanyReqI) {
-    console.log(data, 'kurwa');
     // eslint-disable-next-line no-console
     return Api.axiosInstance.post('/company', data) as Promise<
       AxiosResponse<ResponseObject<CompanyResponseBase>>
