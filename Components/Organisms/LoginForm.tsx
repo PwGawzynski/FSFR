@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import React, { useContext, useState } from 'react';
 import { DeviceType } from 'expo-device';
 import { useMutation } from 'react-query';
+import { AxiosError } from 'axios';
 import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
@@ -9,6 +10,7 @@ import { AppSettings } from '../../helpers/appSettings/contexts';
 import { LoginUser } from '../../FarmServiceTypes/User/LoginUser';
 import { Api } from '../../helpers/api/Api';
 import { LoginFormProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
+import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 
 export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
   const [data, setData] = useState({
@@ -20,10 +22,12 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
 
   const loginMutation = useMutation(async (loginData: LoginUser) => {
     const response = await Api.loginUser(loginData);
-    if (response) setLogged(true);
+    if (response === true) setLogged(true);
     return response;
   });
-
+  let { error } = loginMutation;
+  if (error instanceof AxiosError)
+    error = (error.response as any).data.payload.message;
   return (
     <View
       className={`w-full mt-14 ${
@@ -39,6 +43,11 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
             : 'flex-1 items-center justify-center  mr-10'
         }`}
       >
+        {loginMutation.isError && (
+          <ErrorInfoText additionalStyles="text-center">
+            {(error as any).toString()}
+          </ErrorInfoText>
+        )}
         <AppInput
           keyboardHideOnSubmit
           onDeFocus={onDeFocus}
@@ -73,7 +82,7 @@ export function LoginForm({ onFocus, onDeFocus }: LoginFormProps) {
         <AppButton
           action={() => {
             // eslint-disable-next-line no-console
-            console.log(loginMutation.mutate(data));
+            console.log(loginMutation.mutate(data), 'LOGIN_MUT_ELS');
           }}
           context="Login"
           abs={`${deviceType === DeviceType.PHONE ? 'mt-10' : ''}`}
