@@ -5,7 +5,6 @@ import { AppInput } from '../Molecules/AppInput';
 import { AppButton } from '../Atoms/AppButton';
 import { OrLabel } from '../Atoms/OrLabel';
 import {
-  handleRemoveDataFromStore,
   handleRestoreData,
   handleSaveDataMerge,
 } from '../../helpers/handlers/AsyncStoreHelpers';
@@ -16,7 +15,7 @@ import { ErrorInfoText } from '../Atoms/ErrorInfoText';
 import { useValidation } from '../../helpers/hooks/validationHook';
 import { handlePrintErrorToUser } from '../../helpers/handlers/HandlePrintErrorToUser';
 import { EmailAndPasswordSchema } from '../../helpers/validation/mobileSchemas/emailAndPasswordSchema';
-import { AppSettings, ModalState } from '../../helpers/appSettings/contexts';
+import { AppSettings } from '../../helpers/appSettings/contexts';
 import { handleSaveToSecureStore } from '../../helpers/handlers/SecureStoreHelpers';
 import { RegisterMobiPropsBase } from '../../FrontendSelfTypes/navigation/types';
 
