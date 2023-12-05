@@ -1,3 +1,5 @@
+import { RegisterScreensDataCollection } from '../RegisterMobi/RegisterScreensData';
+
 export type RegisterStackParamList = {
   EmailAndPassword: undefined;
 
@@ -10,4 +12,8 @@ export type RegisterStackParamList = {
   AddressesCdn: undefined;
 
   ChooseUserRole: undefined;
+  OperationConfirmed: {
+    redirectScreenName: any;
+    shownMessage?: string;
+  };
 };
