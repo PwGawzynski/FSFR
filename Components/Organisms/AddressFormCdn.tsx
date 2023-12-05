@@ -35,7 +35,9 @@ export function AddressFormCdn({
   );
 
   useEffect(() => {
-    if (!validator.isError && btnClicked) createUserMutation.mutate(data);
+    if (!validator.isError && btnClicked) {
+      createUserMutation.mutate(data);
+    }
   }, [validator]);
 
   useEffect(() => {
