@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import Constants from 'expo-constants';
 import RNEventSource, { ListenerCallback } from 'react-native-event-source';
@@ -32,6 +32,9 @@ import {
   UpdateOrderSetPricePerUnit,
 } from '../../FarmServiceTypes/Order/Requests';
 import { CreateFieldReqI } from '../../FarmServiceTypes/Field/Requests';
+import { CreateCompanyReqI } from '../../FarmServiceTypes/Common/Requests';
+import { CompanyResponseBase } from '../../FarmServiceTypes/Company/Ressponses';
+import { AddressResponseBase } from '../../FarmServiceTypes/Address/Ressponses';
 
 export class Api {
   /**
@@ -227,12 +230,20 @@ export class Api {
    * @returns boolean to indicate that access is given or not
    * @throws Error when save went wrong
    */
+  // eslint-disable-next-line consistent-return
   static async loginUser(loginData: LoginUser) {
-    const response: ResponseObject<IdentityAuthTokenLoginRaw> = (
-      await Api.axiosAuthInstance.post('/auth/login', loginData)
-    ).data;
-    // must return true or false to manage isLogged state
-    return Api.saveTokensToSecureStoreFromResPayload(response);
+    try {
+      const response: ResponseObject<IdentityAuthTokenLoginRaw> = (
+        await Api.axiosAuthInstance.post('/auth/login', loginData)
+      ).data;
+      if (await Api.saveTokensToSecureStoreFromResPayload(response))
+        await Api.axiosInstance.get('/user/me');
+      return true;
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw e;
+      }
+    }
   }
 
   /**
@@ -244,6 +255,18 @@ export class Api {
     return (
       await Api.axiosAuthInstance.get(`/user/exist/${userLoginIdentifier}`)
     ).data;
+  }
+
+  static async me() {
+    return (await Api.axiosInstance.get('/user/personal_data')).data;
+  }
+
+  static async myAddress(): Promise<ResponseObject<AddressResponseBase>> {
+    return (await Api.axiosInstance.get('/user/address_data')).data;
+  }
+
+  static async company() {
+    return (await Api.axiosInstance.get('/company')).data;
   }
 
   static async getAllActivities() {
@@ -323,6 +346,14 @@ export class Api {
     // eslint-disable-next-line no-console
     return Api.axiosInstance.post('/task', { tasks: data }) as Promise<
       AxiosResponse<ResponseObject>
+    >;
+  }
+
+  static async createCompany(data: CreateCompanyReqI) {
+    console.log(data, 'kurwa');
+    // eslint-disable-next-line no-console
+    return Api.axiosInstance.post('/company', data) as Promise<
+      AxiosResponse<ResponseObject<CompanyResponseBase>>
     >;
   }
 
