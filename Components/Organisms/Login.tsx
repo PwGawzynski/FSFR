@@ -4,7 +4,7 @@ import { LoginForm } from './LoginForm';
 import { RegisterAsk } from '../Molecules/RegisterAsk';
 import { ForgotPasswordReset } from '../Molecules/ForgotPasswordReset';
 import { handleLoginPgAnimation } from '../../helpers/handlers/LoginHandlers';
-import { LoginProps } from '../../frontendSelfTypes/moduleProps/ComponentsProps';
+import { LoginProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function Login({ navigation, onOff, setOnOff }: LoginProps) {
   const elPosition = useRef(new Animated.Value(0)).current;
