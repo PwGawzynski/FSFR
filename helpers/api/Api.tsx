@@ -107,6 +107,10 @@ export class Api {
     }
   }
 
+  static async session() {
+    return (await checkCurrentSession()) || Api.restoreTokens();
+  }
+
   /**
    * Method used to restore tokens from secure store
    * @throws Error when can't get tokens from store
@@ -132,6 +136,7 @@ export class Api {
    * @throws AxiosError when req went wrong, Error when saving operation went wrong
    */
   private static async restoreTokens() {
+    console.log('restoringTOkens');
     const response = (await Api.axiosAuthInstance.post('/auth/refresh'))
       .data as ResponseObject<IdentityAuthTokenLoginRaw>;
     return Api.saveTokensToSecureStoreFromResPayload(response);
@@ -427,26 +432,28 @@ export class Api {
   }
 
   static notificationsSse({ open, message, error }: sseAsyncListenerParams) {
-    const eventSource = new RNEventSource(
-      `http://localhost:3002/notifications/sse`,
-      {
-        headers: { Authorization: `Bearer ${Api.access_token}` },
-      },
-    );
+    (async () => {
+      const eventSource = new RNEventSource(
+        `http://localhost:3002/notifications/sse`,
+        {
+          headers: { Authorization: `Bearer ${Api.access_token}` },
+        },
+      );
 
-    eventSource.addEventListener('message', data => {
-      message(data);
-    });
-    eventSource.addEventListener('error', data => {
-      error(data);
-      eventSource.removeAllListeners();
-      eventSource.close();
-    });
-    eventSource.addEventListener('open', open);
-    return () => {
-      eventSource.removeAllListeners();
-      eventSource.close();
-    };
+      eventSource.addEventListener('message', data => {
+        message(data);
+      });
+      eventSource.addEventListener('error', data => {
+        error(data);
+        eventSource.removeAllListeners();
+        eventSource.close();
+      });
+      eventSource.addEventListener('open', open);
+      return () => {
+        eventSource.removeAllListeners();
+        eventSource.close();
+      };
+    })();
   }
 }
 

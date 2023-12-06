@@ -1,6 +1,7 @@
 import { SafeAreaView, View } from 'react-native';
 import { useQuery } from 'react-query';
 import { AxiosError } from 'axios';
+import { useEffect } from 'react';
 import { AppearingText } from '../Molecules/AppearingText';
 import { me } from '../../helpers/api/Services/User';
 import { myCompany } from '../../helpers/api/Services/Company';
@@ -15,7 +16,9 @@ export function Landing({
     if (error?.response?.data.payload.message === "Causer don't have company")
       navigation.navigate('CreateCompany');
   }
-  if (company && isSuccess) navigation.navigate('desktop');
+  useEffect(() => {
+    if (company && isSuccess) navigation.navigate('desktop');
+  }, [company, isSuccess]);
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 mr-4 ml-4 justify-center">
