@@ -406,7 +406,7 @@ export class Api {
 
   static workerAssignedListener(
     workerId: string,
-    { open, message, error }: workerAsyncListenerParams,
+    { open, message, error }: sseAsyncListenerParams,
   ) {
     const eventSource = new RNEventSource(
       `http://localhost:3002/worker/sse/${workerId}`,
@@ -425,9 +425,32 @@ export class Api {
     });
     eventSource.addEventListener('open', open);
   }
+
+  static notificationsSse({ open, message, error }: sseAsyncListenerParams) {
+    const eventSource = new RNEventSource(
+      `http://localhost:3002/notifications/sse`,
+      {
+        headers: { Authorization: `Bearer ${Api.access_token}` },
+      },
+    );
+
+    eventSource.addEventListener('message', data => {
+      message(data);
+    });
+    eventSource.addEventListener('error', data => {
+      error(data);
+      eventSource.removeAllListeners();
+      eventSource.close();
+    });
+    eventSource.addEventListener('open', open);
+    return () => {
+      eventSource.removeAllListeners();
+      eventSource.close();
+    };
+  }
 }
 
-export interface workerAsyncListenerParams {
+export interface sseAsyncListenerParams {
   open: ListenerCallback;
   message: ListenerCallback;
   error: ListenerCallback;
