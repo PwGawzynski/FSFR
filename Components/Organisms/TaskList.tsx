@@ -28,7 +28,7 @@ function TaskList({ ListEmptyComponent, filter }: TaskListProps) {
     );
   }, []);
 
-  const { data } = useQuery('tasks', getTasks, {});
+  const { data } = useQuery('tasks', getTasks, { refetchOnWindowFocus: true });
   let dataSorted: TaskResponseBase[] | undefined;
   switch (filter) {
     case FilterTask.undone:
