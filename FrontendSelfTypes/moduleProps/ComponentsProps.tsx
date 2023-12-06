@@ -31,6 +31,7 @@ import { OrderStatus } from '../../FarmServiceTypes/Order/Enums';
 import { FieldResponseBase } from '../../FarmServiceTypes/Field/Ressponses';
 import { WorkerResponseBase } from '../../FarmServiceTypes/Worker/Responses';
 import { TaskResponseBase } from '../../FarmServiceTypes/Task/Restonses';
+import { NotificationsResponseBase } from '../../FarmServiceTypes/Notification/Responses';
 
 export interface AppButtonProps {
   action: () => void;
@@ -192,7 +193,7 @@ export interface NotificationsProps {
 
 export type NotificationItem = { item: NotificationProps };
 
-export type LasActivitiesItem = { item: ActivityProps };
+export type LasActivitiesItem = { item: NotificationsResponseBase };
 
 export interface ThreeOptionSwitchStates {
   firstOptionName: string;
