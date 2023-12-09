@@ -14,7 +14,7 @@ export function OperationConfirmedAnimation({
   navigation,
   route,
 }: OwnerMobiDesktopRootStackProps<'OperationConfirmed'>) {
-  const { shownMessage, redirectScreenName } = route.params;
+  const { shownMessage, redirectScreenName, goBack, payload } = route.params;
   const opacity = useSharedValue(0);
   const [animationStart, setAnimationStart] = useState(false);
   const [acceptBell, setAcceptBell] = useState<Sound | undefined>();
@@ -37,10 +37,13 @@ export function OperationConfirmedAnimation({
     const intervalId = setTimeout(() => {
       setAnimationStart(true);
     }, 1000);
-    const interval2Id = setTimeout(
-      () => navigation.navigate(redirectScreenName as any),
-      3000,
-    );
+    const interval2Id = setTimeout(() => {
+      if (goBack) {
+        navigation.navigate(redirectScreenName as any, payload);
+        return;
+      }
+      navigation.navigate(redirectScreenName as any);
+    }, 3000);
     return () => {
       clearInterval(intervalId);
       clearInterval(interval2Id);
