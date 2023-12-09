@@ -22,6 +22,8 @@ export type OwnerDesktopRootStackParamList = {
       | keyof FieldTopTabParamList
       | keyof MaterialOrdersRootTopTabParamList;
     shownMessage?: string;
+    goBack?: boolean;
+    payload?: any;
   };
   OperationDanger: {
     shownMessage?: string | Array<string>;
