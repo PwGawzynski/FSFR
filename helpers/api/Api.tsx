@@ -35,6 +35,7 @@ import { CreateFieldReqI } from '../../FarmServiceTypes/Field/Requests';
 import { CreateCompanyReqI } from '../../FarmServiceTypes/Common/Requests';
 import { CompanyResponseBase } from '../../FarmServiceTypes/Company/Ressponses';
 import { AddressResponseBase } from '../../FarmServiceTypes/Address/Ressponses';
+import { CreateMachineReqI } from '../../FarmServiceTypes/Machine/Requests';
 
 export class Api {
   /**
@@ -300,6 +301,10 @@ export class Api {
 
   static async createField(data: CreateFieldReqI) {
     return Api.axiosInstance.post('field', data);
+  }
+
+  static async createMachine(data: CreateMachineReqI) {
+    return Api.axiosInstance.post('machine', data);
   }
 
   static async getWorkers() {
