@@ -35,7 +35,10 @@ import { CreateFieldReqI } from '../../FarmServiceTypes/Field/Requests';
 import { CreateCompanyReqI } from '../../FarmServiceTypes/Common/Requests';
 import { CompanyResponseBase } from '../../FarmServiceTypes/Company/Ressponses';
 import { AddressResponseBase } from '../../FarmServiceTypes/Address/Ressponses';
-import { CreateMachineReqI } from '../../FarmServiceTypes/Machine/Requests';
+import {
+  AssignMachinesReqI,
+  CreateMachineReqI,
+} from '../../FarmServiceTypes/Machine/Requests';
 
 export class Api {
   /**
@@ -273,6 +276,19 @@ export class Api {
 
   static async company() {
     return (await Api.axiosInstance.get('/company')).data;
+  }
+
+  static async getMachines() {
+    return (await Api.axiosInstance.get('/company/machines')).data;
+  }
+
+  static async getMachinesByTask(id: string) {
+    return (await Api.axiosInstance.get(`/task/machines`, { params: { id } }))
+      .data;
+  }
+
+  static async setMachines(data: AssignMachinesReqI) {
+    return (await Api.axiosInstance.post('/task/assign_machine', data)).data;
   }
 
   static async getAllActivities() {
