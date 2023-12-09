@@ -644,6 +644,13 @@ export interface OrderTask {
 
 export interface WorkersTaskList {
   data: Array<TaskResponseBase>;
+  orderId: string;
+  navigation: CompositeNavigationProp<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MaterialTopTabNavigationProp<OrdersStackParamList, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    StackNavigationProp<OwnerDesktopRootStackParamList, any>
+  >;
 }
 
 export interface WorkerTaskListRenderItem {
@@ -654,6 +661,7 @@ export interface WorkerTaskListRenderItem {
 export interface WorkerTaskListElement extends TaskResponseBase {
   index: number;
   onRemoveTask: (taskId: string) => void;
+  onPress: (taskId: string) => void;
 }
 
 export interface WorkerComponentI {
