@@ -9,7 +9,11 @@ import { WorkersTaskListElement } from '../Molecules/WorkersTaskListElement';
 import { remTask } from '../../helpers/api/Services/Task';
 import { LoadingAnimation } from '../Atoms/LoadingAnimation';
 
-export function WorkersTasksList({ data }: WorkersTaskList) {
+export function WorkersTasksList({
+  data,
+  navigation,
+  orderId,
+}: WorkersTaskList) {
   const { mutate: removeTask } = useMutation(remTask);
   const [afterRemData, setAfterRemData] = useState(data);
 
@@ -20,6 +24,9 @@ export function WorkersTasksList({ data }: WorkersTaskList) {
   const renderItem = useCallback(
     ({ item, index }: WorkerTaskListRenderItem) => (
       <WorkersTaskListElement
+        onPress={taskId =>
+          navigation.navigate('AddMachine', { taskId, orderId })
+        }
         createdAt={item.createdAt}
         isDone={item.isDone}
         closedAt={item.closedAt}
