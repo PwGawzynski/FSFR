@@ -70,7 +70,14 @@ export function OrdersManageWorkers({
 
   const selectedWorkerTasksList = useMemo(
     () =>
-      selectedWorkerTasks && <WorkersTasksList data={selectedWorkerTasks} />,
+      selectedWorkerTasks &&
+      orderId && (
+        <WorkersTasksList
+          navigation={navigation}
+          orderId={orderId}
+          data={selectedWorkerTasks}
+        />
+      ),
     [selectedWorkerTasks],
   );
 
