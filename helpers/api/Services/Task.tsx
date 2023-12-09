@@ -2,6 +2,7 @@ import { Api } from '../Api';
 import { TaskResponseBase } from '../../../FarmServiceTypes/Task/Restonses';
 import { CreateTaskBase } from '../../../FarmServiceTypes/Task/Requests';
 import { ResponseObject } from '../../../FarmServiceTypes/Respnse/responseGeneric';
+import { MachineResponseBase } from '../../../FarmServiceTypes/Machine/Responses';
 
 export async function addNewTask(
   data: Array<CreateTaskBase>,
@@ -28,4 +29,10 @@ export async function remTask(taskId: string): Promise<string | undefined> {
   } catch (e) {
     return undefined;
   }
+}
+
+export async function getMachinesByTask(
+  id: string,
+): Promise<MachineResponseBase[]> {
+  return (await Api.getMachinesByTask(id)).payload;
 }
