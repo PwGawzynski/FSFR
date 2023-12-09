@@ -17,8 +17,8 @@ export function WorkersTaskListElement({
   field,
   type,
   id,
-  index,
   onRemoveTask,
+  onPress,
 }: WorkerTaskListElement) {
   const animated = useSharedValue(1);
   const opacity = useSharedValue(0);
@@ -67,7 +67,7 @@ export function WorkersTaskListElement({
         <TouchableHighlight
           underlayColor="#848484"
           activeOpacity={1}
-          onPress={() => console.log('Touched', index)}
+          onPress={() => onPress(id)}
           className="flex-1 h-[70] flex flex-col bg-white justify-center rounded "
         >
           <View className="grow justify-center">
