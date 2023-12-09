@@ -18,4 +18,6 @@ export type OrdersStackParamList = {
   allOrders: undefined;
 
   ordersFinishAndAccount: { orderId?: string };
+
+  AddMachine: { taskId?: string; orderId?: string };
 };
