@@ -11,6 +11,7 @@ import { OrderFinishAndAccount } from '../../../Pages/Mobi/OwnerPages/Orders/Ord
 import { OrdersHistory } from '../../../Pages/Mobi/OwnerPages/Orders/OrdersHistory';
 import { MaterialOrdersRootTopTab } from './MaterialOrdersRootTopTab';
 import { AllOrders } from '../../../Pages/Mobi/OwnerPages/Orders/AllOrders';
+import { AddMachine } from '../../../Pages/Mobi/OwnerPages/Orders/AddMachine';
 
 const TabNavigator = createNativeStackNavigator<OrdersStackParamList>();
 
@@ -46,6 +47,11 @@ export function OrdersStack() {
         options={OrdersStackScreenOptions}
         name="assignedWorkers"
         component={AssignedWorkers}
+      />
+      <TabNavigator.Screen
+        options={OrdersStackScreenOptions}
+        name="AddMachine"
+        component={AddMachine}
       />
       <TabNavigator.Screen
         options={OrdersStackScreenOptions}
