@@ -10,7 +10,7 @@ export interface Props {
 }
 export function AccountType({ onFlag, setOnFlag }: Props) {
   return (
-    <View className="flex w-max flex-row h-1/6">
+    <View className="flex w-max flex-row h-1/6" testID="account-type">
       <ChoseOwnerRoleBtn onFlag={onFlag} setOnFlag={setOnFlag} />
       <ChooseWorkerRoleBtn onFlag={onFlag} setOnFlag={setOnFlag} />
     </View>
