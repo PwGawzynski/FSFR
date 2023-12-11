@@ -6,6 +6,7 @@ export function CheckBox<T extends () => void>({ onPress }: CheckBoxProps<T>) {
   const [checked, setChecked] = useState(false);
   return (
     <Checkbox
+      testID="CheckBoxTestId"
       status={checked ? 'checked' : 'indeterminate'}
       onPress={() => {
         onPress();
