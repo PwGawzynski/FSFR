@@ -8,5 +8,12 @@ export interface Props {
 }
 
 export function ErrorInfoText({ children, additionalStyles }: Props) {
-  return <Text className={`text-red-600 ${additionalStyles}`}>{children}</Text>;
+  return (
+    <Text
+      testID="error-info-text"
+      className={`text-red-600 ${additionalStyles}`}
+    >
+      {children}
+    </Text>
+  );
 }
