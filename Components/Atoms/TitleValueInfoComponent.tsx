@@ -8,9 +8,10 @@ export function TitleValueInfoComponent({
   elementAbs,
 }: OrderDetailsInfoProps) {
   return (
-    <View className={`flex flex-col ${abs}`}>
+    <View testID="title-value-info" className={`flex flex-col ${abs}`}>
       {titles.map((t, index) => (
         <View
+          testID="title-value-pair"
           className={`flex flex-row mt-2 ${elementAbs}`}
           key={Math.random()}
         >
