@@ -19,6 +19,7 @@ export function ProfilePhoto({
   }, [isLoading]);
   return (
     <View
+      testID="profile-photo"
       className={`w-8 h-8 rounded-full overflow-hidden items-center justify-center ${
         focused && 'border-solid border-[#279840] border-4'
       } ${abs}`}
@@ -42,10 +43,11 @@ export function ProfilePhoto({
           { width: '100%', height: '100%', position: 'absolute' },
           { opacity },
         ]}
+        testID="loading-indicator"
         className="w-full h-full bg-gray-300 items-center justify-center "
       >
         <View className="items-center justify-center">
-          <UserSvg fill="#000" width={24} height={24} />
+          <UserSvg testID="user-svg" fill="#000" width={24} height={24} />
         </View>
       </Animated.View>
     </View>
