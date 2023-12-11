@@ -11,6 +11,7 @@ export function BigBoldText({ additionalStyles, children }: Props) {
     <Text
       adjustsFontSizeToFit
       numberOfLines={1}
+      testID="big-bold-text"
       className={`w-full text-xl font-medium ${additionalStyles}`}
     >
       {children}
