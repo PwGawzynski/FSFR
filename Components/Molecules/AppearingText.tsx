@@ -33,6 +33,7 @@ export function AppearingText({
     <Animated.Text
       adjustsFontSizeToFit
       numberOfLines={1}
+      testID="appearing-text"
       className="text-center font-semibold"
       style={{ fontSize: getFontScaledSize(24), opacity }}
     >
