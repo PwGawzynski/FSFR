@@ -3,7 +3,7 @@ import { LogoProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function Logo({ abs, additionalImageStyles, resizeMode }: LogoProps) {
   return (
-    <View className={`w-full h-full ${abs}`}>
+    <View testID="logo" className={`w-full h-full ${abs}`}>
       <Image
         resizeMode={resizeMode}
         className={`items-center justify-center w-full h-full ${additionalImageStyles}`}

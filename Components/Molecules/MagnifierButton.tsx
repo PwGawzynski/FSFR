@@ -6,6 +6,7 @@ import { MagnifierButtonProps } from '../../FrontendSelfTypes/moduleProps/Compon
 export function MagnifierButton({ onPress }: MagnifierButtonProps) {
   return (
     <TouchableOpacity
+      testID="magnifier-button"
       onPress={onPress}
       className="h-9 w-9 rounded-full ml-4 bg-black p-2"
     >

@@ -5,7 +5,8 @@ import { AppSettings } from '../../helpers/appSettings/contexts';
 import { AppButtonProps } from '../../FrontendSelfTypes/moduleProps/ComponentsProps';
 
 export function AppButton({ action, context, abs, ats }: AppButtonProps) {
-  const { deviceType } = useContext(AppSettings).settings;
+  const appSettings = useContext(AppSettings);
+  const deviceType = appSettings?.settings?.deviceType || DeviceType.PHONE;
 
   return (
     <TouchableOpacity

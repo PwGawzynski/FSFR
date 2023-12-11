@@ -10,7 +10,7 @@ export function ScreenTitleHeader({
   ats,
 }: ScreenTitleHeaderProps) {
   return (
-    <View className={`justify-center ${abs}`}>
+    <View testID="screen-title-header" className={`justify-center ${abs}`}>
       <BigBoldText
         additionalStyles={`uppercase ${
           variant === 'lg' ? 'text-2xl' : ''

@@ -11,6 +11,7 @@ export function DesktopRootHeader({
     <View className="flex flex-row  w-full  mb-6">
       <ScreenTitleHeader variant="lg">Last Activities</ScreenTitleHeader>
       <TouchableOpacity
+        testID="touchable-opacity"
         className="flex-1"
         onPress={() => navigation.navigate('notifications')}
       >
